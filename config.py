@@ -2,7 +2,7 @@ def init():
     import pandas as pd
 
     global All_Summary
-    All_Summary = pd.read_excel(r"C:\Users\pkzr3\VirtualVisitas\Virtual Visitas (Responses).xlsx")
+    All_Summary = pd.read_excel("Virtual Visitas (Responses).xlsx")
     global allEmailsNoDuplicates
     global desired
     '''
