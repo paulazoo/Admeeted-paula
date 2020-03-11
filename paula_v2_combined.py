@@ -34,6 +34,11 @@ category = input("Do groups by a category?")
 category_Summary=All_Summary[category]
 cat_val='History'
 cat_yes=category_Summary[category_Summary==cat_val].index.tolist
+
+specifics = [allEmailsNoDuplicates[i] for i in cat_yes]
+
+
+
 #%%
 specific=allEmails1.index()
 
