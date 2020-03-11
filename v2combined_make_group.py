@@ -102,8 +102,8 @@ for subGroup in generatedGroups:
         for i in range(0,200,20):
             pyautogui.click(260, 375+i)
             #print("y = " + str(375+i)) 
-        pyautogui.click(470, 290)
-        pyautogui.click(460, 290)
+        for i in range(0,200,20):
+            pyautogui.click(460, 290+i)
       
       pyautogui.click(260, 230)
       whichCall = groupName + str(totalGroups);
