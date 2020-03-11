@@ -66,60 +66,66 @@ waitTime1 = 1
 groupNum = 1
 today = date.today()
 dateNow = today.strftime("%B %d, %Y")
+groupName = dateNow + " Call " + str(groupNum) + " Key: "
+web = Browser()
+web.go_to('google.com')
+web.maximize_window()
+#for some reason going directly to hangouts.google.com doesn't work
+web.type('google hangouts online' + '\n')
+web.click('hangouts.google.com')
+web.click('Sign in')
+web.type('VirtualVisitas2.0' , into='Email')
+web.click('NEXT' , tag='span')
+#For some reason this needs to be put twice to work
+time.sleep(waitTime1)
+web.type('Apaar&AlbertSal' , into='Password' , id='passwordFieldId')
+web.type('Apaar&AlbertSal' , into='Password' , id='passwordFieldId')
+web.click('NEXT' , tag='span') # you are logged in . woohoooo
+web.click('confirm')
+
+
 for subGroup in generatedGroups:
-  while notWorked:
-      groupName = dateNow + " Call " + str(groupNum) + " Key: "
-      web = Browser()
-      web.go_to('google.com')
-      web.maximize_window()
-      #for some reason going directly to hangouts.google.com doesn't work
-      web.type('google hangouts online' + '\n')
-      web.click('hangouts.google.com')
-      web.click('Sign in')
-      web.type('VirtualVisitas2.0' , into='Email')
-      web.click('NEXT' , tag='span')
-      #For some reason this needs to be put twice to work
-      time.sleep(waitTime1)
-      web.type('Apaar&AlbertSal' , into='Password' , id='passwordFieldId')
-      web.type('Apaar&AlbertSal' , into='Password' , id='passwordFieldId')
-      web.click('NEXT' , tag='span') # you are logged in . woohoooo
-      web.click('confirm')
-
-      
-      
-      #num = 8 is message, 7 is phone call, 6 is video call with tag = 'span', classname="Ce1Y1c"
-      time.sleep(waitTime1)
-      web.click(tag = 'span', classname="Ce1Y1c", number=8)
-      web.click(tag = 'input', classname="tF")
-      web.type("please work    " + "\t")
-      web.press(web.Key.ENTER)
-
-      for email in subGroup:
-        web.type(email + '\t')
-        #pixel coordinates: x=260, y=395 on a 1080p screen. Just double the values for 4K. 
+    while notWorked:
+        #num = 8 is message, 7 is phone call, 6 is video call with tag = 'span', classname="Ce1Y1c"
         time.sleep(waitTime1)
-        #increase the second number if you're adding a lot of people to the gruop
-        for i in range(0,200,20):
-            pyautogui.click(260, 375+i)
-            #print("y = " + str(375+i)) 
-        for i in range(0,200,20):
-            pyautogui.click(460, 290+i)
-      
-      pyautogui.click(260, 230)
-      whichCall = groupName + str(totalGroups);
-      web.type(whichCall)
-      pyautogui.click(440, 260)
-      
-      pyautogui.click(1450, 1060)
-      pyautogui.click(1450, 1060)
-      keyboard.write("Hello! Welcome to the group for " + groupName)
-      keyboard.press("enter")
-      if 'hangouts.google.com' in web.get_current_url():
-        notWorked = False  
-        print(groupName + " was successfully created, hopefully.")
-        totalGroups += 1
-      else:
-        print(groupName + " NOT successfully created.")
-  groupNum += 1
-  print("it got to here! end of the browser")
+        web.click(tag = 'span', classname="Ce1Y1c", number=8)
+        web.click(tag = 'input', classname="tF")
+        web.type("please work    " + "\t")
+        web.press(web.Key.ENTER)
+
+        for email in subGroup:
+            web.type(email + '\t')
+            #pixel coordinates: x=260, y=395 on a 1080p screen. Just double the values for 4K. 
+            time.sleep(waitTime1)
+            #increase the second number if you're adding a lot of people to the gruop
+            for i in range(0,200,20):
+                pyautogui.click(260, 375+i)
+                #print("y = " + str(375+i)) 
+            #!!!!!!!!!!!!!!!!!!!!!!!
+
+            #This is where we are stuck! Adding people to the hangout! because we can't do it with pyauto.gui since the location to add files is too small. :( . Probably need to inspect element this.
+
+            #!!!!!!!!!!!!!!!!!
+            for i in range(0,200,20):
+                pyautogui.click(460, 290+i)
+        
+        pyautogui.click(260, 230)
+        whichCall = groupName + str(totalGroups);
+        web.type(whichCall)
+        pyautogui.click(440, 260)
+        
+        pyautogui.click(1450, 1060)
+        pyautogui.click(1450, 1060)
+        keyboard.write("Hello! Welcome to the group for " + groupName)
+        keyboard.press("enter")
+        if 'hangouts.google.com' in web.get_current_url():
+            notWorked = False  
+            print(groupName + " was successfully created, hopefully.")
+            totalGroups += 1
+        else:
+            print(groupName + " NOT successfully created.")
+        web.refresh()
+    groupNum += 1
+    print("it got to here! end of the browser")
+  
       
