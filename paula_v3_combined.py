@@ -7,10 +7,14 @@ import selenium
 import pyautogui 
 from datetime import date
 
+#%%
+import config
+
+config.init()
+config.All_Summary
+
+#%%
 totalGroups = 0
-#%%
-All_Summary = pd.read_excel(r"C:\Users\pkzr3\VirtualVisitas\VirtualVisitas\Virtual Visitas (Responses).xlsx")
-#%%
 # make sure the exact name of the column is Email
 Summary = All_Summary["Email Address"]
 Summary = Summary.dropna()
