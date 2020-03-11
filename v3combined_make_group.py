@@ -60,7 +60,6 @@ def start_google_hangouts(waitTime1):
     #For some reason this needs to be put twice to work
     time.sleep(waitTime1)
     web.type('Apaar&AlbertSal' , into='Password' , id='passwordFieldId')
-    web.type('Apaar&AlbertSal' , into='Password' , id='passwordFieldId')
     web.click('NEXT' , tag='span') # you are logged in . woohoooo
     web.click('confirm')
     return web
@@ -91,11 +90,19 @@ def make_hangouts(web,generatedGroups,waitTime1):
                 for i in range(0,200,20):
                     pyautogui.click(260, 375+i)
                     #print("y = " + str(375+i)) 
-                #!!!!!!!!!!!!!!!!!!!!!!!
-    
-                #This is where we are stuck! Adding people to the hangout! because we can't do it with pyauto.gui since the location to add files is too small. :( . Probably need to inspect element this.
-    
-                #!!!!!!!!!!!!!!!!!
+                '''
+                To Albert: iframe id seems to change every time login??
+                '''
+                iframe_id=web.driver.find_element_by_id("o6dv52z46ipg")
+                
+                web.driver.switch_to.frame(iframe_id)
+                
+                #tF gB Xp kG ea-Ga-ea input class according to inspect element
+                web.driver.find_element_by_xpath("//input[@class='tF gB Xp kG ea-Ga-ea']").click()
+                
+                web.driver.switch_to.default_content()                
+                '''
+                '''
                 for i in range(0,200,20):
                     pyautogui.click(460, 290+i)
             
@@ -117,15 +124,16 @@ def make_hangouts(web,generatedGroups,waitTime1):
             web.refresh()
         groupNum += 1
         print("it got to here! end of the browser")
+        return web
     
 #%%
+
 # generate groups
 generatedGroups = createGroups(allEmailsNoDuplicates, desired)
 print(generatedGroups)
 
 #WaitTime is used with time.sleep() to make sure webpages are loading. Especially for pyautogui
 waitTime1 = 1
-
 web=start_google_hangouts(waitTime1)
 
 make_hangouts(web,generatedGroups,waitTime1)
