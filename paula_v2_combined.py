@@ -37,6 +37,7 @@ cat_yes=category_Summary[category_Summary==cat_val].index.tolist
 #%%
 specific=allEmails1.index()
 
+#%%
 def createGroups(allEmails, desired):
     # returns a list of the subgroups (which are also lists) of the emails.
     random.shuffle(allEmails)
