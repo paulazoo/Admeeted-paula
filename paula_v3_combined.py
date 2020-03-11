@@ -24,7 +24,7 @@ allEmails1 = []
 for i in Summary:
     allEmails1.append(i)
 allEmailsNoDuplicates = list(dict.fromkeys(allEmails1))
-
+config.allEmailsNoDuplicates=allEmailsNoDuplicates
 # to test that all emails work
 # print(allEmails1)
 # allEmails now contains all of the emails from the Excel file with all NaN values dropped
