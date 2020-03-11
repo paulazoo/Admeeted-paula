@@ -1,11 +1,10 @@
-import pandas as pd
-
 def init():
+    import pandas as pd
+
     global All_Summary
     All_Summary = pd.read_excel(r"C:\Users\pkzr3\VirtualVisitas\Virtual Visitas (Responses).xlsx")
     global allEmailsNoDuplicates
     global desired
-    
     '''
     changed this
     '''
@@ -24,9 +23,8 @@ def init():
     '''
     so this is is just:
     '''
-    allEmailsNoDuplicates=allEmails1
+    allEmailsNoDuplicates=list(allEmails1)
     # to test that all emails work
     # print(allEmailsNoDuplicates)
     # allEmails now contains all of the emails from the Excel file with all NaN values dropped
 
-init()
