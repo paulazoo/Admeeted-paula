@@ -8,12 +8,11 @@ import pyautogui
 from datetime import date
 
 totalGroups = 0
-
-excel_file = 'Virtual Visitas (Responses).xlsx'
-Summary = pd.read_excel(excel_file)
+#%%
+All_Summary = pd.read_excel(r"C:\Users\pkzr3\VirtualVisitas\VirtualVisitas\Virtual Visitas (Responses).xlsx")
 #%%
 # make sure the exact name of the column is Email
-Summary = Summary["Email Address"]
+Summary = All_Summary["Email Address"]
 Summary = Summary.dropna()
 # Putting all the data into a pandas dataframe
 desired = int(input("How many people would you like in a group? "))
@@ -27,7 +26,21 @@ allEmailsNoDuplicates = list(dict.fromkeys(allEmails1))
 # allEmails now contains all of the emails from the Excel file with all NaN values dropped
 
 #%%
+'''
+hi
+'''
+category = input("Do groups by a category?")
 
+category_Summary=All_Summary[category]
+category_val='History'
+#%%
+category_yes=category_Summary[category_Summary==category_val].index
+#%%
+specific=allEmails1.index(category_yes)
+for x in category_yes:
+    category_yes[x]
+
+#%%
 def createGroups(allEmails, desired):
     # returns a list of the subgroups (which are also lists) of the emails.
     random.shuffle(allEmails)
