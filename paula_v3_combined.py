@@ -20,6 +20,7 @@ Summary = All_Summary["Email Address"]
 Summary = Summary.dropna()
 # Putting all the data into a pandas dataframe
 desired = int(input("How many people would you like in a group? "))
+config.desired=desired
 allEmails1 = []
 for i in Summary:
     allEmails1.append(i)
