@@ -28,7 +28,7 @@ generatedGroups = groups.createGroups(allEmailsNoDuplicates, desired)
 
 print(generatedGroups)
 #%%
-#WaitTime is used with time.sleep() to make sure webpages are loading. Especially for pyautogui
+#WaitTime is used with time.sleep() to make sure webpages are loading.
 waitTime1 = 1
 
 
@@ -65,27 +65,34 @@ for subGroup in generatedGroups:
         web.click(tag = 'input', classname="tF")
         web.type("please work    " + "\t")
         web.press(web.Key.ENTER)
-
+        #%%
+        iframe_pls=web.driver.find_element_by_xpath("//iframe[@class='Xyqxtc']")
+        iframe_id=iframe_pls.get_attribute("id")
+        iframe_correct=web.driver.find_element_by_id(iframe_id)
+        'will this work? maybe.'
+        web.driver.switch_to.frame(iframe_correct)
+        #%%    
         for email in subGroup:
             web.type(email)
-            #pixel coordinates: x=260, y=395 on a 1080p screen. Just double the values for 4K. 
             time.sleep(waitTime1)
-            #increase the second number if you're adding a lot of people to the gruop
-            iframe_pls=web.driver.find_element_by_xpath("//iframe[@class='Xyqxtc']")
-            iframe_id=iframe_pls.get_attribute("id")
-            iframe_correct=web.driver.find_element_by_id(iframe_id)
-            #%%
-            'will this work? maybe.'
-            web.driver.switch_to.frame(iframe_correct)
-            
-            #%%
             #cick the email to add
+            time.sleep(waitTime1)
             web.driver.find_element_by_xpath("//li[@class='eh XcEgrf fp pu hy']").click()   
-            #%%
-        web.type("Hello! Welcome to the group for " + groupName, into = "Send a message", id=":9v.f")
+            
+        #name the group input box
+        web.driver.find_element_by_xpath("//input[@class='t0ZFWd AKyIEc ea-Ga-ea']").send_keys(groupName)
+        time.sleep(waitTime1)
+        #click green button to make group
+        web.driver.find_element_by_xpath("//button[@class='PD7XNe yt1Zfc']").click()
+        time.sleep(waitTime1)
+        #get out of iframe for making groups
+        web.driver.switch_to.default_content()
+        #introduce group
+        time.slee(waitTime1)
+        web.type("Hello! Welcome to the group for " + groupName)
+        time.sleep(waitTime1)
         web.press(web.Key.ENTER)
-        keyboard.write("Hello! Welcome to the group for " + groupName)
-        keyboard.press("enter")
+        #%%
         if 'hangouts.google.com' in web.get_current_url():
             notWorked = False  
             print(groupName + " was successfully created, hopefully.")
