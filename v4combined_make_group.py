@@ -86,6 +86,7 @@ web.type('VirtualVisitas2.0' , into='Email')
 web.click('NEXT' , tag='span')
 #For some reason this needs to be put twice to work
 time.sleep(waitTime1)
+time.sleep(2)
 web.type('Apaar&AlbertSal' , into='Password' , id='passwordFieldId')
 web.type('Apaar&AlbertSal' , into='Password' , id='passwordFieldId')
 web.click('NEXT' , tag='span') # you are logged in . woohoooo
@@ -137,6 +138,7 @@ for subGroup in generatedGroups:
         else:
             print(groupName + " NOT successfully created.")
         time.sleep(waitTime1)
+        time.sleep(3)
         time.sleep(waitTime1)
         web.refresh()
     groupNum += 1
