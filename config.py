@@ -5,9 +5,7 @@ def init():
     All_Summary = pd.read_excel("Virtual Visitas (Responses).xlsx")
     global allEmailsNoDuplicates
     global desired
-    '''
-    changed this
-    '''
+
     #remove all rows with duplicate emails except last
     All_Summary=All_Summary.drop_duplicates(subset=['Email Address'], keep='last').reset_index(drop=True)
     
@@ -20,9 +18,6 @@ def init():
     for i in Summary:
         allEmails1.append(i)
     
-    '''
-    so this is is just:
-    '''
     allEmailsNoDuplicates=list(allEmails1)
     # to test that all emails work
     # print(allEmailsNoDuplicates)
