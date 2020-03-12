@@ -52,8 +52,8 @@ def _get_parser(extra_args):
         '-d', '--debug', action='store_true',
         help='log detailed debugging messages'
     )
-    for extra_arg in extra_args:
-        parser.add_argument(extra_arg, required=True)
+    #for extra_arg in extra_args:
+    #    parser.add_argument(extra_arg, required=True)
     return parser
 
 
