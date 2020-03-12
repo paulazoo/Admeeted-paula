@@ -40,10 +40,14 @@ notWorked = True
 groupNum = 1
 today = date.today()
 dateNow = today.strftime("%B %d, %Y")
-groupName = dateNow + " Call " + str(groupNum) + " Key: "
+
 
 #%%
+#get out of iframe for making groups
+web.driver.switch_to.default_content()
+        
 for subGroup in generatedGroups:
+    groupName = dateNow + " Call " + str(groupNum) + " Key: "
     notWorked = True
     while notWorked:
         #num = 8 is message, 7 is phone call, 6 is video call with tag = 'span', classname="Ce1Y1c"
@@ -65,10 +69,16 @@ for subGroup in generatedGroups:
         for email in subGroup:
             #type the email string
             web.type(email)
-            time.sleep(waitTime1*5)
+            time.sleep(waitTime1*2)
             #cick the email to add
-            #only works for gmails
-            web.driver.find_element_by_xpath("//li[@class='eh XcEgrf fp pu hy']").click()
+            try:
+                #for gmails
+                element=web.driver.find_element_by_xpath("//li[@class='eh XcEgrf fp pu hy']").click()
+                print(email + " added")
+            except NoSuchElementException:
+                #for non-gmails??
+                print("No element found. Trying again...")
+                element=web.driver.find_element_by_xpath("//li[@class='eh XcEgrf fp pu hy c-P-p lebsnd Tb']").click()
             time.sleep(waitTime1)
             
         #name the group input box
@@ -92,7 +102,7 @@ for subGroup in generatedGroups:
         else:
             print(groupName + " NOT successfully created.")
         time.sleep(waitTime1)
-        #web.refresh()
+        web.refresh()
     groupNum += 1
     print("it got to here! end of the browser")
   

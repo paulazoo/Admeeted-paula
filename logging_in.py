@@ -11,7 +11,6 @@ def login(waitTime1):
     time.sleep(waitTime1*2)
     #go to hangouts
     web.go_to('https://hangouts.google.com/')
-    web.maximize_window()
     #sign in email
     web.click('Sign in')
     web.type('VirtualVisitas2.0' , into='Email')
