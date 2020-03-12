@@ -1,6 +1,0 @@
-docutils
-httpretty
-pip-tools
-pycodestyle
-pylint
-pytest
