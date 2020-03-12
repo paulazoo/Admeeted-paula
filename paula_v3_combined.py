@@ -7,20 +7,25 @@ import selenium
 import pyautogui 
 from datetime import date
 
+#%%
+import config
+
+config.init()
+config.All_Summary
+
+#%%
 totalGroups = 0
-#%%
-All_Summary = pd.read_excel(r"C:\Users\pkzr3\VirtualVisitas\VirtualVisitas\Virtual Visitas (Responses).xlsx")
-#%%
 # make sure the exact name of the column is Email
 Summary = All_Summary["Email Address"]
 Summary = Summary.dropna()
 # Putting all the data into a pandas dataframe
 desired = int(input("How many people would you like in a group? "))
+config.desired=desired
 allEmails1 = []
 for i in Summary:
     allEmails1.append(i)
 allEmailsNoDuplicates = list(dict.fromkeys(allEmails1))
-
+config.allEmailsNoDuplicates=allEmailsNoDuplicates
 # to test that all emails work
 # print(allEmails1)
 # allEmails now contains all of the emails from the Excel file with all NaN values dropped
