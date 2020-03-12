@@ -24,4 +24,5 @@ async def send_message(client, args):
 # --gaia-ids: list of participant gaia_id, separated by comma (excluding self)
 # --conversation-name: the group conversation name to specify/customize
 if __name__ == '__main__':
-    run_example(send_message, '--gaia-ids', '--conversation-name')
+    #run_example(send_message, '--gaia-ids', '--conversation-name')
+    run_example(send_message, '115958017814216547284, 112843788752294098531', '--Test 1 with self')
