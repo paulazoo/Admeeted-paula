@@ -1,8 +1,3 @@
-"""
-For this to work, your display needs to be at the 1080p resolution with nothing obscuring the top left corner (so the task bar in Windows should be on the right or bottom, not top or left)
-"""
-
-
 from webbot import Browser
 import pandas as pd
 import random
@@ -13,35 +8,41 @@ import pyautogui
 from datetime import date
 
 
-
+#get survey responses
 excel_file = r'C:\Users\pkzr3\VirtualVisitas\Virtual Visitas (Responses).xlsx'
 Summary = pd.read_excel(excel_file)
 #%%
+#initialize variables
 import config
 config.init()
 All_Summary=config.All_Summary
 desired=config.desired
 allEmailsNoDuplicates=config.allEmailsNoDuplicates
 
+#%%
+#group manipulations
 import groups
 generatedGroups = groups.createGroups(allEmailsNoDuplicates, desired)
 
 print(generatedGroups)
 #%%
+#starting browser and logging in to hangouts
+
 #WaitTime is used with time.sleep() to make sure webpages are loading.
 waitTime1 = 1
 
-
+#start new browser
 web = Browser()
 time.sleep(waitTime1*2)
+#go to hangouts
 web.go_to('https://hangouts.google.com/')
 web.maximize_window()
-#for some reason going directly to hangouts.google.com doesn't work
+#sign in email
 web.click('Sign in')
 web.type('VirtualVisitas2.0' , into='Email')
 web.click('NEXT' , tag='span')
-#For some reason this needs to be put twice to work
 time.sleep(waitTime1)
+#sign in password
 web.type('Apaar&AlbertSal' , into='Password' , id='passwordFieldId')
 web.click('NEXT' , tag='span') # you are logged in . woohoooo
 web.click('confirm')
@@ -66,6 +67,7 @@ for subGroup in generatedGroups:
         web.type("please work    " + "\t")
         web.press(web.Key.ENTER)
         #%%
+        #get into iframe
         iframe_pls=web.driver.find_element_by_xpath("//iframe[@class='Xyqxtc']")
         iframe_id=iframe_pls.get_attribute("id")
         iframe_correct=web.driver.find_element_by_id(iframe_id)
@@ -73,6 +75,7 @@ for subGroup in generatedGroups:
         web.driver.switch_to.frame(iframe_correct)
         #%%    
         for email in subGroup:
+            #type the email string
             web.type(email)
             time.sleep(waitTime1)
             #cick the email to add
