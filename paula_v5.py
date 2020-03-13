@@ -96,4 +96,4 @@ for subGroup in generatedGroups:
     groupNum += 1
     print("it got to here! end of the browser")
   
-      
+   

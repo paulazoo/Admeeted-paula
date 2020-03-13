@@ -1,25 +1,30 @@
+#import pandas package for doing stuff with data
+import pandas as pd
+
+#define an initial function that when run, initializes variables
 def init():
-    import pandas as pd
-
+    #make All_Summary a global variable we can use across files
     global All_Summary
+    #All_Summary holds the survey response data as a pandas dataframe
     All_Summary = pd.read_excel("Virtual Visitas (Responses).xlsx")
-    global allEmailsNoDuplicates
-    global desired
-
-    #remove all rows with duplicate emails except last
+    #remove all rows (people) with duplicate emails except last entered row by that email person
     All_Summary=All_Summary.drop_duplicates(subset=['Email Address'], keep='last').reset_index(drop=True)
     
-    # make sure the exact name of the column is Email
-    Summary = All_Summary["Email Address"]
-    Summary = Summary.dropna()
-    # Putting all the data into a pandas dataframe
-    desired = int(input("How many people would you like in a group? "))
-    allEmails1 = []
-    for i in Summary:
-        allEmails1.append(i)
+    #get the email column from the survey data and store in Email_Summary
+    Email_Summary = All_Summary["Email Address"]
+    #drop empty emails
+    Email_Summary = Email_Summary.dropna()
+    #start a list
+    allEmails = []
+    #create a list allEmails, adding on every email from
+    for i in Email_Summary:
+        allEmails.append(i)
+    #global variable allEmailsNoDuplicates holds the final list of emails w no duplicate emails
+    global allEmailsNoDuplicates
+    allEmailsNoDuplicates=list(allEmails)
     
-    allEmailsNoDuplicates=list(allEmails1)
-    # to test that all emails work
-    # print(allEmailsNoDuplicates)
-    # allEmails now contains all of the emails from the Excel file with all NaN values dropped
+    #create global variable desired for the desired number of ppl per group
+    global desired
+    desired = int(input("How many people would you like in a group? "))
+    
 
