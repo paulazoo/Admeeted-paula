@@ -24,7 +24,7 @@ def createGroups(allEmails, desired):
         subgroups.pop(-1)
     return subgroups
 
-
+#%%
 #returns a list of groups from specified category, where each group is a list of emails for one specific category value
 def get_category_emails(All_Summary,allEmails,category):
     #get relevant category column
@@ -49,4 +49,31 @@ def get_category_emails(All_Summary,allEmails,category):
     print(by_category)
     return by_category
 
+#%%
+def get_multicategory_emails(All_Summary,allEmails,category):
+    #get the data for the relevant category
+    category_Summary=All_Summary[category]
+    #turn each multichoose answer into a list of chosen multichoose answers
+    category_list = [(category_Summary[i].split(", ")) for i in range(0,len(category_Summary))]
+    
+    #get all existing values in the category w no duplicates
+    all_category_vals=list(set([j for i in category_list for j in i]))
+    
+    #initialize email list for category
+    by_category=[]
+    #for each category value e.g. for each genre
+    for category_val in all_category_vals:
+        #initialize an email list for specific genre
+        specific_emails=[]
+        #for each answer in category list
+        for idx, ans in enumerate(category_list):
+            #if the specific genre is in the answer
+            if category_val in ans:
+                #add that email to the specific_emails list
+                specific_emails.append(allEmails[idx])
+        #check specific emails list
+        print(category_val, ": ", specific_emails)
+        #add this genre specific emails list to the general list of lists of emails by genre
+        by_category.append(specific_emails)
+    return by_category
 

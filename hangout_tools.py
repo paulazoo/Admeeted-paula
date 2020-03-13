@@ -1,5 +1,6 @@
 import time
 from webbot import Browser
+from selenium.common.exceptions import NoSuchElementException
 
 #%%
 #open a specific group hangout
@@ -87,6 +88,44 @@ def write_in_group_hangout(web, groupName, waitTime1, message):
     #enter message into hangout groupchat
     web.press(web.Key.ENTER)
     time.sleep(waitTime1)
+    
+    #get out of specific group hangout iframe
+    web.driver.switch_to.default_content()
+    
+    return web
+
+#%%
+#add a person to an existing already open group hangout
+def add_to_group_hangout(web, groupName, waitTime1, email):
+    #get out of any iframes
+    web.driver.switch_to.default_content()
+    
+    #get into iframe
+    iframe_pls=web.driver.find_elements_by_xpath("//iframe[@aria-label='" +groupName+ "']")
+    iframe_id=iframe_pls[0].get_attribute("id")
+    iframe_correct=web.driver.find_element_by_id(iframe_id)
+    time.sleep(waitTime1)
+    web.driver.switch_to.frame(iframe_correct) 
+    
+    #click hangout people button
+    web.driver.find_element_by_xpath("//div[@class='dwrYTb PK']").click()
+    #click Add people button
+    web.click('Add people')
+    #type the email string
+    web.type(email)
+    time.sleep(waitTime1*2)
+    #cick the email to add
+    try:
+        #for gmails click the gmail
+        element=web.driver.find_element_by_xpath("//li[@class='eh XcEgrf fp pu hy']").click()
+        print(email + " added")
+    except NoSuchElementException:
+        #for non-gmails?? click the non gmails
+        print("No element found. Trying again...")
+        element=web.driver.find_element_by_xpath("//li[@class='eh XcEgrf fp pu hy c-P-p lebsnd Tb']").click()
+    time.sleep(waitTime1)
+    #click Add people button to finish adding
+    web.click('Add people')
     
     #get out of specific group hangout iframe
     web.driver.switch_to.default_content()

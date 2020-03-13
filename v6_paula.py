@@ -26,6 +26,7 @@ import groups
 generatedGroups = groups.createGroups(allEmailsNoDuplicates, desired)
 #print the generated groups to check
 print(generatedGroups)
+
 #%%
 #login file
 import logging_in
