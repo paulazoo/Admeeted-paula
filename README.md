@@ -2,7 +2,7 @@
 
 Google Form link: https://docs.google.com/forms/d/e/1FAIpQLScrrI4c-SRt6blejIZLADnBDt98UUg-2pMxrfMiChnDykhkGw/viewform
 
-prereq packages:
+### prereq packages:
 - webbot
 - random
 - pandas
@@ -10,16 +10,17 @@ prereq packages:
 - datetime
 - selenium
 
-config.py: 
-	config.init(): initialize and define global variables at the start
-logging_in.py:
-	logging_in.login(waitTime1): start browser and login to hangouts function
-groups.py:
-	createGroups(allEmails, desired): create random groups w desired number of ppl per group
-	get_category_emails(All_Summary,allEmails,category): make list of groups from specified category, where each group is a list of emails for one specific category value
-hangout_tools.py:
-	open_group_hangout(web, groupName, waitTime1): open a specific group hangout
-	exit_group_hangout(web, groupName, waitTime1): exit an already open group hangout
-	call_group_hangout(web, groupName, waitTime1): start a call for a group hangout (that has already been opened)
-	write_in_group_hangout(web, groupName, waitTime1, message): write in an already open group hangout
+### functions
+- config.py: 
+	- config.init(): initialize and define global variables at the start
+- logging_in.py:
+	- logging_in.login(waitTime1): start browser and login to hangouts function
+- groups.py:
+	- createGroups(allEmails, desired): create random groups w desired number of ppl per group
+	- get_category_emails(All_Summary,allEmails,category): make list of groups from specified category, where each group is a list of emails for one specific category value
+- hangout_tools.py:
+	- open_group_hangout(web, groupName, waitTime1): open a specific group hangout
+	- exit_group_hangout(web, groupName, waitTime1): exit an already open group hangout
+	- call_group_hangout(web, groupName, waitTime1): start a call for a group hangout (that has already been opened)
+	- write_in_group_hangout(web, groupName, waitTime1, message): write in an already open group hangout
 
