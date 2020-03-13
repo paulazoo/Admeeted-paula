@@ -3,9 +3,7 @@ import time
 import selenium
 
 #starting browser and logging in to hangouts
-
-def login(waitTime1):
-    
+def login(waitTime1):    
     #start new browser
     web = Browser()
     time.sleep(waitTime1*2)
