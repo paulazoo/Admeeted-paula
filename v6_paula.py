@@ -10,9 +10,9 @@ from datetime import date
 
 #%%
 #initialize variables
-#the config file cleans and gets the starting variable values
+#the config file cleans the data and gets the starting variable values
 import config
-#clean and git the starting variable values
+#clean and get the starting variable values
 config.init()
 #get variables from config variables
 All_Summary=config.All_Summary
