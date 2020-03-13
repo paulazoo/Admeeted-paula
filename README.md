@@ -18,6 +18,7 @@ Google Form link: https://docs.google.com/forms/d/e/1FAIpQLScrrI4c-SRt6blejIZLAD
 - groups.py:
 	- createGroups(allEmails, desired): create random groups w desired number of ppl per group
 	- get_category_emails(All_Summary,allEmails,category): make list of groups from specified category, where each group is a list of emails for one specific category value
+	- get_multicategory_emails(All_Summary,allEmails,category): get category emails, but for multichoose categories. Each possible category value gets a group list.
 - hangout_tools.py:
 	- open_group_hangout(web, groupName, waitTime1): open a specific group hangout
 	- exit_group_hangout(web, groupName, waitTime1): exit an already open group hangout
