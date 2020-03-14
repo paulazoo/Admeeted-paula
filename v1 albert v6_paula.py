@@ -7,6 +7,7 @@ import time
 import selenium
 from selenium.common.exceptions import NoSuchElementException
 from datetime import date
+import keyboard
 
 #%%
 #initialize variables
@@ -64,13 +65,6 @@ for subGroup in generatedGroups:
         #skip to the entering group people box
         web.type("please work    " + "\t")
 
-        #testing whether it's supposed to be web.Key.BACKSPACE or web.Key.BACK_SPACE, Should be web.Key.BACK_SPACE
-        # web.type("please work    ")
-        # time.sleep(2)
-        # for i in range(len("please work    ")):
-        #         web.press(web.Key.BACK_SPACE)
-        # time.sleep(2)
-
         web.press(web.Key.ENTER)
         
         #find the iframe for the box for creating hangouts
@@ -89,23 +83,26 @@ for subGroup in generatedGroups:
         for email in subGroup:
             #type the email string
             try: 
-              web.type(email)
-              time.sleep(waitTime1*2)
-              #cick the email to add
-              try:
-                  #for gmails click the gmail
-                  element=web.driver.find_element_by_xpath("//li[@class='eh XcEgrf fp pu hy']").click()
-                  print(email + " added")
-              except NoSuchElementException:
-                  #for non-gmails?? click the non gmails
-                  print("No element found. Trying again...")
-                  element=web.driver.find_element_by_xpath("//li[@class='eh XcEgrf fp pu hy c-P-p lebsnd Tb']").click()
+                web.type(email)
+                time.sleep(waitTime1*2)
+                #cick the email to add
+                #for gmails click the gmail
+                element=web.driver.find_element_by_xpath("//li[@class='eh XcEgrf fp pu hy']").click()
+                print(email + " added")
+            #just delete the inputted email instead.
+            #   except NoSuchElementException:
+            #       #for non-gmails?? click the non gmails
+            #       print("No element found. Trying again...")
+            #       element=web.driver.find_element_by_xpath("//li[@class='eh XcEgrf fp pu hy c-P-p lebsnd Tb']").click()
             except:
               print(email + " was not added.")
-              print(email)
-              print(str(len(email)))
-              for i in range(len(email)-13):
-                web.press(web.Key.BACK_SPACE)
+              #print(email)
+              #print(str(len(email)))
+              for i in range(len(email)): 
+                keyboard.press_and_release('backspace')
+                # time.sleep(0.5)
+                # web.press(web.Key.BACK_SPACE)
+                # print(str(i))
             time.sleep(waitTime1)
             
         #name the group input box
