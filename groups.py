@@ -4,15 +4,19 @@ import random
 def createGroups(allEmails, desired):
     #shuffle the list of emails
     random.shuffle(allEmails)
+    #if the desired group size is more than the number of emails, just put everyone into one group
+    if desired > len(allEmails):
+        subgroups = [allEmails]
     #make subgroups the length of the desired number of ppl per group from the shuffled email list
-    subgroups = [allEmails[x:x + desired] for x in range(0, len(allEmails), desired)]
-    #if there's a group with less than desired number of people, evenly distribute amongst the other groups
-    lastLen = len(subgroups[-1])
-    if lastLen < desired:
-        for x in range(lastLen):
-            # if the remainder in the last group is larger than the number of subgroups, then it will add multiple people to the other groups
-            subgroups[x % len(subgroups)].append(subgroups[-1][x])
-            subgroups[-1][x] = 0
+    else:
+        subgroups = [allEmails[x:x + desired] for x in range(0, len(allEmails), desired)]
+        #if there's a group with less than desired number of people, evenly distribute amongst the other groups
+        lastLen = len(subgroups[-1])
+        if lastLen < desired:
+            for x in range(lastLen):
+                # if the remainder in the last group is larger than the number of subgroups, then it will add multiple people to the other groups
+                subgroups[x % len(subgroups)].append(subgroups[-1][x])
+                subgroups[-1][x] = 0
 
     subgroups = [x for x in subgroups if x != []]
     counter = 0
