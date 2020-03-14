@@ -19,7 +19,7 @@ def init():
     allEmails = []
     #create a list allEmails, adding on every email from
     for i in Email_Summary:
-        if i.endswith("@gmail.com"):
+        if i.endswith("@gmail.com") and len(i) < 150:
           allEmails.append(i)
     #global variable allEmailsNoDuplicates holds the final list of emails w no duplicate emails
     global allEmailsNoDuplicates
