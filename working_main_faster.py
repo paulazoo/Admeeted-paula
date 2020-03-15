@@ -10,8 +10,8 @@ from datetime import date
 #%%
 #initialize variables
 #the config file cleans the data and gets the starting variable values
-import config_onlygmail as config
-config.init()
+import config_all as config
+config.init('Virtual Visitas (all Responses).xlsx')
 #get variables from config variables
 All_Summary=config.All_Summary
 desired=config.desired
