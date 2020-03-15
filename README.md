@@ -24,4 +24,5 @@ Google Form link: https://docs.google.com/forms/d/e/1FAIpQLScrrI4c-SRt6blejIZLAD
 	- exit_group_hangout(web, groupName, waitTime1): exit an already open group hangout
 	- call_group_hangout(web, groupName, waitTime1): start a call for a group hangout (that has already been opened)
 	- write_in_group_hangout(web, groupName, waitTime1, message): write in an already open group hangout
+	- add_to_group_hangout(web, groupName, waitTime1, email): add an email to an already open and existing group hangout
 

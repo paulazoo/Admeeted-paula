@@ -10,14 +10,12 @@ from datetime import date
 #%%
 #initialize variables
 #the config file cleans the data and gets the starting variable values
-import config_excel_into_email_list as config
-#clean and get the starting variable values
-config.init()
+import config_all as config
+config.init('Virtual Visitas (all Responses).xlsx')
 #get variables from config variables
 All_Summary=config.All_Summary
 desired=config.desired
 allEmailsNoDuplicates=config.allEmailsNoDuplicates
-
 #%%
 #group manipulations
 import groups
