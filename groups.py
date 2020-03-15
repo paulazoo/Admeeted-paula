@@ -20,6 +20,7 @@ def createGroups(allEmails, desired):
 
     subgroups = [x for x in subgroups if x != []]
     counter = 0
+    #For efficiency, edit this to just check the last group in subgroups. Otherwise, could cause a bug
     for i in subgroups:
         for x in i:
             if x == 0:
