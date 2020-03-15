@@ -13,6 +13,7 @@ def login(waitTime1):
     web.type('VirtualVisitas2.0' , into='Email')
     web.click('NEXT' , tag='span')
     #sign in password
+    time.sleep(waitTime1)
     web.type('Apaar&AlbertSal' , into='Password' , id='passwordFieldId')
     web.click('NEXT' , tag='span') # you are logged in . woohoooo
     web.click('confirm')

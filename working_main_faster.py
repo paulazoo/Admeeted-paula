@@ -11,7 +11,7 @@ from datetime import date
 #initialize variables
 #the config file cleans the data and gets the starting variable values
 import config_all as config
-config.init('Virtual Visitas (all Responses).xlsx')
+config.init('Virtual Visitas (Responses) (2).xlsx')
 #get variables from config variables
 All_Summary=config.All_Summary
 desired=config.desired
