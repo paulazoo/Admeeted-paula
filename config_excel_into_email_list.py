@@ -19,8 +19,8 @@ def init():
     All_Summary=All_Summary.drop_duplicates(subset=['Full Name'], keep='last').reset_index(drop=True)
     #Get indices for non gmails
     non_gmails_indices = All_Summary[All_Summary['Email Address'].str.endswith("@gmail.com") == False].index
-    #deletes emails that are too long (greater than 300 chars) because they would slow down the program and no legit emails are longer than 300 chars
-    too_long_indices = All_Summary[len(All_Summary['Email Address'].str) > 300].index
+    #deletes emails that are too long (greater than 500 chars) because they would slow down the program and no legit emails are longer than 500 chars
+    too_long_indices = All_Summary[len(All_Summary['Email Address'].str) > 500].index
     # Delete these row indexes from dataFrame
     All_Summary=All_Summary.drop(non_gmails_indices).reset_index(drop=True)
     All_Summary=All_Summary.drop(too_long_indices).reset_index(drop=True)
