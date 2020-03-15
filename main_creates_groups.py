@@ -53,7 +53,9 @@ web.driver.switch_to.default_content()
 #start creating the hangout for each group
 for subGroup in generatedGroups:
     #groupName using the date and groupNum
-    groupName = dateNow + " Call " + str(groupNum) + " Key: "
+    #groupName = dateNow + " Call " + str(groupNum) + " Key: "
+    #Alternatively, make the groupName with the specific call time
+    groupName = "March 15 9:30 PM," + " Call " + str(groupNum)
     #hangout is not created yet
     notWorked = True
     while notWorked:
@@ -101,7 +103,7 @@ for subGroup in generatedGroups:
               for i in range(len(email)): 
                 keyboard.press_and_release('backspace')
                 # time.sleep(0.5)
-                # web.press(web.Key.BACK_SPACE)
+                # web.
                 # print(str(i))
             time.sleep(waitTime1)
             
@@ -115,8 +117,8 @@ for subGroup in generatedGroups:
         web.driver.switch_to.default_content()
         #type and enter group introduction messages
         time.sleep(waitTime1)
-        #web.type("Hello! Welcome to the group for " + groupName)
-        web.type("Hello! This is the testing for a program. Please ignore this hangout. You may exit.")
+        web.type("Hello! Welcome to the group for " + groupName + ". For this group, please make this the " + groupNum + " call. At the designated start time, someone should initiate the call. In order for this to work as smoothly as possible, we need to coordinate our calling. Albert originally planned for each call to be 15 minutes, but times will be flexible depending on how ya'll like the lengths, so please check the GroupMe for the official lengths for each call! You can always return to this chat later if ya'll want to talk more :) . Additionally, if you would like to leave early, just leave the groups that you won't be able to call in. So, you could choose to only partake in calls 1 to 3 if you prefer, but we all would love if you join all the calls. :D Thanks for helping make this happen!")
+        #web.type("Hello! This is the testing for a program. Please ignore this hangout. You may exit.")
         time.sleep(waitTime1)
         web.press(web.Key.ENTER)
         
