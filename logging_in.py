@@ -8,12 +8,10 @@ def login(waitTime1):
     web = Browser()
     time.sleep(waitTime1*2)
     #go to hangouts
-    web.go_to('https://hangouts.google.com/')
+    web.go_to('https://accounts.google.com/signin/v2/identifier?service=talk&passive=1209600&continue=https%3A%2F%2Fhangouts.google.com%2Fwebchat%2Fstart&followup=https%3A%2F%2Fhangouts.google.com%2Fwebchat%2Fstart&flowName=GlifWebSignIn&flowEntry=ServiceLogin')
     #sign in email
-    web.click('Sign in')
     web.type('VirtualVisitas2.0' , into='Email')
     web.click('NEXT' , tag='span')
-    time.sleep(waitTime1)
     #sign in password
     web.type('Apaar&AlbertSal' , into='Password' , id='passwordFieldId')
     web.click('NEXT' , tag='span') # you are logged in . woohoooo
