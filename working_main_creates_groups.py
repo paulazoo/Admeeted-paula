@@ -1,5 +1,6 @@
 #some packages to import
 #to install a package on python: pip install [package name]
+#if people fill out the form after the groups are already made, just run this program again but only on the people who just joined, so go make a different excel with just the new emails and run it on that.
 from webbot import Browser
 import pandas as pd
 import random
@@ -63,7 +64,7 @@ for generatedGroups in allGeneratedGroups:
         #groupName using the date and groupNum
         #groupName = dateNow + " Call " + str(groupNum) + " Key: "
         #Alternatively, make the groupName with the specific call time
-        groupName = "Testing, March 15 9:30 PM," + " Call " + str(callNum)
+        groupName = "March 15 9:30 PM," + " Call " + str(callNum)
         #hangout is not created yet
         notWorked = True
         while notWorked:
