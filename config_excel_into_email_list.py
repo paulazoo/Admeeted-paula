@@ -1,13 +1,16 @@
 #import pandas package for doing stuff with data
 import pandas as pd
+import os
 
 #define an initial function that when run, initializes variables
 def init():
     #make All_Summary a global variable we can use across files
     global All_Summary
-    #In future, use the function from library os to automatically get path in case of the error.
-    excel_file = 'Testers Virtual Visitas (Responses).xlsx'
-    #excel_file = pd.read_excel("Testers Virtual Visitas (Responses).xlsx")
+
+    #get current directory path on specific computer using os    
+    dir_path = os.path.dirname(os.path.realpath('Testers Virtual Visitas (Responses).xlsx'))
+    #file location for respones excel file
+    excel_file = dir_path + '\\Testers Virtual Visitas (Responses).xlsx'
     #All_Summary holds the survey response data as a pandas dataframe
     All_Summary = pd.read_excel(excel_file)
     #remove all rows (people cases) with duplicate emails except last entered row by that email person
@@ -29,6 +32,5 @@ def init():
     global desired
     desired = int(input("How many people would you like in a group? "))
 
-init()
-    
+
 
