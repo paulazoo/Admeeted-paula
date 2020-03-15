@@ -32,7 +32,7 @@ print(str(len(allGeneratedGroups[0][0])))
 #login file
 import logging_in
 #WaitTime is used with time.sleep() to make sure webpages are loading.
-waitTime1 = 1
+waitTime1 = 2
 #login using the login function in logging_in.py
 web=logging_in.login(waitTime1)
 
@@ -57,7 +57,7 @@ for generatedGroups in allGeneratedGroups:
     groupNum = 1
     for subGroup in generatedGroups:
         #groupName using the date and groupNum
-        #groupName = dateNow + callTime + " Call " + str(callNum) + " (Key: " + str(groupNum) +  + ")"
+        #groupName = dateNow + callTime + " Call " + str(callNum) + " (Key: " + str(groupNum) + " " + category + ")"
         #Alternatively, make the groupName with the specific call time
         groupName = "Testing, March 15 9:30 PM," + " Call " + str(callNum)
         #hangout is not created yet
@@ -94,9 +94,17 @@ for generatedGroups in allGeneratedGroups:
                     element=web.driver.find_element_by_xpath("//li[@class='eh XcEgrf fp pu hy']").click()
                     print(email + " added")
                 except NoSuchElementException:
-                    #for non-gmails?? click the non gmails
                     print("No element found. Trying again...")
-                    element=web.driver.find_element_by_xpath("//li[@class='eh XcEgrf fp pu hy c-P-p lebsnd Tb']").click()
+                    try:
+                        #for non-gmails?? click the non gmails
+                        element=web.driver.find_element_by_xpath("//li[@class='eh XcEgrf fp pu hy c-P-p lebsnd Tb']").click()
+                        print(email + " added")
+                    except NoSuchElementException:
+                        #still doesn't work? just move on
+                        print("rough. skipping over email...")
+                        with open("dropped_ppl.txt", "w") as outfile:
+                            #writes the call and groupNum, then the email that wasn't add to that hangout
+                            outfile.write("\n".join([callNum, groupNum, email]))
                 
                 # except:
                 #   print(email + " was not added.")
@@ -131,8 +139,20 @@ for generatedGroups in allGeneratedGroups:
             else:
                 #didn't work, print that hangout was not successfully created
                 print(groupName + " NOT successfully created.")
-            #refresh the webpage to get back to general page for creating hangouts
-            web.refresh()
+            
+            #exit out of the group hangout
+                #get into iframe
+            iframe_pls=web.driver.find_elements_by_xpath("//iframe[@aria-label='" +groupName+ "']")
+            iframe_id=iframe_pls[0].get_attribute("id")
+            iframe_correct=web.driver.find_element_by_id(iframe_id)
+            web.driver.switch_to.frame(iframe_correct) 
+            
+            #click to exist specific hangout iframe
+            web.driver.find_element_by_xpath("//button[@class='gGnOIc tV qp SD p7oPo JPiKic']").click()    
+            
+            #get out of specific group hangout iframe
+            web.driver.switch_to.default_content()
+            
             time.sleep(waitTime1)
         #move on to the next group
         #finished!

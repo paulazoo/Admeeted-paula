@@ -51,7 +51,7 @@ def exit_group_hangout(web, groupName, waitTime1):
     #get out of any iframes
     web.driver.switch_to.default_content()
     
-    # #get into iframe
+    #get into iframe
     iframe_pls=web.driver.find_elements_by_xpath("//iframe[@aria-label='" +groupName+ "']")
     iframe_id=iframe_pls[0].get_attribute("id")
     iframe_correct=web.driver.find_element_by_id(iframe_id)

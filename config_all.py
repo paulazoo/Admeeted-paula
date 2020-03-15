@@ -21,8 +21,7 @@ def init(excel_name):
     #Get indices for non gmails
     non_gmails_indices = All_Summary[All_Summary['Email Address'].str.endswith("@gmail.com") == False].index
     #deletes emails that are too long (greater than 300 chars) because they would slow down the program and no legit emails are longer than 300 chars
-    too_long_indices = All_Summary[All_Summary['Email Address'].str.len() > 300].index
-    
+    too_long_indices = All_Summary[All_Summary['Email Address'].str.len() > 300].index    
     #print ppl whos emails didn't make it
     global Dropped_ppl
     Dropped_ppl=[All_Summary["Full Name"][i] for i in list(non_gmails_indices)] + [All_Summary["Full Name"][i] for i in list(too_long_indices)]
