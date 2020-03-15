@@ -33,7 +33,7 @@ print(str(len(generatedGroups[0])))
 #login file
 import logging_in
 #WaitTime is used with time.sleep() to make sure webpages are loading.
-waitTime1 = 1
+waitTime1 = 2
 #login using the login function in logging_in.py
 web=logging_in.login(waitTime1)
 
@@ -84,27 +84,27 @@ for subGroup in generatedGroups:
         #enter all the emails
         for email in subGroup:
             #type the email string
-            try: 
-                web.type(email)
-                time.sleep(waitTime1*2)
-                #cick the email to add
+            web.type(email)
+            time.sleep(waitTime1*2)
+            #cick the email to add
+            try:
                 #for gmails click the gmail
                 element=web.driver.find_element_by_xpath("//li[@class='eh XcEgrf fp pu hy']").click()
                 print(email + " added")
-            #just delete the inputted email instead.
-            #   except NoSuchElementException:
-            #       #for non-gmails?? click the non gmails
-            #       print("No element found. Trying again...")
-            #       element=web.driver.find_element_by_xpath("//li[@class='eh XcEgrf fp pu hy c-P-p lebsnd Tb']").click()
-            except:
-              print(email + " was not added.")
-              #print(email)
-              #print(str(len(email)))
-              for i in range(len(email)): 
-                keyboard.press_and_release('backspace')
-                # time.sleep(0.5)
-                # web.
-                # print(str(i))
+            except NoSuchElementException:
+                #for non-gmails?? click the non gmails
+                print("No element found. Trying again...")
+                element=web.driver.find_element_by_xpath("//li[@class='eh XcEgrf fp pu hy c-P-p lebsnd Tb']").click()
+            time.sleep(waitTime1)
+            # except:
+            #   print(email + " was not added.")
+            #   #print(email)
+            #   #print(str(len(email)))
+            #   for i in range(len(email)): 
+            #     keyboard.press_and_release('backspace')
+            #     # time.sleep(0.5)
+            #     # web.
+            #     # print(str(i))
             time.sleep(waitTime1)
             
         #name the group input box
@@ -117,7 +117,7 @@ for subGroup in generatedGroups:
         web.driver.switch_to.default_content()
         #type and enter group introduction messages
         time.sleep(waitTime1)
-        web.type("Hello! Welcome to the group for " + groupName + ". For this group, please make this the " + groupNum + " call. At the designated start time, someone should initiate the call. In order for this to work as smoothly as possible, we need to coordinate our calling. Albert originally planned for each call to be 15 minutes, but times will be flexible depending on how ya'll like the lengths, so please check the GroupMe for the official lengths for each call! You can always return to this chat later if ya'll want to talk more :) . Additionally, if you would like to leave early, just leave the groups that you won't be able to call in. So, you could choose to only partake in calls 1 to 3 if you prefer, but we all would love if you join all the calls. :D Thanks for helping make this happen!")
+        web.type("Hello! Welcome to the group for " + str(groupName) + ". For this group, please make this the " + str(groupNum) + " call. At the designated start time, someone should initiate the call. In order for this to work as smoothly as possible, we need to coordinate our calling. Albert originally planned for each call to be 15 minutes, but times will be flexible depending on how ya'll like the lengths, so please check the GroupMe for the official lengths for each call! You can always return to this chat later if ya'll want to talk more :) . Additionally, if you would like to leave early, just leave the groups that you won't be able to call in. So, you could choose to only partake in calls 1 to 3 if you prefer, but we all would love if you join all the calls. :D Thanks for helping make this happen!")
         #web.type("Hello! This is the testing for a program. Please ignore this hangout. You may exit.")
         time.sleep(waitTime1)
         web.press(web.Key.ENTER)
@@ -137,8 +137,8 @@ for subGroup in generatedGroups:
         #refresh the webpage to get back to general page for creating hangouts
         web.refresh()
     #move on to the next group
-    groupNum += 1
     #finished!
-    print("The " + groupNum + " group has worked! We got to the end of the line!")
+    print("The " + str(groupNum) + " group has worked! We got to the end of the line!")
+    groupNum += 1
   
  
