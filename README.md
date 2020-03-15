@@ -1,6 +1,10 @@
 # VirtualVisitas
 
-Google Form link: https://docs.google.com/forms/d/e/1FAIpQLScrrI4c-SRt6blejIZLADnBDt98UUg-2pMxrfMiChnDykhkGw/viewform
+### Google Form link: https://docs.google.com/forms/d/e/1FAIpQLScrrI4c-SRt6blejIZLADnBDt98UUg-2pMxrfMiChnDykhkGw/viewform
+
+### Find invites:
+- from gmail: https://github.com/alzh9000/VirtualVisitas/blob/master/where_are_invites_gmail.jpeg
+- from hangouts.google.com: https://github.com/alzh9000/VirtualVisitas/blob/master/where_are_invites_gmail.jpeg
 
 ### prereq packages:
 - webbot
