@@ -104,7 +104,7 @@ def create_hangout(web, subGroup, groupName, callNum, totalGroups):
         web.press(web.Key.ENTER)
         
         #find the iframe for the box for creating hangouts
-        iframe_pls=web.driver.find_element_by_xpath("//iframe[@class='Xyqxtc']")
+        iframe_pls=web.driver.find_elements_by_xpath("//iframe[@aria-label='Contacts and conversations']")
         #get that iframe's id as a string
         iframe_id=iframe_pls.get_attribute("id")
         print(iframe_id)
@@ -175,7 +175,7 @@ for generatedGroups in allGeneratedGroups:
         web, totalGroups=create_hangout(web, subGroup, groupName, callNum, totalGroups)
         #move on to the next group
         #finished!
-        print("The " + str(groupNum) + " group of the " + str(callNum) + " call has worked! We got to the end of the line!")
+        print("The " + str(groupName) " hangout has worked!")
         groupNum += 1
     callNum += 1
     
