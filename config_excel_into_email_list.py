@@ -14,19 +14,10 @@ def init():
     All_Summary=All_Summary.drop_duplicates(subset=['Email Address'], keep='last').reset_index(drop=True)
     #remove all rows (people cases) with duplicate NAMES except last entered row by that name person
     All_Summary=All_Summary.drop_duplicates(subset=['Full Name'], keep='last').reset_index(drop=True)
-    
-    #get the email column from the survey data and store in Email_Summary
-    Email_Summary = All_Summary["Email Address"]
-    #drop empty emails
-    Email_Summary = Email_Summary.dropna()
-
-    print(All_Summary["Email Address"])
     #Get indices for non gmails
     non_gmails_indices = All_Summary[All_Summary['Email Address'].str.endswith("@gmail.com") == False].index
     # Delete these row indexes from dataFrame
     All_Summary=All_Summary.drop(non_gmails_indices).reset_index(drop=True)
-    print(All_Summary["Email Address"])
-    print(All_Summary["Full Name"])
     
     #To optimize things, we should keep this stuff in a pd.dataframe instead of turning it into a list, because pd is more efficient.
 
