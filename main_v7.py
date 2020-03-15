@@ -47,6 +47,7 @@ groupNum = 1
 today = date.today()
 dateNow = today.strftime("%B %d, %Y")
 callTime = '9:30 PM EST'
+category='Random'
 #%%
 #get out of iframe for making groups
 web.driver.switch_to.default_content()
@@ -57,9 +58,13 @@ for generatedGroups in allGeneratedGroups:
     groupNum = 1
     for subGroup in generatedGroups:
         #groupName using the date and groupNum
-        #groupName = dateNow + callTime + " Call " + str(callNum) + " (Key: " + str(groupNum) + " " + category + ")"
+        groupName = dateNow + callTime + " Call " + str(callNum) + " (Key: " + category + str(callNum) + str(groupNum) + ")"
+            #write down the generatedGroups
+        with open("group_ppl.txt", "a") as file:
+            file.write("\n")
+            file.write("groupName: "+groupName+" ppl: "+ str(subGroup))
         #Alternatively, make the groupName with the specific call time
-        groupName = "Testing, March 15 9:30 PM," + " Call " + str(callNum)
+        #groupName = "Testing, March 15 9:30 PM," + " Call " + str(callNum)
         #hangout is not created yet
         notWorked = True
         while notWorked:
