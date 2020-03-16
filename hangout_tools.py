@@ -38,7 +38,7 @@ def call_group_hangout(web, groupName, waitTime1):
     
     #click video call
     web.driver.find_element_by_css_selector("[title*='Video call. Click to start a video call.']").click() 
-    time.sleep(waitTime1*3)
+    time.sleep(waitTime1)
     
     #get out of groupName specific hagnout iframe
     web.driver.switch_to.default_content()
