@@ -163,14 +163,13 @@ for generatedGroups in allGeneratedGroups:
     #start creating the hangout for each group in the generatedGroups for each designated call
     groupNum = 1
     for subGroup in generatedGroups:
-        tic=time.perf_counter()
         #groupName using the date and groupNum
         #groupName = dateNow + callTime + " Call " + str(callNum) + " (Key: " + category + str(callNum) + str(groupNum) + ")"
         groupName="testin some stuff pls ignore :)"
         web, totalGroups=create_hangout(web, subGroup, groupName, callNum, totalGroups)
         #move on to the next group
         #finished!
-        print(str(groupName) +" created! t="+str(time.perf_counter()-tic))
+        print(str(groupName) +" created!")
         groupNum += 1
     callNum += 1
     
