@@ -218,33 +218,15 @@ print(batchedLists)
 # print("hmm")
 # second_half = allGeneratedGroups[middle_index:]
 # print(second_half)
+for i in batchedLists[]:
 while catchErrors:
     try:
-        t1 = threading.Thread(target=go_thread, args=(batchedLists[0],1,1,)) 
-        t2 = threading.Thread(target=go_thread, args=(batchedLists[1],2,2,))
-        t3 = threading.Thread(target=go_thread, args=(batchedLists[1],3,3,)) 
-        t4 = threading.Thread(target=go_thread, args=(batchedLists[1],4,4,)) 
-        t5 = threading.Thread(target=go_thread, args=(batchedLists[1],5,5,))  
+        t = threading.Thread(target=go_thread, args=(batchedLists[i],i+1,i+1,))
         
         # starting thread 1 
-        t1.start() 
-        # starting thread 2 
-        t2.start() 
-
-        t3.start()
+        t.start() 
+        thread_list.append(t)
         
-        t4.start()
-        
-        t5.start()
-        
-        
-        # wait until thread 1 is completely executed 
-        t1.join() 
-        # wait until thread 2 is completely executed 
-        t2.join() 
-        t3.join()
-        t4.join()
-        t5.join()
         catchErrors = False
     except:
         print("There was an error. Restarting threads.")
