@@ -30,29 +30,38 @@ def createGroups(allEmails, desired):
     return subgroups
 
 #%%
-#returns a list of groups from specified category, where each group is a list of emails for one specific category value
+#returns a list of groups from specified category, where each group is a list of emails for one specific category value (first value for each ans)
 def get_category_emails(All_Summary,allEmails,category):
-    #get relevant category column
+    #get the data for the relevant category
     category_Summary=All_Summary[category]
+    #turn each multichoose answer into a list of chosen multichoose answers
+    category_list = [(category_Summary[i].split(", ")) for i in range(0,len(category_Summary))]
     
-    #go through each category value to get a list of 
-    category_strs=category_Summary.drop_duplicates()
+    #get only the first ans for ans with multichoose
+    category_firsts=[ans[0] for ans in category_list]
+    print(category_firsts)
+    
+    #get all existing values in the category w no duplicates
+    category_strs=list(set(category_firsts))
+    
     #list of category lists
     by_category=[]
     #relevant category value
     for category_val in category_strs:
-        # print(major)
-        #index of correct category values in category column
-        category_yes=category_Summary[category_Summary==category_val].index
-        category_yes=pd.Index.tolist(category_yes)
-        # print(category_yes)
+        #print(category_val)
+        
+        #indices of correct category values in category_firsts list
+        category_yes=[i for i, x in enumerate(category_firsts) if x == category_val]
+        #print(category_yes)
         
         #get specific emails that are correct e.g. 'History' in 'Major' column emails
         specific_emails = [allEmails[i] for i in category_yes]
-        # print(specific_emails)
+        #print(specific_emails)
+        
+        #add that email list into by_category list
         by_category.append(specific_emails)
     print(by_category)
-    return by_category
+    return by_category, category_strs
 
 #%%
 def get_multicategory_emails(All_Summary,allEmails,category):

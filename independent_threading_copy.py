@@ -193,7 +193,7 @@ def go_thread(givenGroups, threadNum, callNum):
         groupNum = 1
         for subGroup in generatedGroups:
             #groupName using the date and groupNum
-            #groupName = dateNow + callTime + " Call " + str(callNum) + " (Key: " + category + str(callNum) + str(groupNum) + ")"
+            #groupName = dateNow + callTime + " Call " + str(callNum) + " (Key: " + category + str(threadNum)+str(callNum)+str(groupNum)+")"
             groupName="test t: "+str(threadNum) + " c: "+str(callNum) + " g: "+str(groupNum)
             web, totalGroups=create_hangout(web, subGroup, groupName, totalGroups,waitTime1)
             #move on to the next group
@@ -217,11 +217,6 @@ print(batchedLists)
 # print("hmm")
 # second_half = allGeneratedGroups[middle_index:]
 # print(second_half)
-
-#%%
-def loopy(something):
-    print(something)
-    return something
 
 #%%
 thread_list=[]

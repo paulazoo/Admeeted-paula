@@ -18,22 +18,33 @@ def init(excel_name):
     All_Summary=All_Summary.drop_duplicates(subset=['Email Address'], keep='last').reset_index(drop=True)
     #remove all rows (people cases) with duplicate NAMES except last entered row by that name person
     All_Summary=All_Summary.drop_duplicates(subset=['Full Name'], keep='last').reset_index(drop=True)
+    
+    global Dropped_ppl
     #Get indices for non gmails
     non_gmails_indices = All_Summary[All_Summary['Email Address'].str.endswith("@gmail.com") == False].index
+    Dropped_ppl=[All_Summary["Full Name"][i] for i in list(non_gmails_indices)]
+    All_Summary=All_Summary.drop(non_gmails_indices).reset_index(drop=True)
+    
+    #Get indices for non participating
+    non_participating_indices = All_Summary[All_Summary['Participating'] == False].index
+    Dropped_ppl=Dropped_ppl + [All_Summary["Full Name"][i] for i in list(non_participating_indices)]
+    All_Summary=All_Summary.drop(non_participating_indices).reset_index(drop=True)
+    
     #deletes emails that are too long (greater than 300 chars) because they would slow down the program and no legit emails are longer than 300 chars
-    too_long_indices = All_Summary[All_Summary['Email Address'].str.len() > 300].index    
+    too_long_indices = All_Summary[All_Summary['Email Address'].str.len() > 300].index  
+    Dropped_ppl=Dropped_ppl + [All_Summary["Full Name"][i] for i in list(too_long_indices)]
+    All_Summary=All_Summary.drop(too_long_indices).reset_index(drop=True)
+    
     #print ppl whos emails didn't make it
-    global Dropped_ppl
-    Dropped_ppl=[All_Summary["Full Name"][i] for i in list(non_gmails_indices)] + [All_Summary["Full Name"][i] for i in list(too_long_indices)]
-
+    
     #write the full names of dropped gmails into a file
     with open("dropped_ppl.txt", "w") as outfile:
         outfile.write("\n".join(Dropped_ppl))
 
     #Delete these row indexes from dataFrame    
-    All_Summary=All_Summary.drop(too_long_indices).reset_index(drop=True)
-    All_Summary=All_Summary.drop(non_gmails_indices).reset_index(drop=True)
-
+    
+    
+    
     #To optimize things, we should keep this stuff in a pd.dataframe instead of turning it into a list, because pd is more efficient.
 
     #global variable allEmailsNoDuplicates holds the final list of emails w no duplicate emails
