@@ -39,9 +39,11 @@ def splitList(seq, num): #input a list and the desired number of smaller lists. 
 #create groups using the createGroups function defined in groups.py file
 allGeneratedGroups = []
 for i in range(numCalls):
-    allGeneratedGroups.append(groups.createGroups(allEmailsNoDuplicates, desired))
+    allGeneratedGroups = allGeneratedGroups + groups.createGroups(allEmailsNoDuplicates, desired, i)
+    print("hi")
 #print the generated groups to check
-print(str(len(allGeneratedGroups[0][0])))
+print(allGeneratedGroups)
+print(str(len(allGeneratedGroups[0])))
 
 #%%
 
@@ -75,7 +77,7 @@ def enter_email(web, email, groupName):
         element=web.driver.find_element_by_css_selector("li[class*='eh XcEgrf fp pu hy']").click()
     except NoSuchElementException:
         #still doesn't work? just move on
-        print("skipping "+email)
+        print("skipping "+ str(email))
         with open("dropped_ppl.txt", "w") as outfile:
             #writes the call and groupNum, then the email that wasn't add to that hangout
             outfile.write("\n" + groupName + " " + email)
@@ -121,8 +123,9 @@ def create_hangout(web, subGroup, groupName, totalGroups, waitTime1):
         web.driver.switch_to.frame(iframe_correct)
         
         #enter all the emails
-        for email in subGroup:
-            enter_email(web, email, groupName)
+        for i in range(1, len(subGroup)):
+            print(subGroup[i])
+            enter_email(web, subGroup[i], groupName)
             
             
         #name the group input box
@@ -167,7 +170,7 @@ def create_hangout(web, subGroup, groupName, totalGroups, waitTime1):
         
         return web, totalGroups
 #%%
-def go_thread(givenGroups, threadNum, callNum):
+def go_thread(givenGroups, threadNum):
     #WaitTime is used with time.sleep() to make sure webpages are loading.
     waitTime1 = 2
     #initialize some variables
@@ -193,20 +196,26 @@ def go_thread(givenGroups, threadNum, callNum):
         groupNum = 1
         for subGroup in generatedGroups:
             #groupName using the date and groupNum
+<<<<<<< HEAD
             #groupName = dateNow + callTime + " Call " + str(callNum) + " (Key: " + category + str(threadNum)+str(callNum)+str(groupNum)+")"
             groupName="test t: "+str(threadNum) + " c: "+str(callNum) + " g: "+str(groupNum)
+=======
+            #groupName = dateNow + callTime + " Call " + str(callNum) + " (Key: " + category + str(callNum) + str(groupNum) + ")"
+            groupName="test t: "+str(threadNum) + " c: "+ str(subGroup[0]) + " g: "+str(groupNum)
+>>>>>>> 217f9c2ee8427a0e29c2d32a0d49e48854a0afc3
             web, totalGroups=create_hangout(web, subGroup, groupName, totalGroups,waitTime1)
             #move on to the next group
             #finished!
             print(str(groupName) +" created!")
             groupNum += 1
-        callNum += 1
     
 #%%
 import threading
 # creating thread 
 catchErrors = True
+
 batchedLists = splitList(allGeneratedGroups, numThreads)
+batchedLists = splitList(batchedLists, numThreads)
 print(batchedLists)
 # length = len(allGeneratedGroups)
 # middle_index = length//2
@@ -224,7 +233,7 @@ errorCount = 0
 for i in batchedLists:
     try:
 
-        t = threading.Thread(target=go_thread, args=(i,batchedLists.index(i)+1,batchedLists.index(i)+1,))      
+        t = threading.Thread(target=go_thread, args=(i,batchedLists.index(i)+1,))      
         # starting thread 1 
         t.start()
         thread_list.append(t)

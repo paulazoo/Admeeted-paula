@@ -1,7 +1,7 @@
 import pandas as pd
 import random
 #returns a list of the subgroups (which are also lists themselves) of the emails.
-def createGroups(allEmails, desired):
+def createGroups(allEmails, desired, callNum):
     #shuffle the list of emails
     random.shuffle(allEmails)
     #if the desired group size is more than the number of emails, just put everyone into one group
@@ -9,7 +9,7 @@ def createGroups(allEmails, desired):
         subgroups = [allEmails]
     #make subgroups the length of the desired number of ppl per group from the shuffled email list
     else:
-        subgroups = [allEmails[x:x + desired] for x in range(0, len(allEmails), desired)]
+        subgroups = [[callNum] + allEmails[x:x + desired] for x in range(0, len(allEmails), desired)]
         #if there's a group with less than desired number of people, evenly distribute amongst the other groups
         lastLen = len(subgroups[-1])
         if lastLen < desired:
