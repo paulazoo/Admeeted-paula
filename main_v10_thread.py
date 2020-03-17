@@ -21,6 +21,19 @@ allEmailsNoDuplicates=config.allEmailsNoDuplicates
 #group manipulations
 import groups
 numCalls = int(input("How many times do you want people to call? "))
+
+numThreads = int(input("How many threads/tabs/windows do you want to use? More means the program runs faster but takes more memory. "))
+def splitList(seq, num): #input a list and the desired number of smaller lists. Returns a nested list with the smaller lists.
+    avg = len(seq) / float(num)
+    out = []
+    last = 0.0
+
+    while last < len(seq):
+        out.append(seq[int(last):int(last + avg)])
+        last += avg
+
+    return out
+
 #create groups using the createGroups function defined in groups.py file
 allGeneratedGroups = []
 for i in range(numCalls):
@@ -29,15 +42,6 @@ for i in range(numCalls):
 print(str(len(allGeneratedGroups[0][0])))
 
 #%%
-length = len(allGeneratedGroups)
-middle_index = length//2
-print(length)
-print(middle_index)
-first_half = allGeneratedGroups[:middle_index]
-print(first_half)
-print("hmm")
-second_half = allGeneratedGroups[middle_index:]
-print(second_half)
 
 #define waitTime1 to prevent errors?
 waitTime1 = 2
@@ -201,6 +205,16 @@ import threading
 # creating thread 
 catchErrors = True
 errorCount = 0
+batchedLists = splitList()
+length = len(allGeneratedGroups)
+middle_index = length//2
+print(length)
+print(middle_index)
+first_half = allGeneratedGroups[:middle_index]
+print(first_half)
+print("hmm")
+second_half = allGeneratedGroups[middle_index:]
+print(second_half)
 while catchErrors:
     try:
         t1 = threading.Thread(target=go_thread, args=(first_half,1,1,)) 
@@ -221,6 +235,6 @@ while catchErrors:
         errorCount += 1
   
 # both threads completely executed 
-print("Done! There were " + str(errorCount) + "errors.") 
+print("Done! There were " + str(errorCount) + " errors.") 
 
 
