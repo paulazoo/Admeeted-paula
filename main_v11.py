@@ -8,6 +8,7 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.keys import Keys
 from datetime import date
 import hangout_tools
+
 #%%
 #initialize variables
 #the config file cleans the data and gets the starting variable values
@@ -22,19 +23,6 @@ allEmailsNoDuplicates=config.allEmailsNoDuplicates
 #group manipulations
 import groups
 numCalls = int(input("How many times do you want people to call? "))
-
-numThreads = int(input("How many threads/tabs/windows do you want to use? More means the program runs faster but takes more memory. "))
-def splitList(seq, num): #input a list and the desired number of smaller lists. Returns a nested list with the smaller lists.
-    avg = len(seq) / float(num)
-    out = []
-    last = 0.0
-
-    while last < len(seq):
-        out.append(seq[int(last):int(last + avg)])
-        last += avg
-
-    return out
-
 #create groups using the createGroups function defined in groups.py file
 allGeneratedGroups = []
 for i in range(numCalls):
@@ -43,9 +31,15 @@ for i in range(numCalls):
 print(str(len(allGeneratedGroups[0][0])))
 
 #%%
-
-#define waitTime1 to prevent errors?
-waitTime1 = 2
+length = len(allGeneratedGroups)
+middle_index = length//2
+print(length)
+print(middle_index)
+first_half = allGeneratedGroups[:middle_index]
+print(first_half)
+print("hmm")
+second_half = allGeneratedGroups[middle_index:]
+print(second_half)
 
 #%%
 #starting browser and logging in to hangouts
@@ -177,7 +171,7 @@ def go_thread(givenGroups,threadNum, callNum):
     today = date.today()
     dateNow = today.strftime("%B %d, %Y")
     callTime = '9:30 PM EST'
-    category='Testing'
+    category='Random'
 
     #login using the login function in logging_in.py
     web=login(waitTime1)
@@ -192,7 +186,7 @@ def go_thread(givenGroups,threadNum, callNum):
         groupNum = 1
         for subGroup in generatedGroups:
             #groupName using the date and groupNum
-            #groupName = dateNow + callTime + " Call " + str(callNum) + " (Key: " + category + str(callNum) + str(groupNum) + ")"
+            #groupName = dateNow + callTime + " Call " + str(callNum) + " (Key: "+category+str(threadNum)+str(callNum)+str(groupNum)")"
             groupName="test t: "+str(threadNum) + " c: "+str(callNum) + " g: "+str(groupNum)
             web, totalGroups=create_hangout(web, subGroup, groupName, totalGroups,waitTime1)
             #move on to the next group
@@ -204,39 +198,20 @@ def go_thread(givenGroups,threadNum, callNum):
 #%%
 import threading
 # creating thread 
-catchErrors = True
-errorCount = 0
-batchedLists = splitList(allGeneratedGroups, numThreads)
-print(batchedLists)
-# length = len(allGeneratedGroups)
-# middle_index = length//2
-# print(length)
-# print(middle_index)
-# first_half = allGeneratedGroups[:middle_index]
-# print(first_half)
-# print("hmm")
-# second_half = allGeneratedGroups[middle_index:]
-# print(second_half)
-while catchErrors:
-    try:
-        t1 = threading.Thread(target=go_thread, args=(batchedLists[0],1,1,)) 
-        t2 = threading.Thread(target=go_thread, args=(batchedLists[1],2,3,)) 
-        
-        # starting thread 1 
-        t1.start() 
-        # starting thread 2 
-        t2.start() 
-        
-        # wait until thread 1 is completely executed 
-        t1.join() 
-        # wait until thread 2 is completely executed 
-        t2.join() 
-        catchErrors = False
-    except:
-        print("There was an error. Restarting threads.")
-        errorCount += 1
+t1 = threading.Thread(target=go_thread, args=(first_half,1,1,)) 
+t2 = threading.Thread(target=go_thread, args=(second_half,2,3,)) 
+  
+# starting thread 1 
+t1.start() 
+# starting thread 2 
+t2.start() 
+  
+# wait until thread 1 is completely executed 
+t1.join() 
+# wait until thread 2 is completely executed 
+t2.join() 
   
 # both threads completely executed 
-print("Done! There were " + str(errorCount) + " errors.") 
+print("Done!") 
 
 
