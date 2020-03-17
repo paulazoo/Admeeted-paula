@@ -25,7 +25,7 @@ def init(excel_name):
     Dropped_ppl=[All_Summary["Full Name"][i] for i in list(non_gmails_indices)]
     All_Summary=All_Summary.drop(non_gmails_indices).reset_index(drop=True)
     
-    #Get indices for non participating
+    #Get indices for non participating (CANT call at the time)
     non_participating_indices = All_Summary[All_Summary['Participating'] == False].index
     Dropped_ppl=Dropped_ppl + [All_Summary["Full Name"][i] for i in list(non_participating_indices)]
     All_Summary=All_Summary.drop(non_participating_indices).reset_index(drop=True)
