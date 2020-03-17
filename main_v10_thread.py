@@ -39,6 +39,9 @@ print("hmm")
 second_half = allGeneratedGroups[middle_index:]
 print(second_half)
 
+#define waitTime1 to prevent errors?
+waitTime1 = 2
+
 #%%
 #starting browser and logging in to hangouts
 def login(waitTime1):    
@@ -169,7 +172,7 @@ def go_thread(givenGroups,threadNum, callNum):
     today = date.today()
     dateNow = today.strftime("%B %d, %Y")
     callTime = '9:30 PM EST'
-    category='Random'
+    category='Testing'
 
     #login using the login function in logging_in.py
     web=login(waitTime1)
@@ -196,20 +199,28 @@ def go_thread(givenGroups,threadNum, callNum):
 #%%
 import threading
 # creating thread 
-t1 = threading.Thread(target=go_thread, args=(first_half,1,1,)) 
-t2 = threading.Thread(target=go_thread, args=(second_half,2,3,)) 
-  
-# starting thread 1 
-t1.start() 
-# starting thread 2 
-t2.start() 
-  
-# wait until thread 1 is completely executed 
-t1.join() 
-# wait until thread 2 is completely executed 
-t2.join() 
+catchErrors = True
+errorCount = 0
+while catchErrors:
+    try:
+        t1 = threading.Thread(target=go_thread, args=(first_half,1,1,)) 
+        t2 = threading.Thread(target=go_thread, args=(second_half,2,3,)) 
+        
+        # starting thread 1 
+        t1.start() 
+        # starting thread 2 
+        t2.start() 
+        
+        # wait until thread 1 is completely executed 
+        t1.join() 
+        # wait until thread 2 is completely executed 
+        t2.join() 
+        catchErrors = False
+    except:
+        print("There was an error. Restarting threads.")
+        errorCount += 1
   
 # both threads completely executed 
-print("Done!") 
+print("Done! There were " + str(errorCount) + "errors.") 
 
 

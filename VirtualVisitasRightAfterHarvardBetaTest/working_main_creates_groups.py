@@ -64,7 +64,7 @@ for generatedGroups in allGeneratedGroups:
         #groupName using the date and groupNum
         #groupName = dateNow + " Call " + str(groupNum) + " Key: "
         #Alternatively, make the groupName with the specific call time
-        groupName = "March 15 9:30 PM," + " Call " + str(callNum)
+        groupName = "TEN 10 PEOPLE CALL :) March 15 9:30 PM," + " Call " + str(callNum)
         #hangout is not created yet
         notWorked = True
         while notWorked:

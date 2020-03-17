@@ -8,9 +8,9 @@ def init():
     global All_Summary
 
     #get current directory path on specific computer using os    
-    dir_path = os.path.dirname(os.path.realpath('Virtual Visitas (Responses) (2).xlsx'))
+    dir_path = os.path.dirname(os.path.realpath('Virtual Visitas (Responses) Big.xlsx'))
     #file location for respones excel file
-    excel_file = dir_path + '\\Virtual Visitas (Responses) (2).xlsx'
+    excel_file = dir_path + '\\Virtual Visitas (Responses) Big.xlsx'
     #All_Summary holds the survey response data as a pandas dataframe
     All_Summary = pd.read_excel(excel_file)
     #remove all rows (people cases) with duplicate emails except last entered row by that email person
