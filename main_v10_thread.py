@@ -205,20 +205,21 @@ import threading
 # creating thread 
 catchErrors = True
 errorCount = 0
-batchedLists = splitList()
-length = len(allGeneratedGroups)
-middle_index = length//2
-print(length)
-print(middle_index)
-first_half = allGeneratedGroups[:middle_index]
-print(first_half)
-print("hmm")
-second_half = allGeneratedGroups[middle_index:]
-print(second_half)
+batchedLists = splitList(allGeneratedGroups, numThreads)
+print(batchedLists)
+# length = len(allGeneratedGroups)
+# middle_index = length//2
+# print(length)
+# print(middle_index)
+# first_half = allGeneratedGroups[:middle_index]
+# print(first_half)
+# print("hmm")
+# second_half = allGeneratedGroups[middle_index:]
+# print(second_half)
 while catchErrors:
     try:
-        t1 = threading.Thread(target=go_thread, args=(first_half,1,1,)) 
-        t2 = threading.Thread(target=go_thread, args=(second_half,2,3,)) 
+        t1 = threading.Thread(target=go_thread, args=(batchedLists[0],1,1,)) 
+        t2 = threading.Thread(target=go_thread, args=(batchedLists[1],2,3,)) 
         
         # starting thread 1 
         t1.start() 
