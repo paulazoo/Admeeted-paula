@@ -229,7 +229,7 @@ errorCount = 0
 for i in batchedLists:
     try:
 
-        t = threading.Thread(target=go_thread, args=(i,69,96,))      
+        t = threading.Thread(target=go_thread, args=(i,batchedLists.index(i)+1,batchedLists.index(i)+1,))      
         # starting thread 1 
         t.start()
         thread_list.append(t)
