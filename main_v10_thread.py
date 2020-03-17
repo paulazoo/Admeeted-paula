@@ -5,6 +5,7 @@ import pandas as pd
 import time
 import selenium
 from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.common.keys import Keys
 from datetime import date
 import hangout_tools
 #%%
@@ -25,29 +26,34 @@ allGeneratedGroups = []
 for i in range(numCalls):
     allGeneratedGroups.append(groups.createGroups(allEmailsNoDuplicates, desired))
 #print the generated groups to check
-print(allGeneratedGroups)
 print(str(len(allGeneratedGroups[0][0])))
 
 #%%
-#login file
-import logging_in
-#WaitTime is used with time.sleep() to make sure webpages are loading.
-waitTime1 = 2
-#login using the login function in logging_in.py
-web=logging_in.login(waitTime1)
+length = len(allGeneratedGroups)
+middle_index = length//2
+print(length)
+print(middle_index)
+first_half = allGeneratedGroups[:middle_index]
+print(first_half)
+print("hmm")
+second_half = allGeneratedGroups[middle_index:]
+print(second_half)
 
 #%%
-#initialize some variables
-totalGroups = 0
-#first call is callNum = 1
-callNum = 1
-#groupNum is just for our tracking purposes
-groupNum = 1
-#get the date to put into groupName later
-today = date.today()
-dateNow = today.strftime("%B %d, %Y")
-callTime = '9:30 PM EST'
-category='Random'
+#starting browser and logging in to hangouts
+def login(waitTime1):    
+    #start new browser
+    web = Browser()
+    #go to hangouts
+    web.driver.get('https://accounts.google.com/signin/v2/identifier?service=talk&passive=1209600&continue=https%3A%2F%2Fhangouts.google.com%2Fwebchat%2Fstart&followup=https%3A%2F%2Fhangouts.google.com%2Fwebchat%2Fstart&flowName=GlifWebSignIn&flowEntry=ServiceLogin')
+    time.sleep(waitTime1)
+    #sign in email
+    web.driver.find_element_by_css_selector("input[type='email']").send_keys('VirtualVisitas2.0')
+    web.driver.find_element_by_css_selector("input[type='email']").send_keys(Keys.RETURN)
+    time.sleep(waitTime1)
+    web.driver.find_element_by_css_selector("input[type='password']").send_keys('Apaar&AlbertSal')
+    web.driver.find_element_by_css_selector("input[type='password']").send_keys(Keys.RETURN)
+    return web
 
 #%%
 def enter_email(web, email):
@@ -76,7 +82,7 @@ def enter_email(web, email):
     return web
 
 #%%
-def create_hangout(web, subGroup, groupName, callNum, totalGroups):
+def create_hangout(web, subGroup, groupName, totalGroups,waitTime1):
 
         #write down the generatedGroups
     with open("group_ppl.txt", "a") as file:
@@ -117,10 +123,11 @@ def create_hangout(web, subGroup, groupName, callNum, totalGroups):
         web.driver.find_element_by_css_selector("button.PD7XNe.yt1Zfc").click()
         #get out of iframe for making groups
         web.driver.switch_to.default_content()
+        time.sleep(waitTime1)
         #type and enter group introduction messages
         #web.type("Hello! Welcome to the group for " + str(groupName) + ". Please make this the " + str(callNum) + " call. At the designated start time, someone should initiate the call. In order for this to work as smoothly as possible, we need to coordinate our calling. Albert originally planned for each call to be 15 minutes, but times will be flexible depending on how ya'll like the lengths, so please check the GroupMe for the official lengths for each call! You can always return to this chat later if ya'll want to talk more :) . Additionally, if you would like to leave early, just leave the groups that you won't be able to call in. So, you could choose to only partake in calls 1 to 3 if you prefer, but we all would love if you join all the calls. :D Thanks for helping make this happen!")
-        web.type("testing")
-        #web.type("Hello! This is the testing for a program. Please ignore this hangout. You may exit.")
+        web.type("Hello! This is the testing for a program. Please ignore this hangout. You may exit.")
+        time.sleep(waitTime1)
         web.press(web.Key.ENTER)
         
         #check if the group hangout was successfully created by checking if we're still in hangouts
@@ -137,7 +144,6 @@ def create_hangout(web, subGroup, groupName, callNum, totalGroups):
         
         #exit out of the group hangout
             #get into iframe
-        time.sleep(waitTime1)
         iframe_pls=web.driver.find_elements_by_css_selector("iframe[aria-label='"+groupName+"']")
         iframe_id=iframe_pls[0].get_attribute("id")
         iframe_correct=web.driver.find_element_by_id(iframe_id)
@@ -148,29 +154,62 @@ def create_hangout(web, subGroup, groupName, callNum, totalGroups):
         
         #get out of specific group hangout iframe
         web.driver.switch_to.default_content()
-        
         time.sleep(waitTime1)
         
         return web, totalGroups
-
-
 #%%
-#get out of iframe for making groups
-web.driver.switch_to.default_content()
-
-#make the number of generatedGroups corresponding to the number of calls
-for generatedGroups in allGeneratedGroups:
-    #start creating the hangout for each group in the generatedGroups for each designated call
+def go_thread(givenGroups,threadNum, callNum):
+    #WaitTime is used with time.sleep() to make sure webpages are loading.
+    waitTime1 = 2
+    #initialize some variables
+    totalGroups = 0
+    #groupNum is just for our tracking purposes
     groupNum = 1
-    for subGroup in generatedGroups:
-        #groupName using the date and groupNum
-        #groupName = dateNow + callTime + " Call " + str(callNum) + " (Key: " + category + str(callNum) + str(groupNum) + ")"
-        groupName="testin some stuff pls ignore :)"
-        web, totalGroups=create_hangout(web, subGroup, groupName, callNum, totalGroups)
-        #move on to the next group
-        #finished!
-        print(str(groupName) +" created!")
-        groupNum += 1
-    callNum += 1
+    #get the date to put into groupName later
+    today = date.today()
+    dateNow = today.strftime("%B %d, %Y")
+    callTime = '9:30 PM EST'
+    category='Random'
+
+    #login using the login function in logging_in.py
+    web=login(waitTime1)
     
+    #get out of iframe for making groups
+    web.driver.switch_to.default_content()
+    time.sleep(waitTime1)
     
+    #make the number of generatedGroups corresponding to the number of calls
+    for generatedGroups in givenGroups:
+        #start creating the hangout for each group in the generatedGroups for each designated call
+        groupNum = 1
+        for subGroup in generatedGroups:
+            #groupName using the date and groupNum
+            #groupName = dateNow + callTime + " Call " + str(callNum) + " (Key: " + category + str(callNum) + str(groupNum) + ")"
+            groupName="test t: "+str(threadNum) + " c: "+str(callNum) + " g: "+str(groupNum)
+            web, totalGroups=create_hangout(web, subGroup, groupName, totalGroups,waitTime1)
+            #move on to the next group
+            #finished!
+            print(str(groupName) +" created!")
+            groupNum += 1
+        callNum += 1
+    
+#%%
+import threading
+# creating thread 
+t1 = threading.Thread(target=go_thread, args=(first_half,1,1,)) 
+t2 = threading.Thread(target=go_thread, args=(second_half,2,3,)) 
+  
+# starting thread 1 
+t1.start() 
+# starting thread 2 
+t2.start() 
+  
+# wait until thread 1 is completely executed 
+t1.join() 
+# wait until thread 2 is completely executed 
+t2.join() 
+  
+# both threads completely executed 
+print("Done!") 
+
+
