@@ -206,7 +206,6 @@ def go_thread(givenGroups, threadNum, callNum):
 import threading
 # creating thread 
 catchErrors = True
-errorCount = 0
 batchedLists = splitList(allGeneratedGroups, numThreads)
 print(batchedLists)
 # length = len(allGeneratedGroups)
@@ -218,12 +217,19 @@ print(batchedLists)
 # print("hmm")
 # second_half = allGeneratedGroups[middle_index:]
 # print(second_half)
-thread_list=[]
 
 #%%
+def loopy(something):
+    print(something)
+    return something
+
+#%%
+thread_list=[]
+errorCount = 0
 for i in batchedLists:
     try:
-        t = threading.Thread(target=go_thread, args=(batchedLists[i],i+1,i+1,))      
+
+        t = threading.Thread(target=go_thread, args=(i,69,96,))      
         # starting thread 1 
         t.start()
         thread_list.append(t)
