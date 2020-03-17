@@ -65,7 +65,7 @@ def login(waitTime1):
     return web
 
 #%%
-def enter_email(web, email):
+def enter_email(web, email, groupName):
     #type the email string
     web.type(email)
     time.sleep(waitTime1)
@@ -78,7 +78,7 @@ def enter_email(web, email):
         print("skipping "+email)
         with open("dropped_ppl.txt", "w") as outfile:
             #writes the call and groupNum, then the email that wasn't add to that hangout
-            outfile.write("\n" +str(callNum)+" "+str(groupNum)+" "+email)
+            outfile.write("\n" + groupName + " " + email)
 # except:
 #   print(email + " was not added.")
 #   #print(email)
@@ -91,7 +91,7 @@ def enter_email(web, email):
     return web
 
 #%%
-def create_hangout(web, subGroup, groupName, totalGroups,waitTime1):
+def create_hangout(web, subGroup, groupName, totalGroups, waitTime1):
 
         #write down the generatedGroups
     with open("group_ppl.txt", "a") as file:
@@ -122,7 +122,7 @@ def create_hangout(web, subGroup, groupName, totalGroups,waitTime1):
         
         #enter all the emails
         for email in subGroup:
-            enter_email(web, email)
+            enter_email(web, email, groupName)
             
             
         #name the group input box
@@ -167,7 +167,7 @@ def create_hangout(web, subGroup, groupName, totalGroups,waitTime1):
         
         return web, totalGroups
 #%%
-def go_thread(givenGroups,threadNum, callNum):
+def go_thread(givenGroups, threadNum, callNum):
     #WaitTime is used with time.sleep() to make sure webpages are loading.
     waitTime1 = 2
     #initialize some variables
@@ -222,9 +222,9 @@ while catchErrors:
     try:
         t1 = threading.Thread(target=go_thread, args=(batchedLists[0],1,1,)) 
         t2 = threading.Thread(target=go_thread, args=(batchedLists[1],2,2,))
-        t3 = threading.Thread(target=go_thread, args=(batchedLists[1],3,3,)) 
-        t4 = threading.Thread(target=go_thread, args=(batchedLists[1],4,4,)) 
-        t5 = threading.Thread(target=go_thread, args=(batchedLists[1],5,5,))  
+        t3 = threading.Thread(target=go_thread, args=(batchedLists[2],3,3,)) 
+        t4 = threading.Thread(target=go_thread, args=(batchedLists[3],4,4,)) 
+        t5 = threading.Thread(target=go_thread, args=(batchedLists[4],5,5,))  
         
         # starting thread 1 
         t1.start() 
