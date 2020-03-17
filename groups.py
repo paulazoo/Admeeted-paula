@@ -34,12 +34,12 @@ def createGroups(allEmails, desired, callNum):
 def get_category_emails(All_Summary,allEmails,category):
     #get the data for the relevant category
     category_Summary=All_Summary[category]
+    
     #turn each multichoose answer into a list of chosen multichoose answers
     category_list = [(category_Summary[i].split(", ")) for i in range(0,len(category_Summary))]
     
-    #get only the first ans for ans with multichoose
+    #get only the first ans for ans with multichoose...
     category_firsts=[ans[0] for ans in category_list]
-    print(category_firsts)
     
     #get all existing values in the category w no duplicates
     category_strs=list(set(category_firsts))
@@ -60,7 +60,11 @@ def get_category_emails(All_Summary,allEmails,category):
         
         #add that email list into by_category list
         by_category.append(specific_emails)
+        
+    #check final by_category lists of category_val lists
     print(by_category)
+    
+    #first return is by_category list of lists of emails, second is the category_val names, same index
     return by_category, category_strs
 
 #%%
