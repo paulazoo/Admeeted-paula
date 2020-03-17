@@ -15,10 +15,10 @@
 - selenium
 
 ### functions
+- independent_threading_copy.py:
+	- current main dude
 - config.py: 
 	- config.init(): initialize and define global variables at the start
-- logging_in.py:
-	- logging_in.login(waitTime1): start browser and login to hangouts function
 - groups.py:
 	- createGroups(allEmails, desired): create random groups w desired number of ppl per group
 	- get_category_emails(All_Summary,allEmails,category): make list of groups from specified category, where each group is a list of emails for one specific category value
