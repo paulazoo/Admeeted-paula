@@ -222,17 +222,15 @@ thread_list=[]
 
 #%%
 for i in batchedLists:
-    while catchErrors:
-        try:
-            t = threading.Thread(target=go_thread, args=(batchedLists[i],i+1,i+1,))      
-            # starting thread 1 
-            t.start()
-            thread_list.append(t)
-            
-            catchErrors = False
-        except:
-            print("There was an error. Restarting threads.")
-            errorCount += 1
+    try:
+        t = threading.Thread(target=go_thread, args=(batchedLists[i],i+1,i+1,))      
+        # starting thread 1 
+        t.start()
+        thread_list.append(t)
+        
+    except:
+        print("There was an error.")
+        errorCount += 1
 
 for t in thread_list:
     t.join()
