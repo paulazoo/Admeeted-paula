@@ -9,7 +9,7 @@ def createGroups(allEmails, desired, callNum):
         subgroups = [allEmails]
     #make subgroups the length of the desired number of ppl per group from the shuffled email list
     else:
-        subgroups = [allEmails[x:x + desired] for x in range(0, len(allEmails), desired)]
+        subgroups = [allEmails[(x) : (x + desired)] for x in range(0, len(allEmails), desired)]
         [subgroups[i].insert(0,callNum) for i in range(0,len(subgroups))]
         #print(subgroups)
     #if there's a group with less than desired number of people, evenly distribute amongst the other groups
