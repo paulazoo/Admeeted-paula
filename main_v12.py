@@ -13,15 +13,20 @@ import hangout_tools
 #initialize variables
 #the config file cleans the data and gets the starting variable values
 import config_all as config
-config.init('Virtual Visitas (Responses) (1).xlsx')
+config.init('Testers Virtual Visitas (Responses).xlsx')
 #get variables from config variables
 All_Summary=config.All_Summary
 desired=config.desired
-allEmailsNoDuplicates=config.allEmailsNoDuplicates
+allEmails=config.allEmails
 
 #%%
 #group manipulations
 import groups
+category = input("category? ")
+if category != "Random":
+    by_category, category_strs=groups.get_category_firsts(All_Summary, allEmails, category)
+
+#%%
 numCalls = int(input("How many times do you want people to call? "))
 
 numThreads = int(input("How many threads/tabs/windows do you want to use? More means the program runs faster but takes more memory. "))
@@ -29,7 +34,7 @@ numThreads = int(input("How many threads/tabs/windows do you want to use? More m
 #create groups using the createGroups function defined in groups.py file
 allGeneratedGroups = []
 for i in range(numCalls):
-    allGeneratedGroups = allGeneratedGroups + groups.createGroups(allEmailsNoDuplicates, desired, i)
+    allGeneratedGroups = allGeneratedGroups + groups.createGroups(allEmails, desired, i)
     print("hi")
 #print the generated groups to check
 print(len(allGeneratedGroups[0]))

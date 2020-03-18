@@ -34,7 +34,7 @@ def createGroups(allEmails, desired, callNum):
 
 #%%
 #returns a list of groups from specified category, where each group is a list of emails for one specific category value (first value for each ans)
-def get_category_emails(All_Summary,allEmails,category):
+def get_category_firsts(All_Summary,allEmails,category):
     #get the data for the relevant category
     category_Summary=All_Summary[category]
     
@@ -71,7 +71,45 @@ def get_category_emails(All_Summary,allEmails,category):
     return by_category, category_strs
 
 #%%
-def get_multicategory_emails(All_Summary,allEmails,category):
+#returns a list of groups from specified category, where each group is a list of emails for one specific category value (first value for each ans)
+def get_category_random(All_Summary,allEmails,category):
+    #get the data for the relevant category
+    category_Summary=All_Summary[category]
+    
+    #turn each multichoose answer into a list of chosen multichoose answers
+    category_list = [(category_Summary[i].split(", ")) for i in range(0,len(category_Summary))]
+    
+    #get only the first ans for ans with multichoose...
+    category_firsts=[random.choice(ans) for ans in category_list]
+    
+    #get all existing values in the category w no duplicates
+    category_strs=list(set(category_firsts))
+    
+    #list of category lists
+    by_category=[]
+    #relevant category value
+    for category_val in category_strs:
+        #print(category_val)
+        
+        #indices of correct category values in category_firsts list
+        category_yes=[i for i, x in enumerate(category_firsts) if x == category_val]
+        #print(category_yes)
+        
+        #get specific emails that are correct e.g. 'History' in 'Major' column emails
+        specific_emails = [allEmails[i] for i in category_yes]
+        #print(specific_emails)
+        
+        #add that email list into by_category list
+        by_category.append(specific_emails)
+        
+    #check final by_category lists of category_val lists
+    print(by_category)
+    
+    #first return is by_category list of lists of emails, second is the category_val names, same index
+    return by_category, category_strs
+
+#%%
+def get_multicategory_all(All_Summary,allEmails,category):
     #get the data for the relevant category
     category_Summary=All_Summary[category]
     #turn each multichoose answer into a list of chosen multichoose answers
