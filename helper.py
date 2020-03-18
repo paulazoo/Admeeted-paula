@@ -35,13 +35,13 @@ numThreads = int(input("How many threads/tabs/windows do you want to use? More m
 #create groups using the createGroups function defined in groups.py file
 allGeneratedGroups = []
 
-allGeneratedGroups = allGeneratedGroups + groups.createGroups(allEmails, desired, 1)
+#allGeneratedGroups = allGeneratedGroups + groups.createGroups(allEmails, desired, 1)
 
 for major in by_category:
     allGeneratedGroups = allGeneratedGroups + groups.createGroups(major, desired, 2)
     print(by_category.index(major))
 #%%
-#print(allGeneratedGroups)
+print(allGeneratedGroups)
 #%%
 for i in range(1, numCalls+1):
     allGeneratedGroups = allGeneratedGroups + groups.createGroups(allEmails, desired, i)
