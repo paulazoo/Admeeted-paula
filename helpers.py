@@ -2,7 +2,6 @@
 #some packages to import
 #to install a package on python: pip install [package name]
 from webbot import Browser
-import pandas as pd
 import time
 import selenium
 from selenium.common.exceptions import NoSuchElementException
@@ -114,7 +113,12 @@ def go_thread(givenGroups, threadNum):
     totalGroups = 0
     #groupNum is just for our tracking purposes
     groupNum = 1
-
+    
+        #get the date to put into groupName later
+    today = date.today()
+    dateNow = today.strftime("%B %d, %Y")
+    callTime = '9:30 PM EST'
+    category='Testing'
     #login using the login function in logging_in.py
     web=login(waitTime1)
     print("Login worked")

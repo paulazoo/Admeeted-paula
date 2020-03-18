@@ -52,14 +52,7 @@ print(allGeneratedGroups)
 
 #%%
 import helpers
-#define waitTime1 to prevent errors?
-waitTime1 = 2
-#get the date to put into groupName later
-today = date.today()
-dateNow = today.strftime("%B %d, %Y")
-callTime = '9:30 PM EST'
-category='Testing'
-    
+
 #%%
 import threading
 # creating thread 
@@ -77,7 +70,7 @@ errorCount = 0
 for i in batchedLists:
     try:
 
-        t = threading.Thread(target=go_thread, args=(i,batchedLists.index(i),))      
+        t = threading.Thread(target=helpers.go_thread, args=(i,batchedLists.index(i),))      
         # starting thread 1 
         t.start()
         thread_list.append(t)
