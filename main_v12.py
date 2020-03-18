@@ -24,16 +24,26 @@ allEmails=config.allEmails
 import groups
 category = input("category? ")
 if category != "Random":
-    by_category, category_strs=groups.get_category_firsts(All_Summary, allEmails, category)
+    by_category, category_strs=groups.get_category_random(All_Summary, allEmails, category)
 
 #%%
 numCalls = int(input("How many times do you want people to call? "))
 
 numThreads = int(input("How many threads/tabs/windows do you want to use? More means the program runs faster but takes more memory. "))
 
+#%%
 #create groups using the createGroups function defined in groups.py file
 allGeneratedGroups = []
-for i in range(numCalls):
+
+allGeneratedGroups = allGeneratedGroups + groups.createGroups(allEmails, desired, 1)
+
+for major in by_category:
+    allGeneratedGroups = allGeneratedGroups + groups.createGroups(major, desired, 2)
+    print(by_category.index(major))
+#%%
+#print(allGeneratedGroups)
+#%%
+for i in range(1, numCalls+1):
     allGeneratedGroups = allGeneratedGroups + groups.createGroups(allEmails, desired, i)
     print("hi")
 #print the generated groups to check
