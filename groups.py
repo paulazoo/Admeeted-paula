@@ -11,7 +11,7 @@ def createGroups(allEmails, desired, callNum):
     else:
         subgroups = [allEmails[x:x + desired] for x in range(0, len(allEmails), desired)]
         [subgroups[i].insert(0,callNum) for i in range(0,len(subgroups))]
-        print(subgroups)
+        #print(subgroups)
     #if there's a group with less than desired number of people, evenly distribute amongst the other groups
         lastLen = len(subgroups[-1])
         if lastLen < desired+1:
@@ -29,7 +29,7 @@ def createGroups(allEmails, desired, callNum):
                 counter += 1
     if counter != 0:
         subgroups.pop(-1)
-    print(subgroups)
+    #print(subgroups)
     return subgroups
 
 #%%

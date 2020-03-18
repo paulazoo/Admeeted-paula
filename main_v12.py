@@ -33,7 +33,7 @@ for i in range(numCalls):
     print("hi")
 #print the generated groups to check
 print(len(allGeneratedGroups[0]))
-#print(str(len(allGeneratedGroups[0])))
+print(allGeneratedGroups)
 
 #%%
 
@@ -214,6 +214,7 @@ catchErrors = True
 batchedLists = splitList(allGeneratedGroups, numThreads)
 #batchedLists = splitList(batchedLists, numThreads)
 print(batchedLists[0])
+
 
 #%%
 thread_list=[]
