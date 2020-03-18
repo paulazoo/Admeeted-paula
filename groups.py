@@ -13,8 +13,8 @@ def createGroups(allEmails, desired, callNum):
         [subgroups[i].insert(0,callNum) for i in range(0,len(subgroups))]
         print(subgroups)
     #if there's a group with less than desired number of people, evenly distribute amongst the other groups
-        lastLen = len(subgroups[-1])-1
-        if lastLen < desired:
+        lastLen = len(subgroups[-1])
+        if lastLen < desired+1:
             for x in range(1,lastLen):
                 # if the remainder in the last group is larger than the number of subgroups, then it will add multiple people to the other groups
                 subgroups[x % len(subgroups)].append(subgroups[-1][x])
