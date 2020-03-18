@@ -26,8 +26,10 @@ def init(excel_name):
     All_Summary=All_Summary.drop(non_gmails_indices).reset_index(drop=True)
     
     #Get indices for non participating (CANT call at the time)
-    non_participating_indices = All_Summary[All_Summary['Participating'] == False].index
+    non_participating_indices = All_Summary[All_Summary['Will you join the Wednesday 3:00 PM EST call? If you select yes, please participate; otherwise, it hurts the experience for others. :) '].str.endswith("Yes") == False].index
+    #non_participating_indices2 = All_Summary[All_Summary['Will you join the Wednesday 3:00 PM EST call? If you select yes, please participate; otherwise, it hurts the experience for others. :) '].str.len() == 0].index
     Dropped_ppl=Dropped_ppl + [All_Summary["Full Name"][i] for i in list(non_participating_indices)]
+    #Dropped_ppl=Dropped_ppl + [All_Summary["Full Name"][i] for i in list(non_participating_indices2)]
     All_Summary=All_Summary.drop(non_participating_indices).reset_index(drop=True)
     
     #deletes emails that are too long (greater than 300 chars) because they would slow down the program and no legit emails are longer than 300 chars
