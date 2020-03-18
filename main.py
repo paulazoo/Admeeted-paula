@@ -13,7 +13,7 @@ import hangout_tools
 #the config file cleans the data and gets the starting variable values
 from config import ExcelParser
 
-myparser = ExcelParser('Testers Virtual Visitas (Responses).xlsx')
+myparser = ExcelParser('Coke Scholars Virtual Visitas (Responses).xlsx')
 
 myparser.all_summary
 myparser.desired
