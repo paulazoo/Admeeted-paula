@@ -1,5 +1,11 @@
 #%%
 import hangout_tools
-web.driver.find_element_by_css_selector("[title*='Video call. Click to start a video call.']").click()
-web.driver.switch_to.window(1)
-print(web.get_current_url())
+groupName='test t: 2 c: 3 g: 1'
+
+waitTime1=2
+
+web=hangout_tools.open_group_hangout(web,groupName ,waitTime1)
+web,call_url=hangout_tools.get_call_url(web,groupName,waitTime1)
+msg="Join the hangout video call and say hi: "+call_url
+web=hangout_tools.write_in_group_hangout(web,groupName,waitTime1,msg)
+

@@ -131,3 +131,28 @@ def add_to_group_hangout(web, groupName, waitTime1, email):
     web.driver.switch_to.default_content()
     
     return web
+
+#%%
+def get_call_url(web,groupName,waitTime1):    
+    #get into iframe
+    iframe_pls=web.driver.find_elements_by_xpath("//iframe[@aria-label='" +groupName+ "']")
+    iframe_id=iframe_pls[0].get_attribute("id")
+    iframe_correct=web.driver.find_element_by_id(iframe_id)
+    time.sleep(waitTime1)
+    web.driver.switch_to.frame(iframe_correct) 
+    
+    #click video call
+    web.driver.find_element_by_css_selector("button[title='Video call. Click to start a video call.']").click()
+    
+    #switch to video call
+    web.driver.switch_to.window(web.driver.window_handles[1])
+    #get call url
+    call_url=web.get_current_url()
+    #exit call
+    element = web.driver.find_elements_by_css_selector("span[class='DPvwYc']")[2]
+    web.driver.execute_script("arguments[0].click();", element)
+    #switch back to original window
+    web.driver.switch_to.window(web.driver.window_handles[0])
+    #get back out of iframe
+    web.driver.switch_to.default_content()
+    return web, call_url
