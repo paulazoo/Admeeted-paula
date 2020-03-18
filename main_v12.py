@@ -175,6 +175,7 @@ def go_thread(givenGroups, threadNum):
 
     #login using the login function in logging_in.py
     web=login(waitTime1)
+    print("Login worked")
     
     #get out of iframe for making groups
     web.driver.switch_to.default_content()
@@ -187,6 +188,7 @@ def go_thread(givenGroups, threadNum):
         #groupName using the date and groupNum
         #groupName = dateNow + callTime + " Call " + str(callNum) + " (Key: " + category + str(callNum) + str(groupNum) + ")"
         groupName="test t: "+str(threadNum) + " c: "+ str(subGroup[0]) + " g: "+str(groupNum)
+        web, totalGroups=create_hangout(web, subGroup, groupName, totalGroups,waitTime1)
         print(groupName)
         #web, totalGroups=create_hangout(web, subGroup, groupName, totalGroups,waitTime1)
         #move on to the next group
@@ -213,7 +215,8 @@ catchErrors = True
 
 batchedLists = splitList(allGeneratedGroups, numThreads)
 #batchedLists = splitList(batchedLists, numThreads)
-print(batchedLists[0])
+print("Batched lists are:")
+print(batchedLists)
 
 
 #%%
