@@ -32,7 +32,7 @@ for i in range(numCalls):
     allGeneratedGroups = allGeneratedGroups + groups.createGroups(allEmailsNoDuplicates, desired, i)
     print("hi")
 #print the generated groups to check
-print(allGeneratedGroups[0])
+print(len(allGeneratedGroups[0]))
 #print(str(len(allGeneratedGroups[0])))
 
 #%%

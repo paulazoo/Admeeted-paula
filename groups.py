@@ -17,7 +17,7 @@ def createGroups(allEmails, desired, callNum):
         if lastLen < desired+1:
             for x in range(1,lastLen):
                 # if the remainder in the last group is larger than the number of subgroups, then it will add multiple people to the other groups
-                subgroups[x % len(subgroups)].append(subgroups[-1][x])
+                subgroups[(x-1) % len(subgroups)].append(subgroups[-1][x])
                 subgroups[-1][x] = 0
     
     subgroups = [x for x in subgroups if x != []]
