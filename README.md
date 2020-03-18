@@ -15,7 +15,7 @@
 - selenium
 
 ### functions
-- independent_threading_copy.py:
+- main_v12.py:
 	- current main dude
 - config.py: 
 	- config.init(): initialize and define global variables at the start
