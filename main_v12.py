@@ -13,7 +13,7 @@ import hangout_tools
 #initialize variables
 #the config file cleans the data and gets the starting variable values
 import config_all as config
-config.init('Testers Virtual Visitas (Responses).xlsx')
+config.init('Virtual Visitas (Responses) (1).xlsx')
 #get variables from config variables
 All_Summary=config.All_Summary
 desired=config.desired
@@ -127,8 +127,8 @@ def create_hangout(web, subGroup, groupName, totalGroups, waitTime1):
         web.driver.switch_to.default_content()
         time.sleep(waitTime1)
         #type and enter group introduction messages
-        #web.type("Hello! Welcome to the group for " + str(groupName) + ". Please make this the " + str(callNum) + " call. At the designated start time, someone should initiate the call. In order for this to work as smoothly as possible, we need to coordinate our calling. Albert originally planned for each call to be 15 minutes, but times will be flexible depending on how ya'll like the lengths, so please check the GroupMe for the official lengths for each call! You can always return to this chat later if ya'll want to talk more :) . Additionally, if you would like to leave early, just leave the groups that you won't be able to call in. So, you could choose to only partake in calls 1 to 3 if you prefer, but we all would love if you join all the calls. :D Thanks for helping make this happen!")
-        web.type("Hello! This is the testing for a program. Please ignore this hangout. You may exit.")
+        web.type("Hello! Welcome to the group for " + str(groupName) + ". Please make this the designated call (from the title). At the designated start time, someone should initiate the call. In order for this to work as smoothly as possible, we need to coordinate our calling. Albert originally planned for each call to be 15 minutes, but times will be flexible depending on how ya'll like the lengths, so please check the GroupMe for the official lengths for each call! You can always return to this chat later if ya'll want to talk more :) . Additionally, if you would like to leave early, just leave the groups that you won't be able to call in. So, you could choose to only partake in calls 1 to 3 if you prefer, but we all would love if you join all the calls. :D Thanks for helping make this happen!")
+        #web.type("Hello! This is the testing for a program. Please ignore this hangout. You may exit.")
         time.sleep(waitTime1)
         web.press(web.Key.ENTER)
         
@@ -175,6 +175,7 @@ def go_thread(givenGroups, threadNum):
 
     #login using the login function in logging_in.py
     web=login(waitTime1)
+    print("Login worked")
     
     #get out of iframe for making groups
     web.driver.switch_to.default_content()
@@ -186,7 +187,9 @@ def go_thread(givenGroups, threadNum):
     for subGroup in givenGroups:
         #groupName using the date and groupNum
         #groupName = dateNow + callTime + " Call " + str(callNum) + " (Key: " + category + str(callNum) + str(groupNum) + ")"
-        groupName="test t: "+str(threadNum) + " c: "+ str(subGroup[0]) + " g: "+str(groupNum)
+        #groupName="test t: "+str(threadNum) + " c: "+ str(subGroup[0]) + " g: "+str(groupNum)
+        groupName="3/18/2020 3:00 EST: Call number: "+ str(subGroup[0] + 1)
+        web, totalGroups=create_hangout(web, subGroup, groupName, totalGroups,waitTime1)
         print(groupName)
         #web, totalGroups=create_hangout(web, subGroup, groupName, totalGroups,waitTime1)
         #move on to the next group
@@ -213,7 +216,8 @@ catchErrors = True
 
 batchedLists = splitList(allGeneratedGroups, numThreads)
 #batchedLists = splitList(batchedLists, numThreads)
-print(batchedLists[0])
+print("Batched lists are:")
+print(batchedLists)
 
 
 #%%
