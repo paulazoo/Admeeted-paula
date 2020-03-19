@@ -12,7 +12,7 @@ import hangout_tools
 import logging
 #set up logger
 FORMAT = '%(asctime)-15s %(clientip)s %(user)-8s %(message)s'
-logging.basicConfig(format=FORMAT, filename='log_file_name')
+logging.basicConfig(format=FORMAT, filename='log_file_name.txt')
 d = {'clientip': '192.168.0.1', 'user': 'fbloggs'}
 logger = logging.getLogger('tcpserver')
 logger.warning('Protocol problem: %s', 'connection reset', extra=d)
