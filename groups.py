@@ -1,7 +1,7 @@
 import pandas as pd
 import random
 #returns a list of the subgroups (which are also lists themselves) of the emails.
-def createGroups(allEmails, desired, callNum):
+def create_groups(allEmails, desired, callNum):
     #shuffle the list of emails
     random.shuffle(allEmails)
     #if the desired group size is more than the number of emails, just put everyone into one group

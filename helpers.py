@@ -144,7 +144,7 @@ def go_thread(givenGroups, threadNum):
         groupNum += 1
 
 #%%
-def splitList(seq, num): #input a list and the desired number of smaller lists. Returns a nested list with the smaller lists.
+def split_list(seq, num): #input a list and the desired number of smaller lists. Returns a nested list with the smaller lists.
     avg = len(seq) / float(num)
     out = []
     last = 0.0

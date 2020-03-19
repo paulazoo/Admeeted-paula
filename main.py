@@ -2,7 +2,6 @@
 #to install a package on python: pip install [package name]
 from webbot import Browser
 import pandas as pd
-import time
 import selenium
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.keys import Keys
@@ -18,8 +17,8 @@ myparser = ExcelParser('Coke Scholars Virtual Visitas (Responses).xlsx')
 myparser.all_summary
 myparser.desired
 myparser.all_emails
-myparser.numCalls
-myparser.numThreads
+myparser.num_calls
+myparser.num_threads
 #%%
 #group manipulations
 import groups
@@ -29,52 +28,50 @@ if category != "Random":
     by_category, category_strs=groups.get_category_random(myparser.all_summary, myparser.all_emails, category)
     
 #create groups using the createGroups function defined in groups.py file
-allGeneratedGroups = []
+all_generated_groups = []
 
-allGeneratedGroups = allGeneratedGroups + groups.createGroups(myparser.all_emails, myparser.desired, 1)
+all_generated_groups = all_generated_groups + groups.create_groups(myparser.all_emails, myparser.desired, 1)
 
 for major in by_category:
-    allGeneratedGroups = allGeneratedGroups + groups.createGroups(major, myparser.desired, 2)
+    all_generated_groups = all_generated_groups + groups.create_groups(major, myparser.desired, 2)
     print(by_category.index(major))
 
-print(allGeneratedGroups)
+print(all_generated_groups)
 #%%
-for i in range(1, myparser.numCalls+1):
-    allGeneratedGroups = allGeneratedGroups + groups.createGroups(myparser.all_emails, myparser.desired, i)
+for i in range(1, myparser.num_calls+1):
+    all_generated_groups = all_generated_groups + groups.create_groups(myparser.all_emails, myparser.desired, i)
     print("hi")
 #print the generated groups to check
-print(len(allGeneratedGroups[0]))
-print(allGeneratedGroups)
+print(len(all_generated_groups[0]))
+print(all_generated_groups)
 
 #%%
 import helpers
 import threading
-# creating thread 
-catchErrors = True
 
-batchedLists = helpers.splitList(allGeneratedGroups, myparser.numThreads)
-#batchedLists = splitList(batchedLists, numThreads)
+batched_lists = helpers.split_list(all_generated_groups, myparser.num_threads)
+#batchedLists = splitList(batchedLists, num_threads)
 print("Batched lists are:")
-print(batchedLists)
+print(batched_lists)
 
 #%%
 thread_list=[]
-errorCount = 0
-for i in batchedLists:
+error_count = 0
+for i in batched_lists:
     try:
 
-        t = threading.Thread(target=helpers.go_thread, args=(i,batchedLists.index(i),))      
+        t = threading.Thread(target=helpers.go_thread, args=(i,batched_lists.index(i),))      
         # starting thread 1 
         t.start()
         thread_list.append(t)
         
     except:
         print("There was an error.")
-        errorCount += 1
+        error_count += 1
 
 for t in thread_list:
     t.join()
 # both threads completely executed 
-print("Done! There were " + str(errorCount) + " errors.") 
+print("Done! There were " + str(error_count) + " errors.") 
 
 

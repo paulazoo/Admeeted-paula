@@ -53,9 +53,9 @@ class ExcelParser():
         self.desired = int(input("How many people would you like in a group? "))
         
         #number of total calls
-        self.numCalls = int(input("How many times do you want people to call? "))
+        self.num_calls = int(input("How many times do you want people to call? "))
 
         #number of total threads
-        self.numThreads = int(input("How many threads/tabs/windows do you want to use? More means the program runs faster but takes more memory. "))
+        self.num_threads = int(input("How many threads/tabs/windows do you want to use? More means the program runs faster but takes more memory. "))
         
         
