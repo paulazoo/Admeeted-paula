@@ -4,7 +4,7 @@ from selenium.common.exceptions import NoSuchElementException
 
 #%%
 #open a specific group hangout
-def open_group_hangout(web, groupName, waitTime1):
+def open_group_hangout(web, group_name, wait_time):
     #get out of any iframes
     web.driver.switch_to.default_content()
     
@@ -12,12 +12,12 @@ def open_group_hangout(web, groupName, waitTime1):
     iframe_pls=web.driver.find_elements_by_xpath("//iframe[@aria-label='Contacts and conversations']")
     iframe_id=iframe_pls[0].get_attribute("id")
     iframe_correct=web.driver.find_element_by_id(iframe_id)
-    time.sleep(waitTime1)
+    time.sleep(wait_time)
     web.driver.switch_to.frame(iframe_correct)
         
-    #open specific group by groupName
-    web.driver.find_element_by_css_selector("[title*='"+groupName+"']").click()   
-    time.sleep(waitTime1)
+    #open specific group by group_name
+    web.driver.find_element_by_css_selector("[title*='"+group_name+"']").click()   
+    time.sleep(wait_time)
     
     #get out of conversations iframe
     web.driver.switch_to.default_content()
@@ -25,37 +25,37 @@ def open_group_hangout(web, groupName, waitTime1):
     return web
 #%%
 #start a call for a group hangout (that has already been opened)
-def call_group_hangout(web, groupName, waitTime1):
+def call_group_hangout(web, group_name, wait_time):
     #get out of any iframes
     web.driver.switch_to.default_content()
     
     #get into iframe
-    iframe_pls=web.driver.find_elements_by_xpath("//iframe[@aria-label='" +groupName+ "']")
+    iframe_pls=web.driver.find_elements_by_xpath("//iframe[@aria-label='" +group_name+ "']")
     iframe_id=iframe_pls[0].get_attribute("id")
     iframe_correct=web.driver.find_element_by_id(iframe_id)
-    time.sleep(waitTime1)
+    time.sleep(wait_time)
     web.driver.switch_to.frame(iframe_correct) 
     
     #click video call
     web.driver.find_element_by_css_selector("[title*='Video call. Click to start a video call.']").click() 
-    time.sleep(waitTime1)
+    time.sleep(wait_time)
     
-    #get out of groupName specific hagnout iframe
+    #get out of group_name specific hagnout iframe
     web.driver.switch_to.default_content()
     
     return web
     
 #%%
 #exit an already open group hangout
-def exit_group_hangout(web, groupName, waitTime1):
+def exit_group_hangout(web, group_name, wait_time):
     #get out of any iframes
     web.driver.switch_to.default_content()
     
     #get into iframe
-    iframe_pls=web.driver.find_elements_by_xpath("//iframe[@aria-label='" +groupName+ "']")
+    iframe_pls=web.driver.find_elements_by_xpath("//iframe[@aria-label='" +group_name+ "']")
     iframe_id=iframe_pls[0].get_attribute("id")
     iframe_correct=web.driver.find_element_by_id(iframe_id)
-    time.sleep(waitTime1)
+    time.sleep(wait_time)
     web.driver.switch_to.frame(iframe_correct) 
     
     #click to exist specific hangout iframe
@@ -69,25 +69,25 @@ def exit_group_hangout(web, groupName, waitTime1):
 #%%
 #write in an already open group hangout
 #message is a string
-def write_in_group_hangout(web, groupName, waitTime1, message):
+def write_in_group_hangout(web, group_name, wait_time, message):
     #get out of any iframes
     web.driver.switch_to.default_content()
     
     # #get into iframe
-    iframe_pls=web.driver.find_elements_by_xpath("//iframe[@aria-label='" +groupName+ "']")
+    iframe_pls=web.driver.find_elements_by_xpath("//iframe[@aria-label='" +group_name+ "']")
     iframe_id=iframe_pls[0].get_attribute("id")
     iframe_correct=web.driver.find_element_by_id(iframe_id)
-    time.sleep(waitTime1)
+    time.sleep(wait_time)
     web.driver.switch_to.frame(iframe_correct) 
     
     #click hangout text input box
     web.driver.find_element_by_xpath("//div[@class='vE dQ editable']").click()
     #type in message string
     web.type(message)
-    time.sleep(waitTime1)
+    time.sleep(wait_time)
     #enter message into hangout groupchat
     web.press(web.Key.ENTER)
-    time.sleep(waitTime1)
+    time.sleep(wait_time)
     
     #get out of specific group hangout iframe
     web.driver.switch_to.default_content()
@@ -96,15 +96,15 @@ def write_in_group_hangout(web, groupName, waitTime1, message):
 
 #%%
 #add a person to an existing already open group hangout
-def add_to_group_hangout(web, groupName, waitTime1, email):
+def add_to_group_hangout(web, group_name, wait_time, email):
     #get out of any iframes
     web.driver.switch_to.default_content()
     
     #get into iframe
-    iframe_pls=web.driver.find_elements_by_xpath("//iframe[@aria-label='" +groupName+ "']")
+    iframe_pls=web.driver.find_elements_by_xpath("//iframe[@aria-label='" +group_name+ "']")
     iframe_id=iframe_pls[0].get_attribute("id")
     iframe_correct=web.driver.find_element_by_id(iframe_id)
-    time.sleep(waitTime1)
+    time.sleep(wait_time)
     web.driver.switch_to.frame(iframe_correct) 
     
     #click hangout people button
@@ -113,7 +113,7 @@ def add_to_group_hangout(web, groupName, waitTime1, email):
     web.click('Add people')
     #type the email string
     web.type(email)
-    time.sleep(waitTime1*2)
+    time.sleep(wait_time*2)
     #cick the email to add
     try:
         #for gmails click the gmail
@@ -123,7 +123,7 @@ def add_to_group_hangout(web, groupName, waitTime1, email):
         #for non-gmails?? click the non gmails
         print("No element found. Trying again...")
         element=web.driver.find_element_by_xpath("//li[@class='eh XcEgrf fp pu hy c-P-p lebsnd Tb']").click()
-    time.sleep(waitTime1)
+    time.sleep(wait_time)
     #click Add people button to finish adding
     web.click('Add people')
     
@@ -133,12 +133,12 @@ def add_to_group_hangout(web, groupName, waitTime1, email):
     return web
 
 #%%
-def get_call_url(web,groupName,waitTime1):    
+def get_call_url(web,group_name,wait_time):    
     #get into iframe
-    iframe_pls=web.driver.find_elements_by_xpath("//iframe[@aria-label='" +groupName+ "']")
+    iframe_pls=web.driver.find_elements_by_xpath("//iframe[@aria-label='" +group_name+ "']")
     iframe_id=iframe_pls[0].get_attribute("id")
     iframe_correct=web.driver.find_element_by_id(iframe_id)
-    time.sleep(waitTime1)
+    time.sleep(wait_time)
     web.driver.switch_to.frame(iframe_correct) 
     
     #click video call
