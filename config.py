@@ -22,9 +22,14 @@ class ExcelParser():
         all_summary=all_summary.drop(non_gmails_indices).reset_index(drop=True)
         
         #Get indices for non participating (CANT call at the time). Removes either "No"
-        non_participating_indices = all_summary[all_summary['Participating'].str.endswith("Yes") == False].index
+        # non_participating_indices = all_summary[all_summary['Participating'].str.endswith("Yes") == False].index
+        # print(non_participating_indices)
+        # dropped_ppl=dropped_ppl + [all_summary["Full Name"][i] for i in list(non_participating_indices)]
+        # all_summary=all_summary.drop(non_participating_indices).reset_index(drop=True)
+
+        non_participating_indices = all_summary[all_summary[all_summary.filter(like='Will you join').columns].str.endswith("Yes") == False].index
         print(non_participating_indices)
-        dropped_ppl=dropped_ppl + [all_summary["Full Name"][i] for i in list(non_participating_indices)]
+        Dropped_ppl=Dropped_ppl + [all_summary["Full Name"][i] for i in list(non_participating_indices)]
         all_summary=all_summary.drop(non_participating_indices).reset_index(drop=True)
     
         #Removes null or no response in the participating  question
