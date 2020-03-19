@@ -12,17 +12,11 @@ import hangout_tools
 import logging
 #set up logger
 FORMAT = '%(asctime)-15s %(clientip)s %(user)-8s %(message)s'
-logging.basicConfig(format=FORMAT, filename='log_file.log')
+logging.basicConfig(format=FORMAT, filename='log_file_name')
 d = {'clientip': '192.168.0.1', 'user': 'fbloggs'}
 logger = logging.getLogger('tcpserver')
 logger.warning('Protocol problem: %s', 'connection reset', extra=d)
 
-#%%
-import logging
-logging.basicConfig(filename='example.log')
-logging.debug('This message should go to the log file')
-logging.info('So should this')
-logging.warning('And this, too')
 #%%
 #initialize variables
 #the config file cleans the data and gets the starting variable values
