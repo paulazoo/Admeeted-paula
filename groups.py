@@ -1,16 +1,16 @@
 import pandas as pd
 import random
 #returns a list of the subgroups (which are also lists themselves) of the emails.
-def create_groups(allEmails, desired, callNum):
+def create_groups(all_emails, desired, call_num):
     #shuffle the list of emails
-    random.shuffle(allEmails)
+    random.shuffle(all_emails)
     #if the desired group size is more than the number of emails, just put everyone into one group
-    if desired > len(allEmails):
-        subgroups = [allEmails]
+    if desired > len(all_emails):
+        subgroups = [all_emails]
     #make subgroups the length of the desired number of ppl per group from the shuffled email list
     else:
-        subgroups = [allEmails[(x) : (x + desired)] for x in range(0, len(allEmails), desired)]
-        [subgroups[i].insert(0,callNum) for i in range(0,len(subgroups))]
+        subgroups = [all_emails[(x) : (x + desired)] for x in range(0, len(all_emails), desired)]
+        [subgroups[i].insert(0,call_num) for i in range(0,len(subgroups))]
         #print(subgroups)
     #if there's a group with less than desired number of people, evenly distribute amongst the other groups
         lastLen = len(subgroups[-1])
@@ -34,9 +34,9 @@ def create_groups(allEmails, desired, callNum):
 
 #%%
 #returns a list of groups from specified category, where each group is a list of emails for one specific category value (first value for each ans)
-def get_category_firsts(All_Summary,allEmails,category):
+def get_category_firsts(all_summary,all_emails,category):
     #get the data for the relevant category
-    category_Summary=All_Summary[category]
+    category_Summary=all_summary[category]
     
     #turn each multichoose answer into a list of chosen multichoose answers
     category_list = [(category_Summary[i].split(", ")) for i in range(0,len(category_Summary))]
@@ -58,7 +58,7 @@ def get_category_firsts(All_Summary,allEmails,category):
         #print(category_yes)
         
         #get specific emails that are correct e.g. 'History' in 'Major' column emails
-        specific_emails = [allEmails[i] for i in category_yes]
+        specific_emails = [all_emails[i] for i in category_yes]
         #print(specific_emails)
         
         #add that email list into by_category list
@@ -72,9 +72,9 @@ def get_category_firsts(All_Summary,allEmails,category):
 
 #%%
 #returns a list of groups from specified category, where each group is a list of emails for one specific category value (first value for each ans)
-def get_category_random(All_Summary,allEmails,category):
+def get_category_random(all_summary,all_emails,category):
     #get the data for the relevant category
-    category_Summary=All_Summary[category]
+    category_Summary=all_summary[category]
     
     #turn each multichoose answer into a list of chosen multichoose answers
     category_list = [(category_Summary[i].split(", ")) for i in range(0,len(category_Summary))]
@@ -96,7 +96,7 @@ def get_category_random(All_Summary,allEmails,category):
         #print(category_yes)
         
         #get specific emails that are correct e.g. 'History' in 'Major' column emails
-        specific_emails = [allEmails[i] for i in category_yes]
+        specific_emails = [all_emails[i] for i in category_yes]
         #print(specific_emails)
         
         #add that email list into by_category list
@@ -109,9 +109,9 @@ def get_category_random(All_Summary,allEmails,category):
     return by_category, category_strs
 
 #%%
-def get_multicategory_all(All_Summary,allEmails,category):
+def get_multicategory_all(all_summary,all_emails,category):
     #get the data for the relevant category
-    category_Summary=All_Summary[category]
+    category_Summary=all_summary[category]
     #turn each multichoose answer into a list of chosen multichoose answers
     category_list = [(category_Summary[i].split(", ")) for i in range(0,len(category_Summary))]
     
@@ -129,7 +129,7 @@ def get_multicategory_all(All_Summary,allEmails,category):
             #if the specific genre is in the answer
             if category_val in ans:
                 #add that email to the specific_emails list
-                specific_emails.append(allEmails[idx])
+                specific_emails.append(all_emails[idx])
         #check specific emails list
         print(category_val, ": ", specific_emails)
         #add this genre specific emails list to the general list of lists of emails by genre
