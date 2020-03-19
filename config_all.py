@@ -27,7 +27,8 @@ def init(excel_name):
     All_Summary=All_Summary.drop(non_gmails_indices).reset_index(drop=True)
     
     #Get indices for non participating (CANT call at the time). Removes either "No" or NaN (no response)
-    non_participating_indices = All_Summary[All_Summary['Will you join the Wednesday 9:30 PM EST call? If you select yes, please participate; otherwise, it hurts the experience for others. :) '].str.endswith("Yes") == False].index
+    #non_participating_indices = All_Summary[All_Summary['Will you join the Wednesday 9:30 PM EST call? If you select yes, please participate; otherwise, it hurts the experience for others. :) '].str.endswith("Yes") == False].index
+    non_participating_indices = All_Summary[All_Summary.filter(like='Will you join')].index
     print(non_participating_indices)
     Dropped_ppl=Dropped_ppl + [All_Summary["Full Name"][i] for i in list(non_participating_indices)]
     All_Summary=All_Summary.drop(non_participating_indices).reset_index(drop=True)
@@ -45,6 +46,7 @@ def init(excel_name):
     
     #print ppl whos emails didn't make it
     print(All_Summary['Participating'])
+
     #write the full names of dropped gmails into a file
     with open("dropped_ppl.txt", "w") as outfile:
         outfile.write("\n".join(str(Dropped_ppl)))

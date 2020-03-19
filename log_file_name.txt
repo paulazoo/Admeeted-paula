@@ -1,0 +1,2 @@
+2020-03-19 17:35:36,165 192.168.0.1 fbloggs  Protocol problem: connection reset
+2020-03-19 18:54:35,960 192.168.0.1 fbloggs  Protocol problem: connection reset
