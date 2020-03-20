@@ -25,7 +25,7 @@ logger.warning('Protocol problem: %s', 'connection reset', extra=d)
 #the config file cleans the data and gets the starting variable values
 from config import ExcelParser
 
-myparser = ExcelParser('Coke Scholars Virtual Visitas (Responses).xlsx')
+myparser = ExcelParser("GT'ing for Quaran-teens (Responses).xlsx")
 
 myparser.all_summary
 myparser.desired

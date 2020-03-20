@@ -14,7 +14,7 @@ print("It's running")
 #initialize variables
 #the config file cleans the data and gets the starting variable values
 import config_all as config
-config.init('Coke Scholars Virtual Visitas (Responses).xlsx')
+config.init("GT'ing for Quaran-teens (Responses).xlsx")
 #get variables from config variables
 All_Summary=config.All_Summary
 desired=config.desired
@@ -189,7 +189,7 @@ def go_thread(givenGroups, threadNum):
         #groupName using the date and groupNum
         #groupName = dateNow + callTime + " Call " + str(callNum) + " (Key: " + category + str(callNum) + str(groupNum) + ")"
         #groupName="test t: "+str(threadNum) + " c: "+ str(subGroup[0]) + " g: "+str(groupNum)
-        groupName="NEW Smaller FOURTH call v4 3/18/2020 9:30 EST: Call number: "+ str(subGroup[0] + 1)
+        groupName="IGNORE NEW Smaller FOURTH call v4 3/18/2020 9:30 EST: Call number: "+ str(subGroup[0] + 1)
         web, totalGroups=create_hangout(web, subGroup, groupName, totalGroups,waitTime1)
         print(groupName)
         #web, totalGroups=create_hangout(web, subGroup, groupName, totalGroups,waitTime1)

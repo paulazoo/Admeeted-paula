@@ -16,9 +16,12 @@ def login(wait_time):
     #go to hangouts
     web.driver.get('https://accounts.google.com/signin/v2/identifier?service=talk&passive=1209600&continue=https%3A%2F%2Fhangouts.google.com%2Fwebchat%2Fstart&followup=https%3A%2F%2Fhangouts.google.com%2Fwebchat%2Fstart&flowName=GlifWebSignIn&flowEntry=ServiceLogin')
     time.sleep(wait_time)
+    time.sleep(wait_time)
+    time.sleep(wait_time)
     #sign in email
     web.driver.find_element_by_css_selector("input[type='email']").send_keys('VirtualVisitas2.0')
     web.driver.find_element_by_css_selector("input[type='email']").send_keys(Keys.RETURN)
+    time.sleep(wait_time)
     time.sleep(wait_time)
     web.driver.find_element_by_css_selector("input[type='password']").send_keys('Apaar&AlbertSal')
     web.driver.find_element_by_css_selector("input[type='password']").send_keys(Keys.RETURN)
@@ -87,6 +90,7 @@ def create_hangout(web, subgroup, group_name, total_groups, wait_time):
         #type and enter group introduction messages
         web.type("Hello! Welcome to the group for " + str(group_name) + ". Please make this the designated call (from the title). At the designated start time, someone should initiate the call. In order for this to work as smoothly as possible, we need to coordinate our calling. Albert originally planned for each call to be 30 minutes, but times will be flexible depending on how ya'll like the lengths, so please check the GroupMe for the official lengths for each call! You can always return to this chat later if ya'll want to talk more :) . Additionally, if you would like to leave early, just leave the groups that you won't be able to call in. So, you could choose to only partake in calls 1 to 3 if you prefer, but we all would love if you join all the calls. :D Thanks for helping make this happen!")
         #web.type("Hello! This is the testing for a program. Please ignore this hangout. You may exit.")
+        time.sleep(wait_time)
         time.sleep(wait_time)
         web.press(web.Key.ENTER)
         #get into iframe
