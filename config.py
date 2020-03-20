@@ -38,7 +38,7 @@ class ExcelParser():
         #print(all_summary['Participating'])
         #write the full names of dropped gmails into a file
         with open("dropped_ppl.txt", "w") as outfile:
-            outfile.write("\n".join(str(dropped_ppl)))
+            outfile.write("\n".join(dropped_ppl))
         
         self.all_summary = all_summary
 
