@@ -35,7 +35,7 @@ myparser.num_threads
 import groups
 #create groups using the createGroups function defined in groups.py file
 all_generated_groups = []
-for call_num in myparser.num_calls:
+for call_num in range(myparser.num_calls):
     all_generated_groups = all_generated_groups + groups.create_groups(myparser.all_emails, myparser.desired, call_num)
 
 print(all_generated_groups)
