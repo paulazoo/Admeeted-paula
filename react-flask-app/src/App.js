@@ -1,6 +1,9 @@
+import withRoot from './modules/withRoot';
 import React, { useState, useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import AppAppBar from './modules/views/AppAppBar';
+import AppFooter from "./modules/views/AppFooter";
 
 function App() {
   const [currTime, setCurrTime] = useState(0);
@@ -13,6 +16,7 @@ function App() {
 
   return (
     <div className="App">
+      <AppAppBar />
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
@@ -28,8 +32,9 @@ function App() {
         </a>
         <p>The current time is {currTime}</p>
       </header>
+      <AppFooter />
     </div>
   );
 }
 
-export default App;
+export default withRoot(App);
