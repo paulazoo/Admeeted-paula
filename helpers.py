@@ -12,10 +12,10 @@ import logging
 def login(wait_time):    
     #start new browser
     web = Browser()
-    options = webdriver.ChromeOptions()
-    options.add_argument('--ignore-certificate-errors') 
-    options.add_argument('--ignore-ssl-errors')
-    web = web.driver.Chrome(chrome_options=options)
+    # options = web.driver.ChromeOptions()
+    # options.add_argument('--ignore-certificate-errors') 
+    # options.add_argument('--ignore-ssl-errors')
+    # web = web.driver.Chrome(chrome_options=options)
     #go to hangouts
     web.driver.get('https://accounts.google.com/signin/v2/identifier?service=talk&passive=1209600&continue=https%3A%2F%2Fhangouts.google.com%2Fwebchat%2Fstart&followup=https%3A%2F%2Fhangouts.google.com%2Fwebchat%2Fstart&flowName=GlifWebSignIn&flowEntry=ServiceLogin')
     time.sleep(wait_time*2)
@@ -96,6 +96,7 @@ def create_hangout(web, subgroup, group_name, total_groups, wait_time):
         time.sleep(wait_time)
         web.press(web.Key.ENTER)
         #get into iframe
+        time.sleep(wait_time)
         iframe_pls=web.driver.find_elements_by_css_selector("iframe[aria-label='"+group_name+"']")
         iframe_id=iframe_pls[0].get_attribute("id")
         iframe_correct=web.driver.find_element_by_id(iframe_id)
