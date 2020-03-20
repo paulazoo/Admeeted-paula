@@ -14,7 +14,7 @@ print("It's running")
 #initialize variables
 #the config file cleans the data and gets the starting variable values
 import config_all as config
-config.init("GT'ing for Quaran-teens (Responses).xlsx")
+config.init("GT'ing for Quaran-teens (Responses) (2).xlsx")
 #get variables from config variables
 All_Summary=config.All_Summary
 desired=config.desired
@@ -50,10 +50,10 @@ def login(waitTime1):
     web.driver.get('https://accounts.google.com/signin/v2/identifier?service=talk&passive=1209600&continue=https%3A%2F%2Fhangouts.google.com%2Fwebchat%2Fstart&followup=https%3A%2F%2Fhangouts.google.com%2Fwebchat%2Fstart&flowName=GlifWebSignIn&flowEntry=ServiceLogin')
     time.sleep(waitTime1)
     #sign in email
-    web.driver.find_element_by_css_selector("input[type='email']").send_keys('VirtualVisitas2.0')
+    web.driver.find_element_by_css_selector("input[type='email']").send_keys('VirtualVisitas3.0')
     web.driver.find_element_by_css_selector("input[type='email']").send_keys(Keys.RETURN)
     time.sleep(waitTime1)
-    web.driver.find_element_by_css_selector("input[type='password']").send_keys('Apaar&AlbertSal')
+    web.driver.find_element_by_css_selector("input[type='password']").send_keys('MyDeetYeet')
     web.driver.find_element_by_css_selector("input[type='password']").send_keys(Keys.RETURN)
     return web
 
@@ -128,7 +128,7 @@ def create_hangout(web, subGroup, groupName, totalGroups, waitTime1):
         web.driver.switch_to.default_content()
         time.sleep(waitTime1)
         #type and enter group introduction messages
-        web.type("Hello! Welcome to the group for " + str(groupName) + ". Please make this the designated call (from the title). At the designated start time, someone should initiate the call. In order for this to work as smoothly as possible, we need to coordinate our calling. Albert originally planned for each call to be 15 minutes, but times will be flexible depending on how ya'll like the lengths, so please check the GroupMe for the official lengths for each call! You can always return to this chat later if ya'll want to talk more :) . Additionally, if you would like to leave early, just leave the groups that you won't be able to call in. So, you could choose to only partake in calls 1 to 3 if you prefer, but we all would love if you join all the calls. :D Thanks for helping make this happen!")
+        web.type("Hello! Welcome to the group for " + str(groupName) + ". Please make this the designated call (from the title). At the designated start time, someone should initiate the call. In order for this to work as smoothly as possible, we need to coordinate our calling. Albert originally planned for each call to be 30 minutes, with 3 calls in total, but times will be flexible depending on how ya'll like the lengths, so please check the GroupMe for the official lengths for each call! You can always return to this chat later if ya'll want to talk more :) . Additionally, if you would like to leave early, just leave the groups that you won't be able to call in. So, you could choose to only partake in calls 1 to 3 if you prefer, but we all would love if you join all the calls. :D Thanks for helping make this happen! --------------------------------------------------- ---------------------------------------------- ------------------------------------------------------------------Icebreakers (Questions) to spice up the conversation! Two truths and a lie What is your favorite high school memory? What is your most used emoji? You have your own late night talk show, who would you invite as your first guest? You have to sing karaoke, what song do you pick? What’s your life’s theme song? What’s the best piece of advice you’ve ever given? What is your absolute dream job? If you had to delete all but 3 apps on your smartphone, which ones would you keep? Coffee or tea? What is your cellphone wallpaper?")
         #web.type("Hello! This is the testing for a program. Please ignore this hangout. You may exit.")
         time.sleep(waitTime1)
         web.press(web.Key.ENTER)
@@ -189,7 +189,8 @@ def go_thread(givenGroups, threadNum):
         #groupName using the date and groupNum
         #groupName = dateNow + callTime + " Call " + str(callNum) + " (Key: " + category + str(callNum) + str(groupNum) + ")"
         #groupName="test t: "+str(threadNum) + " c: "+ str(subGroup[0]) + " g: "+str(groupNum)
-        groupName="IGNORE NEW Smaller FOURTH call v4 3/18/2020 9:30 EST: Call number: "+ str(subGroup[0] + 1)
+        #groupName="First call 3/20/2020 3:00 EST: Call number: "+ str(subGroup[0] + 1)
+        groupName="First call GT 3/20/2020 3:00 EST"
         web, totalGroups=create_hangout(web, subGroup, groupName, totalGroups,waitTime1)
         print(groupName)
         #web, totalGroups=create_hangout(web, subGroup, groupName, totalGroups,waitTime1)
