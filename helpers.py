@@ -7,7 +7,7 @@ import selenium
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.keys import Keys
 from datetime import date
-
+import logging
 #%%
 #starting browser and logging in to hangouts
 def login(wait_time):    
@@ -35,7 +35,7 @@ def enter_email(web, email, group_name, wait_time):
         element=web.driver.find_element_by_css_selector("li[class*='eh XcEgrf fp pu hy']").click()
     except NoSuchElementException:
         #still doesn't work? just move on
-        print("skipping "+ str(email))
+        logging.warning("skipping "+ str(email))
         with open("dropped_ppl.txt", "w") as outfile:
             #writes the call and groupNum, then the email that wasn't add to that hangout
             outfile.write("\n" + group_name + " " + email)
@@ -73,7 +73,7 @@ def create_hangout(web, subgroup, group_name, total_groups, wait_time):
         
         #enter all the emails
         for i in range(1, len(subgroup)):
-            print(subgroup[i])
+            logging.warning(subgroup[i])
             enter_email(web, subgroup[i], group_name, wait_time)
             
         #name the group input box
@@ -118,7 +118,7 @@ def go_thread(given_groups, thread_num):
     category='Testing'
     #login using the login function in logging_in.py
     web=login(wait_time)
-    print("Login worked")
+    logging.warning("Login worked")
     
     #get out of iframe for making groups
     web.driver.switch_to.default_content()
@@ -132,11 +132,11 @@ def go_thread(given_groups, thread_num):
         #group_name="3/18/2020"+call_time+"Call number: "+ str(subgroup[0] + 1) + " Key:"+category+str(thread_num)+str(group_num)
         group_name="IGNORE THIS. IT IS A TEST 3/18/2020"+str(call_time)+"Call number: "+ str(int(subgroup[0]) + 1)
         web, total_groups=create_hangout(web, subgroup, group_name, total_groups, wait_time)
-        print(group_name)
+        logging.warning(group_name)
         #web, total_groups=create_hangout(web, subgroup, group_name, total_groups,wait_time)
         #move on to the next group
         #finished!
-        print(str(group_name) +" created!")
+        logging.warning(str(group_name) +" created!")
         groupNum += 1
 
 #%%
