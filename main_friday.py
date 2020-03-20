@@ -35,21 +35,8 @@ myparser.num_threads
 import groups
 #create groups using the createGroups function defined in groups.py file
 all_generated_groups = []
-
-category = input("category? ")
-#if category doesn't equal random
-if category != "Random":
-    by_category, category_strs=groups.get_category_random(myparser.all_summary, myparser.all_emails, category)
-    for i in range(0,len(category_strs)):
-        all_generated_groups = all_generated_groups + groups.create_groups(by_category[i], myparser.desired, 1)
-    
-else:
-    for call_num in range(0, myparser.num_calls):
-        all_generated_groups = all_generated_groups + groups.create_groups(myparser.all_emails, myparser.desired, call_num)
-
-for major in by_category:
-    all_generated_groups = all_generated_groups + groups.create_groups(major, myparser.desired, 2)
-    print(by_category.index(major))
+for call_num in range(0,myparser.num_calls):
+    all_generated_groups = all_generated_groups + groups.create_groups(myparser.all_emails, myparser.desired, call_num)
 
 print(all_generated_groups)
 

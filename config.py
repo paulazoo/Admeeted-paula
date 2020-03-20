@@ -3,7 +3,6 @@ import pandas as pd
 import os
 
 class ExcelParser():
-    #test space
     #define an initial function that when run, initializes variables
     def __init__(self, excel_name):
         #get current directory path on specific computer using os    
@@ -24,8 +23,8 @@ class ExcelParser():
         
         #Get indices for non participating (CANT call at the time). Removes any rows 
         participating_col_name = [x for x in all_summary.columns if ("Will you join" in x)][0]
-        non_participating_indices = all_summary[all_summary[participating_col_name].str != "Yes"].index
-        print(non_participating_indices)
+        non_participating_indices = all_summary[all_summary[participating_col_name] != "Yes"].index
+        dropped_ppl=[]
         dropped_ppl=dropped_ppl + [all_summary["Full Name"][i] for i in list(non_participating_indices)]
         all_summary=all_summary.drop(non_participating_indices).reset_index(drop=True)
 
@@ -38,7 +37,7 @@ class ExcelParser():
         #print(all_summary['Participating'])
         #write the full names of dropped gmails into a file
         with open("dropped_ppl.txt", "w") as outfile:
-            outfile.write("\n".join(str(dropped_ppl)))
+            outfile.write("\n".join(dropped_ppl))
         
         self.all_summary = all_summary
 

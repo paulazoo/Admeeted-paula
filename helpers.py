@@ -74,8 +74,7 @@ def create_hangout(web, subgroup, group_name, total_groups, wait_time):
         #enter all the emails
         for i in range(1, len(subgroup)):
             print(subgroup[i])
-            enter_email(web, subgroup[i], group_name)
-            
+            enter_email(web, subgroup[i], group_name, wait_time)
             
         #name the group input box
         web.driver.find_element_by_css_selector("input.t0ZFWd.AKyIEc.ea-Ga-ea").send_keys(group_name)
@@ -131,7 +130,7 @@ def go_thread(given_groups, thread_num):
     for subgroup in given_groups:
         #group_name using the date and groupNum
         #group_name="3/18/2020"+call_time+"Call number: "+ str(subgroup[0] + 1) + " Key:"+category+str(thread_num)+str(group_num)
-        group_name="3/18/2020"+call_time+"Call number: "+ str(subgroup[0] + 1)
+        group_name="IGNORE THIS. IT IS A TEST 3/18/2020"+call_time+"Call number: "+ str(subgroup[0] + 1)
         web, total_groups=create_hangout(web, subgroup, group_name, total_groups, wait_time)
         print(group_name)
         #web, total_groups=create_hangout(web, subgroup, group_name, total_groups,wait_time)
