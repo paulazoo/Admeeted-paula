@@ -6,7 +6,7 @@ def create_groups(all_emails, desired, call_num):
     random.shuffle(all_emails)
     #if the desired group size is more than the number of emails, just put everyone into one group
     if desired > len(all_emails):
-        subgroups = [all_emails]
+        subgroups = [[call_num] + all_emails]
     #make subgroups the length of the desired number of ppl per group from the shuffled email list
     else:
         subgroups = [all_emails[(x) : (x + desired)] for x in range(0, len(all_emails), desired)]

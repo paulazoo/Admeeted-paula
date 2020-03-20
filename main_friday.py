@@ -7,6 +7,9 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.keys import Keys
 from datetime import date
 import hangout_tools
+import time
+start_time = time.time()
+
 
 #%%
 import logging
@@ -77,4 +80,6 @@ for t in thread_list:
 # both threads completely executed 
 print("Done! There were " + str(error_count) + " errors.") 
 
-
+time_to_run = time.time() - start_time
+print("The program finished running in --- %s seconds ---" % (time_to_run))
+print("The program finished running in " + str(time_to_run/60) + " minutes.")
