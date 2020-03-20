@@ -73,12 +73,12 @@ print(batched_lists)
 #%%
 thread_list=[]
 error_count = 0
-for i in batched_lists:
+for batched_list in batched_lists:
     try:
-
-        t = threading.Thread(target=helpers.go_thread, args=(i,batched_lists.index(i),))      
-        # starting thread 1 
+        t = threading.Thread(target=helpers.go_thread, args=(batched_list,batched_lists.index(batched_list),))      
+        # starting each thread
         t.start()
+        #list of all threads
         thread_list.append(t)
         
     except:
@@ -86,6 +86,7 @@ for i in batched_lists:
         error_count += 1
 
 for t in thread_list:
+    #join all threads together
     t.join()
 # both threads completely executed 
 print("Done! There were " + str(error_count) + " errors.") 
