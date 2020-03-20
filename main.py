@@ -29,14 +29,16 @@ myparser.desired
 myparser.all_emails
 myparser.num_calls
 myparser.num_threads
+
 #%%
 #group manipulations
 import groups
+
+#%%
 category = input("category? ")
 #if category doesn't equal random
 if category != "Random":
-    by_category, category_strs=groups.get_category_random(myparser.all_summary, myparser.all_emails, category)
-    
+    by_category, category_strs=groups.get_category_random(myparser.all_summary, myparser.all_emails, category) 
 #create groups using the createGroups function defined in groups.py file
 all_generated_groups = []
 
@@ -47,6 +49,7 @@ for major in by_category:
     print(by_category.index(major))
 
 print(all_generated_groups)
+
 #%%
 for i in range(1, myparser.num_calls+1):
     all_generated_groups = all_generated_groups + groups.create_groups(myparser.all_emails, myparser.desired, i)

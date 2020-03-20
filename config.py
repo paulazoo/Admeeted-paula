@@ -22,23 +22,13 @@ class ExcelParser():
         dropped_ppl=[all_summary["Full Name"][i] for i in list(non_gmails_indices)]
         all_summary=all_summary.drop(non_gmails_indices).reset_index(drop=True)
         
-        #Get indices for non participating (CANT call at the time). Removes either "No"
-        # non_participating_indices = all_summary[all_summary['Participating'].str.endswith("Yes") == False].index
-        # print(non_participating_indices)
-        # dropped_ppl=dropped_ppl + [all_summary["Full Name"][i] for i in list(non_participating_indices)]
-        # all_summary=all_summary.drop(non_participating_indices).reset_index(drop=True)
-
-        non_participating_indices = all_summary[all_summary[all_summary.filter(like='Will you join').columns].str.endswith("Yes") == False].index
+        #Get indices for non participating (CANT call at the time). Removes any rows 
+        participating_col_name = [x for x in all_summary.columns if ("Will you join" in x)][0]
+        non_participating_indices = all_summary[all_summary[participating_col_name].str != "Yes"].index
         print(non_participating_indices)
-        Dropped_ppl=Dropped_ppl + [all_summary["Full Name"][i] for i in list(non_participating_indices)]
+        dropped_ppl=dropped_ppl + [all_summary["Full Name"][i] for i in list(non_participating_indices)]
         all_summary=all_summary.drop(non_participating_indices).reset_index(drop=True)
-    
-        #Removes null or no response in the participating  question
-        null_participating_indices = all_summary[all_summary['Participating'].isnull()].index
-        print(null_participating_indices)
-        dropped_ppl=dropped_ppl + [all_summary["Full Name"][i] for i in list(null_participating_indices)]
-        all_summary=all_summary.drop(null_participating_indices).reset_index(drop=True)
-        
+
         #deletes emails that are too long (greater than 300 chars) because they would slow down the program and no legit emails are longer than 300 chars
         too_long_indices = all_summary[all_summary['Email Address'].str.len() > 300].index  
         dropped_ppl=dropped_ppl + [all_summary["Full Name"][i] for i in list(too_long_indices)]
