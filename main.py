@@ -34,7 +34,7 @@ logging.warning('Log started with user: '+current_user)
 #the config file cleans the data and gets the starting variable values
 from config import ExcelParser
 
-myparser = ExcelParser("GT'ing for Quaran-teens (Responses).xlsx")
+myparser = ExcelParser("Coke Scholars Virtual Visitas (Responses).xlsx")
 
 myparser.all_summary
 myparser.desired
@@ -95,35 +95,23 @@ for call_num in range(1, myparser.num_calls + 1):
 logging.warning(all_generated_groups)
 
 #%%
-for i in range(1, myparser.num_calls+1):
-    all_generated_groups = all_generated_groups + groups.create_groups(myparser.all_emails, myparser.desired, i)
-    logging.warning("hi")
-#print the generated groups to check
-logging.warning(len(all_generated_groups[0]))
-logging.warning(all_generated_groups)
-
-#%%
 import helpers
 import threading
 
 batched_lists = helpers.split_list(all_generated_groups, myparser.num_threads)
-#batchedLists = splitList(batchedLists, num_threads)
 logging.warning("Batched lists are:")
 logging.warning(batched_lists)
 
 #%%
-print("yo")
-time.sleep(5)
-
-#%%
 thread_list=[]
 error_count = 0
-for i in batched_lists:
+for batch in batched_lists:
     try:
 
-        t = threading.Thread(target=helpers.go_thread, args=(i,batched_lists.index(i),))      
-        # starting thread 1 
+        t = threading.Thread(target=helpers.go_thread, args=(batch, batched_lists.index(i),))      
+        #starting thread
         t.start()
+        #add thread to thread list
         thread_list.append(t)
         
     except:
@@ -131,6 +119,7 @@ for i in batched_lists:
         error_count += 1
 
 for t in thread_list:
+    #join all the threads in thread_list
     t.join()
 # both threads completely executed 
 logging.warning("Done! There were " + str(error_count) + " errors.") 
