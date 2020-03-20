@@ -16,6 +16,7 @@ def login(wait_time):
     # options.add_argument('--ignore-certificate-errors') 
     # options.add_argument('--ignore-ssl-errors')
     # web = web.driver.Chrome(chrome_options=options)
+    #options = web.driver.ChromeOptions('--ignore-certificate-errors', '--ignore-ssl-errors')
     #go to hangouts
     web.driver.get('https://accounts.google.com/signin/v2/identifier?service=talk&passive=1209600&continue=https%3A%2F%2Fhangouts.google.com%2Fwebchat%2Fstart&followup=https%3A%2F%2Fhangouts.google.com%2Fwebchat%2Fstart&flowName=GlifWebSignIn&flowEntry=ServiceLogin')
     time.sleep(wait_time*2)
@@ -50,9 +51,9 @@ def enter_email(web, email, group_name, wait_time):
 def create_hangout(web, subgroup, group_name, total_groups, wait_time):
 
         #write down the generatedGroups
-    with open("group_ppl.txt", "a") as file:
-        file.write("\n")
-        file.write("group_name: "+group_name+" ppl: "+ str(subgroup))
+    # with open("group_ppl.txt", "a") as file:
+    #     file.write("\n")
+    #     file.write("group_name: "+group_name+" ppl: "+ str(subgroup))
     #Alternatively, make the group_name with the specific call time
     #group_name = "Testing, March 15 9:30 PM," + " Call " + str(callNum)
     #hangout is not created yet
@@ -137,7 +138,7 @@ def go_thread(given_groups, thread_num):
     for subgroup in given_groups:
         #group_name using the date and groupNum
         #group_name="3/18/2020"+call_time+"Call number: "+ str(subgroup[0] + 1) + " Key:"+category+str(thread_num)+str(group_num)
-        group_name="IGNORE THIS TEST 3/18/2020"+str(call_time)+"Call number: "+ str(int(subgroup[0]) + 1)
+        group_name="IGNORE THIS TEST 3/18/2020"+str(call_time)+"Call number: "+ str(int(subgroup[0]))
         web, total_groups=create_hangout(web, subgroup, group_name, total_groups, wait_time)
         logging.warning(group_name)
         #web, total_groups=create_hangout(web, subgroup, group_name, total_groups,wait_time)
