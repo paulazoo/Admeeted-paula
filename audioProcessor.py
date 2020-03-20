@@ -14,11 +14,11 @@ from numpy.fft import fft, ifft
 
 #the following records audio from your microphone and saves it as a .WAV file
 
-fs = 44100  # Sample rate, 44.1 kHz
-seconds = 3  # Duration of recording, 3 seconds
+fs = 44100  # sample rate, 44.1 kHz
+seconds = 3  # duration of recording, 3 seconds
 
 myRecording = sd.rec(seconds * fs, samplerate=fs, channels=2)
-sd.wait()  # Wait until recording is finished
+sd.wait()  # wait until recording is finished
 
 write('output.wav', fs, myRecording)
 
