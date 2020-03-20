@@ -74,8 +74,7 @@ def create_hangout(web, subgroup, group_name, total_groups, wait_time):
         #enter all the emails
         for i in range(1, len(subgroup)):
             print(subgroup[i])
-            enter_email(web, subgroup[i], group_name)
-            
+            enter_email(web, subgroup[i], group_name, wait_time)
             
         #name the group input box
         web.driver.find_element_by_css_selector("input.t0ZFWd.AKyIEc.ea-Ga-ea").send_keys(group_name)
