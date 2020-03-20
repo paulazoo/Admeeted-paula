@@ -19,11 +19,11 @@ def login(wait_time):
     time.sleep(wait_time)
     time.sleep(wait_time)
     #sign in email
-    web.driver.find_element_by_css_selector("input[type='email']").send_keys('VirtualVisitas2.0')
+    web.driver.find_element_by_css_selector("input[type='email']").send_keys('VirtualVisitas3.0')
     web.driver.find_element_by_css_selector("input[type='email']").send_keys(Keys.RETURN)
     time.sleep(wait_time)
     time.sleep(wait_time)
-    web.driver.find_element_by_css_selector("input[type='password']").send_keys('Apaar&AlbertSal')
+    web.driver.find_element_by_css_selector("input[type='password']").send_keys('MyDeetYeet')
     web.driver.find_element_by_css_selector("input[type='password']").send_keys(Keys.RETURN)
     return web
 
