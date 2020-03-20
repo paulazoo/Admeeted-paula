@@ -34,7 +34,7 @@ logging.warning('Log started with user: '+current_user)
 #the config file cleans the data and gets the starting variable values
 from config import ExcelParser
 
-myparser = ExcelParser("GT'ing for Quaran-teens (Responses).xlsx")
+myparser = ExcelParser("Coke Scholars Virtual Visitas (Responses).xlsx")
 
 myparser.all_summary
 myparser.desired
@@ -95,12 +95,12 @@ for call_num in range(1, myparser.num_calls + 1):
 logging.warning(all_generated_groups)
 
 #%%
-for i in range(1, myparser.num_calls+1):
-    all_generated_groups = all_generated_groups + groups.create_groups(myparser.all_emails, myparser.desired, i)
-    logging.warning("hi")
+#for i in range(1, myparser.num_calls+1):
+ #   all_generated_groups = all_generated_groups + groups.create_groups(myparser.all_emails, myparser.desired, i)
+  #  logging.warning("hi")
 #print the generated groups to check
-logging.warning(len(all_generated_groups[0]))
-logging.warning(all_generated_groups)
+#logging.warning(len(all_generated_groups[0]))
+#logging.warning(all_generated_groups)
 
 #%%
 import helpers
@@ -110,10 +110,6 @@ batched_lists = helpers.split_list(all_generated_groups, myparser.num_threads)
 #batchedLists = splitList(batchedLists, num_threads)
 logging.warning("Batched lists are:")
 logging.warning(batched_lists)
-
-#%%
-print("yo")
-time.sleep(5)
 
 #%%
 thread_list=[]

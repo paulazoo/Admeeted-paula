@@ -35,7 +35,7 @@ class ExcelParser():
         all_summary=all_summary.drop(too_long_indices).reset_index(drop=True)
         
         #print ppl whos emails didn't make it
-        logging.warning(all_summary['Participating'])
+        logging.warning(all_summary[participating_col_name])
         #write the full names of dropped gmails into a file
         with open("dropped_ppl.txt", "w") as outfile:
             outfile.write("\n".join(dropped_ppl))
