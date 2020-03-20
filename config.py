@@ -1,15 +1,16 @@
 #import pandas package for doing stuff with data
 import pandas as pd
 import os
+import logging
 
 class ExcelParser():
     #define an initial function that when run, initializes variables
     def __init__(self, excel_name):
         #get current directory path on specific computer using os    
         dir_path = os.path.dirname(os.path.realpath(excel_name))
-        print(dir_path)
         #file location for respones excel file
         excel_file = dir_path + "\\" + excel_name
+        logging.warning("file location at "+excel_file)
         #all_summary holds the survey response data as a pandas dataframe
         all_summary = pd.read_excel(excel_file)
         #remove all rows (people cases) with duplicate emails except last entered row by that email person
@@ -34,7 +35,7 @@ class ExcelParser():
         all_summary=all_summary.drop(too_long_indices).reset_index(drop=True)
         
         #print ppl whos emails didn't make it
-        #print(all_summary['Participating'])
+        logging.warning(all_summary['Participating'])
         #write the full names of dropped gmails into a file
         with open("dropped_ppl.txt", "w") as outfile:
             outfile.write("\n".join(dropped_ppl))
