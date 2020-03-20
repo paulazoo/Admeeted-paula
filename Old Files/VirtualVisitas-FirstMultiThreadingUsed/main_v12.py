@@ -190,7 +190,7 @@ def go_thread(givenGroups, threadNum):
         #groupName = dateNow + callTime + " Call " + str(callNum) + " (Key: " + category + str(callNum) + str(groupNum) + ")"
         #groupName="test t: "+str(threadNum) + " c: "+ str(subGroup[0]) + " g: "+str(groupNum)
         #groupName="First call 3/20/2020 3:00 EST: Call number: "+ str(subGroup[0] + 1)
-        groupName="First call GT 3/20/2020 3:00 EST"
+        groupName="NEW First call GT 3/20/2020 3:00 EST"
         web, totalGroups=create_hangout(web, subGroup, groupName, totalGroups,waitTime1)
         print(groupName)
         #web, totalGroups=create_hangout(web, subGroup, groupName, totalGroups,waitTime1)
