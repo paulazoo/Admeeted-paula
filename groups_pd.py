@@ -1,7 +1,5 @@
 import pandas as pd
 import random
-import logging
-
 #returns a list of the subgroups (which are also lists themselves) of the emails.
 def create_groups(all_emails, desired, call_num):
     #shuffle the list of emails
@@ -14,7 +12,7 @@ def create_groups(all_emails, desired, call_num):
         subgroups = [all_emails[(x) : (x + desired)] for x in range(0, len(all_emails), desired)]
         #first element of every group within subgroups is the call_num
         [subgroups[i].insert(0,call_num) for i in range(0,len(subgroups))]
-        #logging.warning(subgroups)
+        #print(subgroups)
     #if there's a group with less than desired number of people, evenly distribute amongst the other groups
         lastLen = len(subgroups[-1])
         if lastLen < desired+1:
@@ -32,7 +30,7 @@ def create_groups(all_emails, desired, call_num):
                 counter += 1
     if counter != 0:
         subgroups.pop(-1)
-    #logging.warning(subgroups)
+    #print(subgroups)
     return subgroups
 
 #%%
@@ -50,17 +48,17 @@ def get_category_firsts(all_summary,all_emails,category):
     by_category=[]
     #relevant category value
     for category_val in category_strs:
-        #logging.warning(category_val)
+        #print(category_val)
         #indices of correct category values in category_firsts list
         category_yes=[i for i, x in enumerate(category_firsts) if x == category_val]
-        #logging.warning(category_yes)
+        #print(category_yes)
         #get specific emails that are correct e.g. 'History' in 'Major' column emails
         specific_emails = [all_emails[i] for i in category_yes]
-        #logging.warning(specific_emails)
+        #print(specific_emails)
         #add that email list into by_category list
         by_category.append(specific_emails)
     #check final by_category lists of category_val lists
-    logging.warning(by_category)
+    print(by_category)
     #first return is by_category list of lists of emails, second is the category_val names, same index
     return by_category, category_strs
 
@@ -83,21 +81,21 @@ def get_category_random(all_summary,all_emails,category):
     by_category=[]
     #relevant category value
     for category_val in category_strs:
-        #logging.warning(category_val)
+        #print(category_val)
         
         #indices of correct category values in category_firsts list
         category_yes=[i for i, x in enumerate(category_firsts) if x == category_val]
-        #logging.warning(category_yes)
+        #print(category_yes)
         
         #get specific emails that are correct e.g. 'History' in 'Major' column emails
         specific_emails = [all_emails[i] for i in category_yes]
-        #logging.warning(specific_emails)
+        #print(specific_emails)
         
         #add that email list into by_category list
         by_category.append(specific_emails)
         
     #check final by_category lists of category_val lists
-    logging.warning(by_category)
+    print(by_category)
     
     #first return is by_category list of lists of emails, second is the category_val names, same index
     return by_category, category_strs
@@ -124,10 +122,8 @@ def get_multicategory_all(all_summary,all_emails,category):
                 #add that email to the specific_emails list
                 specific_emails.append(all_emails[idx])
         #check specific emails list
-        logging.warning(category_val, ": ", specific_emails)
+        print(category_val, ": ", specific_emails)
         #add this genre specific emails list to the general list of lists of emails by genre
         by_category.append(specific_emails)
     return by_category
 
-#%%
-#def major-area():
