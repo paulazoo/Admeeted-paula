@@ -24,8 +24,8 @@ class ExcelParser():
         
         #Get indices for non participating (CANT call at the time). Removes any rows 
         participating_col_name = [x for x in all_summary.columns if ("Will you join" in x)][0]
-        non_participating_indices = all_summary[all_summary[participating_col_name].str != "Yes"].index
-        print(non_participating_indices)
+        non_participating_indices = all_summary[all_summary[participating_col_name] != "Yes"].index
+        dropped_ppl=[]
         dropped_ppl=dropped_ppl + [all_summary["Full Name"][i] for i in list(non_participating_indices)]
         all_summary=all_summary.drop(non_participating_indices).reset_index(drop=True)
 
