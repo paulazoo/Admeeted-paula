@@ -107,13 +107,11 @@ thread_list=[]
 error_count = 0
 for batch in batched_lists:
     try:
-
-        t = threading.Thread(target=helpers.go_thread, args=(batch, batched_lists.index(i),))      
+        t = threading.Thread(target=helpers.go_thread, args=(batch, batched_lists.index(batch),))
         #starting thread
         t.start()
         #add thread to thread list
         thread_list.append(t)
-        
     except:
         logging.warning("There was an error.")
         error_count += 1

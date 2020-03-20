@@ -43,3 +43,7 @@
 2020-03-20 13:59:55,825 192.168.0.1 fbloggs  Protocol problem: connection reset
 2020-03-20 14:02:05,475 192.168.0.1 fbloggs  Protocol problem: connection reset
 2020-03-20 14:02:57,281 192.168.0.1 fbloggs  Protocol problem: connection reset
+2020-03-20 16:07:09,419 192.168.0.1 fbloggs  Protocol problem: connection reset
+2020-03-20 16:07:18,444 192.168.0.1 fbloggs  Protocol problem: connection reset
+2020-03-20 16:16:44,719 192.168.0.1 fbloggs  Protocol problem: connection reset
+2020-03-20 16:45:00,853 192.168.0.1 fbloggs  Protocol problem: connection reset

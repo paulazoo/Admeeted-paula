@@ -12,6 +12,10 @@ import logging
 def login(wait_time):    
     #start new browser
     web = Browser()
+    options = webdriver.ChromeOptions()
+    options.add_argument('--ignore-certificate-errors') 
+    options.add_argument('--ignore-ssl-errors')
+    web = web.driver.Chrome(chrome_options=options)
     #go to hangouts
     web.driver.get('https://accounts.google.com/signin/v2/identifier?service=talk&passive=1209600&continue=https%3A%2F%2Fhangouts.google.com%2Fwebchat%2Fstart&followup=https%3A%2F%2Fhangouts.google.com%2Fwebchat%2Fstart&flowName=GlifWebSignIn&flowEntry=ServiceLogin')
     time.sleep(wait_time)
@@ -75,6 +79,7 @@ def create_hangout(web, subgroup, group_name, total_groups, wait_time):
         #enter all the emails
         for i in range(1, len(subgroup)):
             logging.warning(subgroup[i])
+            time.sleep(wait_time)
             enter_email(web, subgroup[i], group_name, wait_time)
             
         #name the group input box
