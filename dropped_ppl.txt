@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Taruna Singh
 Laila Nasher
 Alan Zhang
@@ -9,3 +10,6 @@ Giao Nguyen
 Kate De Groote
 Tarun Amasa
 Hana Lampson
+=======
+Priya Thelapurath
+>>>>>>> parent of 941117d... Testing main_friday
