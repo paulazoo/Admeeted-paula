@@ -85,7 +85,7 @@ def create_hangout(web, subgroup, group_name, total_groups, wait_time):
         web.driver.switch_to.default_content()
         time.sleep(wait_time)
         #type and enter group introduction messages
-        web.type("Hello! Welcome to the group for " + str(group_name) + ". Please make this the designated call (from the title). At the designated start time, someone should initiate the call. In order for this to work as smoothly as possible, we need to coordinate our calling. Albert originally planned for each call to be 15 minutes, but times will be flexible depending on how ya'll like the lengths, so please check the GroupMe for the official lengths for each call! You can always return to this chat later if ya'll want to talk more :) . Additionally, if you would like to leave early, just leave the groups that you won't be able to call in. So, you could choose to only partake in calls 1 to 3 if you prefer, but we all would love if you join all the calls. :D Thanks for helping make this happen!")
+        web.type("Hello! Welcome to the group for " + str(group_name) + ". Please make this the designated call (from the title). At the designated start time, someone should initiate the call. In order for this to work as smoothly as possible, we need to coordinate our calling. Albert originally planned for each call to be 30 minutes, but times will be flexible depending on how ya'll like the lengths, so please check the GroupMe for the official lengths for each call! You can always return to this chat later if ya'll want to talk more :) . Additionally, if you would like to leave early, just leave the groups that you won't be able to call in. So, you could choose to only partake in calls 1 to 3 if you prefer, but we all would love if you join all the calls. :D Thanks for helping make this happen!")
         #web.type("Hello! This is the testing for a program. Please ignore this hangout. You may exit.")
         time.sleep(wait_time)
         web.press(web.Key.ENTER)
@@ -130,7 +130,7 @@ def go_thread(given_groups, thread_num):
     for subgroup in given_groups:
         #group_name using the date and groupNum
         #group_name="3/18/2020"+call_time+"Call number: "+ str(subgroup[0] + 1) + " Key:"+category+str(thread_num)+str(group_num)
-        group_name="IGNORE THIS. IT IS A TEST 3/18/2020"+str(call_time)+"Call number: "+ str(int(subgroup[0]) + 1)
+        group_name= str(int(subgroup[0]) + 1) + " IGNORE THIS. IT IS A TEST 3/18/2020"+str(call_time)+"Call number: "+ str(int(subgroup[0]) + 1)
         web, total_groups=create_hangout(web, subgroup, group_name, total_groups, wait_time)
         print(group_name)
         #web, total_groups=create_hangout(web, subgroup, group_name, total_groups,wait_time)
