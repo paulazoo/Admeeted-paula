@@ -77,6 +77,7 @@ def create_hangout(web, subgroup, group_name, total_groups, wait_time):
         #enter all the emails
         for i in range(1, len(subgroup)):
             print(subgroup[i])
+            time.sleep(wait_time)
             enter_email(web, subgroup[i], group_name, wait_time)
             
         #name the group input box
