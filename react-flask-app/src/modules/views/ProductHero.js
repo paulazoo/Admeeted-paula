@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Button from '../components/Button';
 import Typography from '../components/Typography';
 import ProductHeroLayout from './ProductHeroLayout';
+import { NavLink } from 'react-router-dom';
 
 const backgroundImage =
   'https://assets.rbl.ms/11259921/origin.jpg';
@@ -47,8 +48,8 @@ function ProductHero(props) {
         variant="contained"
         size="large"
         className={classes.button}
-        component="a"
-        href="/register/"
+        component={NavLink}
+        to="/sign-up"
       >
         Register
       </Button>

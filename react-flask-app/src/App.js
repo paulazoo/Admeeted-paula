@@ -4,7 +4,7 @@ import logo from './logo.svg';
 import './App.css';
 import AppAppBar from './modules/views/AppAppBar';
 import AppFooter from './modules/views/AppFooter';
-import ProductHero from './modules/views/ProductHero';
+import Main from './modules/components/Main';
 
 function App() {
   const [currTime, setCurrTime] = useState(0);
@@ -16,11 +16,11 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
+    <React.Fragment>
       <AppAppBar />
-        <ProductHero />
+      <Main />
       <AppFooter />
-    </div>
+    </React.Fragment>
   );
 }
 

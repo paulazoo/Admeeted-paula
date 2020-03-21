@@ -16,10 +16,10 @@ from numpy.fft import fft, ifft
 fs = 44100  # sample rate, 44.1 kHz
 seconds = 3  # duration of recording, 3 seconds
 
-myRecording = sd.rec(seconds * fs, samplerate=fs, channels=2)
+my_recording = sd.rec(seconds * fs, samplerate=fs, channels=2)
 sd.wait()  # wait until recording is finished
 
-write('output.wav', fs, myRecording)
+write('output.wav', fs, my_recording)
 
 #read and plot the following data
 Fs, data = read("output.wav")
