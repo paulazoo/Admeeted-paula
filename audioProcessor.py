@@ -11,7 +11,6 @@ import matplotlib.pyplot as plt
 from IPython.display import Audio
 from numpy.fft import fft, ifft
 
-
 #the following records audio from your microphone and saves it as a .WAV file
 
 fs = 44100  # sample rate, 44.1 kHz
