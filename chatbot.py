@@ -1,15 +1,14 @@
 #!/usr/bin/python3
 from random import randint
 import pandas as pd
-#import hangout_tools
 import time
 
 def chatbot():
     time_length = 10
 
     for x in range(0, 10*60):
-        minutes = randint(2,4)
-        time.sleep(minutes) #do the following every 2 to 4 minutes (random)
+        minutes = randint(1,3)
+        time.sleep(minutes) #do the following every 1 to 3 minutes (random)
 
         #options (1) icebreaker... (2) trivia question (3) outrageous fact
         value = randint(1,3)
