@@ -12,9 +12,14 @@ import logging
 def login(wait_time):    
     #start new browser
     web = Browser()
+    # options = web.driver.ChromeOptions()
+    # options.add_argument('--ignore-certificate-errors') 
+    # options.add_argument('--ignore-ssl-errors')
+    # web = web.driver.Chrome(chrome_options=options)
+    #options = web.driver.ChromeOptions('--ignore-certificate-errors', '--ignore-ssl-errors')
     #go to hangouts
     web.driver.get('https://accounts.google.com/signin/v2/identifier?service=talk&passive=1209600&continue=https%3A%2F%2Fhangouts.google.com%2Fwebchat%2Fstart&followup=https%3A%2F%2Fhangouts.google.com%2Fwebchat%2Fstart&flowName=GlifWebSignIn&flowEntry=ServiceLogin')
-    time.sleep(wait_time)
+    time.sleep(wait_time*2)
     #sign in email
     web.driver.find_element_by_css_selector("input[type='email']").send_keys('VirtualVisitas3.0')
     web.driver.find_element_by_css_selector("input[type='email']").send_keys(Keys.RETURN)
@@ -46,9 +51,9 @@ def enter_email(web, email, group_name, wait_time):
 def create_hangout(web, subgroup, group_name, total_groups, wait_time):
 
         #write down the generatedGroups
-    with open("group_ppl.txt", "a") as file:
-        file.write("\n")
-        file.write("group_name: "+group_name+" ppl: "+ str(subgroup))
+    # with open("group_ppl.txt", "a") as file:
+    #     file.write("\n")
+    #     file.write("group_name: "+group_name+" ppl: "+ str(subgroup))
     #Alternatively, make the group_name with the specific call time
     #group_name = "Testing, March 15 9:30 PM," + " Call " + str(callNum)
     #hangout is not created yet
@@ -75,6 +80,7 @@ def create_hangout(web, subgroup, group_name, total_groups, wait_time):
         #enter all the emails
         for i in range(1, len(subgroup)):
             logging.warning(subgroup[i])
+            time.sleep(wait_time)
             enter_email(web, subgroup[i], group_name, wait_time)
             
         #name the group input box
@@ -91,6 +97,7 @@ def create_hangout(web, subgroup, group_name, total_groups, wait_time):
         time.sleep(wait_time)
         web.press(web.Key.ENTER)
         #get into iframe
+        time.sleep(wait_time)
         iframe_pls=web.driver.find_elements_by_css_selector("iframe[aria-label='"+group_name+"']")
         iframe_id=iframe_pls[0].get_attribute("id")
         iframe_correct=web.driver.find_element_by_id(iframe_id)
@@ -131,7 +138,7 @@ def go_thread(given_groups, thread_num):
     for subgroup in given_groups:
         #group_name using the date and groupNum
         #group_name="3/18/2020"+call_time+"Call number: "+ str(subgroup[0] + 1) + " Key:"+category+str(thread_num)+str(group_num)
-        group_name="IGNORE THIS TEST 3/18/2020"+str(call_time)+"Call number: "+ str(int(subgroup[0]) + 1)
+        group_name="IGNORE THIS TEST 3/18/2020"+str(call_time)+"Call number: "+ str(int(subgroup[0]))
         web, total_groups=create_hangout(web, subgroup, group_name, total_groups, wait_time)
         logging.warning(group_name)
         #web, total_groups=create_hangout(web, subgroup, group_name, total_groups,wait_time)
