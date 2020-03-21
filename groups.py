@@ -1,39 +1,27 @@
 import pandas as pd
 import random
 import logging
+import numpy as np
 
 #returns a list of the subgroups (which are also lists themselves) of the emails.
 def create_groups(all_emails, desired, call_num):
     #shuffle the list of emails
-    random.shuffle(all_emails)
+    all_emails=np.array(all_emails)
+    np.random.shuffle(all_emails)
     #if the desired group size is more than the number of emails, just put everyone into one group
-    if desired > len(all_emails):
-        subgroups = [[call_num] + all_emails]
-    #make subgroups the length of the desired number of ppl per group from the shuffled email list
+    if desired > all_emails.shape[0]:
+        subgroup = np.insert(all_emails, 0, str(call_num))    
     else:
-        subgroups = [all_emails[(x) : (x + desired)] for x in range(0, len(all_emails), desired)]
+        #split evenly into all_emails/desired arrays and stack these arrays into a big 2d array
+        subgroup = np.stack(np.array_split(all_emails, np.floor(all_emails.shape[0] / desired)))
         #first element of every group within subgroups is the call_num
-        [subgroups[i].insert(0,call_num) for i in range(0,len(subgroups))]
-        #logging.warning(subgroups)
-    #if there's a group with less than desired number of people, evenly distribute amongst the other groups
-        lastLen = len(subgroups[-1])
-        if lastLen < desired+1:
-            for x in range(1,lastLen):
-                # if the remainder in the last group is larger than the number of subgroups, then it will add multiple people to the other groups
-                subgroups[(x-1) % len(subgroups)].append(subgroups[-1][x])
-                subgroups[-1][x] = 0
+        subgroup=np.concatenate((np.full((subgroup.shape[0], 1), call_num), subgroup),axis=1)
     
-    subgroups = [x for x in subgroups if x != []]
-    counter = 0
-    #For efficiency, edit this to just check the last group in subgroups. Otherwise, could cause a bug
-    for i in subgroups:
-        for x in i:
-            if x == 0:
-                counter += 1
-    if counter != 0:
-        subgroups.pop(-1)
-    #logging.warning(subgroups)
-    return subgroups
+    #log that
+    subgroup=subgroup.tolist()
+    subgroup=subgroup[0]
+    logging.warning(subgroup)
+    return subgroup
 
 #%%
 #returns a list of groups from specified category, where each group is a list of emails for one specific category value (first value for each ans)

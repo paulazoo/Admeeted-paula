@@ -56,37 +56,29 @@ for call_num in range(1, myparser.num_calls + 1):
         #get by category groups
         by_category, category_strs=groups.get_category_random(myparser.all_summary, myparser.all_emails, category)
         
-        
-        
         #for groups too tiny
         tiny_groups = [group for group in by_category if len(group)<3]
         tiny_groups_strs = [category_strs[by_category.index(group)] for group in by_category if len(group)<=2]
         big_groups_strs = [category_val for category_val in category_strs if category_val not in tiny_groups_strs]
         
         print("")
+        print("tiny groups: "+str(tiny_groups_strs))
         print("big groups: "+str(big_groups_strs))
         
         for tiny_group_idx, tiny_group in enumerate(tiny_groups):
-            add_to = input("Add tiny group "+str(tiny_groups_strs[tiny_group_idx])+" to which big group? ")
-            while add_to not in big_groups_strs:
-                add_to = input("Not a big group. Add tiny group "+str(tiny_groups_strs[tiny_group_idx])+" to which big group? ")
-            by_category[category_strs.index(add_to)]=by_category[category_strs.index(add_to)]+tiny_group
-            
-        
-        for tiny_group, tiny_group_idx in enumerate(tiny_groups):
-            add_to = input("add tiny group: "+tiny_groups_strs[tiny_group_idx]+" to which big group?")
-            while add_to not in big_groups_strs:
-                add_to = input("That's not a big group. Add tiny group: "+tiny_groups_strs[tiny_group_idx]+" to which big group?")
-            group_idx=category_strs.index(add_to)
-            by_category[group_idx]=by_category[group_idx]+tiny_group
-                
-            
-                
-        
+            tiny_group_name=tiny_groups_strs[tiny_group_idx]
+            add_to = input("Combine tiny group "+tiny_group_name+" to which group? ")
+            #s to skip
+            while (add_to not in category_strs) and (add_to != "s"):
+                add_to = input(add_to+" is not a group. Combine tiny group "+tiny_group_name+" to which group? ")
+            if add_to != "s":
+                by_category[category_strs.index(add_to)]=by_category[category_strs.index(add_to)]+tiny_group
+                by_category.pop(category_strs.index(tiny_group_name))
+                category_strs.pop(category_strs.index(tiny_group_name))
+
         for i in range(0,len(category_strs)):
             #create_groups out of each by_category category value group
-            #all groups with the same category have the same call
-            
+            #all groups with the same category have the same call  
             all_generated_groups = all_generated_groups + groups.create_groups(by_category[i], myparser.desired, call_num)  
     else:
         #for just random groups, run this
