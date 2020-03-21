@@ -11,9 +11,9 @@ options.headless = True
 driver = webdriver.Firefox(options=options)
 print(colored("Driver successfully created as Firefox headless...", "green"))
 
-with open('random_facts.csv', 'w') as f:
+with open('random_trivia.csv', 'w') as f:
         csvwriter = csv.writer(f)
-        headers = ["Fact"]
+        headers = ["Trivia", "Answer"]
         csvwriter.writerow(headers)
 
 """
@@ -63,8 +63,8 @@ for x in range(0, 1000): #in order to get most if not all of the questions
     button = driver.find_element_by_class_name("button")
     button.click()
     print(str(x) + " done...")
-"""
 
+#fact generator
 driver.get("http://randomfactgenerator.net/")
 for x in range(0, 500):
     facts = driver.find_elements_by_id("z")
@@ -73,5 +73,18 @@ for x in range(0, 500):
             csvwriter = csv.writer(f)
             headers = [facts[x].text]
             csvwriter.writerow(headers)
+    driver.refresh()
+    print(str(x) + " done...")
+"""
+
+driver.get("https://trivia.fyi/random-trivia-questions/")
+for x in range(0, 500):
+    trivia = driver.find_element_by_class_name("query-title-link").text
+    driver.find_element_by_class_name("su-spoiler-title").click()
+    answer = driver.find_element_by_class_name("su-spoiler-content.su-u-clearfix.su-u-trim").text
+    with open('random_trivia.csv', 'a') as f:
+        csvwriter = csv.writer(f)
+        headers = [trivia, answer]
+        csvwriter.writerow(headers)
     driver.refresh()
     print(str(x) + " done...")
