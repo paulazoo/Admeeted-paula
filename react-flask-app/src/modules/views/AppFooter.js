@@ -69,20 +69,20 @@ export default function AppFooter() {
       <Container className={classes.container}>
         <Grid container spacing={5}>
           <Grid item xs={6} sm={4} md={2}>
-            <Typography variant="h6" marked="left" gutterBottom>
-              Legal
+            <Typography variant="h6" marked="center" gutterBottom>
+              About Us
             </Typography>
             <ul className={classes.list}>
               <li className={classes.listItem}>
-                <Link href="/premium-themes/onepirate/terms/">Terms</Link>
+                <Link href="https://material-ui.com/">Our Users</Link>
               </li>
               <li className={classes.listItem}>
-                <Link href="/premium-themes/onepirate/privacy/">Privacy</Link>
+                <Link href="https://material-ui.com/">Our Team</Link>
               </li>
             </ul>
           </Grid>
           <Grid item xs={6} sm={8} md={4}>
-            <Typography variant="h6" marked="left" gutterBottom>
+            <Typography variant="h6" marked="center" gutterBottom>
               Contact Us
             </Typography>
           </Grid>

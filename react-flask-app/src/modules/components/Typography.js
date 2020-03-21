@@ -26,11 +26,11 @@ const styles = theme => ({
     margin: `${theme.spacing(1)}px auto 0`,
     backgroundColor: theme.palette.secondary.main,
   },
-  markedH6Left: {
+  markedH6Center: {
     height: 2,
     width: 28,
     display: 'block',
-    marginTop: theme.spacing(0.5),
+    margin: `${theme.spacing(1)}px auto 0`,
     background: 'currentColor',
   },
 });
