@@ -1,0 +1,23 @@
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-analytics.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyCIzEQWzlyfoUqGs-Pph0Xj23TlPF7eUjs",
+    authDomain: "admeet2024.firebaseapp.com",
+    databaseURL: "https://admeet2024.firebaseio.com",
+    projectId: "admeet2024",
+    storageBucket: "admeet2024.appspot.com",
+    messagingSenderId: "1095364796715",
+    appId: "1:1095364796715:web:3f4d830d22fb579760a56e",
+    measurementId: "G-Y2QPP6YVYY"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+</script>
