@@ -11,9 +11,9 @@ options.headless = True
 driver = webdriver.Firefox(options=options)
 print(colored("Driver successfully created as Firefox headless...", "green"))
 
-with open('random_questions.csv', 'w') as f:
+with open('random_facts.csv', 'w') as f:
         csvwriter = csv.writer(f)
-        headers = ["Question"]
+        headers = ["Fact"]
         csvwriter.writerow(headers)
 
 """
@@ -49,7 +49,7 @@ for x in range(0, 3000): #in order to get most if not all of the questions
     time.sleep(0.5)
 
     print(str(x) + " done...")
-"""
+
 
 #Conversation Starters
 driver.get("https://www.conversationstarters.com/generator.php")
@@ -62,4 +62,16 @@ for x in range(0, 1000): #in order to get most if not all of the questions
         csvwriter.writerow(headers)
     button = driver.find_element_by_class_name("button")
     button.click()
+    print(str(x) + " done...")
+"""
+
+driver.get("http://randomfactgenerator.net/")
+for x in range(0, 500):
+    facts = driver.find_elements_by_id("z")
+    for x in range(0, len(facts)):
+        with open('random_facts.csv', 'a') as f:
+            csvwriter = csv.writer(f)
+            headers = [facts[x].text]
+            csvwriter.writerow(headers)
+    driver.refresh()
     print(str(x) + " done...")

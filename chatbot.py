@@ -4,7 +4,7 @@ def chatbot():
     import hangout_tools
 
     minutes = randint(2,4)
-    time.sleep(minutes) #do the following every 2 to 4 minutes (random)
+    time.sleep(minutes*60) #do the following every 2 to 4 minutes (random)
 
     #options (1) icebreaker... (2) trivia question (3) outrageous fact
     value = randint(1,3)
@@ -17,5 +17,11 @@ def chatbot():
         #write_in_group_hangout()
     elif(value == 2):
         #chat a trivia question
+        
     else:
         #chat an outrageous fact
+        fact_data = pd.read_csv("random_facts.csv", encoding="ISO-8859-1")
+        fact = list(fact_data['Fact'])
+        fact_number = randint(0, len(icebreaker))
+        #chat "Fun fact:" + str(fact[fact_number])
+        #write_in_group_hangout()
