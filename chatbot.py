@@ -1,6 +1,7 @@
 def chatbot():
     import random
     import pandas
+    import hangout_tools
 
     minutes = randint(2,4)
     time.sleep(minutes) #do the following every 2 to 4 minutes (random)
@@ -13,6 +14,7 @@ def chatbot():
         icebreaker = list(icebreaker_data['Question'])
         question_number = randint(0, len(icebreaker))
         #chat icebreaker[question_number]
+        #write_in_group_hangout()
     elif(value == 2):
         #chat a trivia question
     else:
