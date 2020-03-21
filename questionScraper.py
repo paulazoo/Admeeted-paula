@@ -6,6 +6,7 @@ from termcolor import colored
 import csv
 import pyautogui
 
+
 options = Options()
 options.headless = True
 driver = webdriver.Firefox(options=options)
@@ -15,7 +16,6 @@ with open('random_trivia.csv', 'w') as f:
         csvwriter = csv.writer(f)
         headers = ["Trivia", "Answer"]
         csvwriter.writerow(headers)
-
 """
 #Random Question Maker - seems like they have a small number of different questions
 driver.get("https://randomquestionmaker.com/")
@@ -75,8 +75,8 @@ for x in range(0, 500):
             csvwriter.writerow(headers)
     driver.refresh()
     print(str(x) + " done...")
-"""
 
+"""
 driver.get("https://trivia.fyi/random-trivia-questions/")
 for x in range(0, 500):
     trivia = driver.find_element_by_class_name("query-title-link").text
