@@ -34,7 +34,7 @@ logging.warning('Log started with user: '+current_user)
 #the config file cleans the data and gets the starting variable values
 from config import ExcelParser
 
-myparser = ExcelParser("Coke Scholars Virtual Visitas (Responses).xlsx")
+myparser = ExcelParser("Tree'ing for Quaran-teens (Responses).xlsx")
 
 myparser.all_summary
 myparser.desired
