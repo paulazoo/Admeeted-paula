@@ -127,7 +127,7 @@ def go_thread(given_groups, thread_num):
     groupNum = 1
     
     #get the time to put into group_name later
-    call_time = 'Stanford 3/20 9:00 PM EST '
+    call_time = 'Princeton 3/21 3:00 PM EST '
     category='Testing'
     #login using the login function in logging_in.py
     web=login(wait_time)
@@ -145,7 +145,7 @@ def go_thread(given_groups, thread_num):
         #group_name="3/18/2020"+call_time+"Call number: "+ str(subgroup[0] + 1) + " Key:"+category+str(thread_num)+str(group_num)
         #below is better for testing
         #group_name= "c: " + str(int(subgroup[0])) + "g: " + str(groupNum) + " IGNORE THIS TEST 3/18/2020 "+str(call_time)+" Call number: "+ str(int(subgroup[0]))
-        group_name = "NEW" + str(call_time)+" Call number: "+ str(int(subgroup[0])) + " Group number: " + str(groupNum)
+        group_name = "Call: " + str(int(subgroup[0])) + " " + str(call_time) + " Group number: " + str(groupNum)
         web, total_groups=create_hangout(web, subgroup, group_name, total_groups, wait_time)
         logging.warning(group_name)
         #web, total_groups=create_hangout(web, subgroup, group_name, total_groups,wait_time)
