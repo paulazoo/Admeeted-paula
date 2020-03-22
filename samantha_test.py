@@ -1,5 +1,7 @@
-password = "Locked9Forever9!!"
-
+password = "DONT_YOU_DARE_STEAL_MY_PW!"
+#I'm creating a new email and GroupMe account for this lol
+#I'm thinking of naming it sambot but lmk if you want it to be
+#something more official haha
 
 
 

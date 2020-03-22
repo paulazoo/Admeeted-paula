@@ -12,11 +12,16 @@ import logging
 def login(wait_time):    
     #start new browser
     web = Browser()
+    # options = web.driver.ChromeOptions()
+    # options.add_argument('--ignore-certificate-errors') 
+    # options.add_argument('--ignore-ssl-errors')
+    # web = web.driver.Chrome(chrome_options=options)
+    #options = web.driver.ChromeOptions('--ignore-certificate-errors', '--ignore-ssl-errors')
     #go to hangouts
     web.driver.get('https://accounts.google.com/signin/v2/identifier?service=talk&passive=1209600&continue=https%3A%2F%2Fhangouts.google.com%2Fwebchat%2Fstart&followup=https%3A%2F%2Fhangouts.google.com%2Fwebchat%2Fstart&flowName=GlifWebSignIn&flowEntry=ServiceLogin')
-    time.sleep(wait_time)
+    time.sleep(wait_time*2)
     #sign in email
-    web.driver.find_element_by_css_selector("input[type='email']").send_keys('VirtualVisitas3.0')
+    web.driver.find_element_by_css_selector("input[type='email']").send_keys('VirtualVisitas4.0')
     web.driver.find_element_by_css_selector("input[type='email']").send_keys(Keys.RETURN)
     time.sleep(wait_time*2)
     
@@ -46,9 +51,9 @@ def enter_email(web, email, group_name, wait_time):
 def create_hangout(web, subgroup, group_name, total_groups, wait_time):
 
         #write down the generatedGroups
-    with open("group_ppl.txt", "a") as file:
-        file.write("\n")
-        file.write("group_name: "+group_name+" ppl: "+ str(subgroup))
+    # with open("group_ppl.txt", "a") as file:
+    #     file.write("\n")
+    #     file.write("group_name: "+group_name+" ppl: "+ str(subgroup))
     #Alternatively, make the group_name with the specific call time
     #group_name = "Testing, March 15 9:30 PM," + " Call " + str(callNum)
     #hangout is not created yet
@@ -75,6 +80,7 @@ def create_hangout(web, subgroup, group_name, total_groups, wait_time):
         #enter all the emails
         for i in range(1, len(subgroup)):
             logging.warning(subgroup[i])
+            time.sleep(wait_time)
             enter_email(web, subgroup[i], group_name, wait_time)
             
         #name the group input box
@@ -86,11 +92,17 @@ def create_hangout(web, subgroup, group_name, total_groups, wait_time):
         web.driver.switch_to.default_content()
         time.sleep(wait_time)
         #type and enter group introduction messages
-        web.type("Hello! Welcome to the group for " + str(group_name) + ". Please make this the designated call (from the title). At the designated start time, someone should initiate the call. In order for this to work as smoothly as possible, we need to coordinate our calling. Albert originally planned for each call to be 15 minutes, but times will be flexible depending on how ya'll like the lengths, so please check the GroupMe for the official lengths for each call! You can always return to this chat later if ya'll want to talk more :) . Additionally, if you would like to leave early, just leave the groups that you won't be able to call in. So, you could choose to only partake in calls 1 to 3 if you prefer, but we all would love if you join all the calls. :D Thanks for helping make this happen!")
+        web.type("Hello! Welcome to the group for " + str(group_name) + ". Please make this the designated call (from the title). At the designated start time, someone should initiate the call. In order for this to work as smoothly as possible, we need to coordinate our calling. Albert originally planned for each call to be 15 or 30 minutes, but times will be flexible depending on how ya'll like the lengths, so please check the GroupMe for the official lengths for each call! You can always return to this chat later if ya'll want to talk more :) . Additionally, if you would like to leave early, just leave the groups that you won't be able to call in. So, you could choose to only partake in calls 1 to 3 if you prefer, but we all would love if you join all the calls. :D Thanks for helping make this happen! ---------------------------------------------------------------------------------------        Instructions: When the call begins, you all should introduce yourself! For example, you can go across the names at the bottom of the video call screen (which are listed in alphabetical order), and state your name, where you’re from, what you’re interested in, and a fun fact! You can also tag on an additional question, such as “Do you put milk or cereal first?” or “What is your go-to late night snack and why?” -----------------------------Other examples of icebreaker questions are the following: -----------------------------Would you rather questions (ex. Would you rather have free wi-fi wherever you go, or have free coffee whenever and wherever you want?)-----------------------------You can also use a question generator site (https://conversationstartersworld.com/random-question-generator/) and ask each person a different question! -----------------------------What is the best __? (ex. Is the cookie or the cream better in an Oreo?) ----------------------------------------------------------")
         #web.type("Hello! This is the testing for a program. Please ignore this hangout. You may exit.")
+        #need to split this stuff because Hangouts has a character limit for 1 message oop
         time.sleep(wait_time)
         web.press(web.Key.ENTER)
+        web.type("Introductions usually take between 5-10 minutes, so you should still have some time left before the end of your call. If this is the case, you should try and engage in a conversation with your group, or play a game until the next call is ready! ----------------------------------------------------------Examples of games include: -----------------------------Last Letter (Create a sentence using the last letter of the previous word) ----------------------------- Charades (http://www.getcharadesideas.com/) -----------------------------Two Truths and a Lie ----------------------------- I Have Never Ever/Never Have I Ever -----------------------------20 Questions/Guess the Word ----------------------------- Lastly, you do not have to adhere strictly to these instructions, and feel free to deviate as much as you want. As always, have fun and enjoy the call!")
+        time.sleep(wait_time)
+        web.press(web.Key.ENTER)
+
         #get into iframe
+        time.sleep(wait_time)
         iframe_pls=web.driver.find_elements_by_css_selector("iframe[aria-label='"+group_name+"']")
         iframe_id=iframe_pls[0].get_attribute("id")
         iframe_correct=web.driver.find_element_by_id(iframe_id)
@@ -114,8 +126,8 @@ def go_thread(given_groups, thread_num):
     #groupNum is just for our tracking purposes
     groupNum = 1
     
-        #get the time to put into group_name later
-    call_time = '9:30 PM EST'
+    #get the time to put into group_name later
+    call_time = 'Princeton 3/21 3:00 PM EST '
     category='Testing'
     #login using the login function in logging_in.py
     web=login(wait_time)
@@ -131,7 +143,9 @@ def go_thread(given_groups, thread_num):
     for subgroup in given_groups:
         #group_name using the date and groupNum
         #group_name="3/18/2020"+call_time+"Call number: "+ str(subgroup[0] + 1) + " Key:"+category+str(thread_num)+str(group_num)
-        group_name="IGNORE THIS. IT IS A TEST 3/18/2020"+str(call_time)+"Call number: "+ str(int(subgroup[0]) + 1)
+        #below is better for testing
+        #group_name= "c: " + str(int(subgroup[0])) + "g: " + str(groupNum) + " IGNORE THIS TEST 3/18/2020 "+str(call_time)+" Call number: "+ str(int(subgroup[0]))
+        group_name = "Call: " + str(int(subgroup[0])) + " " + str(call_time) + " Group number: " + str(groupNum)
         web, total_groups=create_hangout(web, subgroup, group_name, total_groups, wait_time)
         logging.warning(group_name)
         #web, total_groups=create_hangout(web, subgroup, group_name, total_groups,wait_time)
