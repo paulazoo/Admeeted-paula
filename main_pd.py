@@ -46,23 +46,51 @@ myparser.num_threads
 #group manipulations
 import groups
 #create groups using the createGroups function defined in groups.py file
-generated_groups = []
+all_generated_groups = []
 
 for call_num in range(1, myparser.num_calls + 1):
     #for each call, ask what category for the call
-    #r for random
     category = input("category for call "+str(call_num)+"? ")
-    #s for skip category combining
-    generated_groups = generated_groups + groups.make_call_groups(myparser.all_summary, myparser.all_emails, myparser.desired, call_num, category, generated_groups)
+    #if category doesn't equal random
+    if category != "r":
+        #get by category groups
+        by_category, category_strs=groups.get_category_random(myparser.all_summary, myparser.all_emails, category)
+        
+        #for groups too tiny
+        tiny_groups = [group for group in by_category if len(group)<3]
+        tiny_groups_strs = [category_strs[by_category.index(group)] for group in by_category if len(group)<=2]
+        big_groups_strs = [category_val for category_val in category_strs if category_val not in tiny_groups_strs]
+        
+        print("")
+        print("tiny groups: "+str(tiny_groups_strs))
+        print("big groups: "+str(big_groups_strs))
+        
+        for tiny_group_idx, tiny_group in enumerate(tiny_groups):
+            tiny_group_name=tiny_groups_strs[tiny_group_idx]
+            add_to = input("Combine tiny group "+tiny_group_name+" to which group? ")
+            #s to skip
+            while (add_to not in category_strs) and (add_to != "s"):
+                add_to = input(add_to+" is not a group. Combine tiny group "+tiny_group_name+" to which group? ")
+            if add_to != "s":
+                by_category[category_strs.index(add_to)]=by_category[category_strs.index(add_to)]+tiny_group
+                by_category.pop(category_strs.index(tiny_group_name))
+                category_strs.pop(category_strs.index(tiny_group_name))
 
-logging.warning(generated_groups)
-generated_groups_pd=pd.DataFrame(generated_groups)
+        for i in range(0,len(category_strs)):
+            #create_groups out of each by_category category value group
+            #all groups with the same category have the same call  
+            all_generated_groups = all_generated_groups + groups.create_groups(by_category[i], myparser.desired, call_num)  
+    else:
+        #for just random groups, run this
+        all_generated_groups = all_generated_groups + groups.create_groups(myparser.all_emails, myparser.desired, call_num)
+
+logging.warning(all_generated_groups)
 
 #%%
 import helpers
 import threading
 
-batched_lists = helpers.split_list(generated_groups, myparser.num_threads)
+batched_lists = helpers.split_list(all_generated_groups, myparser.num_threads)
 logging.warning("Batched lists are:")
 logging.warning(batched_lists)
 
