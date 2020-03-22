@@ -47,6 +47,8 @@ myparser.num_threads
 import groups
 #create groups using the createGroups function defined in groups.py file
 all_generated_groups = []
+call_time = "3:00"
+call_org = "Princeton 3/21"
 
 for call_num in range(1, myparser.num_calls + 1):
     #for each call, ask what category for the call
@@ -60,7 +62,7 @@ for call_num in range(1, myparser.num_calls + 1):
         tiny_groups = [group for group in by_category if len(group)<3]
         tiny_groups_strs = [category_strs[by_category.index(group)] for group in by_category if len(group)<=2]
         big_groups_strs = [category_val for category_val in category_strs if category_val not in tiny_groups_strs]
-        
+
         print("")
         print("tiny groups: "+str(tiny_groups_strs))
         print("big groups: "+str(big_groups_strs))
@@ -78,19 +80,25 @@ for call_num in range(1, myparser.num_calls + 1):
 
         for i in range(0,len(category_strs)):
             #create_groups out of each by_category category value group
-            #all groups with the same category have the same call  
-            all_generated_groups = all_generated_groups + groups.create_groups(by_category[i], myparser.desired, call_num)  
+            #all groups with the same category have the same call
+            all_generated_groups = all_generated_groups + groups.create_groups(by_category[i], myparser.desired, call_num)
     else:
         #for just random groups, run this
         all_generated_groups = all_generated_groups + groups.create_groups(myparser.all_emails, myparser.desired, call_num)
 
 logging.warning(all_generated_groups)
 
+#make all_generated_groups into a dict
+giant_dict = {}
+for i in range(len(all_generated_groups)):
+   group_name = "Call: %s %s %s PM EST Group number: %d"%(all_generated_groups[i][0], call_org, call_time, i)
+   giant_dict[group_name] = i
+
 #%%
 import helpers
 import threading
 
-batched_lists = helpers.split_list(all_generated_groups, myparser.num_threads)
+batched_lists = helpers.split_dict(giant_dict, myparser.num_threads)
 logging.warning("Batched lists are:")
 logging.warning(batched_lists)
 
