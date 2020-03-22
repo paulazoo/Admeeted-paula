@@ -76,9 +76,9 @@ logging.warning(batched_lists)
 #%%
 thread_list=[]
 error_count = 0
-for batch in batched_dicts:
+for batch in batched_lists:
     try:
-        t = threading.Thread(target=helpers.go_thread, args=(batch, batched_dicts.index(batch),))
+        t = threading.Thread(target=helpers.go_thread, args=(batch, batched_lists.index(batch),))
         #starting thread
         t.start()
         #add thread to thread list
