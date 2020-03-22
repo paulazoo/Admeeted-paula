@@ -22,13 +22,6 @@ def open_group_hangout(web, group_name, wait_time):
     #get out of conversations iframe
     web.driver.switch_to.default_content()
     
-    return web
-#%%
-#start a call for a group hangout (that has already been opened)
-def call_group_hangout(web, group_name, wait_time):
-    #get out of any iframes
-    web.driver.switch_to.default_content()
-    
     #get into iframe
     iframe_pls=web.driver.find_elements_by_xpath("//iframe[@aria-label='" +group_name+ "']")
     iframe_id=iframe_pls[0].get_attribute("id")
@@ -36,6 +29,11 @@ def call_group_hangout(web, group_name, wait_time):
     time.sleep(wait_time)
     web.driver.switch_to.frame(iframe_correct) 
     
+    return web
+#%%
+#start a call for a group hangout (that has already been opened)
+def call_group_hangout(web, group_name, wait_time):
+
     #click video call
     web.driver.find_element_by_css_selector("[title*='Video call. Click to start a video call.']").click() 
     time.sleep(wait_time)
@@ -48,15 +46,6 @@ def call_group_hangout(web, group_name, wait_time):
 #%%
 #exit an already open group hangout
 def exit_group_hangout(web, group_name, wait_time):
-    #get out of any iframes
-    web.driver.switch_to.default_content()
-    
-    #get into iframe
-    iframe_pls=web.driver.find_elements_by_xpath("//iframe[@aria-label='" +group_name+ "']")
-    iframe_id=iframe_pls[0].get_attribute("id")
-    iframe_correct=web.driver.find_element_by_id(iframe_id)
-    time.sleep(wait_time)
-    web.driver.switch_to.frame(iframe_correct) 
     
     #click to exist specific hangout iframe
     web.driver.find_element_by_xpath("//button[@class='gGnOIc tV qp SD p7oPo JPiKic']").click()    
@@ -70,15 +59,6 @@ def exit_group_hangout(web, group_name, wait_time):
 #write in an already open group hangout
 #message is a string
 def write_in_group_hangout(web, group_name, wait_time, message):
-    #get out of any iframes
-    web.driver.switch_to.default_content()
-    
-    # #get into iframe
-    iframe_pls=web.driver.find_elements_by_xpath("//iframe[@aria-label='" +group_name+ "']")
-    iframe_id=iframe_pls[0].get_attribute("id")
-    iframe_correct=web.driver.find_element_by_id(iframe_id)
-    time.sleep(wait_time)
-    web.driver.switch_to.frame(iframe_correct) 
     
     #click hangout text input box
     web.driver.find_element_by_xpath("//div[@class='vE dQ editable']").click()
@@ -97,15 +77,6 @@ def write_in_group_hangout(web, group_name, wait_time, message):
 #%%
 #add a person to an existing already open group hangout
 def add_to_group_hangout(web, group_name, wait_time, email):
-    #get out of any iframes
-    web.driver.switch_to.default_content()
-    
-    #get into iframe
-    iframe_pls=web.driver.find_elements_by_xpath("//iframe[@aria-label='" +group_name+ "']")
-    iframe_id=iframe_pls[0].get_attribute("id")
-    iframe_correct=web.driver.find_element_by_id(iframe_id)
-    time.sleep(wait_time)
-    web.driver.switch_to.frame(iframe_correct) 
     
     #click hangout people button
     web.driver.find_element_by_xpath("//div[@class='dwrYTb PK']").click()
@@ -134,12 +105,6 @@ def add_to_group_hangout(web, group_name, wait_time, email):
 
 #%%
 def get_call_url(web,group_name,wait_time):    
-    #get into iframe
-    iframe_pls=web.driver.find_elements_by_xpath("//iframe[@aria-label='" +group_name+ "']")
-    iframe_id=iframe_pls[0].get_attribute("id")
-    iframe_correct=web.driver.find_element_by_id(iframe_id)
-    time.sleep(wait_time)
-    web.driver.switch_to.frame(iframe_correct) 
     
     #click video call
     web.driver.find_element_by_css_selector("button[title='Video call. Click to start a video call.']").click()

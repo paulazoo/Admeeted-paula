@@ -121,7 +121,6 @@ def create_hangout(web, subgroup, group_name, wait_time):
 def go_thread(given_groups, thread_num):
     wait_time = 2
     
-    category='Testing'
     #login using the login function in logging_in.py
     web=login(wait_time)
     logging.warning("Login worked")
