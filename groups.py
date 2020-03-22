@@ -119,7 +119,7 @@ def get_multicategory_all(all_summary,all_emails,category):
     return by_category
 
 #%%
-def make_call_groups(all_summary, all_emails, desired, call_num, category, all_generated_groups):
+def make_call_groups(all_summary, all_emails, desired, call_num, category, category_groups):
     #if category doesn't equal random
     if category != "r":
         #get by category groups
@@ -148,9 +148,9 @@ def make_call_groups(all_summary, all_emails, desired, call_num, category, all_g
         for i in range(0,len(category_strs)):
             #create_groups out of each by_category category value group
             #all groups with the same category have the same call  
-            all_generated_groups = all_generated_groups + create_groups(by_category[i], desired, call_num)  
+            category_groups = category_groups + create_groups(by_category[i], desired, call_num)  
     else:
         #for just random groups, run this
-        all_generated_groups = all_generated_groups + create_groups(all_emails, desired, call_num)
+        category_groups = category_groups + create_groups(all_emails, desired, call_num)
         
-    return all_generated_groups
+    return category_groups

@@ -123,8 +123,6 @@ def go_thread(given_groups, thread_num):
     wait_time = 2
     #initialize some variables
     total_groups = 0
-    #groupNum is just for our tracking purposes
-    groupNum = 1
     
     #get the time to put into group_name later
     call_time = 'Princeton 3/21 3:00 PM EST '

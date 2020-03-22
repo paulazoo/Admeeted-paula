@@ -34,7 +34,7 @@ logging.warning('Log started with user: '+current_user)
 #the config file cleans the data and gets the starting variable values
 from config import ExcelParser
 
-myparser = ExcelParser("Coke Scholars Virtual Visitas (Responses).xlsx")
+myparser = ExcelParser("Princeton'ing for Quaran-teens (Responses) (1).xlsx")
 
 myparser.all_summary
 myparser.desired
@@ -53,10 +53,17 @@ for call_num in range(1, myparser.num_calls + 1):
     #r for random
     category = input("category for call "+str(call_num)+"? ")
     #s for skip category combining
-    generated_groups = generated_groups + groups.make_call_groups(myparser.all_summary, myparser.all_emails, myparser.desired, call_num, category, generated_groups)
+    generated_groups = groups.make_call_groups(myparser.all_summary, myparser.all_emails, myparser.desired, call_num, category, generated_groups)
 
 logging.warning(generated_groups)
 generated_groups_pd=pd.DataFrame(generated_groups)
+
+#%%
+#group name for hangout_tools
+#get the time to put into group_name later
+generated_groups_pd['call_time']='3:00'
+generated_groups_pd['group_num']=generated_groups_pd.index.astype(str)
+generated_groups_pd["group_name"] = "Call: "+generated_groups_pd[0]+" Princeton 3/21 "+generated_groups_pd['call_time']+" PM EST Group number: " + generated_groups_pd['group_num']
 
 #%%
 import helpers
