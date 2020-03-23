@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 # firebase
 ServiceAccountKey/*
+=======
+#Credential files
+react-flask-app/api/admeet2024-firebase-adminsdk-oa4v1-1a11cd5d5a.json
+>>>>>>> 089d27d2f6e7d5a5cd54662fee6da3b92732334f
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
