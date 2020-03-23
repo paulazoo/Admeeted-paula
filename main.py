@@ -63,11 +63,6 @@ generated_groups_pd=pd.DataFrame(generated_groups)
 
 #%%
 #group name for hangout_tools
-#get the time to put into group_name later
-generated_groups_pd['call_time']='3:00'
-generated_groups_pd['group_num']=generated_groups_pd.index.astype(str)
-generated_groups_pd["group_name"] = "Call: "+generated_groups_pd[0]+" Princeton 3/21 "+generated_groups_pd['call_time']+" PM EST Group number: " + generated_groups_pd['group_num']
-
 #make generated_groups into a dict
 giant_dict = {}
 for i in range(len(generated_groups)):
