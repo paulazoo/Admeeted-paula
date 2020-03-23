@@ -2,6 +2,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import ProductHero from '../views/ProductHero';
+import Homepage from '../views/Homepage';
 import SignUp from '../views/SignUp';
 import SignIn from '../views/SignIn';
 

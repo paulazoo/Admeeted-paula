@@ -2,9 +2,6 @@ import time, json
 from flask import Flask, jsonify, render_template, request
 from werkzeug import exceptions as wex
 
-import firebase_admin
-from firebase_admin import credentials
-
 # from flask_login import (
 #     LoginManager,
 #     current_user,
@@ -44,9 +41,6 @@ from firebase_admin import credentials
 # def load_user(user_id):
 #     return User.get(user_id)
 
-cred = credentials.Certificate("admeet2024-firebase-adminsdk-oa4v1-1a11cd5d5a.json")
-firebase_admin.initialize_app(cred)
-
 
 app = Flask(__name__)
 
@@ -56,10 +50,13 @@ def get_current_time():
 
 @app.route('/register', methods=['POST'])
 def register():
+    #Under construction...
     try:
         data = request.get_json()
     except wex.BadRequest:
         return f.error(1313, "Bad request. Make sure your request conforms to the api."), 400
-
-
     return 'work in progresss'
+
+@app.route('/hitest')
+def hi():
+    return "<h1>Hiiiii!!!</h1>"
