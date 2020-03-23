@@ -9,9 +9,13 @@ cred = credentials.Certificate("./admeet2024-firebase-adminsdk-oa4v1-1a11cd5d5a.
 firebase_admin.initialize_app(cred)
 db = firestore.client()
 
+#%%
 
-user_by_fullname = db.collection('users').where('fullName', u'==', 'Albert Zhang').stream()
+user = db.collection(u'users').where(u'fullName', u'==', u'Albert Zhang').stream()
+for i in user:
+    print('{} => {}\n'.format(i.id, i.to_dict()))
 
+#%%
 ##prints out all users
 users_ref = db.collection(u'users')
 docs = users_ref.stream()
