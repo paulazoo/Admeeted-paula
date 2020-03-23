@@ -10,12 +10,21 @@ firebase_admin.initialize_app(cred)
 db = firestore.client()
 
 #%%
-
+#get all the Albert Zhang users
 user = db.collection(u'users').where(u'fullName', u'==', u'Albert Zhang')
 user_stream=user.stream()
 for i in user_stream:
     print('{} => {}\n'.format(i.id, i.to_dict()))
 
+
+#%%
+#get uhhhh this user by his user id
+user_ref=db.collection(u'users').document('0JQunbpuKbcPpkA0hrN5')
+user_ref.get()
+user_ref.set({
+    u'feeback': 'Horrible survey!'
+}, merge=True)
+    
 #%%
 ##prints out all users
 users_ref = db.collection(u'users')
