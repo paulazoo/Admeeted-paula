@@ -34,7 +34,7 @@ logging.warning('Log started with user: '+current_user)
 #the config file cleans the data and gets the starting variable values
 from config import ExcelParser
 
-myparser = ExcelParser("Princeton'ing for Quaran-teens (Responses) (1).xlsx")
+myparser = ExcelParser("Coke Scholars Virtual Visitas (Responses).xlsx")
 
 myparser.all_summary
 myparser.desired
@@ -46,19 +46,11 @@ myparser.num_threads
 #group manipulations
 import groups
 #create groups using the createGroups function defined in groups.py file
-<<<<<<< HEAD
 all_generated_groups = []
-call_time = "3:00"
-call_org = "Princeton 3/21"
-=======
-generated_groups = []
->>>>>>> de498a324365818754f4059a24e5f91d0e9561d8
 
 for call_num in range(1, myparser.num_calls + 1):
     #for each call, ask what category for the call
-    #r for random
     category = input("category for call "+str(call_num)+"? ")
-<<<<<<< HEAD
     #if category doesn't equal random
     if category != "r":
         #get by category groups
@@ -68,7 +60,7 @@ for call_num in range(1, myparser.num_calls + 1):
         tiny_groups = [group for group in by_category if len(group)<3]
         tiny_groups_strs = [category_strs[by_category.index(group)] for group in by_category if len(group)<=2]
         big_groups_strs = [category_val for category_val in category_strs if category_val not in tiny_groups_strs]
-
+        
         print("")
         print("tiny groups: "+str(tiny_groups_strs))
         print("big groups: "+str(big_groups_strs))
@@ -86,50 +78,28 @@ for call_num in range(1, myparser.num_calls + 1):
 
         for i in range(0,len(category_strs)):
             #create_groups out of each by_category category value group
-            #all groups with the same category have the same call
-            all_generated_groups = all_generated_groups + groups.create_groups(by_category[i], myparser.desired, call_num)
+            #all groups with the same category have the same call  
+            all_generated_groups = all_generated_groups + groups.create_groups(by_category[i], myparser.desired, call_num)  
     else:
         #for just random groups, run this
         all_generated_groups = all_generated_groups + groups.create_groups(myparser.all_emails, myparser.desired, call_num)
-=======
-    #s for skip category combining
-    generated_groups = groups.make_call_groups(myparser.all_summary, myparser.all_emails, myparser.desired, call_num, category, generated_groups)
 
-logging.warning(generated_groups)
-generated_groups_pd=pd.DataFrame(generated_groups)
->>>>>>> de498a324365818754f4059a24e5f91d0e9561d8
-
-#%%
-#group name for hangout_tools
-#get the time to put into group_name later
-generated_groups_pd['call_time']='3:00'
-generated_groups_pd['group_num']=generated_groups_pd.index.astype(str)
-generated_groups_pd["group_name"] = "Call: "+generated_groups_pd[0]+" Princeton 3/21 "+generated_groups_pd['call_time']+" PM EST Group number: " + generated_groups_pd['group_num']
-
-#make all_generated_groups into a dict
-giant_dict = {}
-for i in range(len(all_generated_groups)):
-   group_name = "Call: %s %s %s PM EST Group number: %d"%(all_generated_groups[i][0], call_org, call_time, i)
-   giant_dict[group_name] = i
+logging.warning(all_generated_groups)
 
 #%%
 import helpers
 import threading
 
-<<<<<<< HEAD
-batched_lists = helpers.split_dict(giant_dict, myparser.num_threads)
-=======
-batched_lists = helpers.split_list(generated_groups, myparser.num_threads)
->>>>>>> de498a324365818754f4059a24e5f91d0e9561d8
+batched_lists = helpers.split_list(all_generated_groups, myparser.num_threads)
 logging.warning("Batched lists are:")
 logging.warning(batched_lists)
 
 #%%
 thread_list=[]
 error_count = 0
-for batch in batched_dicts:
+for batch in batched_lists:
     try:
-        t = threading.Thread(target=helpers.go_thread, args=(batch, batched_dicts.index(batch),))
+        t = threading.Thread(target=helpers.go_thread, args=(batch, batched_lists.index(batch),))
         #starting thread
         t.start()
         #add thread to thread list

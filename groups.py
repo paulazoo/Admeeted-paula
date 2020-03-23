@@ -10,18 +10,19 @@ def create_groups(all_emails, desired, call_num):
     np.random.shuffle(all_emails)
     #if the desired group size is more than the number of emails, just put everyone into one group
     if desired > all_emails.shape[0]:
-        subgroup = np.insert(all_emails, 0, str(call_num))    
+        created_groups = [np.insert(all_emails, 0, str(call_num)).tolist()]
     else:
         #split evenly into all_emails/desired arrays and stack these arrays into a big 2d array
-        subgroup = np.stack(np.array_split(all_emails, np.floor(all_emails.shape[0] / desired)))
+        split_groups = np.array_split(all_emails, np.floor(all_emails.shape[0] / desired))
+        logging.warning(split_groups)
         #first element of every group within subgroups is the call_num
-        subgroup=np.concatenate((np.full((subgroup.shape[0], 1), call_num), subgroup),axis=1)
+        call_num_groups=[np.concatenate((np.array([call_num]), subgroup),axis=0) for subgroup in split_groups]
+        created_groups=[l.tolist() for l in call_num_groups]
     
     #log that
-    subgroup=subgroup.tolist()
-    subgroup=subgroup[0]
-    logging.warning(subgroup)
-    return subgroup
+    logging.warning(created_groups)
+
+    return created_groups
 
 #%%
 #returns a list of groups from specified category, where each group is a list of emails for one specific category value (first value for each ans)
@@ -118,4 +119,38 @@ def get_multicategory_all(all_summary,all_emails,category):
     return by_category
 
 #%%
-#def major-area():
+def make_call_groups(all_summary, all_emails, desired, call_num, category, category_groups):
+    #if category doesn't equal random
+    if category != "r":
+        #get by category groups
+        by_category, category_strs=get_category_random(all_summary, all_emails, category)
+        
+        #for groups too tiny
+        tiny_groups = [group for group in by_category if len(group)<3]
+        tiny_groups_strs = [category_strs[by_category.index(group)] for group in by_category if len(group)<=2]
+        big_groups_strs = [category_val for category_val in category_strs if category_val not in tiny_groups_strs]
+        
+        print("")
+        print("tiny groups: "+str(tiny_groups_strs))
+        print("big groups: "+str(big_groups_strs))
+        
+        for tiny_group_idx, tiny_group in enumerate(tiny_groups):
+            tiny_group_name=tiny_groups_strs[tiny_group_idx]
+            add_to = input("Combine tiny group "+tiny_group_name+" to which group? ")
+            #s to skip
+            while (add_to not in category_strs) and (add_to != "s"):
+                add_to = input(add_to+" is not a group. Combine tiny group "+tiny_group_name+" to which group? ")
+            if add_to != "s":
+                by_category[category_strs.index(add_to)]=by_category[category_strs.index(add_to)]+tiny_group
+                by_category.pop(category_strs.index(tiny_group_name))
+                category_strs.pop(category_strs.index(tiny_group_name))
+
+        for i in range(0,len(category_strs)):
+            #create_groups out of each by_category category value group
+            #all groups with the same category have the same call  
+            category_groups = category_groups + create_groups(by_category[i], desired, call_num)  
+    else:
+        #for just random groups, run this
+        category_groups = category_groups + create_groups(all_emails, desired, call_num)
+        
+    return category_groups
