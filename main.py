@@ -71,8 +71,8 @@ generated_groups_pd["group_name"] = "Call: "+generated_groups_pd[0]+" Princeton 
 #make generated_groups into a dict
 giant_dict = {}
 for i in range(len(generated_groups)):
-   group_name = "Call: %s %s %s PM EST Group number: %d"%(generated_groups[i][0], call_org, call_time, i)
-   giant_dict[group_name] = i
+   group_name = "IGNORE TEST Call: %s %s %s PM EST Group number: %d"%(generated_groups[i][0], call_org, call_time, i)
+   giant_dict[group_name]=generated_groups[i]
 
 #%%
 import helpers

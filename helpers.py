@@ -132,7 +132,7 @@ def go_thread(given_groups, thread_num):
     
     #start creating the hangout for each group in the generatedGroups for each designated call
     for group_name in given_groups:
-        web = create_hangout(web, given_groups[subgroup], group_name, wait_time)
+        web = create_hangout(web, given_groups[group_name], group_name, wait_time)
         logging.warning(group_name)
         #web, total_groups=create_hangout(web, subgroup, group_name, total_groups,wait_time)
         #move on to the next group
