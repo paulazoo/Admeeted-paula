@@ -22,7 +22,7 @@ for i in user_stream:
 user_ref=db.collection(u'users').document('0JQunbpuKbcPpkA0hrN5')
 user_ref.get()
 user_ref.set({
-    u'feeback': 'Horrible survey!'
+    u'feedback': 'Horrible survey!'
 }, merge=True)
     
 #%%
