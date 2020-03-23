@@ -163,3 +163,45 @@ def split_list(seq, num): #input a list and the desired number of smaller lists.
         last += avg
     
     return out
+
+#%%
+def split_dict(dic, num_parts):
+    '''
+    Parameters
+    dic : a dictionary to be split into pieces.
+
+    num_parts : desired number of pieces of that dictionary.
+
+    Returns
+    list_dicts : a list with a piece of the inputted dictionary at each
+        index (distributed across a desired number of indeces).
+    '''
+    count = 0
+    at_dict = 0
+    avg_len = len(dic) / float(num_parts)
+    round_avg = int(avg_len)
+    #left_over = len(dic) % num_parts
+    #left_in = len(dic) // num_parts
+    list_dicts = [{}] * num_parts
+    new_dict = {}
+
+    for k in dic.keys():
+
+        if (count == round_avg):
+            count = 0
+            new_dict = {}
+            at_dict += 1
+            if (at_dict == num_parts):
+                at_dict = 0            
+            
+        if count < round_avg:
+            new_dict[k] = dic[k]
+            count += 1
+            current_dict = list_dicts[at_dict]
+            list_dicts[at_dict] = {**current_dict, **new_dict}
+
+    return list_dicts
+            
+        
+        
+        
