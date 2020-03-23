@@ -10,13 +10,13 @@ firebase_admin.initialize_app(cred)
 db = firestore.client()
 
 
-user_by_fullname = db.collection('users').where('fullname', u'==', 'Albert Zhang').stream()
+user_by_fullname = db.collection('users').where('fullName', u'==', 'Albert Zhang').stream()
 
 ##prints out all users
-#users_ref = db.collection(u'users')
-#docs = users_ref.stream()
-# for doc in docs:
-#     print(u'{} => {}\n'.format(doc.id, doc.to_dict()))
+users_ref = db.collection(u'users')
+docs = users_ref.stream()
+for doc in docs:
+    print(u'{} => {}\n'.format(doc.id, doc.to_dict()))
 
 
 
