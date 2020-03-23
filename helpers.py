@@ -48,7 +48,7 @@ def enter_email(web, email, group_name, wait_time):
     return web
 
 #%%
-def create_hangout(web, subgroup, group_name, total_groups, wait_time):
+def create_hangout(web, subgroup, group_name, wait_time):
 
         #write down the generatedGroups
     # with open("group_ppl.txt", "a") as file:
@@ -115,18 +115,12 @@ def create_hangout(web, subgroup, group_name, total_groups, wait_time):
         web.driver.switch_to.default_content()
         time.sleep(wait_time)
         
-        return web, total_groups
+        return web
     
 #%%
 def go_thread(given_groups, thread_num):
-    #WaitTime is used with time.sleep() to make sure webpages are loading.
     wait_time = 2
-    #initialize some variables
-    total_groups = 0
     
-    #get the time to put into group_name later
-    call_time = 'Princeton 3/21 3:00 PM EST '
-    category='Testing'
     #login using the login function in logging_in.py
     web=login(wait_time)
     logging.warning("Login worked")
@@ -135,22 +129,15 @@ def go_thread(given_groups, thread_num):
     web.driver.switch_to.default_content()
     time.sleep(wait_time)
     
-
+    
     #start creating the hangout for each group in the generatedGroups for each designated call
-    groupNum = 1
-    for subgroup in given_groups:
-        #group_name using the date and groupNum
-        #group_name="3/18/2020"+call_time+"Call number: "+ str(subgroup[0] + 1) + " Key:"+category+str(thread_num)+str(group_num)
-        #below is better for testing
-        #group_name= "c: " + str(int(subgroup[0])) + "g: " + str(groupNum) + " IGNORE THIS TEST 3/18/2020 "+str(call_time)+" Call number: "+ str(int(subgroup[0]))
-        group_name = "Call: " + str(int(subgroup[0])) + " " + str(call_time) + " Group number: " + str(groupNum)
-        web, total_groups=create_hangout(web, subgroup, group_name, total_groups, wait_time)
+    for group_name in given_groups:
+        web = create_hangout(web, given_groups[group_name], group_name, wait_time)
         logging.warning(group_name)
         #web, total_groups=create_hangout(web, subgroup, group_name, total_groups,wait_time)
         #move on to the next group
         #finished!
         logging.warning(str(group_name) +" created!")
-        groupNum += 1
 
 #%%
 def split_list(seq, num): #input a list and the desired number of smaller lists. Returns a nested list with the smaller lists.
@@ -163,3 +150,45 @@ def split_list(seq, num): #input a list and the desired number of smaller lists.
         last += avg
     
     return out
+
+#%%
+def split_dict(dic, num_parts):
+    '''
+    Parameters
+    dic : a dictionary to be split into pieces.
+
+    num_parts : desired number of pieces of that dictionary.
+
+    Returns
+    list_dicts : a list with a piece of the inputted dictionary at each
+        index (distributed across a desired number of indeces).
+    '''
+    count = 0
+    at_dict = 0
+    avg_len = len(dic) / float(num_parts)
+    round_avg = int(avg_len)
+    #left_over = len(dic) % num_parts
+    #left_in = len(dic) // num_parts
+    list_dicts = [{}] * num_parts
+    new_dict = {}
+
+    for k in dic.keys():
+
+        if (count == round_avg):
+            count = 0
+            new_dict = {}
+            at_dict += 1
+            if (at_dict == num_parts):
+                at_dict = 0            
+            
+        if count < round_avg:
+            new_dict[k] = dic[k]
+            count += 1
+            current_dict = list_dicts[at_dict]
+            list_dicts[at_dict] = {**current_dict, **new_dict}
+
+    return list_dicts
+            
+        
+        
+        
