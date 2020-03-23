@@ -5,14 +5,15 @@ from firebase_admin import firestore
 from classes import User
 from config import ExcelParser
 
-cred = credentials.Certificate("./admeet2024-firebase-adminsdk-oa4v1-1a11cd5d5a.json")
+cred = credentials.Certificate("./admeet2024privatekey.json")
 firebase_admin.initialize_app(cred)
 db = firestore.client()
 
 #%%
 
-user = db.collection(u'users').where(u'fullName', u'==', u'Albert Zhang').stream()
-for i in user:
+user = db.collection(u'users').where(u'fullName', u'==', u'Albert Zhang')
+user_stream=user.stream()
+for i in user_stream:
     print('{} => {}\n'.format(i.id, i.to_dict()))
 
 #%%
