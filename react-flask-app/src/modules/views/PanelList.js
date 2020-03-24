@@ -27,6 +27,8 @@ const styles = theme => ({
 
 function PanelList(props) {
     const { classes } = props;
+    const primary = 'single-line item';
+    const secondary = 'secondary text';
 
     return (
         <List className={classes.list}>
@@ -37,8 +39,8 @@ function PanelList(props) {
                     </Avatar>
                   </ListItemAvatar>
                   <ListItemText
-                    primary="Single-line item"
-                    secondary='Secondary text'
+                    primary={primary}
+                    secondary={secondary}
                   />
                   <ListItemSecondaryAction>
                     <IconButton edge="end" aria-label="delete">

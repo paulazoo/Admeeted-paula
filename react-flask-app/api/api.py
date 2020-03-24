@@ -41,7 +41,6 @@ from werkzeug import exceptions as wex
 # def load_user(user_id):
 #     return User.get(user_id)
 
-
 app = Flask(__name__)
 
 @app.route('/time')
@@ -60,3 +59,29 @@ def register():
 @app.route('/hitest')
 def hi():
     return "<h1>Hiiiii!!!</h1>"
+
+@app.route('/upcoming-convos')
+def upcoming_convos():
+    return jsonify(message=
+        [
+            {
+                'id': 0,
+                'name': 'Coca-Cola Scholars 2020',
+                'time': time.time()
+            },
+            {
+                'id': 1,
+                'name': 'Virtual Visitas',
+                'time': time.time()
+            }
+        ]
+    ), 200
+
+@app.route('/me', methods=['GET'])
+def me():
+    return jsonify(isLoggedIn=True), 200
+
+@app.route('/login', methods=['POST'])
+def login():
+    # Placeholder code
+    return jsonify(isLoggedIn=True), 200
