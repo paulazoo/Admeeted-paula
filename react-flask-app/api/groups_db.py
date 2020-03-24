@@ -2,8 +2,9 @@ import firebase_admin, datetime, math
 import pandas as pd
 from firebase_admin import credentials
 from firebase_admin import firestore
-from classes import User
+#from classes import User
 from config import ExcelParser
+
 
 cred = credentials.Certificate("./admeet2024privatekey.json")
 firebase_admin.initialize_app(cred)
