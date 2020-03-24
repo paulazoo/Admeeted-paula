@@ -65,7 +65,7 @@ function AppAppBar(props) {
               {'Admeet'}
             </Link>
             <div className={classes.right}>
-              <Link
+              {!isLoggedIn ? <Link
                   color="inherit"
                   variant="h6"
                   underline="none"
@@ -74,7 +74,7 @@ function AppAppBar(props) {
                   to={isLoggedIn ? "/sign-out" : "/sign-in"}
               >
                 {isLoggedIn ? 'Sign Out' : 'Sign In'}
-              </Link>
+              </Link> : null}
               {!isLoggedIn ? <Link
                   variant="h6"
                   underline="none"

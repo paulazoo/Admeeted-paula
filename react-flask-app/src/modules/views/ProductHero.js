@@ -63,10 +63,6 @@ function ProductHero(props) {
                   Take a chance
                 </Typography>
               </ProductHeroLayout>
-              <iframe
-                  src="https://docs.google.com/forms/d/e/1FAIpQLScrrI4c-SRt6blejIZLADnBDt98UUg-2pMxrfMiChnDykhkGw/viewform?embedded=true"
-                  width="640" height="2513" frameBorder="0" marginHeight="0" marginWidth="0">Loading…
-              </iframe>
             </div>
         )}
       </div>

@@ -5,6 +5,7 @@ import './App.css';
 import AppAppBar from './modules/views/AppAppBar';
 import AppFooter from './modules/views/AppFooter';
 import Main from './modules/components/Main';
+import StaticGoogleForm from './modules/views/StaticGoogleForm';
 
 function App() {
   const [currTime, setCurrTime] = useState(0);
@@ -22,8 +23,9 @@ function App() {
   return (
       <React.Fragment>
           <AppAppBar/>
-          <Main/>
-          <AppFooter/>
+          <StaticGoogleForm/>
+          {/*<Main/>*/}
+          {/*<AppFooter/>*/}
       </React.Fragment>
   );
 }
