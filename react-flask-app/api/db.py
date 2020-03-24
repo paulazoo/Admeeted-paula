@@ -5,7 +5,7 @@ from firebase_admin import firestore
 from classes import User
 from config import ExcelParser
 
-cred = credentials.Certificate("./admeet2024-firebase-adminsdk-oa4v1-1a11cd5d5a.json")
+cred = credentials.Certificate("./admeet-privatekey.json")
 firebase_admin.initialize_app(cred)
 db = firestore.client()
 
