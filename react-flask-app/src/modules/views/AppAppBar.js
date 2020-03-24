@@ -62,7 +62,7 @@ function AppAppBar(props) {
                 component={NavLink}
                 to="/"
             >
-              {'Admeet'}
+              {'Admeeted'}
             </Link>
             <div className={classes.right}>
               {!isLoggedIn ? <Link

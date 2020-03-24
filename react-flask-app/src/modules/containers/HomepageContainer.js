@@ -8,14 +8,14 @@ function HomepageContainer ({ data, loadData }) {
     useEffect(() => {
         loadData();
     }, []);
-
+    console.log(data);
     return (
         <Homepage data={data}/>
     )
 }
 
 const mapStateToProps = state => ({
-    data: state.data.upcomingConvos,
+    data: state.data,
 })
 
 const mapDispatchToProps = dispatch => ({

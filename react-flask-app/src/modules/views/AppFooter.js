@@ -63,12 +63,13 @@ const useStyles = makeStyles(theme => ({
 
 export default function AppFooter() {
   const classes = useStyles();
+  const staticPage = true;
 
   return (
     <Typography component="footer" className={classes.root}>
       <Container className={classes.container}>
         <Grid container spacing={5}>
-          <Grid item xs={6} sm={4} md={2}>
+          {!staticPage ? <Grid item xs={6} sm={4} md={2}>
             <Typography variant="h6" marked="left" gutterBottom>
               About Us
             </Typography>
@@ -80,11 +81,12 @@ export default function AppFooter() {
                 <Link href="https://material-ui.com/">Our Team</Link>
               </li>
             </ul>
-          </Grid>
+          </Grid> : null}
           <Grid item xs={6} sm={8} md={4}>
             <Typography variant="h6" marked="left" gutterBottom>
               Contact Us
             </Typography>
+            admeeted2.0@gmail.com
           </Grid>
         </Grid>
       </Container>

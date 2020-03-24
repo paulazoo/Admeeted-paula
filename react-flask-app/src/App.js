@@ -1,13 +1,15 @@
 import withRoot from './modules/withRoot';
 import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
 import logo from './logo.svg';
 import './App.css';
 import AppAppBar from './modules/views/AppAppBar';
 import AppFooter from './modules/views/AppFooter';
 import Main from './modules/components/Main';
 import StaticGoogleForm from './modules/views/StaticGoogleForm';
+import {loadMe} from "./modules/actions";
 
-function App() {
+function App({ loadUser }) {
   const [currTime, setCurrTime] = useState(0);
 
   useEffect(() => {
@@ -17,17 +19,21 @@ function App() {
   }, []);
 
   useEffect(() => {
-      // loadUser();
+      loadUser();
   }, []);
 
   return (
       <React.Fragment>
           <AppAppBar/>
-          <StaticGoogleForm/>
-          {/*<Main/>*/}
-          {/*<AppFooter/>*/}
+          {/*<StaticGoogleForm/>*/}
+          <Main/>
+          <AppFooter/>
       </React.Fragment>
   );
 }
 
-export default withRoot(App);
+const mapDispatchToProps = dispatch => ({
+    loadUser: () => dispatch(loadMe())
+});
+
+export default withRoot(connect(null, mapDispatchToProps)(App));

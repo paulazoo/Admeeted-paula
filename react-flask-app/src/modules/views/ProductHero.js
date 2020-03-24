@@ -7,7 +7,7 @@ import ProductHeroLayout from './ProductHeroLayout';
 import {NavLink, Redirect} from 'react-router-dom';
 
 const backgroundImage =
-  'https://assets.rbl.ms/11259921/origin.jpg';
+  'https://www.insidehighered.com/sites/default/server_files/media/image_4.png';
 
 const styles = theme => ({
   background: {
@@ -47,7 +47,7 @@ function ProductHero(props) {
                   Discover New Friends
                 </Typography>
                 <Typography color="inherit" align="center" variant="h5" className={classes.h5}>
-                  Meet the people you vibe with through our data-driven video-conferencing platform.
+                  Meet your fellow Harvard admitted students - new connections, just one click away.
                 </Typography>
                 <Button
                   color="secondary"
@@ -57,10 +57,10 @@ function ProductHero(props) {
                   component={NavLink}
                   to="/sign-up"
                 >
-                  Register
+                  Sign Up
                 </Button>
                 <Typography variant="body2" color="inherit" className={classes.more}>
-                  Take a chance
+                  Take a chance!
                 </Typography>
               </ProductHeroLayout>
             </div>

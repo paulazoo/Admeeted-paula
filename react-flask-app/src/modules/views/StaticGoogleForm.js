@@ -7,9 +7,9 @@ import Box from '@material-ui/core/Box';
 const styles = theme => ({
     root: {
         display: 'flex',
-        backgroundImage: 'url(https://i.pinimg.com/originals/bc/1e/88/bc1e8884b0c4cb638753ba953e102334.jpg)',
+        backgroundImage: 'url(https://upload.wikimedia.org/wikipedia/commons/c/c7/Memorial_Hall_%28Harvard_University%29_-_facade_view.JPG)',
         // backgroundRepeat: 'no-repeat',
-        backgroundSize: 'fill',
+        backgroundSize: 'cover',
       }
 });
 
@@ -21,7 +21,7 @@ function StaticGoogleForm ({ classes }) {
                     <Box mt={7} mb={12}>
                         <iframe
                             src="https://docs.google.com/forms/d/e/1FAIpQLScrrI4c-SRt6blejIZLADnBDt98UUg-2pMxrfMiChnDykhkGw/viewform?embedded=true"
-                            width="640" height="2039" frameBorder="0" marginHeight="0" marginWidth="0">Loading…
+                            width="640" height="1500" frameBorder="0" marginHeight="0" marginWidth="0">Loading…
                         </iframe>
                     </Box>
                 </Container>

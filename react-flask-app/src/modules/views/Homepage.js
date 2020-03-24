@@ -20,11 +20,12 @@ const styles = theme => ({
     },
 });
 
-function Homepage(props) {
-    const { classes } = props;
+function Homepage({ data, classes }) {
     const upcomingText = 'Your upcoming conversations';
     const pastText = 'Your past conversations';
     const orgText = 'Your organizations';
+
+    const upcomingConvos = data.upcomingConvos;
 
     return(
         <ProductHeroLayout backgroundClassName={classes.background}>
