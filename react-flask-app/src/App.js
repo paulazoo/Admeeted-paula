@@ -15,12 +15,16 @@ function App() {
     });
   }, []);
 
+  useEffect(() => {
+      // loadUser();
+  }, []);
+
   return (
-    <React.Fragment>
-      <AppAppBar />
-      <Main />
-      <AppFooter />
-    </React.Fragment>
+      <React.Fragment>
+          <AppAppBar/>
+          <Main/>
+          <AppFooter/>
+      </React.Fragment>
   );
 }
 

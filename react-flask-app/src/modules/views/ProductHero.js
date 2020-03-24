@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Button from '../components/Button';
 import Typography from '../components/Typography';
 import ProductHeroLayout from './ProductHeroLayout';
-import { NavLink } from 'react-router-dom';
+import {NavLink, Redirect} from 'react-router-dom';
 
 const backgroundImage =
   'https://assets.rbl.ms/11259921/origin.jpg';
@@ -32,31 +32,44 @@ const styles = theme => ({
 
 function ProductHero(props) {
   const { classes } = props;
+  const isLoggedIn = false;
 
   return (
-    <ProductHeroLayout backgroundClassName={classes.background}>
-      {/* Increase the network loading priority of the background image. */}
-      <img style={{ display: 'none' }} src={backgroundImage} alt="increase priority" />
-      <Typography color="inherit" align="center" variant="h2" marked="center">
-        Discover New Friends
-      </Typography>
-      <Typography color="inherit" align="center" variant="h5" className={classes.h5}>
-        Meet the people you vibe with through our data-driven video-conferencing platform.
-      </Typography>
-      <Button
-        color="secondary"
-        variant="contained"
-        size="large"
-        className={classes.button}
-        component={NavLink}
-        to="/sign-up"
-      >
-        Register
-      </Button>
-      <Typography variant="body2" color="inherit" className={classes.more}>
-        Take a chance
-      </Typography>
-    </ProductHeroLayout>
+      <div>
+        {isLoggedIn ? (
+            <Redirect to='/home' />
+            ) : (
+            <div>
+              <ProductHeroLayout backgroundClassName={classes.background}>
+                {/* Increase the network loading priority of the background image. */}
+                <img style={{ display: 'none' }} src={backgroundImage} alt="increase priority" />
+                <Typography color="inherit" align="center" variant="h2" marked="center">
+                  Discover New Friends
+                </Typography>
+                <Typography color="inherit" align="center" variant="h5" className={classes.h5}>
+                  Meet the people you vibe with through our data-driven video-conferencing platform.
+                </Typography>
+                <Button
+                  color="secondary"
+                  variant="contained"
+                  size="large"
+                  className={classes.button}
+                  component={NavLink}
+                  to="/sign-up"
+                >
+                  Register
+                </Button>
+                <Typography variant="body2" color="inherit" className={classes.more}>
+                  Take a chance
+                </Typography>
+              </ProductHeroLayout>
+              <iframe
+                  src="https://docs.google.com/forms/d/e/1FAIpQLScrrI4c-SRt6blejIZLADnBDt98UUg-2pMxrfMiChnDykhkGw/viewform?embedded=true"
+                  width="640" height="2513" frameBorder="0" marginHeight="0" marginWidth="0">Loading…
+              </iframe>
+            </div>
+        )}
+      </div>
   );
 }
 

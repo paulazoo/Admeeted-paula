@@ -12,7 +12,9 @@ import { email, required } from '../form/validation';
 import RFTextField from '../form/RFTextField';
 import FormButton from '../form/FormButton';
 import FormFeedback from '../form/FormFeedback';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { login } from '../actions';
 
 const useStyles = makeStyles(theme => ({
   form: {
@@ -27,7 +29,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function SignIn() {
+function SignIn({ handleSubmit, errorMessage }) {
   const classes = useStyles();
   const [sent, setSent] = React.useState(false);
 
@@ -44,8 +46,10 @@ function SignIn() {
     return errors;
   };
 
-  const handleSubmit = () => {
+  const submitForm = values => {
+    console.log('hello');
     setSent(true);
+    handleSubmit(values.email, values.password);
   };
 
   return (
@@ -62,8 +66,11 @@ function SignIn() {
             </Link>
           </Typography>
         </React.Fragment>
-        <Form onSubmit={handleSubmit} subscription={{ submitting: true }} validate={validate}>
-          {({ handleSubmit2, submitting }) => (
+        <Form
+            onSubmit={submitForm}
+            subscription={{ submitting: true }}
+            validate={validate}
+            render={({ handleSubmit2, submitting }) => (
             <form onSubmit={handleSubmit2} className={classes.form} noValidate>
               <Field
                 autoComplete="email"
@@ -108,8 +115,7 @@ function SignIn() {
                 {submitting || sent ? 'In progress…' : 'Sign In'}
               </FormButton>
             </form>
-          )}
-        </Form>
+          )}/>
         <Typography align="center">
           <Link underline="always" href="/premium-themes/onepirate/forgot-password/">
             Forgot password?

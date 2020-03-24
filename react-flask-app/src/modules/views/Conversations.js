@@ -20,11 +20,10 @@ const styles = theme => ({
     },
 });
 
-function Homepage(props) {
+function Conversations(props) {
     const { classes } = props;
     const upcomingText = 'Your upcoming conversations';
-    const pastText = 'Your past conversations';
-    const orgText = 'Your organizations';
+    const availText = 'Your available conversations';
 
     return(
         <ProductHeroLayout backgroundClassName={classes.background}>
@@ -38,10 +37,7 @@ function Homepage(props) {
                 </Grid>
                 <Grid item xs={12} sm={8} md={6}>
                     <PanelLayout>
-                        <Panel title={orgText}>
-                            <PanelList/>
-                        </Panel>
-                        <Panel title={pastText}>
+                        <Panel title={availText}>
                             <PanelList/>
                         </Panel>
                     </PanelLayout>
@@ -51,8 +47,8 @@ function Homepage(props) {
     );
 }
 
-Homepage.propTypes = {
+Conversations.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Homepage);
+export default withStyles(styles)(Conversations);

@@ -3,17 +3,19 @@ import { Switch, Route } from 'react-router-dom';
 
 import ProductHero from '../views/ProductHero';
 import Homepage from '../views/Homepage';
+import Conversations from '../views/Conversations';
 import SignUp from '../views/SignUp';
-import SignIn from '../views/SignIn';
+import SignInContainer from '../containers/SignInContainer';
 
 const Main = () => {
-  return (
-    <Switch>
-      <Route exact path='/' component={ProductHero}></Route>
-      <Route exact path='/sign-up' component={SignUp}></Route>
-      <Route exact path='/sign-in' component={SignIn}></Route>
-    </Switch>
-  );
+    return (
+        <Switch>
+            <Route exact path='/' component={ProductHero}/>
+            <Route exact path='/home' component={Homepage}/>
+            <Route exact path='/sign-up' component={SignUp}/>
+            <Route exact path='/sign-in' component={SignInContainer}/>
+        </Switch>
+    );
 }
 
 
