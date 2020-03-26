@@ -60,28 +60,176 @@ def register():
 def hi():
     return "<h1>Hiiiii!!!</h1>"
 
-@app.route('/upcoming-convos')
+@app.route('/profile', methods=['GET', 'POST'])
+def profile():
+    return jsonify(message=
+                   {
+                       'email': 'albertzhang9000@gmail.com',
+                       'displayName': 'Albert Zhang',
+                       'state': 'Georgia',
+                       'country': 'USA',
+                       'participating': True,
+                       'avatar': ''
+                   }
+    ), 200
+
+@app.route('/upcoming-convos', methods=['GET'])
 def upcoming_convos():
     return jsonify(message=
         [
             {
                 'id': 0,
                 'name': 'Coca-Cola Scholars 2020',
+                'displayName': 'Coca-Cola Scholars 2020',
                 'time': time.time()
             },
             {
                 'id': 1,
                 'name': 'Virtual Visitas',
+                'displayName': 'Virtual Visitas',
                 'time': time.time()
             }
         ]
     ), 200
 
+@app.route('/past-convos', methods=['GET'])
+def past_convos():
+    return jsonify(message=
+                   [
+                       {
+                           'id': 2,
+                           'name': 'Virtual Visitas Test 1',
+                           'displayName': 'Paula, Bill, Samantha',
+                           'time': time.time()
+                       },
+                       {
+                           'id': 3,
+                           'name': 'Virtual Visitas Test 2',
+                           'displayName': 'Bill, Samantha, Paula',
+                           'time': time.time()
+                       },
+                       {
+                           'id': 2,
+                           'name': 'Virtual Visitas Test 1',
+                           'displayName': 'Paula, Bill, Samantha',
+                           'time': time.time()
+                       },
+                       {
+                           'id': 3,
+                           'name': 'Virtual Visitas Test 2',
+                           'displayName': 'Bill, Samantha, Paula',
+                           'time': time.time()
+                       }, {
+                           'id': 2,
+                           'name': 'Virtual Visitas Test 1',
+                           'displayName': 'Paula, Bill, Samantha',
+                           'time': time.time()
+                       },
+                       {
+                           'id': 3,
+                           'name': 'Virtual Visitas Test 2',
+                           'displayName': 'Bill, Samantha, Paula',
+                           'time': time.time()
+                       },
+                       {
+                           'id': 2,
+                           'name': 'Virtual Visitas Test 1',
+                           'displayName': 'Paula, Bill, Samantha',
+                           'time': time.time()
+                       },
+                       {
+                           'id': 3,
+                           'name': 'Virtual Visitas Test 2',
+                           'displayName': 'Bill, Samantha, Paula',
+                           'time': time.time()
+                       }, {
+                           'id': 2,
+                           'name': 'Virtual Visitas Test 1',
+                           'displayName': 'Paula, Bill, Samantha',
+                           'time': time.time()
+                       },
+                       {
+                           'id': 3,
+                           'name': 'Virtual Visitas Test 2',
+                           'displayName': 'Bill, Samantha, Paula',
+                           'time': time.time()
+                       },
+                       {
+                           'id': 2,
+                           'name': 'Virtual Visitas Test 1',
+                           'displayName': 'Paula, Bill, Samantha',
+                           'time': time.time()
+                       },
+                       {
+                           'id': 3,
+                           'name': 'Virtual Visitas Test 2',
+                           'displayName': 'Bill, Samantha, Paula',
+                           'time': time.time()
+                       }, {
+                           'id': 2,
+                           'name': 'Virtual Visitas Test 1',
+                           'displayName': 'Paula, Bill, Samantha',
+                           'time': time.time()
+                       },
+                       {
+                           'id': 3,
+                           'name': 'Virtual Visitas Test 2',
+                           'displayName': 'Bill, Samantha, Paula',
+                           'time': time.time()
+                       }
+                   ])
+
+@app.route('/avail-convos', methods=['GET'])
+def avail_convos():
+    return jsonify(message=
+                   [
+                       {
+                           'id': 4,
+                           'name': 'Tennis Social #1',
+                           'displayName': 'Tennis Social #1',
+                           'time': time.time()
+                       },
+                       {
+                           'id': 5,
+                           'name': 'Tennis Social #2',
+                           'displayName': 'Tennis Social #2',
+                           'time': time.time()
+                       }
+                   ]), 200
+
+@app.route('/organizations', methods=['GET'])
+def organizations():
+    return jsonify(message=
+                   [
+                       {
+                           'id': 0,
+                           'name': 'Harvard Class of 2024',
+                           'displayName': 'Harvard Class of 2024'
+                       }
+                   ])
+
+loggedIn = False
+
 @app.route('/me', methods=['GET'])
 def me():
-    return jsonify(isLoggedIn=True), 200
+    '''
+    Inputs: None
+    Outputs: Whether user is currently logged in (Boolean)
+    '''
+    # placeholder code
+    return jsonify(isLoggedIn=loggedIn), 200
 
 @app.route('/login', methods=['POST'])
 def login():
+    '''
+    Inputs will be a username (String) and password (String)
+    Outputs will be whether user successfully logs in (Boolean)
+    '''
     # Placeholder code
-    return jsonify(isLoggedIn=True), 200
+    loggedIn = True
+    return jsonify(isLoggedIn=loggedIn), 200
+
+@app.route('/logout', methods=['GET'])
+def logout():
+    loggedIn = False
+    return jsonify(isLoggedIn=loggedIn), 200

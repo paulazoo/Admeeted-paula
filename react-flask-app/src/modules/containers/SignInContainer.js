@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Redirect } from 'react-router-dom';
 
@@ -6,6 +6,13 @@ import SignIn from '../views/SignIn';
 import { login, setErrorMessage } from "../actions";
 
 function SignInContainer ({ loggedIn, handleSubmit, errorMessage }) {
+    // THIS CODE REPLACES THE ACTUAL FORM PAGE
+    useEffect(() => {
+        if (!loggedIn) {
+            handleSubmit('a', 'b')
+        }
+    }, []);
+
     return (
         <div>
             {loggedIn ? (

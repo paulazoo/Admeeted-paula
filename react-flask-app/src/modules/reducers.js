@@ -17,7 +17,7 @@ const initialState = {
   loggedIn: false,
   errorMessage: '',
   data: {
-    name: '',
+    profile: '',
     upcomingConvos: [],
     pastConvos: [],
     availConvos: [],
@@ -38,6 +38,7 @@ export const homeReducer = (state = initialState, action) => {
     case SET_ERROR_MESSAGE:
       return setErrorMessage(state, action)
     case SET_DATA:
+      console.log(action)
       return setData(state, action)
     default:
       return state
