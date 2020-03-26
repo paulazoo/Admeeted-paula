@@ -16,3 +16,10 @@ urllib3==1.25.8
 webbot==0.1.4
 Werkzeug==1.0.0
 xlrd==1.2.0
+
+
+requests==2.21.0
+
+oauthlib==3.0.1
+pyOpenSSL==19.0.0
+Flask-Login==0.4.1
