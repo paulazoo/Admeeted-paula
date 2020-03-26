@@ -12,7 +12,7 @@ import ConversationsContainer from "../containers/ConversationsContainer";
 import AccountContainer from "../containers/AccountContainer";
 
 const Main = () => {
-    const staticPage = false;
+    const staticPage = true;
     return (
         <div>
             {!staticPage ? <Switch>

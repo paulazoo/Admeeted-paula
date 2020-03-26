@@ -30,7 +30,7 @@ const mapDispatchToProps = dispatch => ({
         dispatch(loadData('/past-convos', 'pastConvos'));
     },
     loadOrganizations: () => {
-        dispatch(loadData('/organizations', 'organizations'));
+        dispatch(loadData('/organizations-old', 'organizations'));
     }
 })
 

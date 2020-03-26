@@ -21,7 +21,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     loadProfile: () => {
-        dispatch(loadData('/profile', 'profile'))
+        dispatch(loadData('/profile-old', 'profile'))
     }
 })
 
