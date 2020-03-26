@@ -34,7 +34,7 @@ logging.warning('Log started with user: '+current_user)
 #the config file cleans the data and gets the starting variable values
 from config import ExcelParser
 
-myparser = ExcelParser("Coke Scholars Virtual Visitas (Responses).xlsx")
+myparser = ExcelParser("Virtual Visitas (Responses).xlsx")
 
 myparser.all_summary
 myparser.desired
@@ -48,7 +48,7 @@ import groups
 #create groups using the createGroups function defined in groups.py file
 generated_groups = []
 call_time = "3:00"
-call_org = "Princeton 3/21"
+call_org = "Harvard 3/26"
 
 for call_num in range(1, myparser.num_calls + 1):
     #for each call, ask what category for the call
