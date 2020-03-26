@@ -14,35 +14,23 @@ class ExcelParser():
         #all_summary holds the survey response data as a pandas dataframe
         all_summary = pd.read_excel(excel_file)
         #remove all rows (people cases) with duplicate emails except last entered row by that email person
-        all_summary=all_summary.drop_duplicates(subset=['Email Address'], keep='last').reset_index(drop=True)
+        all_summary=all_summary.drop_duplicates(subset=['email_address'], keep='last').reset_index(drop=True)
         #remove all rows (people cases) with duplicate NAMES except last entered row by that name person
-        all_summary=all_summary.drop_duplicates(subset=['Full Name'], keep='last').reset_index(drop=True)
+        all_summary=all_summary.drop_duplicates(subset=['fullname'], keep='last').reset_index(drop=True)
         #Get indices for non gmails
-        non_gmails_indices = all_summary[all_summary['Email Address'].str.endswith("@gmail.com") == False].index
-        dropped_ppl=[all_summary["Full Name"][i] for i in list(non_gmails_indices)]
+        non_gmails_indices = all_summary[all_summary['email_address'].str.endswith("@gmail.com") == False].index
+        dropped_ppl=[all_summary["fullname"][i] for i in list(non_gmails_indices)]
         all_summary=all_summary.drop(non_gmails_indices).reset_index(drop=True)
 
-        # #Get indices for non participating (CANT call at the time). Removes any rows
-        # participating_col_name = [x for x in all_summary.columns if ("Will you join" in x)][0]
-        # non_participating_indices = all_summary[all_summary[participating_col_name] != "Yes"].index
-        # dropped_ppl=dropped_ppl + [all_summary["Full Name"][i] for i in list(non_participating_indices)]
-        # all_summary=all_summary.drop(non_participating_indices).reset_index(drop=True)
-
         #deletes emails that are too long (greater than 300 chars) because they would slow down the program and no legit emails are longer than 300 chars
-        too_long_indices = all_summary[all_summary['Email Address'].str.len() > 300].index
-        dropped_ppl=dropped_ppl + [all_summary["Full Name"][i] for i in list(too_long_indices)]
+        too_long_indices = all_summary[all_summary['email_address'].str.len() > 300].index
+        dropped_ppl=dropped_ppl + [all_summary["fullname"][i] for i in list(too_long_indices)]
         all_summary=all_summary.drop(too_long_indices).reset_index(drop=True)
-
-        # #print ppl whos emails didn't make it
-        # logging.warning(all_summary[participating_col_name])
-        # #write the full names of dropped gmails into a file
-        # with open("dropped_ppl.txt", "w") as outfile:
-        #     outfile.write("\n".join(dropped_ppl))
 
         self.all_summary = all_summary
 
         #all_emails holds the final list of emails w no duplicate emails
-        self.all_emails=list(all_summary["Email Address"])
+        self.all_emails=list(all_summary["email_address"])
         #
         # #desired for the desired number of ppl per group
         # self.desired = int(input("How many people would you like in a group? "))

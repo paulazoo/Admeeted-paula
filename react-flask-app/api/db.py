@@ -9,7 +9,7 @@ cred = credentials.Certificate("./admeeted-privatekey.json")
 firebase_admin.initialize_app(cred)
 db = firestore.client()
 
-
+#%%
 def getYear(year):
     if year == "Prefrosh (if you're class of 2024)":
         return 2024
@@ -37,6 +37,7 @@ def addNewUsers(usersList):
         db.collection('users').add(user.json())
         i+=1
 
+#%%
 #List of users
 users = []
 
@@ -70,7 +71,7 @@ myparser = ExcelParser("Princeton.xlsx")
 for user in myparser.all_summary.iloc:
     users.append(User(user['Full Name'], user['Email Address'], 'Princeton', user['Timestamp'], getYear(user['Grade / Class at College']), user['Where are you from?'], strToTuple(user['What do you want (or are considering) to concentrate in?']), strToTuple(user['What do you want (or considering) to certificate in?']), strToTuple(user['What genres of music do you like?']), strToTuple(user['What sports are you interested in?']), strToTuple(user['What are some of your interests or hobbies?']), user['Feedback :)'] if user['Feedback :)']==user['Feedback :)'] else None))
 
-addNewUsers(users)
+#addNewUsers(users)
 
 print("done!")
 
