@@ -53,7 +53,7 @@ def profile():
     return jsonify(message=profile_data), 200
   
     
-@app.route('/profile/<other_user_uid>', methods=['GET'])
+@app.route('/profile/<int: other_user_uid>', methods=['GET'])
 def other_profile(other_user_uid):
     
     profile_data=db_for_flask.db_profile(other_user_uid)

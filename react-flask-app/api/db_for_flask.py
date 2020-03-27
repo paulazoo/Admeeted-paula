@@ -15,6 +15,7 @@ config = {
 
 firebase = pyrebase.initialize_app(config)
 db = firebase.database()
+#%%
 
 def profile_db(data):
     
