@@ -35,10 +35,8 @@ App gets client credentials by reading environmental variables
 
 Windows users: set GOOGLE_CLIENT_ID=your_client_id in Command Prompt
 """
-GOOGLE_CLIENT_ID = "667088492207-2fch6bc6r8b40fm40hjv8mq0n6minrr2.apps.googleusercontent.com"
-#os.environ.get("GOOGLE_CLIENT_ID", None)
-GOOGLE_CLIENT_SECRET = "CFG-c2H48GDs_xdxvDj4nFAb"
-#os.environ.get("GOOGLE_CLIENT_SECRET", None)
+GOOGLE_CLIENT_ID = os.environ.get("GOOGLE_CLIENT_ID", None)
+GOOGLE_CLIENT_SECRET = os.environ.get("GOOGLE_CLIENT_SECRET", None)
 GOOGLE_DISCOVERY_URL = (
     "https://accounts.google.com/.well-known/openid-configuration"
 )
