@@ -15,10 +15,9 @@ The name, email, and profile picture will all be retrieved from Google.
 #For Google authentication
 
 from flask_login import UserMixin
-import sqlite3
-#import schema
+#import sqlite3
 from db import get_db
-from db import init_db
+#from db import init_db
 
 class User(UserMixin):
     def __init__(self, id_, name, email, profile_pic):
@@ -31,33 +30,35 @@ class User(UserMixin):
     def get(user_id):
         print("Get User Id")
         db = get_db()
-        print("Get User ID database gotten")
-        #init_db()
-        a_user = db.execute(
-            "SELECT * FROM user WHERE id = ?", (user_id,)
-        ).fetchone()
-        print("Get User ID user fetched")
+        print("get user_id db gotten")
+
+        a_user = db.child("users").child(user_id).get().val()
+        print("User gotten from db from user_id: {} is: {}".format(user_id, a_user))
+
+        print("Get User ID gotten from firebase")
+
         if not a_user:
             print("Get User ID no user")
             return None
 
         a_user = User(
-            id_=a_user[0], name=a_user[1], email=a_user[2], profile_pic=a_user[3]
+            id_ = user_id, email = a_user['email'], name = a_user['name'], profile_pic = a_user['profile_pic']
         )
-        print("Get User ID User:")
-        print(a_user)
+        print("Get User ID User: {}".format(a_user))
         return a_user
 
     @staticmethod
     def create(id_, name, email, profile_pic):
-        print("Create User staticmethod called")
-        db = get_db()
-        db.execute(
-            "INSERT INTO user (id, name, email, profile_pic) "
-            "VALUES (?, ?, ?, ?)",
-            (id_, name, email, profile_pic),
-        )
-        db.commit()
+        print("Creating user")
+        id_ = str(id_) #actually an integer (always 21 digits?)
+        name = str(name) #already a string?
+        email = str(email) #aleady a string?
+        profile_pic = str(profile_pic) #already a string?
+        db=get_db()
+        user_dict = {'id_': id_, 'name': name, 'email': email, 'profile_pic':profile_pic}
+        print("In create_user made this user_dict: {}".format(user_dict))
+        db.child("users").child(id_).set(user_dict)
+        
         
 """
 Executes SQL statements against the database, 

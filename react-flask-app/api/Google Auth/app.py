@@ -9,7 +9,6 @@ Created on Wed Mar 25 09:19:59 2020
 # Python standard libraries
 import json
 import os
-import sqlite3
 
 # Third-party libraries
 from flask import Flask, redirect, request, url_for
@@ -66,7 +65,9 @@ login_manager.init_app(app)
 # Naive database setup
 try:
     init_db_command()
-except sqlite3.OperationalError:
+except: 
+    #og error: sqlite3.OperationalError:
+    #TODO safe to assume firebase created?
     # Assume it's already been created
     pass
 
@@ -200,8 +201,9 @@ def callback():
         id_=unique_id, name=users_name, email=users_email, profile_pic=picture
         )
 
-# Doesn't exist? Add it to the database (new row).
+# Doesn't exist? Add it to the database.
     if not User.get(unique_id):
+        print("User doesn't exist, creating new User")
         User.create(unique_id, users_name, users_email, picture)
 
 # Begin user session by logging the user in (using Flask Log-in)
