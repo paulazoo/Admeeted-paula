@@ -9,7 +9,7 @@ config = {
   "databaseURL": "https://"+project_id+".firebaseio.com",
   "projectId": project_id,
   "storageBucket": project_id+".appspot.com",
-  "serviceAccount": r"C:\Users\pkzr3\Admeeted\react-flask-app\api\admeeted-private-key.json",
+  "serviceAccount": r"", #Fill this in
   "messagingSenderId": "667088492207"
 }
 
