@@ -3,6 +3,7 @@ from flask import Flask, jsonify, render_template, request, g
 from flask_wtf import Form
 from werkzeug import exceptions as wex
 import db_for_flask
+
 #%%
 app = Flask(__name__)
 
