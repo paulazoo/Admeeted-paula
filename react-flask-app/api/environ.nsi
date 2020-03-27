@@ -1,0 +1,3 @@
+=C.UTF-8
+LANG=C.UTF-8
+FIREBASE_API_KEY=AIzaSyCn1qXoa7sdfe7vgyce9E71SbcBa3s

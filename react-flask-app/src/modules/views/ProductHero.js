@@ -3,11 +3,13 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '../components/Button';
 import Typography from '../components/Typography';
-import ProductHeroLayout from './ProductHeroLayout';
-import { NavLink } from 'react-router-dom';
+import ProductHeroLayout from '../layouts/ProductHeroLayout';
+import {NavLink, Redirect} from 'react-router-dom';
+import {compose} from "redux";
+import {connect} from "react-redux";
 
 const backgroundImage =
-  'https://assets.rbl.ms/11259921/origin.jpg';
+  'https://www.insidehighered.com/sites/default/server_files/media/image_4.png';
 
 const styles = theme => ({
   background: {
@@ -30,33 +32,40 @@ const styles = theme => ({
   },
 });
 
-function ProductHero(props) {
-  const { classes } = props;
+function ProductHero({ loggedIn, classes }) {
 
   return (
-    <ProductHeroLayout backgroundClassName={classes.background}>
-      {/* Increase the network loading priority of the background image. */}
-      <img style={{ display: 'none' }} src={backgroundImage} alt="increase priority" />
-      <Typography color="inherit" align="center" variant="h2" marked="center">
-        Discover New Friends
-      </Typography>
-      <Typography color="inherit" align="center" variant="h5" className={classes.h5}>
-        Meet the people you vibe with through our data-driven video-conferencing platform.
-      </Typography>
-      <Button
-        color="secondary"
-        variant="contained"
-        size="large"
-        className={classes.button}
-        component={NavLink}
-        to="/sign-up"
-      >
-        Register
-      </Button>
-      <Typography variant="body2" color="inherit" className={classes.more}>
-        Take a chance
-      </Typography>
-    </ProductHeroLayout>
+      <div>
+        {loggedIn ? (
+            <Redirect to='/home' />
+            ) : (
+            <div>
+              <ProductHeroLayout backgroundClassName={classes.background}>
+                {/* Increase the network loading priority of the background image. */}
+                <img style={{ display: 'none' }} src={backgroundImage} alt="increase priority" />
+                <Typography color="inherit" align="center" variant="h2" marked="center">
+                  Discover New Friends
+                </Typography>
+                <Typography color="inherit" align="center" variant="h5" className={classes.h5}>
+                  Meet your fellow Harvard admitted students - new connections, just one click away.
+                </Typography>
+                <Button
+                  color="secondary"
+                  variant="contained"
+                  size="large"
+                  className={classes.button}
+                  component={NavLink}
+                  to="/sign-up"
+                >
+                  Sign Up
+                </Button>
+                <Typography variant="body2" color="inherit" className={classes.more}>
+                  Take a chance!
+                </Typography>
+              </ProductHeroLayout>
+            </div>
+        )}
+      </div>
   );
 }
 
@@ -64,4 +73,11 @@ ProductHero.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(ProductHero);
+const mapStateToProps = state => ({
+  loggedIn: state.loggedIn
+})
+
+export default compose(
+    withStyles(styles),
+    connect(mapStateToProps, null)
+    )(ProductHero);

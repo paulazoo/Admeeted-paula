@@ -14,6 +14,8 @@ import SignIn from './SignIn';
 import SignUp from './SignUp';
 import App from '../../App';
 import Toolbar, { styles as toolbarStyles } from '../components/Toolbar';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
 
 const styles = theme => ({
   title: {
@@ -44,49 +46,79 @@ const styles = theme => ({
   },
 });
 
-function AppAppBar(props) {
-  const { classes } = props;
+function AppAppBar({ loggedIn, classes }) {
 
   return (
-    <div>
-      <AppBar position="fixed">
-        <Toolbar className={classes.toolbar}>
-            <div className={classes.left} />
+      <div>
+        <AppBar position="fixed">
+          <Toolbar className={classes.toolbar}>
+            <div className={classes.left}/>
             <Link
-              variant="h6"
-              underline="none"
-              color="inherit"
-              className={classes.title}
-              component={NavLink}
-              to="/"
+                variant="h6"
+                underline="none"
+                color="inherit"
+                className={classes.title}
+                component={NavLink}
+                to="/"
             >
-              {'Admeet'}
+              {'Admeeted'}
             </Link>
             <div className={classes.right}>
-              <Link
-                color="inherit"
-                variant="h6"
-                underline="none"
-                className={classes.rightLink}
-                component={NavLink}
-                to="/sign-in"
+              {loggedIn ? <div>
+                    <Link
+                  color="inherit"
+                  variant="h6"
+                  underline="none"
+                  className={classes.rightLink}
+                  component={NavLink}
+                  to="/conversations"
               >
-                {'Sign In'}
+                Convos
               </Link>
-              <Link
-                variant="h6"
-                underline="none"
-                className={clsx(classes.rightLink, classes.linkSecondary)}
-                component={NavLink}
-                to="/sign-up"
+                  <Link
+                  color="inherit"
+                  variant="h6"
+                  underline="none"
+                  className={classes.rightLink}
+                  component={NavLink}
+                  to="/account"
+              >
+                Acct
+              </Link>
+              </div>: null}
+              {!loggedIn ? <Link
+                  color="inherit"
+                  variant="h6"
+                  underline="none"
+                  className={classes.rightLink}
+                  component={NavLink}
+                  to="/sign-in"
+              >
+                Sign In
+              </Link> : <Link
+                  color="inherit"
+                  variant="h6"
+                  underline="none"
+                  className={classes.rightLink}
+                  component={NavLink}
+                  to="/sign-out"
+              >
+                Sign Out
+              </Link>}
+              {!loggedIn ? <Link
+                  variant="h6"
+                  underline="none"
+                  className={clsx(classes.rightLink, classes.linkSecondary)}
+                  component={NavLink}
+                  to="/sign-up"
               >
                 {'Sign Up'}
-              </Link>
+              </Link> : null}
             </div>
-        </Toolbar>
-      </AppBar>
-      <div className={classes.placeholder} />
-    </div>
+          </Toolbar>
+        </AppBar>
+        <div className={classes.placeholder}/>
+      </div>
   );
 }
 
@@ -94,4 +126,11 @@ AppAppBar.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(AppAppBar);
+const mapStateToProps = state => ({
+  loggedIn: state.loggedIn
+})
+
+export default compose(
+    withStyles(styles),
+    connect(mapStateToProps, null)
+    )(AppAppBar);

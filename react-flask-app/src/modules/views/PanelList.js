@@ -25,43 +25,31 @@ const styles = theme => ({
     }
 });
 
-function PanelList(props) {
-    const { classes } = props;
+function PanelList({ data, classes }) {
+    console.log(data);
 
     return (
         <List className={classes.list}>
-            <ListItem>
+            {data.map((entry) =>
+                <ListItem>
                   <ListItemAvatar>
                     <Avatar>
                       <FolderIcon />
                     </Avatar>
                   </ListItemAvatar>
                   <ListItemText
-                    primary="Single-line item"
-                    secondary='Secondary text'
+                    primary={entry.displayName}
+                    secondary={entry.time}
                   />
                   <ListItemSecondaryAction>
                     <IconButton edge="end" aria-label="delete">
                       <DeleteIcon />
                     </IconButton>
                   </ListItemSecondaryAction>
-            </ListItem>
-            <ListItem>
-                  <ListItemAvatar>
-                    <Avatar>
-                      <FolderIcon />
-                    </Avatar>
-                  </ListItemAvatar>
-                  <ListItemText
-                    primary="Single-line item"
-                    secondary='Secondary text'
-                  />
-                  <ListItemSecondaryAction>
-                    <IconButton edge="end" aria-label="delete">
-                      <DeleteIcon />
-                    </IconButton>
-                  </ListItemSecondaryAction>
-            </ListItem>
+                </ListItem>
+            )}
+
+
         </List>
     )
 }
