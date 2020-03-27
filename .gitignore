@@ -1,5 +1,5 @@
 #Credential files
-react-flask-app/api/admeeted-privatekey.json
+react-flask-app/api/admeeted-private-key.json
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
