@@ -30,6 +30,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function SignIn({ handleSubmit, errorMessage }) {
+    console.log('rendering')
   const classes = useStyles();
   const [sent, setSent] = React.useState(false);
 
@@ -46,10 +47,10 @@ function SignIn({ handleSubmit, errorMessage }) {
     return errors;
   };
 
-  const submitForm = values => {
+  const onSubmit = values => {
     console.log('hello');
-    setSent(true);
     handleSubmit(values.email, values.password);
+    setSent(true);
   };
 
   return (
@@ -67,7 +68,7 @@ function SignIn({ handleSubmit, errorMessage }) {
           </Typography>
         </React.Fragment>
         <Form
-            onSubmit={submitForm}
+            onSubmit={onSubmit}
             subscription={{ submitting: true }}
             validate={validate}
             render={({ handleSubmit2, submitting }) => (

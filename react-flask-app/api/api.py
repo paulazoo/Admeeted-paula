@@ -11,14 +11,35 @@ app = Flask(__name__)
 def get_current_time():
     return jsonify({'time': time.time()})
 
+# Bill's placeholder
+loggedIn = False
 
+# Bill's placeholder
 @app.route('/me', methods=['GET'])
 def me():
-    return jsonify(isLoggedIn=True), 200
+    '''
+    Inputs: None
+    Outputs: Whether user is currently logged in (Boolean)
+    '''
+    # placeholder code
+    return jsonify(isLoggedIn=loggedIn), 200
 
-#login
+# Bill's placeholder
+@app.route('/login', methods=['POST'])
+def login():
+    '''
+    Inputs will be a username (String) and password (String)
+    Outputs will be whether user successfully logs in (Boolean)
+    '''
+    # Placeholder code
+    loggedIn = True
+    return jsonify(isLoggedIn=loggedIn), 200
 
-#logout
+# Bill's placeholder
+@app.route('/logout', methods=['GET'])
+def logout():
+    loggedIn = False
+    return jsonify(isLoggedIn=loggedIn), 200
 
 'endpoint or route??'
 @app.route('/profile', methods=['GET','POST'])
@@ -32,7 +53,7 @@ def profile():
     
     profile_data=db_for_flask.db_profile(user_uid)
     
-    return render_template('profile.html',profile_data=jsonify(profile_data))
+    return jsonify(message=profile_data), 200
   
     
 @app.route('/profile/<int:other_user_uid>', methods=['GET'])
@@ -40,20 +61,20 @@ def other_profile(other_user_uid):
     
     profile_data=db_for_flask.db_profile(other_user_uid)
     
-    return render_template('profile/<int:other_user_uid>.html',profile_data=jsonify(profile_data))
+    return jsonify(message=profile_data), 200
 
 
 @app.route('/upcoming-events', methods=['GET'])
 def upcoming_events():
     user_uid=g.user_uid
     upcoming_events_data = db_for_flask.db_upcoming_events(user_uid)
-    return render_template('upcoming-events.html',upcoming_events_data=jsonify(upcoming_events_data))
+    return jsonify(message=upcoming_events_data), 200
 
 @app.route('/avail-events/<org_uid>', methods=['GET'])
 def avail_events(org_uid):
     user_uid=g.user_uid
     avail_events_data = db_for_flask.db_avail_events(user_uid, org_uid)
-    return render_template('avail-events/<org_uid>.html',avail_events_data=jsonify(avail_events_data))
+    return jsonify(message=avail_events_data), 200
  
 @app.route('/events/<event_uid>', methods=['GET', 'POST'])
 def events(event_uid):
@@ -64,20 +85,20 @@ def events(event_uid):
         db_for_flask.events_db(user_uid, event_uid, signup_cancel)
     
     events_data = db_for_flask.db_events(event_uid)
-    return render_template('upcoming-events.html',events_data=jsonify(events_data))
+    return jsonify(message=events_data), 200
 
 @app.route('/conversations', methods=['GET'])
 def convos():
     user_uid=g.user_uid
     convos_data = db_for_flask.db_convos(user_uid)
-    return render_template('conversations.html',convos_data=jsonify(convos_data))
+    return jsonify(message=convos_data), 200
 
 @app.route('/conversations/<convo_uid>', methods=['GET'])
 def other_convos(convo_uid):
     #...bc user can't change convos?
     user_uid=g.user_uid
     other_convos_data = db_for_flask.db_other_convos(user_uid, convo_uid)
-    return render_template('conversations/<convo_uid>.html',other_convos_data=jsonify(other_convos_data))
+    return jsonify(message=other_convos_data), 200
 
 @app.route('/organizations', methods=['GET', 'POST'])
 def orgs():
@@ -89,15 +110,16 @@ def orgs():
         
 
     orgs_data = db_for_flask.db_orgs(user_uid)
-    return render_template('organizations.html',orgs_data=jsonify(orgs_data))
+    return jsonify(message=orgs_data), 200
 
 @app.route('/organizations/<org_uid>', methods=['GET', 'POST'])
 def other_orgs(org_uid):
     user_uid=g.user_uid
     other_orgs_data = db_for_flask.db_other_orgs(user_uid, org_uid)
-    return render_template('organizations/<org_uid>.html',other_orgs_data=jsonify(other_orgs_data))
+    return jsonify(message=other_orgs_data), 200
 
-    
+# -------------------------------------------------------------
+# Bill's placeholders
 @app.route('/upcoming-convos')
 def upcoming_convos():
     return jsonify(message=
@@ -105,18 +127,143 @@ def upcoming_convos():
             {
                 'id': 0,
                 'name': 'Coca-Cola Scholars 2020',
+                'displayName': 'Coca-Cola Scholars 2020',
                 'time': time.time()
             },
             {
                 'id': 1,
                 'name': 'Virtual Visitas',
+                'displayName': 'Virtual Visitas',
                 'time': time.time()
             }
         ]
     ), 200
 
+@app.route('/past-convos', methods=['GET'])
+def past_convos():
+    return jsonify(message=
+                   [
+                       {
+                           'id': 2,
+                           'name': 'Virtual Visitas Test 1',
+                           'displayName': 'Paula, Bill, Samantha',
+                           'time': time.time()
+                       },
+                       {
+                           'id': 3,
+                           'name': 'Virtual Visitas Test 2',
+                           'displayName': 'Bill, Samantha, Paula',
+                           'time': time.time()
+                       },
+                       {
+                           'id': 2,
+                           'name': 'Virtual Visitas Test 1',
+                           'displayName': 'Paula, Bill, Samantha',
+                           'time': time.time()
+                       },
+                       {
+                           'id': 3,
+                           'name': 'Virtual Visitas Test 2',
+                           'displayName': 'Bill, Samantha, Paula',
+                           'time': time.time()
+                       }, {
+                           'id': 2,
+                           'name': 'Virtual Visitas Test 1',
+                           'displayName': 'Paula, Bill, Samantha',
+                           'time': time.time()
+                       },
+                       {
+                           'id': 3,
+                           'name': 'Virtual Visitas Test 2',
+                           'displayName': 'Bill, Samantha, Paula',
+                           'time': time.time()
+                       },
+                       {
+                           'id': 2,
+                           'name': 'Virtual Visitas Test 1',
+                           'displayName': 'Paula, Bill, Samantha',
+                           'time': time.time()
+                       },
+                       {
+                           'id': 3,
+                           'name': 'Virtual Visitas Test 2',
+                           'displayName': 'Bill, Samantha, Paula',
+                           'time': time.time()
+                       }, {
+                           'id': 2,
+                           'name': 'Virtual Visitas Test 1',
+                           'displayName': 'Paula, Bill, Samantha',
+                           'time': time.time()
+                       },
+                       {
+                           'id': 3,
+                           'name': 'Virtual Visitas Test 2',
+                           'displayName': 'Bill, Samantha, Paula',
+                           'time': time.time()
+                       },
+                       {
+                           'id': 2,
+                           'name': 'Virtual Visitas Test 1',
+                           'displayName': 'Paula, Bill, Samantha',
+                           'time': time.time()
+                       },
+                       {
+                           'id': 3,
+                           'name': 'Virtual Visitas Test 2',
+                           'displayName': 'Bill, Samantha, Paula',
+                           'time': time.time()
+                       }, {
+                           'id': 2,
+                           'name': 'Virtual Visitas Test 1',
+                           'displayName': 'Paula, Bill, Samantha',
+                           'time': time.time()
+                       },
+                       {
+                           'id': 3,
+                           'name': 'Virtual Visitas Test 2',
+                           'displayName': 'Bill, Samantha, Paula',
+                           'time': time.time()
+                       }
+                   ])
 
-@app.route('/login', methods=['POST'])
-def login():
-    # Placeholder code
-    return jsonify(isLoggedIn=True), 200
+@app.route('/avail-convos', methods=['GET'])
+def avail_convos():
+    return jsonify(message=
+                   [
+                       {
+                           'id': 4,
+                           'name': 'Tennis Social #1',
+                           'displayName': 'Tennis Social #1',
+                           'time': time.time()
+                       },
+                       {
+                           'id': 5,
+                           'name': 'Tennis Social #2',
+                           'displayName': 'Tennis Social #2',
+                           'time': time.time()
+                       }
+                   ]), 200
+
+@app.route('/organizations-old', methods=['GET'])
+def organizations_old():
+    return jsonify(message=
+                   [
+                       {
+                           'id': 0,
+                           'name': 'Harvard Class of 2024',
+                           'displayName': 'Harvard Class of 2024'
+                       }
+                   ])
+
+@app.route('/profile-old', methods=['GET', 'POST'])
+def profile_old():
+    return jsonify(message=
+                   {
+                       'email': 'albertzhang9000@gmail.com',
+                       'displayName': 'Albert Zhang',
+                       'state': 'Georgia',
+                       'country': 'USA',
+                       'participating': True,
+                       'avatar': ''
+                   }
+    ), 200

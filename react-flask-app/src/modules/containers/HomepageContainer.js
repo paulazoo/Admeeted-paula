@@ -4,22 +4,34 @@ import { loadData } from "../actions";
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-function HomepageContainer ({ data, loadData }) {
+function HomepageContainer ({ data, currentlySending, loadUpcomingConvos, loadPastConvos, loadOrganizations }) {
     useEffect(() => {
-        loadData();
+        loadUpcomingConvos();
+        loadPastConvos();
+        loadOrganizations();
     }, []);
     console.log(data);
+
     return (
-        <Homepage data={data}/>
+        <Homepage data={data} currentlySending={currentlySending}/>
     )
 }
 
 const mapStateToProps = state => ({
     data: state.data,
+    currentlySending: state.currentlySending,
 })
 
 const mapDispatchToProps = dispatch => ({
-    loadData: () => dispatch(loadData('/upcoming-convos', 'upcomingConvos'))
+    loadUpcomingConvos: () => {
+        dispatch(loadData('/upcoming-convos', 'upcomingConvos'));
+    },
+    loadPastConvos: () => {
+        dispatch(loadData('/past-convos', 'pastConvos'));
+    },
+    loadOrganizations: () => {
+        dispatch(loadData('/organizations-old', 'organizations'));
+    }
 })
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(HomepageContainer))

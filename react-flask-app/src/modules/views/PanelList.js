@@ -26,8 +26,7 @@ const styles = theme => ({
 });
 
 function PanelList({ data, classes }) {
-    const primary = 'single-line item';
-    const secondary = 'secondary text';
+    console.log(data);
 
     return (
         <List className={classes.list}>
@@ -39,7 +38,7 @@ function PanelList({ data, classes }) {
                     </Avatar>
                   </ListItemAvatar>
                   <ListItemText
-                    primary={entry.name}
+                    primary={entry.displayName}
                     secondary={entry.time}
                   />
                   <ListItemSecondaryAction>

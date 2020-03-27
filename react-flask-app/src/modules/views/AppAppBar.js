@@ -15,6 +15,7 @@ import SignUp from './SignUp';
 import App from '../../App';
 import Toolbar, { styles as toolbarStyles } from '../components/Toolbar';
 import { compose } from 'redux';
+import { connect } from 'react-redux';
 
 const styles = theme => ({
   title: {
@@ -45,9 +46,7 @@ const styles = theme => ({
   },
 });
 
-function AppAppBar(props) {
-  const { classes } = props;
-  const isLoggedIn = true;
+function AppAppBar({ loggedIn, classes }) {
 
   return (
       <div>
@@ -65,17 +64,48 @@ function AppAppBar(props) {
               {'Admeeted'}
             </Link>
             <div className={classes.right}>
-              {!isLoggedIn ? <Link
+              {loggedIn ? <div>
+                    <Link
                   color="inherit"
                   variant="h6"
                   underline="none"
                   className={classes.rightLink}
                   component={NavLink}
-                  to={isLoggedIn ? "/sign-out" : "/sign-in"}
+                  to="/conversations"
               >
-                {isLoggedIn ? 'Sign Out' : 'Sign In'}
-              </Link> : null}
-              {!isLoggedIn ? <Link
+                Convos
+              </Link>
+                  <Link
+                  color="inherit"
+                  variant="h6"
+                  underline="none"
+                  className={classes.rightLink}
+                  component={NavLink}
+                  to="/account"
+              >
+                Acct
+              </Link>
+              </div>: null}
+              {!loggedIn ? <Link
+                  color="inherit"
+                  variant="h6"
+                  underline="none"
+                  className={classes.rightLink}
+                  component={NavLink}
+                  to="/sign-in"
+              >
+                Sign In
+              </Link> : <Link
+                  color="inherit"
+                  variant="h6"
+                  underline="none"
+                  className={classes.rightLink}
+                  component={NavLink}
+                  to="/sign-out"
+              >
+                Sign Out
+              </Link>}
+              {!loggedIn ? <Link
                   variant="h6"
                   underline="none"
                   className={clsx(classes.rightLink, classes.linkSecondary)}
@@ -96,6 +126,11 @@ AppAppBar.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
+const mapStateToProps = state => ({
+  loggedIn: state.loggedIn
+})
+
 export default compose(
     withStyles(styles),
+    connect(mapStateToProps, null)
     )(AppAppBar);

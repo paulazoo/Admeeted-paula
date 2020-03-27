@@ -27,7 +27,6 @@ export const login = (username, password) => {
 
 export const loadData = (path, name) => {
     return dispatch => {
-        dispatch(setData({ [name]: ''}))
         dispatch(sendingRequest(true))
         dispatch(setErrorMessage(''))
         api(`${path}`)
@@ -58,7 +57,23 @@ export const loadMe = () => {
                 dispatch(loadingAuth(false))
             })
     }
-};
+}
+
+export const logout = () => {
+    return dispatch => {
+        dispatch(sendingRequest(true))
+        dispatch(setErrorMessage(''))
+        api('/logout')
+            .then(data => {
+                dispatch(sendingRequest(false))
+                dispatch(setAuthState(data.isLoggedIn))
+            })
+            .catch(error => {
+                dispatch(sendingRequest(false))
+                dispatch(setErrorMessage('Error logging out'))
+            })
+    }
+}
 
 export const setErrorMessage = message => {
   return { type: SET_ERROR_MESSAGE, message }

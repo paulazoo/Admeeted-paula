@@ -3,8 +3,10 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '../components/Button';
 import Typography from '../components/Typography';
-import ProductHeroLayout from './ProductHeroLayout';
+import ProductHeroLayout from '../layouts/ProductHeroLayout';
 import {NavLink, Redirect} from 'react-router-dom';
+import {compose} from "redux";
+import {connect} from "react-redux";
 
 const backgroundImage =
   'https://www.insidehighered.com/sites/default/server_files/media/image_4.png';
@@ -30,13 +32,11 @@ const styles = theme => ({
   },
 });
 
-function ProductHero(props) {
-  const { classes } = props;
-  const isLoggedIn = false;
+function ProductHero({ loggedIn, classes }) {
 
   return (
       <div>
-        {isLoggedIn ? (
+        {loggedIn ? (
             <Redirect to='/home' />
             ) : (
             <div>
@@ -73,4 +73,11 @@ ProductHero.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(ProductHero);
+const mapStateToProps = state => ({
+  loggedIn: state.loggedIn
+})
+
+export default compose(
+    withStyles(styles),
+    connect(mapStateToProps, null)
+    )(ProductHero);
