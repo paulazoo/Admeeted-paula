@@ -1,5 +1,6 @@
 #%%
 import os
+import random
 import pyrebase
 #fb_conn=fb.FirebaseApplication('https://admeet2024.firebaseio.com/organizations/yx4uGm90iuD1BOOpNwEw', None)
 project_id='admeeted-18732'
@@ -75,9 +76,18 @@ def add_users_multi(peeps, multi_strs, multi):
 db.child("Harvard").remove()
 
 #%%
-db.child("organizations").child("Harvard").set({'org_name':'Harvard 2024', 'date_founded':'24 March 2020'})
+db.child("orgs").child("Harvard").update({'displayName':'Harvard 2024', 
+        'dateFounded':'24 March 2020',
+        'description': 'Group for connecting pre-first year students!'
+        })
+db.child("orgs").child("UVA").update({'displayName':'University of Virginia 2024', 
+        'dateFounded':'28 March 2020', 
+        'avatar':'<UVA_pic_link>',
+        'description': 'Group for connecting pre-first year students!'
+        })
+
 #%%
-multi='org'
+multi='major'
 category_summary = df[multi]
 
 #turn each multichoose answer into a list of chosen multichoose answers
@@ -93,3 +103,51 @@ multi_strs=list(set(category_firsts))
 # if request.auth != null;
 storage=firebase.storage()
 storage.child("org_imgs/harvard_org_img.png").put('harvard_org_img.png')
+#%%
+db.child('majors').child('Neuroscience').set({'displayName':'Neuroscience','description':'Best science in the world!'})
+db.child('majors').child('Psychology').set({'displayName':'Psychology','description':'Study of the mind...'})
+
+#%%
+#%%
+db.child("events").child("Harvard Admeeted 2024 3-25").set({
+        'displayName': 'Virtual Visitas 25',
+        'org': 'Harvard',
+		'timeCreated': '11:00 23 March 2020' ,
+		'timeStart': '16:00 27 March 2020' ,
+		'timeEnd': '18:00 27 March 2020' ,
+		'creator': 1,
+		'desired_size': 3,
+		'num_rounds': 4})
+
+    #%%
+db.child('user_event').child("Harvard Admeeted 2024 3-25").set({10:True})
+#%%
+db.child('event_user').child(10).set({"Harvard Admeeted 2024 3-25":True})
+
+#%%
+db.child('event_org').child('Harvard').set({"Harvard Admeeted 2024 3-25":True, "Harvard Admeeted 2024 3-26":True,"Harvard Admeeted 2024 3-27":True})
+
+#%%
+db.child('org_user').child(10).set({'Harvard':True})
+
+#%%
+db.child('user_org').child('Harvard').set({10:True})
+
+#%%
+data={
+      'displayName': 'Albert, Samantha, Paula, Bill',
+      'org': 'Harvard',
+      'link': '<Hangouts Chat URL>',
+      'timeStart': '16:00 27 March 2020',
+      'timeEnd': '18:00 27 March 2020',
+      'members': {
+			1: True,
+            10: True,
+            }
+      }
+db.child('convos').child('our_convo').set(data)
+#%%
+db.child('user_convo').remove()
+convo_uid='our_convo'
+#%%
+db.child('convo_user').child(1).set({convo_uid:True})
