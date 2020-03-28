@@ -264,3 +264,41 @@ def profile_old():
                        'avatar': ''
                    }
     ), 200
+
+# -------------------------------------------------------------
+# Samantha's placeholders
+    
+#%%
+@app.route('/organizations', methods=['GET'])
+def organizations():
+    '''
+    Inputs: user_uid
+    Outputs: a dictionary containing the info (in dicts) for all of a user's organizations
+    '''
+    #output_dict = {} #will be nested dict (contains dicts of orgs)
+    org_info_dict = {} #dict of info where key is an org and value is its info dict
+    user_uid=g.user_uid
+    user_orgs = dict(g.db.child('org_user').child(user_uid).get().val())
+    for key in user_orgs:
+        #where key is an org
+        org_info_dict[key] = dict(g.db.child('orgs').child(key).get().val())
+        
+    
+    return jsonify(message=org_info_dict), 200
+#%%
+@app.route('/organizations', methods=['GET'])
+def organizations():
+    '''
+    Inputs: user_uid
+    Outputs: a list containing the info (in dicts) for all of a user's organizations
+    '''
+    org_info_list = [] #list of dictionaries containg info for each of a user's orgs
+    user_uid=g.user_uid
+    user_orgs = dict(g.db.child('org_user').child(user_uid).get().val())
+    for key in user_orgs:
+        #where key is an org
+        org_info_list.append(dict(g.db.child('orgs').child(key).get().val()))
+        
+    
+    return jsonify(message=org_info_list), 200
+#%%
