@@ -37,8 +37,8 @@ App gets client credentials by reading environmental variables
 
 Windows users: set GOOGLE_CLIENT_ID=your_client_id in Command Prompt
 """
-GOOGLE_CLIENT_ID = '667088492207-2fch6bc6r8b40fm40hjv8mq0n6minrr2.apps.googleusercontent.com'
-GOOGLE_CLIENT_SECRET = 'CFG-c2H48GDs_xdxvDj4nFAb'
+GOOGLE_CLIENT_ID = ''
+GOOGLE_CLIENT_SECRET = ''
 GOOGLE_DISCOVERY_URL = (
     "https://accounts.google.com/.well-known/openid-configuration"
 )
