@@ -426,31 +426,6 @@ def all_orgs(other_user_uid):
 @app.route('/organizations/<org_uid>', methods=['GET', 'POST'])
 def other_orgs(org_uid):
     if request.method == 'POST':
-        signup_cancel = request.get_json()
-        
-    user_uid=g.user_uid
-    data=dict(g.db.child('orgs').child(org_uid).get().val())
-    #admin...? Need to edit database later
-    data.update({'org_uid':org_uid, 'admin':True})
-    org_users=g.db.child('user_org').child(org_uid).shallow().get().val()
-    if str(user_uid) in org_users:
-        data.update({'joined':True})
-        
-    return jsonify(message=data), 200
-
-#%%
-@app.route('/conversations/<convo_uid>', methods=['GET'])
-def other_convos(convo_uid):
-    #...bc user can't change convos?
-    user_uid=g.user_uid
-    other_convos_data = db_for_flask.db_other_convos(user_uid, convo_uid)
-    return jsonify(message=other_convos_data), 200
-
-@app.route('/organizations', methods=['GET', 'POST'])
-def orgs():
-    user_uid=g.user_uid
-    
-    if request.method == 'POST':
         signup_cancel, org_uid = request.get_json() #...sign up vs cancel?
         try:    
             if signup_cancel==True:
@@ -462,15 +437,51 @@ def orgs():
             return True, 200
         except:
             return False, 400
+    user_uid=g.user_uid
+    data=dict(g.db.child('orgs').child(org_uid).get().val())
+    #admin...? Need to edit database later
+    data.update({'org_uid':org_uid, 'admin':True})
+    org_users=g.db.child('user_org').child(org_uid).shallow().get().val()
+    if str(user_uid) in org_users:
+        data.update({'joined':True})
+        
+    return jsonify(message=data), 200
 
-    orgs_data = db_for_flask.db_orgs(user_uid)
-    return jsonify(message=orgs_data), 200
+@app.route('/organizations', methods=['GET'])
+def organizations():
+    '''
+    Inputs: user_uid
+    Outputs: a list containing the info (in dicts) for all of a user's organizations
+    '''
+    org_info_list = [] #list of dictionaries containg info for each of a user's orgs
+    user_uid=g.user_uid
+    user_orgs = dict(g.db.child('org_user').child(user_uid).get().val())
+    for key in user_orgs:
+        #where key is an org
+        org_info_list.append(dict(g.db.child('orgs').child(key).get().val()))
+        
+    
+    return jsonify(message=org_info_list), 200
+#%%
+@app.route('/conversations/<convo_uid>', methods=['GET'])
+def other_convos(convo_uid):
+    #...bc user can't change convos?
+    user_uid=g.user_uid
+    other_convos_data = db_for_flask.db_other_convos(user_uid, convo_uid)
+    return jsonify(message=other_convos_data), 200
+
 
 #%%
 #To run your Flask application on your local computer to test the login flow
 if __name__ == "__main__":
     app.run(ssl_context="adhoc")
     print("running")
+
+
+
+
+
+
 
 #%%
 # -------------------------------------------------------------
@@ -623,40 +634,3 @@ def profile_old():
                    }
     ), 200
 
-# -------------------------------------------------------------
-# Samantha's placeholders
-    
-#%%
-@app.route('/organizations', methods=['GET'])
-def organizations():
-    '''
-    Inputs: user_uid
-    Outputs: a dictionary containing the info (in dicts) for all of a user's organizations
-    '''
-    #output_dict = {} #will be nested dict (contains dicts of orgs)
-    org_info_dict = {} #dict of info where key is an org and value is its info dict
-    user_uid=g.user_uid
-    user_orgs = dict(g.db.child('org_user').child(user_uid).get().val())
-    for key in user_orgs:
-        #where key is an org
-        org_info_dict[key] = dict(g.db.child('orgs').child(key).get().val())
-        
-    
-    return jsonify(message=org_info_dict), 200
-#%%
-@app.route('/organizations', methods=['GET'])
-def organizations():
-    '''
-    Inputs: user_uid
-    Outputs: a list containing the info (in dicts) for all of a user's organizations
-    '''
-    org_info_list = [] #list of dictionaries containg info for each of a user's orgs
-    user_uid=g.user_uid
-    user_orgs = dict(g.db.child('org_user').child(user_uid).get().val())
-    for key in user_orgs:
-        #where key is an org
-        org_info_list.append(dict(g.db.child('orgs').child(key).get().val()))
-        
-    
-    return jsonify(message=org_info_list), 200
-#%%
