@@ -3797,7 +3797,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"clsx@npm:^1.0.2":
+"clsx@npm:^1.0.2, clsx@npm:^1.1.0":
   version: 1.1.0
   resolution: "clsx@npm:1.1.0"
   checksum: 2/aebac019d24b4f40d28490fa31abdb7791d50242d928f27faa3aef44150f410600eb3c64ab6af01c66c3a022313d1c578a3e57c26bd6040bc15d30699824456c
@@ -11488,11 +11488,14 @@ fsevents@^1.2.7:
   dependencies:
     "@material-ui/core": ^4.9.7
     "@material-ui/icons": ^4.9.1
+    "@material-ui/styles": ^4.9.6
     "@testing-library/jest-dom": ^4.2.4
     "@testing-library/react": ^9.3.2
     "@testing-library/user-event": ^7.1.2
+    clsx: ^1.1.0
     final-form: ^4.18.7
     moment: ^2.24.0
+    prop-types: ^15.7.2
     react: ^16.13.1
     react-dom: ^16.13.1
     react-final-form: ^6.3.5

@@ -27,7 +27,6 @@ import db_for_flask
 Paula and Samantha combined version!
 '''
 
->>>>>>> 6d56fb20dbb62881a9a3a8cb76ace508744def29
 #%%
 #for google auth
 # Google Auth Configuration
@@ -38,8 +37,10 @@ App gets client credentials by reading environmental variables
 
 Windows users: set GOOGLE_CLIENT_ID=your_client_id in Command Prompt
 """
-GOOGLE_CLIENT_ID = os.environ.get("GOOGLE_CLIENT_ID", None)
-GOOGLE_CLIENT_SECRET = os.environ.get("GOOGLE_CLIENT_SECRET", None)
+# GOOGLE_CLIENT_ID = os.environ.get("GOOGLE_CLIENT_ID", None)
+GOOGLE_CLIENT_ID = "667088492207-2fch6bc6r8b40fm40hjv8mq0n6minrr2.apps.googleusercontent.com"
+# GOOGLE_CLIENT_SECRET = os.environ.get("GOOGLE_CLIENT_SECRET", None)
+GOOGLE_CLIENT_SECRET = "CFG-c2H48GDs_xdxvDj4nFAb"
 GOOGLE_DISCOVERY_URL = (
     "https://accounts.google.com/.well-known/openid-configuration"
 )
@@ -313,6 +314,7 @@ def upcoming_events():
 
 @app.route('/upcoming-events/<org_uid>', methods=['GET'])
 def upcoming_events_org(org_uid):
+    user_uid = g.user_uid
     events_users=g.db.child('event_user').child(user_uid).get().val()
     events_orgs=g.db.child('event_org').child(org_uid).get().val()
     events=set(events_users) & set(events_orgs)
@@ -409,6 +411,8 @@ def all_orgs(other_user_uid):
 
 @app.route('/organizations/<org_uid>', methods=['GET', 'POST'])
 def other_orgs(org_uid):
+    user_uid = g.user_uid
+
     if request.method == 'POST':
         signup_cancel, org_uid = request.get_json() #...sign up vs cancel?
         try:    
@@ -421,7 +425,7 @@ def other_orgs(org_uid):
             return True, 200
         except:
             return False, 400
-    user_uid=g.user_uid
+
     data=dict(g.db.child('orgs').child(org_uid).get().val())
     #admin...? Need to edit database later
     data.update({'org_uid':org_uid, 'admin':True})
@@ -704,7 +708,6 @@ profile_old_data = {
 
 @app.route('/profile-old', methods=['GET', 'POST'])
 def profile_old():
-<<<<<<< HEAD
     global profile_old_data
     if request.method == 'POST':
         print(request.get_json(force=True))
@@ -714,16 +717,3 @@ def profile_old():
         profile_old_data['interests'] = request.get_json(force=True)['new_data']['interests']
         return jsonify(message=True), 200
     return jsonify(message=profile_old_data), 200
-=======
-    return jsonify(message=
-                   {
-                       'email': 'albertzhang9000@gmail.com',
-                       'displayName': 'Albert Zhang',
-                       'state': 'Georgia',
-                       'country': 'USA',
-                       'participating': True,
-                       'avatar': ''
-                   }
-    ), 200
-
->>>>>>> 6d56fb20dbb62881a9a3a8cb76ace508744def29
