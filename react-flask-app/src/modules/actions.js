@@ -4,6 +4,7 @@ export const SENDING_REQUEST = 'SENDING_REQUEST';
 export const LOADING_AUTH = 'LOADING_AUTH';
 export const SET_ERROR_MESSAGE = 'SET_ERROR_MESSAGE';
 export const SET_DATA = 'SET_DATA';
+export const SET_ORG_DATA = 'SET_ORG_DATA';
 
 export const login = (username, password) => {
     return dispatch => {
@@ -41,6 +42,66 @@ export const loadData = (path, name) => {
                     dispatch(setAuthState(false))
                 }
             })
+    }
+}
+
+export const changeData = (path, new_data, updatePaths, updateNames) => {
+    return dispatch => {
+        dispatch(sendingRequest(true))
+        dispatch(setErrorMessage(''))
+        fetch(`${path}`, {
+            method: 'POST',
+            body: JSON.stringify({ new_data })
+        }).then(res => {
+            if (res.ok) return res.json();
+            else throw new Error(res.statusText)
+        }).then(data => {
+            dispatch(sendingRequest(false))
+            {updatePaths.map(function(e, i) {
+                dispatch(loadData(e, updateNames[i]))
+            })}
+        }).catch(error => {
+            dispatch(sendingRequest(false))
+            dispatch(setErrorMessage('Change data failed'))
+        });
+    }
+}
+
+export const loadOrgData = (path, name) => {
+    return dispatch => {
+        dispatch(sendingRequest(true))
+        dispatch(setErrorMessage(''))
+        api(`${path}`)
+            .then(data => {
+                dispatch(sendingRequest(false))
+                dispatch(setOrgData({[name]: data.message}))
+            })
+            .catch(error => {
+                dispatch(sendingRequest(false))
+                dispatch(setErrorMessage('Error loading data'))
+            })
+    }
+}
+
+export const changeOrgData = (path, new_data, updatePaths, updateNames) => {
+    return dispatch => {
+        dispatch(sendingRequest(true))
+        dispatch(setErrorMessage(''))
+        fetch(`${path}`, {
+            method: 'POST',
+            body: JSON.stringify({ new_data })
+        }).then(res => {
+            if (res.ok) return res.json();
+            else throw new Error(res.statusText)
+        }).then(data => {
+            dispatch(sendingRequest(false))
+            {updatePaths.map(function(e, i) {
+                dispatch(loadOrgData(e, updateNames[i]))
+            })}
+        }).catch(error => {
+            dispatch(sendingRequest(false))
+            dispatch(setErrorMessage('Change data failed'))
+        });
     }
 }
 
@@ -97,6 +158,10 @@ const loadingAuth = sending => {
 
 const setData = data => {
   return { type: SET_DATA, data }
+}
+
+const setOrgData = data => {
+  return { type: SET_ORG_DATA, data }
 }
 
 const api = path => {

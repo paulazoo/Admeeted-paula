@@ -34,11 +34,9 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function AccountProfile ({ user, className, ...rest }) {
+function OrgProfile ({ user, className, ...rest }) {
 
   const classes = useStyles();
-
-  const timezone = 'GTM-7';
 
   return (
     <Card
@@ -59,14 +57,14 @@ function AccountProfile ({ user, className, ...rest }) {
               color="textSecondary"
               variant="body1"
             >
-              {user.state}, {user.country}
+              {user.description}
             </Typography>
             <Typography
               className={classes.dateText}
               color="textSecondary"
               variant="body1"
             >
-              {moment().format('hh:mm A')}
+              {user.dateFounded}
             </Typography>
           </div>
           <Avatar
@@ -82,23 +80,23 @@ function AccountProfile ({ user, className, ...rest }) {
         {/*  />*/}
         {/*</div>*/}
       </CardContent>
-      {/*<Divider />*/}
-      {/*<CardActions>*/}
-      {/*  <Button*/}
-      {/*    className={classes.uploadButton}*/}
-      {/*    color="primary"*/}
-      {/*    variant="text"*/}
-      {/*  >*/}
-      {/*    Upload picture*/}
-      {/*  </Button>*/}
-      {/*  <Button variant="text">Remove picture</Button>*/}
-      {/*</CardActions>*/}
+      <Divider />
+      <CardActions>
+        <Button
+          className={classes.uploadButton}
+          color="primary"
+          variant="text"
+        >
+          {user.joined ? 'Leave organization' : 'Join organization'}
+        </Button>
+        {user.admin ? <Button variant="text">Manage</Button> : null}
+      </CardActions>
     </Card>
   );
 };
 
-AccountProfile.propTypes = {
+OrgProfile.propTypes = {
   className: PropTypes.string
 };
 
-export default AccountProfile;
+export default OrgProfile;

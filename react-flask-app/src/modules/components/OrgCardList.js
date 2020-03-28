@@ -29,7 +29,7 @@ const styles = theme => ({
     }
 });
 
-function CardList({ title, data, maxItems, avatar, iconButton, className, classes }) {
+function OrgCardList({ title, data, maxItems, iconButton, className, classes }) {
     function setItems(items) {
         if (items.length > maxItems) {
             return data.slice(0, maxItems)
@@ -54,19 +54,11 @@ function CardList({ title, data, maxItems, avatar, iconButton, className, classe
                   divider={i < points.length}
                   key={i}
                 >
-                  <ListItemAvatar>
-                      {avatar(point.org)}
-                    {/*<img*/}
-                    {/*  alt="Conversation"*/}
-                    {/*  className={classes.image}*/}
-                    {/*  src={product.imageUrl}*/}
-                    {/*/>*/}
-                  </ListItemAvatar>
                   <ListItemText
                     primary={point.displayName}
                     secondary={point.timeStart}
                   />
-                    {point.hasOwnProperty('link') ? iconButton(point.link) : null}
+                    {point.hasOwnProperty('link') ? iconButton(point.link) : iconButton(point.id)}
                 </ListItem>
               ))}
             </List>
@@ -84,4 +76,4 @@ function CardList({ title, data, maxItems, avatar, iconButton, className, classe
     )
 }
 
-export default withStyles(styles)(CardList);
+export default withStyles(styles)(OrgCardList);

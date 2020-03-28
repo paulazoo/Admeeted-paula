@@ -20,6 +20,7 @@ import {
 } from '@material-ui/core';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import ChatIcon from '@material-ui/icons/Chat';
 
 import Paper from '../components/Paper';
 import Container from '@material-ui/core/Container';
@@ -29,6 +30,8 @@ import Panel from "./Panel";
 import PanelList from "./PanelList";
 import Loading from "./Loading";
 import CardList from "../components/CardList";
+import {NavLink} from "react-router-dom";
+import OrgCardList from "../components/OrgCardList";
 
 const styles = theme => ({
     grid: {
@@ -41,21 +44,69 @@ const styles = theme => ({
     orgsRoot: {
         height: '100%'
     },
-    pastRoot: {
+    convoRoot: {
         height: '100%'
+    },
+    image: {
+        height: 36,
+        width: 36
     }
 });
 
 function Homepage({ data, currentlySending, classes }) {
-    const upcomingText = 'Your upcoming conversations';
-    const pastText = 'Your past conversations';
+    const upcomingText = 'Your upcoming events';
+    const convoText = 'Your conversations';
     const orgText = 'Your organizations';
 
-    const upcomingConvos = data.upcomingConvos;
-    const pastConvos = data.pastConvos;
+    const viewAllConvos = ''; // What is this for?
+
+    const upcomingEvents = data.upcomingEvents;
+    const conversations = data.conversations;
     const organizations = data.organizations;
 
+    console.log(data);
+
     const maxItems = 5;
+
+    function avatar(uid) {
+        return <Button
+            color="primary"
+            edge="end"
+            size="small"
+            component={NavLink}
+            to={`/organization/${uid}`}
+        >
+            <img
+                className={classes.image}
+                src='/logo192.png'
+                alt='React'
+            />
+        </Button>
+    }
+
+    function chatButton(link) {
+        console.log(link);
+        return <IconButton
+            color="primary"
+            edge="end"
+            size="small"
+            href={link}
+        >
+            <ChatIcon/>
+        </IconButton>
+    }
+
+    function arrowButton(uid) {
+        return <IconButton
+            color="primary"
+            edge="end"
+            size="small"
+            component={NavLink}
+            to={`/organization/${uid}`}
+        >
+            <ArrowRightIcon />
+        </IconButton>
+    }
 
     return(
         <div>
@@ -68,7 +119,14 @@ function Homepage({ data, currentlySending, classes }) {
                           xl={4}
                           xs={12}
                     >
-                        <CardList title={upcomingText} data={upcomingConvos} maxItems={maxItems} className={classes.upcomingRoot}/>
+                        <CardList
+                            title={upcomingText}
+                            data={upcomingEvents}
+                            maxItems={maxItems}
+                            avatar={avatar}
+                            iconButton={chatButton}
+                            className={classes.upcomingRoot}
+                        />
                         {/*<PanelLayout>*/}
                         {/*    <Panel title={upcomingText}>*/}
                         {/*        <PanelList data={upcomingConvos}/>*/}
@@ -81,7 +139,14 @@ function Homepage({ data, currentlySending, classes }) {
                           xl={4}
                           xs={12}
                     >
-                        <CardList title={orgText} data={organizations} maxItems={maxItems} className={classes.orgsRoot}/>
+                        <OrgCardList
+                            title={orgText}
+                            data={organizations}
+                            maxItems={maxItems}
+                            avatar={avatar}
+                            iconButton={arrowButton}
+                            className={classes.orgsRoot}
+                        />
                         {/*<PanelLayout>*/}
                         {/*    <Panel title={orgText}>*/}
                         {/*        <PanelList data={organizations}/>*/}
@@ -97,7 +162,14 @@ function Homepage({ data, currentlySending, classes }) {
                           xl={4}
                           xs={12}
                     >
-                        <CardList title={pastText} data={pastConvos} maxItems={maxItems} className={classes.pastRoot}/>
+                        <CardList
+                            title={convoText}
+                            data={conversations}
+                            maxItems={maxItems}
+                            avatar={avatar}
+                            iconButton={chatButton}
+                            className={classes.convoRoot}
+                        />
                         {/*<PanelLayout>*/}
                         {/*    <Panel title={orgText}>*/}
                         {/*        <PanelList data={organizations}/>*/}

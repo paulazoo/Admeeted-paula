@@ -16,6 +16,10 @@ import App from '../../App';
 import Toolbar, { styles as toolbarStyles } from '../components/Toolbar';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
+import EventIcon from '@material-ui/icons/Event';
+import {IconButton} from "@material-ui/core";
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 const styles = theme => ({
   title: {
@@ -65,26 +69,22 @@ function AppAppBar({ loggedIn, classes }) {
             </Link>
             <div className={classes.right}>
               {loggedIn ? <div>
-                    <Link
+                    <IconButton
                   color="inherit"
-                  variant="h6"
-                  underline="none"
                   className={classes.rightLink}
                   component={NavLink}
-                  to="/conversations"
+                  to="/events"
               >
-                Convos
-              </Link>
-                  <Link
+                <EventIcon/>
+              </IconButton>
+                  <IconButton
                   color="inherit"
-                  variant="h6"
-                  underline="none"
                   className={classes.rightLink}
                   component={NavLink}
                   to="/account"
               >
-                Acct
-              </Link>
+                <AccountCircleIcon/>
+              </IconButton>
               </div>: null}
               {!loggedIn ? <Link
                   color="inherit"
@@ -95,16 +95,14 @@ function AppAppBar({ loggedIn, classes }) {
                   to="/sign-in"
               >
                 Sign In
-              </Link> : <Link
+              </Link> : <IconButton
                   color="inherit"
-                  variant="h6"
-                  underline="none"
                   className={classes.rightLink}
                   component={NavLink}
                   to="/sign-out"
               >
-                Sign Out
-              </Link>}
+                <ExitToAppIcon/>
+              </IconButton>}
               {!loggedIn ? <Link
                   variant="h6"
                   underline="none"

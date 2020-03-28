@@ -24,10 +24,10 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     loadUpcomingConvos: () => {
-        dispatch(loadData('/upcoming-convos', 'upcomingConvos'));
+        dispatch(loadData('/upcoming-convos', 'upcomingEvents'));
     },
     loadPastConvos: () => {
-        dispatch(loadData('/past-convos', 'pastConvos'));
+        dispatch(loadData('/past-convos', 'conversations'));
     },
     loadOrganizations: () => {
         dispatch(loadData('/organizations-old', 'organizations'));

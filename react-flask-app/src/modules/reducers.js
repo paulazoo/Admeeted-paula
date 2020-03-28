@@ -1,27 +1,40 @@
 import {
-  CHANGE_FORM,
-  SET_AUTH,
-  SENDING_REQUEST,
-  LOADING_AUTH,
-  SET_ERROR_MESSAGE,
-  SET_DATA
+    CHANGE_FORM,
+    SET_AUTH,
+    SENDING_REQUEST,
+    LOADING_AUTH,
+    SET_ERROR_MESSAGE,
+    SET_DATA,
+    SET_ORG_DATA
 } from './actions'
 
 const initialState = {
   formState: {
-    email: '',
-    password: ''
+    displayName: '',
+    state: '',
+    country: ''
   },
   currentlySending: false,
   loadingAuth: false,
   loggedIn: false,
   errorMessage: '',
   data: {
-    profile: '',
-    upcomingConvos: [],
-    pastConvos: [],
-    availConvos: [],
-    organizations: []
+    profile: {
+      displayName: '',
+      state: '',
+      country: '',
+      interests: []
+    },
+    upcomingEvents: [],
+    conversations: [],
+    availEvents: [],
+    organizations: [],
+  },
+  org_data: {
+    profile: {},
+    upcomingEvents: [],
+    conversations: [],
+    availEvents: []
   }
 }
 
@@ -38,8 +51,10 @@ export const homeReducer = (state = initialState, action) => {
     case SET_ERROR_MESSAGE:
       return setErrorMessage(state, action)
     case SET_DATA:
-      console.log(action)
       return setData(state, action)
+    case SET_ORG_DATA:
+      console.log(action)
+      return setOrgData(state, action)
     default:
       return state
   }
@@ -88,6 +103,16 @@ const setData = (state, action) => {
     ...state,
     data: {
       ...state.data,
+      ...action.data
+    }
+  }
+}
+
+const setOrgData = (state, action) => {
+  return {
+    ...state,
+    org_data: {
+      ...state.org_data,
       ...action.data
     }
   }

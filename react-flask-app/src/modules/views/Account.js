@@ -1,5 +1,4 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/styles';
 import { Grid } from '@material-ui/core';
 
 import AccountProfile from '../components/AccountProfile';
@@ -7,22 +6,13 @@ import AccountDetails from '../components/AccountDetails';
 import MainLayout from "../layouts/MainLayout";
 import Loading from './Loading';
 import {withStyles} from "@material-ui/core/styles";
+import FolderIcon from "@material-ui/icons/Folder";
 
 const styles = theme => ({
-  root: {
-    padding: theme.spacing(4),
-    backgroundColor: '#7fc7d9',
-    position: 'relative',
-    display: 'flex',
-    [theme.breakpoints.up('sm')]: {
-      height: '100vh',
-      minHeight: 500
-    },
-  },
+  root: { },
 });
 
-function Account({ profile, currentlySending, classes }) {
-  console.log(profile);
+function Account({ profile, currentlySending, setProfile, classes }) {
   return (
     <div>
       {!currentlySending ? <MainLayout>
@@ -46,7 +36,7 @@ function Account({ profile, currentlySending, classes }) {
             xl={8}
             xs={12}
           >
-            <AccountDetails />
+            <AccountDetails profile={profile} setProfile={setProfile}/>
           </Grid>
        </Grid>
       </MainLayout> : <Loading/>}

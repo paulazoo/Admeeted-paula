@@ -32,6 +32,7 @@ function App({ loadingAuth, loadUser }) {
                 {/*<AppFooter/>*/}
             </React.Fragment> : <Loading/>}
       </div>
+
   );
 }
 
