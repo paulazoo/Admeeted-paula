@@ -23,6 +23,7 @@ def profile_db(data):
 
 def db_profile(user_uid):
     data = db.child('users').child(user_uid).get().val()
+    #Need val() to format from json to python
 
     return data
 
@@ -61,6 +62,8 @@ def db_other_convos(user_uid, convo_uid):
     return data
 
 def orgs_db(user_uid,org_uid,signup_cancel):
+    #Check if string from front_end signup or cancel 
+    #For user adding themselves or removing themselves for an organization
     if signup_cancel == 'signup':
         db.child("orgs_users").child(user_uid).set({org_uid:True})
         db.child("users_orgs").child(org_uid).set({user_uid:True})
@@ -75,4 +78,15 @@ def db_orgs(user_uid):
 def db_other_orgs(user_uid, org_uid):
     data = db.child('orgs').child(org_uid).get().val()
     return data
+
+def db_org_user(user_uid):
+    #Returns all the organizations a user is in
+    data = dict(db.child('org_user').child(user_uid).get().val())
+    return data
+
+def db_org_info(org_uid):
+    #Returns the info for an inputted organization
+    data = dict(db.child('orgs').child(org_uid).get().val())
+    return data
+
 #%%
