@@ -37,8 +37,8 @@ App gets client credentials by reading environmental variables
 
 Windows users: set GOOGLE_CLIENT_ID=your_client_id in Command Prompt
 """
-GOOGLE_CLIENT_ID = os.environ.get("GOOGLE_CLIENT_ID", None)
-GOOGLE_CLIENT_SECRET = os.environ.get("GOOGLE_CLIENT_SECRET", None)
+GOOGLE_CLIENT_ID = '667088492207-2fch6bc6r8b40fm40hjv8mq0n6minrr2.apps.googleusercontent.com'
+GOOGLE_CLIENT_SECRET = 'CFG-c2H48GDs_xdxvDj4nFAb'
 GOOGLE_DISCOVERY_URL = (
     "https://accounts.google.com/.well-known/openid-configuration"
 )
@@ -126,7 +126,7 @@ def index():
             "<div><p>Google Profile Picture:</p>"
             '<img src="{}" alt="Google profile pic"></img></div>'
             '<a class="button" href="/logout">Logout</a>'.format(
-                current_user.name, current_user.email, current_user.profile_pic
+                current_user.name, current_user.email, current_user.avatar
             )
         )
     else:
@@ -229,7 +229,7 @@ def callback():
 # Create a user in your db with the information provided
 # by Google
     user = User(
-        id_=unique_id, name=users_name, email=users_email, profile_pic=picture
+        id_=unique_id, name=users_name, email=users_email, avatar=picture
         )
 
 # Doesn't exist? Add it to the database.
@@ -305,7 +305,7 @@ def other_profile(other_user_uid):
     return jsonify(message=profile_data), 200
 
 @app.route('/majors', methods=['GET'])
-def majors(other_user_uid):
+def majors():
     data=g.db.child('majors').get().val()
      
     return jsonify(message=data), 200
@@ -329,6 +329,7 @@ def upcoming_events():
 
 @app.route('/upcoming-events/<org_uid>', methods=['GET'])
 def upcoming_events_org(org_uid):
+    user_uid=g.user_uid
     events_users=g.db.child('event_user').child(user_uid).get().val()
     events_orgs=g.db.child('event_org').child(org_uid).get().val()
     events=set(events_users) & set(events_orgs)
@@ -425,6 +426,7 @@ def all_orgs(other_user_uid):
 
 @app.route('/organizations/<org_uid>', methods=['GET', 'POST'])
 def other_orgs(org_uid):
+    user_uid=g.user_uid
     if request.method == 'POST':
         signup_cancel, org_uid = request.get_json() #...sign up vs cancel?
         try:    
@@ -437,7 +439,6 @@ def other_orgs(org_uid):
             return True, 200
         except:
             return False, 400
-    user_uid=g.user_uid
     data=dict(g.db.child('orgs').child(org_uid).get().val())
     #admin...? Need to edit database later
     data.update({'org_uid':org_uid, 'admin':True})
