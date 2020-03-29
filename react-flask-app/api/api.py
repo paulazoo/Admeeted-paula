@@ -146,13 +146,15 @@ def login():
 
     # Doesn't exist? Add it to the database.
     if not User.get(unique_id):
+        new_user=True
         print("User doesn't exist, creating new User")
         User.create(unique_id, users_name, users_email, picture)
-
+    else:
+        new_user=False
     # Begin user session by logging the user in (using Flask Log-in)
     login_user(user)
 
-    return jsonify(message=current_user.is_authenticated), 200
+    return jsonify(message=current_user.is_authenticated, new_user=new_user), 200
 
     # print("login")
     # # Find out what URL to hit for Google login
@@ -331,7 +333,7 @@ def upcoming_events():
     
         if event_timeStart<=datetime.now():
             event_info=dict(event_info_ord)
-            event_info.update({'event_uid':event})
+            event_info.update({'id':event})
             data.append(event_info)
      
     return jsonify(message=data), 200
@@ -349,7 +351,7 @@ def upcoming_events_org(org_uid):
     
         if event_timeStart<=datetime.now():
             event_info=dict(event_info_ord)
-            event_info.update({'event_uid':event})
+            event_info.update({'id':event})
             data.append(event_info)   
             
     return jsonify(message=data), 200
@@ -371,7 +373,7 @@ def avail_events(org_uid):
     
         if event_timeStart<=datetime.now():
             event_info=dict(event_info_ord)
-            event_info.update({'event_uid':event})
+            event_info.update({'id':event})
             data.append(event_info)
             
     return jsonify(message=data), 200
@@ -389,7 +391,7 @@ def avail_events_org(org_uid):
     
         if event_timeStart<=datetime.now():
             event_info=dict(event_info_ord)
-            event_info.update({'event_uid':event})
+            event_info.update({'id':event})
             data.append(event_info)
             
     return jsonify(message=data), 200
@@ -422,7 +424,7 @@ def convos():
     data={}
     for convo in convos:
         convo_info=g.db.child('convos').child(convo).get().val()
-        convo_info.update({'convo_uid': convo})
+        convo_info.update({'id': convo})
         data.update(convo_info)
     return jsonify(message=data), 200
 
@@ -450,7 +452,7 @@ def other_orgs(org_uid):
             return False, 400
     data=dict(g.db.child('orgs').child(org_uid).get().val())
     #admin...? Need to edit database later
-    data.update({'org_uid':org_uid, 'admin':True})
+    data.update({'id':org_uid, 'admin':True})
     org_users=g.db.child('user_org').child(org_uid).shallow().get().val()
     if str(user_uid) in org_users:
         data.update({'joined':True})
