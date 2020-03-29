@@ -21,10 +21,10 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     loadProfile: () => {
-        dispatch(loadData('/profile-old', 'profile'))
+        dispatch(loadData('/profile', 'profile'))
     },
     setProfile: (new_data) => {
-        dispatch(changeData('/profile-old', new_data, ['/profile-old'], ['profile']))
+        dispatch(changeData('/profile', new_data, ['/profile'], ['profile']))
     }
 })
 

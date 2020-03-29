@@ -34,18 +34,14 @@ export const loadData = (path, name) => {
         dispatch(setErrorMessage(''))
         api(`${path}`)
             .then(data => {
-                console.log('Loaded data')
                 console.log(name)
-                console.log(data)
+                console.log(data.message)
                 dispatch(sendingRequest(false))
                 dispatch(setData({[name]: data.message}))
             })
             .catch(error => {
                 dispatch(sendingRequest(false))
                 dispatch(setErrorMessage('Error loading data'))
-                if (error.message === '401') {
-                    dispatch(setAuthState(false))
-                }
             })
     }
 }

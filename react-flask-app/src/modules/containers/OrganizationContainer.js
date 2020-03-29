@@ -37,22 +37,22 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     loadOrgProfile: (org_uid) => {
-        dispatch(loadOrgData(`/organizations-old/${org_uid}`, 'profile'))
+        dispatch(loadOrgData(`/organizations/${org_uid}`, 'profile'))
     },
     loadOrgUpcomingEvents: (org_uid) => {
-        dispatch(loadOrgData(`/upcoming-convos/${org_uid}`, 'upcomingEvents'))
+        dispatch(loadOrgData(`/upcoming-events/${org_uid}`, 'upcomingEvents'))
     },
     loadOrgAvailEvents: (org_uid) => {
-        dispatch(loadOrgData(`/avail-convos/${org_uid}`, 'availEvents'))
+        dispatch(loadOrgData(`/avail-events/${org_uid}`, 'availEvents'))
     },
     loadOrgConversations: (org_uid) => {
-        dispatch(loadOrgData(`/past-convos/${org_uid}`, 'conversations'))
+        dispatch(loadOrgData(`/conversations-NOT-READY/${org_uid}`, 'conversations'))
     },
     modifyEvent: (event_uid, signUp, org_uid) => {
         dispatch(changeOrgData(
-            `/convos-old/${event_uid}`,
+            `/events/${event_uid}`,
             signUp,
-            [`/upcoming-convos/${org_uid}`, `/avail-convos/${org_uid}`],
+            [`/upcoming-events/${org_uid}`, `/avail-events/${org_uid}`],
             ['upcomingEvents', 'availEvents'])
         );
     }

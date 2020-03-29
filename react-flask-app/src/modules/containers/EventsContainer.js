@@ -23,16 +23,16 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     loadUpcomingEvents: () => {
-        dispatch(loadData('/upcoming-convos', 'upcomingEvents'));
+        dispatch(loadData('/upcoming-events', 'upcomingEvents'));
     },
     loadAvailEvents: () => {
-        dispatch(loadData('/avail-convos', 'availEvents'));
+        dispatch(loadData('/avail-events', 'availEvents'));
     },
     modifyEvent: (event_uid, signUp) => {
         dispatch(changeData(
-            `/convos-old/${event_uid}`,
+            `/events/${event_uid}`,
             signUp,
-            ['/upcoming-convos', '/avail-convos'],
+            ['/upcoming-events', '/avail-events'],
             ['upcomingEvents', 'availEvents'])
         );
     }

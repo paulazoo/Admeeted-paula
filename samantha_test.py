@@ -32,6 +32,7 @@ import os
 import pyrebase
 
 
+
 print("init db called")
 project_id='admeeted-18732'
 config = {
@@ -50,10 +51,23 @@ db = firebase.database()
 
 org_info_list = [] #list of dictionaries containg info for each of a user's orgs
 user_uid= 10
+#db=get_db()
+'''
+Inputs: user_uid
+Outputs: a list containing the info (in dicts) for all of a user's organizations
+'''
+org_info_list = [] #list of dictionaries containg info for each of a user's orgs
+#user_uid=session.get('user_uid')
 user_orgs = dict(db.child('org_user').child(user_uid).get().val())
-for key in user_orgs:
-    #where key is an org
-    org_info_list.append(dict(db.child('orgs').child(key).get().val()))
-    print("Current list: {} at key: {}".format(org_info_list, key))
+if user_orgs:
+    for key in user_orgs:
+        #where key is an org
+        dictionary = dict(db.child('orgs').child(key).get().val())
+        dictionary['id'] = key
+        org_info_list.append(dictionary)
+elif not user_orgs:
+    org_info_list=[]
+
+#return jsonify(message=org_info_list), 200
     
 print("Final list: {}".format(org_info_list))

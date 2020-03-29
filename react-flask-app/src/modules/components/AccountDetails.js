@@ -36,6 +36,12 @@ const all_interests = [
     'hiking'
 ]
 
+const all_majors = [
+    'Computer Science',
+    'Neuroscience',
+    'Psychology'
+]
+
 // const all_interests = [
 //   {
 //     value: 'cooking',
@@ -67,7 +73,7 @@ function AccountDetails({ profile, setProfile, className, classes, ...rest }) {
     displayName: '',
     state: '',
     country: '',
-    interests: []
+    majors: []
   });
 
   useEffect(() => {
@@ -252,24 +258,24 @@ function AccountDetails({ profile, setProfile, className, classes, ...rest }) {
               <FormControl
                   fullWidth
               >
-                <InputLabel>Interests</InputLabel>
+                <InputLabel>Majors</InputLabel>
                 <Select
                     multiple
                     name='interests'
-                    value={values.interests}
+                    value={values.majors}
                     onChange={handleChange}
                     input={<Input id='select-multiple-chip'/>}
                     renderValue={selected => (
                         <div className={classes.chips}>
-                          {selected.map(interest => (
-                              <Chip key={interest} label={interest} className={classes.chip} />
+                          {selected.map(major => (
+                              <Chip key={major} label={major} className={classes.chip} />
                           ))}
                         </div>
                     )}
                 >
-                  {all_interests.map(interest => (
-                      <MenuItem key={interest} value={interest} style={getStyles(interest, values.interests, theme)}>
-                        {interest}
+                  {all_majors.map(major => (
+                      <MenuItem key={major} value={major} style={getStyles(major, values.majors, theme)}>
+                        {major}
                       </MenuItem>
                   ))}
                 </Select>
