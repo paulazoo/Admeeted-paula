@@ -501,6 +501,7 @@ def organizations():
         org_info_list=[]
     
     return jsonify(message=org_info_list), 200
+
 #%%
 @app.route('/conversations/<convo_uid>', methods=['GET'])
 def other_convos(convo_uid):
