@@ -2,7 +2,7 @@
 import time, json, os, datetime
 
 # Third-party libraries
-from flask import Flask, jsonify, render_template, request, g, current_app, redirect, url_for
+from flask import Flask, jsonify, render_template, request, g, current_app, redirect, url_for, session
 from werkzeug import exceptions as wex
 from flask.cli import with_appcontext
 from flask_login import (
@@ -134,7 +134,7 @@ def get_google_provider_cfg():
 def login():
     profile = request.get_json(force=True)['profile']
     unique_id = profile['googleId']
-    current_app.user_uid=unique_id
+    session['user_uid']=unique_id
     users_email = profile['email']
     picture = profile['imageUrl']
     users_name = profile['name']
@@ -272,7 +272,7 @@ def logout():
 @app.route('/profile', methods=['GET','POST'])
 def profile():
     #user_uid = ...?
-    user_uid=current_app.user_uid
+    user_uid=session.get('user_uid')
     db=get_db()
     #if the profile form is edited and submitted
     if request.method == 'POST':
@@ -329,7 +329,7 @@ def majors():
 @app.route('/upcoming-events', methods=['GET'])
 def upcoming_events():
     db=get_db()
-    user_uid=current_app.user_uid
+    user_uid=session.get('user_uid')
     events=db.child('event_user').child(user_uid).get().val()
     data=[]
     for event in events:
@@ -365,7 +365,7 @@ def upcoming_events_org(org_uid):
 @app.route('/avail-events', methods=['GET'])
 def avail_events(org_uid):
     db=get_db()
-    user_uid=current_app.user_uid
+    user_uid=session.get('user_uid')
     orgs=db.child('org_user').child(user_uid).get().val()
     all_events={}
     for org in orgs:
@@ -388,7 +388,7 @@ def avail_events(org_uid):
 @app.route('/avail-events/<org_uid>', methods=['GET'])
 def avail_events_org(org_uid):
     db=get_db()
-    user_uid=current_app.user_uid
+    user_uid=session.get('user_uid')
     events_users=db.child('event_user').child(user_uid).get().val()
     events_orgs=db.child('event_org').child(org_uid).get().val()
     events=set(events_orgs) - set(events_users)
@@ -407,7 +407,7 @@ def avail_events_org(org_uid):
 @app.route('/events/<event_uid>', methods=['GET', 'POST'])
 def events(event_uid):
     db=get_db()
-    user_uid=current_app.user_uid
+    user_uid=session.get('user_uid')
     
     if request.method == 'POST':
         signup_cancel = request.get_json() #...sign up vs cancel?
@@ -429,7 +429,7 @@ def events(event_uid):
 @app.route('/conversations', methods=['GET'])
 def convos():
     db=get_db()
-    user_uid=current_app.user_uid
+    user_uid=session.get('user_uid')
     convos=db.child('convo_user').child(user_uid).get().val()
     data={}
     for convo in convos:
@@ -479,7 +479,7 @@ def organizations():
     Outputs: a list containing the info (in dicts) for all of a user's organizations
     '''
     org_info_list = [] #list of dictionaries containg info for each of a user's orgs
-    user_uid=current_app.user_uid
+    user_uid=session.get('user_uid')
     user_orgs = dict(db.child('org_user').child(user_uid).get().val())
     for key in user_orgs:
         #where key is an org
@@ -491,7 +491,7 @@ def organizations():
 @app.route('/conversations/<convo_uid>', methods=['GET'])
 def other_convos(convo_uid):
     #...bc user can't change convos?
-    user_uid=current_app.user_uid
+    user_uid=session.get('user_uid')
     other_convos_data = db_for_flask.db_other_convos(user_uid, convo_uid)
     return jsonify(message=other_convos_data), 200
 
