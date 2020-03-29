@@ -22,13 +22,15 @@ db = firebase.database()
 from config_db import MyParser
 
 #Iterates through the spreadsheet rows and creates a list of user objects for Harvard
-myparser = MyParser("Harvard.xlsx")
+myparser = MyParser("setting_majors.xlsx")
 df=myparser.all_summary
-h_dict=df.to_dict(orient='records')
+major_dict=df.to_dict(orient='records')
 
 #%%
 def all_childs(person):
-    user_keys = ['user_uid','name', 'email', 'state', 'country', 'participating', 'grade']
+    #user_keys = ['user_uid','name', 'email', 'state', 'country', 'participating', 'grade']
+    user_keys = ['major','displayName','description']
+    
     user_dict={ key : person[key]  for key in user_keys[1:6] }
     
     return user_dict    
@@ -37,11 +39,12 @@ def all_childs(person):
 #user_id cant have .
 def add_user(peeps):
     for person in peeps:
-        user_id=person['user_uid']
-        print(user_id)
+#        user_id=person['user_uid']
+        user_id=person['major']
+#        print(user_id)
         user_child = all_childs(person)
         #print(user_child)
-        db.child("users").child(user_id).set(user_child)
+        db.child("majors").child(user_id).update(user_child)
 
 #%%
 #no / in any answers
@@ -152,3 +155,6 @@ db.child('user_convo').remove()
 convo_uid='our_convo'
 #%%
 db.child('convo_user').child(1).set({convo_uid:True})
+#%%
+major_org_dict=dict.fromkeys(df['major'],True)
+db.child('major_org').child('Harvard').update(major_org_dict)

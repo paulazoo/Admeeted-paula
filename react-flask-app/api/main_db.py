@@ -30,52 +30,49 @@ logging.warning('')
 logging.warning('Log started with user: '+current_user)
 
 #%%
-#initialize variables
-#the config file cleans the data and gets the starting variable values
-from config_db import MyParser
-
-myparser = MyParser("Coke Scholars Virtual Visitas (Responses).xlsx")
-
-myparser.desired
-myparser.num_calls
-myparser.num_threads
+#inputs
+event_uid='Harvard Admeeted 2024 3-30'
 
 #%%
 import firebase_db
-all_emails=firebase_db.get_college_emails('Harvard')
+#get event variables
+displayName, num_rounds, desired_size, timeStart, org_uid=firebase_db.get_event_info(event_uid)
+num_threads=int(input("num_threads? "))
+#%%
+#change depending on call type?
+all_users=firebase_db.get_org_users(org_uid, event_uid)
+all_emails=firebase_db.get_emails(all_users)
+
 
 #%%
 #group manipulations
 import groups
 #create groups using the createGroups function defined in groups.py file
 generated_groups = []
-call_time = "3:00"
-call_org = "Princeton 3/21"
 
-for call_num in range(1, myparser.num_calls + 1):
+for call_num in range(1, num_rounds + 1):
     #for each call, ask what category for the call
     #r for random
     category = input("category for call "+str(call_num)+"? ")
 
     #s for skip category combining
-    generated_groups = groups.make_call_groups(all_emails, myparser.desired, call_num, category, generated_groups)
+    generated_groups = generated_groups+groups.create_groups(all_emails, desired_size, call_num)
 
 logging.warning(generated_groups)
-generated_groups_pd=pd.DataFrame(generated_groups)
 
 #%%
 #group name for hangout_tools
 #make generated_groups into a dict
 giant_dict = {}
 for i in range(len(generated_groups)):
-   group_name = "IGNORE TEST Call: %s %s %s PM EST Group number: %d"%(generated_groups[i][0], call_org, call_time, i)
+   group_name = "IGNORE TEST Call: %s %s %s PM EST Group number: %d"%(generated_groups[i][0], org_uid, timeStart, i)
    giant_dict[group_name]=generated_groups[i]
 
 #%%
 import helpers
 import threading
 
-batched_dicts = helpers.split_dict(giant_dict, myparser.num_threads)
+batched_dicts = helpers.split_dict(giant_dict, num_threads)
 logging.warning("Batched dicts are:")
 logging.warning(batched_dicts)
 

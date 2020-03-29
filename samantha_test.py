@@ -82,7 +82,7 @@ from flask import current_app, g
 from flask.cli import with_appcontext
 import os 
 import pyrebase
-from random import randint
+import random
 
 print("init db called")
 project_id='admeeted-18732'
@@ -99,45 +99,33 @@ config = {
 firebase = pyrebase.initialize_app(config)
 db = firebase.database()
 
-    #Pick a random major
-def random_major(list_majors):
-    rand_int = randint(0, (len(list_majors)-1))
-    selected = list_majors[rand_int]
-    print("Random_major function result is: {}".format(selected))
-    return selected
-
 org_uid = "Harvard"
-print("Org Uid: {}".format(org_uid))
-users_list = list(db.child('user_org').child(org_uid).get().val().keys())
-print("Users List: {}".format(users_list))
-majors_list = ["Biology", "Computer Science", "English", "History", "Music", "Neuroscience", "Psychology"]
-print("Majors List: {}".format(majors_list))
+event_uid='Harvard Admeeted 2024 3-30'
+print("Org Uid: %s Event Uid: %s" % (org_uid, event_uid))
+users_list = list(db.child('user_event').child(event_uid).shallow().get().val())
+#print("Users List: {}".format(users_list))
+majors_list = list(db.child('major_org').child(org_uid).shallow().get().val())
+#print("Majors List: {}".format(majors_list))
 
 users_majors_list = []
 users_majors_dict = {} #dict where key is user uid and value is their list of majors
 update_users_majors_dict = {} #final dict with key: user and value: one random major in org
 
 for user in users_list:
-    all_majors = [] #This is a list of all the majors one user has (not specific to org)
-    all_majors = list(db.child('major_user').child(user).get().val().keys())
-    print("At user: {}, List of all majors is: {}".format(user, all_majors))
-
-    #Remove majors not in org then incorporate
-    for major in all_majors:
-        if major not in majors_list:
-            print("Major {} not in org's majors".format(major))
-            all_majors.remove(major)
-            print("All majors list is: {} with major {} removed".format(all_majors, major))
-
-    users_majors_dict[user] = all_majors
-    print("Users Majors Dict is: {}".format(users_majors_dict))
-    
-    #Currently getting a dictionary with each key as user id and each value as their majors
-    all_majors = random_major(all_majors)
-    print("All Majors after random_major function is: {}".format(all_majors))
-    update_users_majors_dict[user] = all_majors
-    print("Update Users Majors Dict is: {}".format(update_users_majors_dict))
-    
+    #This is a list of all the majors one user has (not specific to org)
+    all_majors = db.child('major_user').child(user).shallow().get().val()
+    if all_majors:
+        all_majors_list=list(all_majors)
+        #Remove majors not in org then incorporate
+        all_majors_org = [x for x in all_majors if x in majors_list]
+        #Currently getting a dictionary with each key as user id and each value as their majors
+        rand_major = random.choice(all_majors_org)
+        #print(rand_major)
+        #print("All Majors after random_major function is: {}".format(all_majors))
+        update_users_majors_dict[user] = rand_major
+        #print("Update Users Majors Dict is: {}".format(update_users_majors_dict))
+    elif not all_majors:
+        update_users_majors_dict[user]='No major'
 
 #Now taking completed update_users_majors_dict and resorting to
     #key: major in that dict, value: all names with that major
@@ -145,15 +133,10 @@ for user in users_list:
 resorted_dict = {}
 for user in update_users_majors_dict:
     major = update_users_majors_dict[user]
-
     if major not in resorted_dict:
-        print("Major not in resorted_dict, adding key")
-        add_list = [user]
-        resorted_dict[major] = add_list
-        
-    else:
-        print("Major key in resorted_dict, appending user to value list")
-        resorted_dict[major] = list(resorted_dict[major]).append(user)
-    print("Resorted dict is: {}, at user: {}, with major: {}".format(resorted_dict, user, major))
+        #print("Major not in resorted_dict, adding key")
+        resorted_dict[major] = []
+    resorted_dict[major].append(user)
+    #print("Resorted dict is: {}, at user: {}, with major: {}".format(resorted_dict, user, major))
 
     

@@ -1,6 +1,7 @@
 #import pandas package for doing stuff with data
 import pandas as pd
 import os
+import numpy
 import logging
 
 class MyParser():
