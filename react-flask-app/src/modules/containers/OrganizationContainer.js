@@ -31,7 +31,7 @@ function OrganizationContainer ({
 }
 
 const mapStateToProps = state => ({
-    org_data: state.org_data,
+    org_data: state.orgData,
     currentlySending: state.currentlySending
 })
 

@@ -456,11 +456,18 @@ def convos():
     return jsonify(message=data), 200
 
 @app.route('/all_organizations', methods=['GET'])
-def all_orgs(other_user_uid):
+def all_orgs():
     db=get_db()
-    data=db.child('orgs').get().val()
-    if not data:
-        data = {}
+    orgs=db.child('orgs').get().val()
+
+    data = []
+    for org in orgs:
+        org_info = orgs[org]
+        org_info.update({'id': org})
+        data.append(org_info)
+
+    print(data)
+
     return jsonify(message=data), 200
 
 

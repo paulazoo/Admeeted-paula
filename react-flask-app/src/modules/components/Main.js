@@ -12,6 +12,7 @@ import EventsContainer from "../containers/EventsContainer";
 import AccountContainer from "../containers/AccountContainer";
 import OrganizationContainer from "../containers/OrganizationContainer";
 import StaticGoogleLogin from "../views/StaticGoogleLogin";
+import SearchBarContainer from "../containers/SearchBarContainer";
 import { connect } from 'react-redux';
 
 function Main ({ loggedIn }) {
@@ -36,6 +37,7 @@ function Main ({ loggedIn }) {
                     {/*<Route exact path='/sign-out' component={SignOutContainer}/>*/}
                     <Route exact path='/events' component={EventsContainer}/>
                     <Route exact path='/account' component={AccountContainer}/>
+                    <Route exact path='/organizations' component={SearchBarContainer}/>
                     <Route exact path={`/organization/:org_uid`} component={OrganizationContainer}/>
                 </Switch> : <Switch>
                     <Route path='/' component={ProductHero}/>

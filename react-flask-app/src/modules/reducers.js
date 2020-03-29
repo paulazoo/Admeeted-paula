@@ -31,8 +31,9 @@ const initialState = {
     conversations: [],
     availEvents: [],
     organizations: [],
+    allOrganizations: []
   },
-  org_data: {
+  orgData: {
     profile: {},
     upcomingEvents: [],
     conversations: [],
@@ -113,8 +114,8 @@ const setData = (state, action) => {
 const setOrgData = (state, action) => {
   return {
     ...state,
-    org_data: {
-      ...state.org_data,
+    orgData: {
+      ...state.orgData,
       ...action.data
     }
   }
