@@ -20,10 +20,12 @@ const initialState = {
   errorMessage: '',
   data: {
     profile: {
+      name: '',
       displayName: '',
       state: '',
       country: '',
-      interests: []
+      avatar: '',
+      majors: []
     },
     upcomingEvents: [],
     conversations: [],

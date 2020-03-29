@@ -34,6 +34,9 @@ export const loadData = (path, name) => {
         dispatch(setErrorMessage(''))
         api(`${path}`)
             .then(data => {
+                console.log('Loaded data')
+                console.log(name)
+                console.log(data)
                 dispatch(sendingRequest(false))
                 dispatch(setData({[name]: data.message}))
             })

@@ -7,8 +7,8 @@ import { withRouter } from 'react-router-dom';
 function HomepageContainer ({ data, currentlySending, loadUpcomingConvos, loadPastConvos, loadOrganizations }) {
     useEffect(() => {
         loadUpcomingConvos();
-        loadPastConvos();
-        loadOrganizations();
+        // loadPastConvos();
+        // loadOrganizations();
     }, []);
     console.log(data);
 
@@ -24,13 +24,13 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     loadUpcomingConvos: () => {
-        dispatch(loadData('/upcoming-convos', 'upcomingEvents'));
+        dispatch(loadData('/majors', 'upcomingEvents'));
     },
     loadPastConvos: () => {
-        dispatch(loadData('/past-convos', 'conversations'));
+        dispatch(loadData('/conversations', 'conversations'));
     },
     loadOrganizations: () => {
-        dispatch(loadData('/organizations-old', 'organizations'));
+        dispatch(loadData('/organizations', 'organizations'));
     }
 })
 
