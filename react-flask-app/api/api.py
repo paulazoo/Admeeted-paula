@@ -507,9 +507,11 @@ def organizations():
     if user_orgs:
         for key in user_orgs:
             #where key is an org
-            dictionary = dict(db.child('orgs').child(key).get().val())
+            dictionary = dict(get_db().child('orgs').child(key).get().val())
             dictionary['id'] = key
             org_info_list.append(dictionary)
+    elif not user_orgs:
+        org_info_list=[]
     
     return jsonify(message=org_info_list), 200
 
@@ -775,6 +777,7 @@ def profile_old():
                        'displayName': 'Albert Zhang',
                        'state': 'Georgia',
                        'country': 'USA',
+                      #TODO: need participating : true back?
                        'avatar': ''
                    }
     ), 200
