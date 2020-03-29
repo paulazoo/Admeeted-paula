@@ -12,7 +12,6 @@ Created on Wed Mar 25 09:06:49 2020
 import click
 from flask import current_app, g
 from flask.cli import with_appcontext
-import os 
 import pyrebase
 
 #def close_db(e=None):
@@ -37,7 +36,7 @@ def init_db():
            "databaseURL": "https://"+project_id+".firebaseio.com",
            "projectId": project_id,
            "storageBucket": project_id+".appspot.com",
-           "serviceAccount": r"", #Fill this in
+           "serviceAccount": r"C:\Users\pkzr3\Admeeted\react-flask-app\api\admeeted-private-key.json", #Fill this in
            "messagingSenderId": "667088492207"
         }   
 

@@ -19,9 +19,9 @@ import requests
 import pyrebase
 
 # Internal imports
-from db import init_db_command
-from user import User
-import db_for_flask
+from api.db import init_db_command
+from api.user import User
+import api.db_for_flask
 
 '''
 Paula and Samantha combined version!
@@ -37,13 +37,14 @@ App gets client credentials by reading environmental variables
 
 Windows users: set GOOGLE_CLIENT_ID=your_client_id in Command Prompt
 """
-GOOGLE_CLIENT_ID = ''
-GOOGLE_CLIENT_SECRET = ''
+GOOGLE_CLIENT_ID = '667088492207-2fch6bc6r8b40fm40hjv8mq0n6minrr2.apps.googleusercontent.com'
+GOOGLE_CLIENT_SECRET = 'CFG-c2H48GDs_xdxvDj4nFAb'
 GOOGLE_DISCOVERY_URL = (
     "https://accounts.google.com/.well-known/openid-configuration"
 )
 
-
+import os 
+os.environ['AUTHLIB_INSECURE_TRANSPORT'] = '1'
 #%%
 app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY") or os.urandom(24)
