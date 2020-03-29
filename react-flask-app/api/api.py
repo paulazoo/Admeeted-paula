@@ -496,7 +496,9 @@ def organizations():
     if user_orgs:
         for key in user_orgs:
             #where key is an org
-            org_info_list.append(dict(db.child('orgs').child(key).get().val()))
+            dictionary = dict(get_db().child('orgs').child(key).get().val())
+            dictionary['id'] = key
+            org_info_list.append(dictionary)
     elif not user_orgs:
         org_info_list=[]
     
@@ -760,6 +762,43 @@ profile_old_data = {
 
 @app.route('/profile-old', methods=['GET', 'POST'])
 def profile_old():
+
+    return jsonify(message=
+                   {
+                       'email': 'albertzhang9000@gmail.com',
+                       'displayName': 'Albert Zhang',
+                       'state': 'Georgia',
+                       'country': 'USA',
+                       'participating': True,
+                       'avatar': ''
+                   }
+    ), 200
+
+
+# -------------------------------------------------------------
+# Samantha's placeholders
+    
+#%%
+# @app.route('/organizations', methods=['GET'])
+# def organizations():
+#     '''
+#     Inputs: user_uid
+#     Outputs: a list containing the info (in dicts) for all of a user's organizations
+#     '''
+#     org_info_list = [] #list of dictionaries containg info for each of a user's orgs
+#     user_uid=g.user_uid
+#     user_orgs = dict(get_db().child('org_user').child(user_uid).get().val())
+#     for key in user_orgs:
+#         #where key is an org
+#         dictionary = dict(get_db().child('orgs').child(key).get().val())
+#         dictionary['id'] = key
+#         org_info_list.append(dictionary)
+        
+    
+#     return jsonify(message=org_info_list), 200
+#%%
+
+
     global profile_old_data
     if request.method == 'POST':
         print(request.get_json(force=True))
@@ -769,3 +808,4 @@ def profile_old():
         profile_old_data['interests'] = request.get_json(force=True)['new_data']['interests']
         return jsonify(message=True), 200
     return jsonify(message=profile_old_data), 200
+
