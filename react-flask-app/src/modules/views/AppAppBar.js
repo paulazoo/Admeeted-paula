@@ -20,6 +20,9 @@ import EventIcon from '@material-ui/icons/Event';
 import {IconButton} from "@material-ui/core";
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import {GoogleLogout} from "react-google-login";
+import Button from "../components/Button";
+import {logout} from "../actions";
 
 const styles = theme => ({
   title: {
@@ -50,7 +53,11 @@ const styles = theme => ({
   },
 });
 
-function AppAppBar({ loggedIn, classes }) {
+function AppAppBar({ loggedIn, handleLogout, classes }) {
+  const logoutGoogle = () => {
+    console.log('User log out');
+    handleLogout();
+  };
 
   return (
       <div>
@@ -85,33 +92,32 @@ function AppAppBar({ loggedIn, classes }) {
               >
                 <AccountCircleIcon/>
               </IconButton>
-              </div>: null}
-              {!loggedIn ? <Link
-                  color="inherit"
-                  variant="h6"
-                  underline="none"
-                  className={classes.rightLink}
-                  component={NavLink}
-                  to="/sign-in"
+                <GoogleLogout
+                  clientId="667088492207-2fch6bc6r8b40fm40hjv8mq0n6minrr2.apps.googleusercontent.com"
+                  buttonText="Logout"
+                  render={renderProps => (
+                      <IconButton
+                          color="inherit"
+                          className={classes.rightLink}
+                          onClick={renderProps.onClick}
+                          disabled={renderProps.disabled}
+                      >
+                        <ExitToAppIcon/>
+                      </IconButton>
+                  )}
+                  onLogoutSuccess={logoutGoogle}
               >
-                Sign In
-              </Link> : <IconButton
-                  color="inherit"
-                  className={classes.rightLink}
-                  component={NavLink}
-                  to="/sign-out"
-              >
-                <ExitToAppIcon/>
-              </IconButton>}
-              {!loggedIn ? <Link
-                  variant="h6"
-                  underline="none"
-                  className={clsx(classes.rightLink, classes.linkSecondary)}
-                  component={NavLink}
-                  to="/sign-up"
-              >
-                {'Sign Up'}
-              </Link> : null}
+              </GoogleLogout>
+              </div> : null}
+              {/*{!loggedIn ? <Link*/}
+              {/*    variant="h6"*/}
+              {/*    underline="none"*/}
+              {/*    className={clsx(classes.rightLink, classes.linkSecondary)}*/}
+              {/*    component={NavLink}*/}
+              {/*    to="/sign-up"*/}
+              {/*>*/}
+              {/*  {'Sign Up'}*/}
+              {/*</Link> : null}*/}
             </div>
           </Toolbar>
         </AppBar>
@@ -128,7 +134,11 @@ const mapStateToProps = state => ({
   loggedIn: state.loggedIn
 })
 
+const mapDispatchToProps = dispatch => ({
+    handleLogout: () => dispatch(logout())
+})
+
 export default compose(
     withStyles(styles),
-    connect(mapStateToProps, null)
+    connect(mapStateToProps, mapDispatchToProps)
     )(AppAppBar);

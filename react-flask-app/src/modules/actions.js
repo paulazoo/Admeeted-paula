@@ -6,19 +6,21 @@ export const SET_ERROR_MESSAGE = 'SET_ERROR_MESSAGE';
 export const SET_DATA = 'SET_DATA';
 export const SET_ORG_DATA = 'SET_ORG_DATA';
 
-export const login = (username, password) => {
+export const login = (profile) => {
     return dispatch => {
         dispatch(sendingRequest(true));
         dispatch(setErrorMessage(''));
         fetch('/login', {
             method: 'POST',
-            body: JSON.stringify({ username, password })
+            body: JSON.stringify({ profile }),
         }).then(res => {
+            console.log(res);
             if (res.ok) return res.json();
             else throw new Error(res.statusText)
         }).then(data => {
+            console.log(data)
             dispatch(sendingRequest(false))
-            dispatch(setAuthState(true))
+            dispatch(setAuthState(data.message))
         }).catch(error => {
             dispatch(sendingRequest(false))
             dispatch(setErrorMessage('Login failed'))
@@ -112,7 +114,7 @@ export const loadMe = () => {
         api('/me')
             .then(data => {
             dispatch(loadingAuth(false))
-            dispatch(setAuthState(data.isLoggedIn))
+            dispatch(setAuthState(data.message))
         })
             .catch(error => {
                 dispatch(loadingAuth(false))

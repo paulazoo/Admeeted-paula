@@ -4,6 +4,7 @@ Created on Wed Mar 25 09:14:59 2020
 
 @author: Samantha
 """
+from db import get_db
 
 """
 User class will store and retrieve information from the SQL database. 
@@ -15,16 +16,14 @@ The name, email, and profile picture will all be retrieved from Google.
 #For Google authentication
 
 from flask_login import UserMixin
-#import sqlite3
-from db import get_db
-#from api import init_db
+
 
 class User(UserMixin):
-    def __init__(self, id_, name, email, profile_pic):
+    def __init__(self, id_, name, email, avatar):
         self.id = id_
         self.name = name
         self.email = email
-        self.profile_pic = profile_pic
+        self.avatar = avatar
 
     @staticmethod
     def get(user_id):
@@ -41,21 +40,22 @@ class User(UserMixin):
             print("Get User ID no user")
             return None
 
+        print(a_user)
         a_user = User(
-            id_ = user_id, email = a_user['email'], name = a_user['name'], profile_pic = a_user['profile_pic']
+            id_ = user_id, email = a_user['email'], name = a_user['name'], avatar = a_user['avatar']
         )
         print("Get User ID User: {}".format(a_user))
         return a_user
 
     @staticmethod
-    def create(id_, name, email, profile_pic):
+    def create(id_, name, email, avatar):
         print("Creating user")
         id_ = str(id_) #actually an integer (always 21 digits?)
         name = str(name) #already a string?
         email = str(email) #aleady a string?
-        profile_pic = str(profile_pic) #already a string?
+        avatar = str(avatar) #already a string?
         db=get_db()
-        user_dict = {'user_uid': id_, 'name': name, 'email': email, 'profile_pic':profile_pic}
+        user_dict = {'user_uid': id_, 'name': name, 'email': email, 'avatar':avatar}
         print("In create_user made this user_dict: {}".format(user_dict))
         db.child("users").child(id_).set(user_dict)
         

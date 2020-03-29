@@ -7,6 +7,8 @@ import ProductHeroLayout from '../layouts/ProductHeroLayout';
 import {NavLink, Redirect} from 'react-router-dom';
 import {compose} from "redux";
 import {connect} from "react-redux";
+import {GoogleLogin} from "react-google-login";
+import {login} from "../actions";
 
 const backgroundImage =
   'https://www.insidehighered.com/sites/default/server_files/media/image_4.png';
@@ -32,7 +34,16 @@ const styles = theme => ({
   },
 });
 
-function ProductHero({ loggedIn, classes }) {
+function ProductHero({ loggedIn, googleLogin, classes }) {
+  const successGoogle = (response) => {
+    console.log(response);
+    googleLogin(response['profileObj'])
+  }
+
+  const failureGoogle = (response) => {
+    console.log(response);
+  }
+
 
   return (
       <div>
@@ -49,16 +60,26 @@ function ProductHero({ loggedIn, classes }) {
                 <Typography color="inherit" align="center" variant="h5" className={classes.h5}>
                   Meet your fellow Harvard admitted students - new connections, just one click away.
                 </Typography>
-                <Button
-                  color="secondary"
-                  variant="contained"
-                  size="large"
-                  className={classes.button}
-                  component={NavLink}
-                  to="/sign-up"
-                >
-                  Sign Up
-                </Button>
+                <GoogleLogin
+                  clientId="667088492207-2fch6bc6r8b40fm40hjv8mq0n6minrr2.apps.googleusercontent.com"
+                  buttonText="Login"
+                  render={renderProps => (
+                      <Button
+                        color="secondary"
+                        variant="contained"
+                        size="large"
+                        className={classes.button}
+                        onClick={renderProps.onClick}
+                        disabled={renderProps.disabled}
+                      >
+                        Sign In With Google
+                      </Button>
+                  )}
+                  onSuccess={successGoogle}
+                  onFailure={failureGoogle}
+                  cookiePolicy={'single_host_origin'}
+                />
+
                 <Typography variant="body2" color="inherit" className={classes.more}>
                   Take a chance!
                 </Typography>
@@ -77,7 +98,13 @@ const mapStateToProps = state => ({
   loggedIn: state.loggedIn
 })
 
+const mapDispatchToProps = dispatch => ({
+    googleLogin: (profile) => {
+        dispatch(login(profile))
+    }
+})
+
 export default compose(
     withStyles(styles),
-    connect(mapStateToProps, null)
+    connect(mapStateToProps, mapDispatchToProps)
     )(ProductHero);

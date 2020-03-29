@@ -15,13 +15,18 @@ from flask_login import (
 from oauthlib.oauth2 import WebApplicationClient
 import requests
 
+print(os.getcwd())
+
 #firebase
 import pyrebase
 
-# Internal imports
-from db import init_db_command
+# # Internal imports
+# from db import init_db_command
+# from user import User
+# import db_for_flask
 from user import User
 import db_for_flask
+from db import init_db_command
 
 '''
 Paula and Samantha combined version!
@@ -111,7 +116,7 @@ def index():
             "<div><p>Google Profile Picture:</p>"
             '<img src="{}" alt="Google profile pic"></img></div>'
             '<a class="button" href="/logout">Logout</a>'.format(
-                current_user.name, current_user.email, current_user.profile_pic
+                current_user.name, current_user.email, current_user.avatar
             )
         )
     else:
@@ -129,24 +134,46 @@ def get_google_provider_cfg():
     #returns a failure and not the valid provider configuration document.
 
     
-@app.route("/login")
+@app.route("/login", methods=['POST'])
 def login():
-    print("login")
-    # Find out what URL to hit for Google login
-    google_provider_cfg = get_google_provider_cfg()
-    authorization_endpoint = google_provider_cfg["authorization_endpoint"]
+    profile = request.get_json(force=True)['profile']
+    unique_id = profile['googleId']
+    users_email = profile['email']
+    picture = profile['imageUrl']
+    users_name = profile['name']
 
-    # Use library to construct the request for Google login and provide
-    # scopes that let you retrieve user's profile from Google
-    request_uri = client.prepare_request_uri(
-        authorization_endpoint,
-        redirect_uri=request.base_url + "/callback",
-        scope=["openid", "email", "profile"],
-        #Note: openid is a required scope to tell Google to initiate the 
-        #OIDC flow, which will authenticate the user by having them log in.
+    # Create a user in your db with the information provided
+    # by Google
+    user = User(
+        id_=unique_id, name=users_name, email=users_email, avatar=picture
     )
-    
-    return redirect(request_uri)
+
+    # Doesn't exist? Add it to the database.
+    if not User.get(unique_id):
+        print("User doesn't exist, creating new User")
+        User.create(unique_id, users_name, users_email, picture)
+
+    # Begin user session by logging the user in (using Flask Log-in)
+    login_user(user)
+
+    return jsonify(message=current_user.is_authenticated), 200
+
+    # print("login")
+    # # Find out what URL to hit for Google login
+    # google_provider_cfg = get_google_provider_cfg()
+    # authorization_endpoint = google_provider_cfg["authorization_endpoint"]
+    #
+    # # Use library to construct the request for Google login and provide
+    # # scopes that let you retrieve user's profile from Google
+    # request_uri = client.prepare_request_uri(
+    #     authorization_endpoint,
+    #     redirect_uri=request.base_url + "/callback",
+    #     scope=["openid", "email", "profile"],
+    #     #Note: openid is a required scope to tell Google to initiate the
+    #     #OIDC flow, which will authenticate the user by having them log in.
+    # )
+    #
+    # return redirect(request_uri)
 
 
 
@@ -214,7 +241,7 @@ def callback():
 # Create a user in your db with the information provided
 # by Google
     user = User(
-        id_=unique_id, name=users_name, email=users_email, profile_pic=picture
+        id_=unique_id, name=users_name, email=users_email, avatar=picture
         )
 
 # Doesn't exist? Add it to the database.
@@ -231,13 +258,14 @@ def callback():
 
 
     #Logout Endpoint (logout and redirect back to homepage)
+
 @app.route("/logout")
 @login_required
 #Note: ^this decorator from the Flask-Login toolbox and will make sure that 
 #only logged in users can access this function (endpoint in this case).
 def logout():
     logout_user()
-    return redirect(url_for("index"))
+    return jsonify(message=current_user.is_authenticated), 200
 
 
 #%%
@@ -290,7 +318,7 @@ def other_profile(other_user_uid):
     return jsonify(message=profile_data), 200
 
 @app.route('/majors', methods=['GET'])
-def majors(other_user_uid):
+def majors():
     data=g.db.child('majors').get().val()
      
     return jsonify(message=data), 200
@@ -412,7 +440,6 @@ def all_orgs(other_user_uid):
 @app.route('/organizations/<org_uid>', methods=['GET', 'POST'])
 def other_orgs(org_uid):
     user_uid = g.user_uid
-
     if request.method == 'POST':
         signup_cancel, org_uid = request.get_json() #...sign up vs cancel?
         try:    
@@ -425,7 +452,6 @@ def other_orgs(org_uid):
             return True, 200
         except:
             return False, 400
-
     data=dict(g.db.child('orgs').child(org_uid).get().val())
     #admin...? Need to edit database later
     data.update({'org_uid':org_uid, 'admin':True})

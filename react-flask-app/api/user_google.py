@@ -4,6 +4,7 @@ Created on Wed Mar 25 09:14:59 2020
 
 @author: Samantha
 """
+from db import get_db
 
 """
 User class will store and retrieve information from the SQL database. 
@@ -17,8 +18,6 @@ The name, email, and profile picture will all be retrieved from Google.
 from flask_login import UserMixin
 import sqlite3
 #import schema
-from db import get_db
-from db import init_db
 
 class User(UserMixin):
     def __init__(self, id_, name, email, profile_pic):
