@@ -560,15 +560,6 @@ def organizations():
     
     return jsonify(message=org_info_list), 200
 
-#%%
-@app.route('/conversations/<convo_uid>', methods=['GET'])
-def other_convos(convo_uid):
-    #...bc user can't change convos?
-    user_uid=session.get('user_uid')
-    other_convos_data = db_for_flask.db_other_convos(user_uid, convo_uid)
-    print(other_convos_data)
-    return jsonify(message=other_convos_data), 200
-
 
 #%%
 #To run your Flask application on your local computer to test the login flow
