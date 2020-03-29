@@ -64,15 +64,18 @@ for i in range(len(generated_groups)):
 
 
 logging.warning(giant_dict)
+
 #%%
 #back to firebase
 firebase_db.post_convo(giant_dict, event_uid, event_info)
-   
+
+big_dict={convo:list(giant_dict[convo].values()) for convo in giant_dict}
+
 #%%
-import helpers
+import helpers_db
 import threading
 
-batched_dicts = helpers.split_dict(giant_dict, num_threads)
+batched_dicts = helpers_db.split_dict(big_dict, num_threads)
 logging.warning("Batched dicts are:")
 logging.warning(batched_dicts)
 
@@ -81,7 +84,7 @@ thread_list=[]
 error_count = 0
 for batch in batched_dicts:
     try:
-        t = threading.Thread(target=helpers.go_thread, args=(batch, batched_dicts.index(batch),))
+        t = threading.Thread(target=helpers_db.go_thread, args=(batch, batched_dicts.index(batch),))
         #starting thread
         t.start()
         #add thread to thread list
