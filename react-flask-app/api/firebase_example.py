@@ -13,8 +13,9 @@ config = {
   "serviceAccount": r"C:\Users\pkzr3\Admeeted\react-flask-app\api\admeeted-private-key.json",
   "messagingSenderId": "667088492207"
 }
-
+#%%
 firebase = pyrebase.initialize_app(config)
+#%%
 db = firebase.database()
 
 #%%
@@ -87,7 +88,7 @@ db.child("orgs").child("UVA").update({'displayName':'University of Virginia 2024
         })
 
 #%%
-multi='major'
+multi='interest'
 category_summary = df[multi]
 
 #turn each multichoose answer into a list of chosen multichoose answers

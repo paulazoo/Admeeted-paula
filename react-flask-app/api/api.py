@@ -19,7 +19,7 @@ import requests
 import pyrebase
 
 # Internal imports
-from api.db import init_db_command
+from api.db import init_db_command, get_db
 from api.user import User
 import api.db_for_flask
 
@@ -133,27 +133,28 @@ def get_google_provider_cfg():
 @app.route("/login", methods=['POST'])
 def login():
     profile = request.get_json(force=True)['profile']
-    user_uid = profile['googleId']
+    unique_id = profile['googleId']
     users_email = profile['email']
     picture = profile['imageUrl']
     users_name = profile['name']
 
-    g.user_uid = user_uid
-    print(f"User's ID: {g.user_uid}")
+    current_app.user_uid = unique_id
+
     # Create a user in your db with the information provided
     # by Google
     user = User(
-        id_=user_uid, name=users_name, email=users_email, avatar=picture
+        id_=unique_id, name=users_name, email=users_email, avatar=picture
     )
 
     new_user = False
 
     # Doesn't exist? Add it to the database.
-    if not User.get(user_uid):
-        new_user = True
+    if not User.get(unique_id):
+        new_user=True
         print("User doesn't exist, creating new User")
-        User.create(user_uid, users_name, users_email, picture)
-
+        User.create(unique_id, users_name, users_email, picture)
+    else:
+        new_user=False
     # Begin user session by logging the user in (using Flask Log-in)
     login_user(user)
 
@@ -185,7 +186,6 @@ authenticating the user and asking for consent. Once the user logs in with
 Google and agrees to share their email and basic profile information
 with this application, Google generates a unique code that it sends here.
 """
-#
 # #Define login callback endpoint and get Google's code
 # @app.route("/login/callback")
 # def callback():
@@ -257,7 +257,6 @@ with this application, Google generates a unique code that it sends here.
 #     return redirect(url_for("index"))
 
 
-
     #Logout Endpoint (logout and redirect back to homepage)
 
 @app.route("/logout")
@@ -273,12 +272,13 @@ def logout():
 @app.route('/profile', methods=['GET','POST'])
 def profile():
     #user_uid = ...?
-    user_uid=g.user_uid
+    user_uid=current_app.user_uid
+    db=get_db()
     #if the profile form is edited and submitted
     if request.method == 'POST':
         try:
             pdata = request.get_json()
-            g.db.child('users').child(user_uid).update({
+            db.child('users').child(user_uid).update({
                     'displayName':pdata['displayName'],
                     'state':pdata['state'],
                     'country':pdata['country'],
@@ -287,18 +287,18 @@ def profile():
             majors=pdata['major']
             majors_dict=dict.fromkeys(majors, True)
             
-            g.db.child('major_user').child(user_uid).update(majors_dict)
+            db.child('major_user').child(user_uid).update(majors_dict)
             for major in majors:
-                g.db.child('user_major').child(major).update({user_uid: True})
+                db.child('user_major').child(major).update({user_uid: True})
 
             return True, 200
         except:
             return False, 400
     
     #get profile data
-    user=g.db.child('users').child(user_uid).get().val()
+    user=db.child('users').child(user_uid).get().val()
     
-    majors=list(g.db.child('major_user').child(user_uid).get().val().keys())
+    majors=list(db.child('major_user').child(user_uid).get().val().keys())
     
     data={'name':user['name'], 
      'displayName':user['displayName'],
@@ -313,150 +313,160 @@ def profile():
     
 @app.route('/profile/<other_user_uid>', methods=['GET'])
 def other_profile(other_user_uid):
-    
+    db=get_db()
     profile_data=db_for_flask.db_profile(other_user_uid)
     
     return jsonify(message=profile_data), 200
 
 @app.route('/majors', methods=['GET'])
 def majors():
-    data=g.db.child('majors').get().val()
+    db=get_db()
+    data=db.child('majors').get().val()
      
     return jsonify(message=data), 200
 
 
 @app.route('/upcoming-events', methods=['GET'])
 def upcoming_events():
-    user_uid=g.user_uid
-    events=g.db.child('event_user').child(user_uid).get().val()
+    db=get_db()
+    user_uid=current_app.user_uid
+    events=db.child('event_user').child(user_uid).get().val()
     data=[]
-    for event in events:
-        event_info_ord=g.db.child('events').child(event).get().val()
-        event_timeStart=datetime.strptime(event_info_ord['timeStart'], '%H:%M %d %B %Y')
-    
-        if event_timeStart<=datetime.now():
-            event_info=dict(event_info_ord)
-            event_info.update({'event_uid':event})
-            data.append(event_info)
+    if events:
+        for event in events:
+            event_info_ord=db.child('events').child(event).get().val()
+            event_timeStart=datetime.strptime(event_info_ord['timeStart'], '%H:%M %d %B %Y')
+
+            if event_timeStart<=datetime.now():
+                event_info=dict(event_info_ord)
+                event_info.update({'id':event})
+                data.append(event_info)
      
     return jsonify(message=data), 200
 
 @app.route('/upcoming-events/<org_uid>', methods=['GET'])
 def upcoming_events_org(org_uid):
-    user_uid = g.user_uid
-    events_users=g.db.child('event_user').child(user_uid).get().val()
-    events_orgs=g.db.child('event_org').child(org_uid).get().val()
+    db=get_db()
+    user_uid = current_app.user_uid
+    events_users=db.child('event_user').child(user_uid).get().val()
+    events_orgs=db.child('event_org').child(org_uid).get().val()
     events=set(events_users) & set(events_orgs)
     data=[]
     for event in events:
-        event_info_ord=g.db.child('events').child(event).get().val()
+        event_info_ord=db.child('events').child(event).get().val()
         event_timeStart=datetime.strptime(event_info_ord['timeStart'], '%H:%M %d %B %Y')
     
         if event_timeStart<=datetime.now():
             event_info=dict(event_info_ord)
-            event_info.update({'event_uid':event})
+            event_info.update({'id':event})
             data.append(event_info)   
             
     return jsonify(message=data), 200
 
 @app.route('/avail-events', methods=['GET'])
 def avail_events(org_uid):
-    user_uid=g.user_uid
-    orgs=g.db.child('org_user').child(user_uid).get().val()
+    db=get_db()
+    user_uid=current_app.user_uid
+    orgs=db.child('org_user').child(user_uid).get().val()
     all_events={}
     for org in orgs:
-        org_events=g.db.child('event_org').child(org).get().val()
+        org_events=db.child('event_org').child(org).get().val()
         all_events.update(dict(org_events))
-    events_users=g.db.child('event_user').child(user_uid).get().val()
+    events_users=db.child('event_user').child(user_uid).get().val()
     events=set(all_events) - set(events_users)
     data=[]
     for event in events:
-        event_info_ord=g.db.child('events').child(event).get().val()
+        event_info_ord=db.child('events').child(event).get().val()
         event_timeStart=datetime.strptime(event_info_ord['timeStart'], '%H:%M %d %B %Y')
     
         if event_timeStart<=datetime.now():
             event_info=dict(event_info_ord)
-            event_info.update({'event_uid':event})
+            event_info.update({'id':event})
             data.append(event_info)
             
     return jsonify(message=data), 200
 
 @app.route('/avail-events/<org_uid>', methods=['GET'])
 def avail_events_org(org_uid):
-    user_uid=g.user_uid
-    events_users=g.db.child('event_user').child(user_uid).get().val()
-    events_orgs=g.db.child('event_org').child(org_uid).get().val()
+    db=get_db()
+    user_uid=current_app.user_uid
+    events_users=db.child('event_user').child(user_uid).get().val()
+    events_orgs=db.child('event_org').child(org_uid).get().val()
     events=set(events_orgs) - set(events_users)
     data=[]
     for event in events:
-        event_info_ord=g.db.child('events').child(event).get().val()
+        event_info_ord=db.child('events').child(event).get().val()
         event_timeStart=datetime.strptime(event_info_ord['timeStart'], '%H:%M %d %B %Y')
     
         if event_timeStart<=datetime.now():
             event_info=dict(event_info_ord)
-            event_info.update({'event_uid':event})
+            event_info.update({'id':event})
             data.append(event_info)
             
     return jsonify(message=data), 200
 
 @app.route('/events/<event_uid>', methods=['GET', 'POST'])
 def events(event_uid):
-    user_uid=g.user_uid
+    db=get_db()
+    user_uid=current_app.user_uid
     
     if request.method == 'POST':
         signup_cancel = request.get_json() #...sign up vs cancel?
         try:
             if signup_cancel==True:
-                g.db.child('event_user').child(user_uid).update({event_uid:True})
-                g.db.child('user_event').child(event_uid).update({user_uid:True})
+                db.child('event_user').child(user_uid).update({event_uid:True})
+                db.child('user_event').child(event_uid).update({user_uid:True})
             elif signup_cancel==False:
-                g.db.child('event_user').child(user_uid).update({event_uid: None})
-                g.db.child('user_event').child(event_uid).update({user_uid: None})
+                db.child('event_user').child(user_uid).update({event_uid: None})
+                db.child('user_event').child(event_uid).update({user_uid: None})
             return True, 200
         except:
             return False, 400
     
-    data=dict(g.db.child('events').child(event_uid).get().val())
+    data=dict(db.child('events').child(event_uid).get().val())
     data.update({'event_uid':event_uid})
     return jsonify(message=data), 200
 
 @app.route('/conversations', methods=['GET'])
 def convos():
-    user_uid=g.user_uid
-    convos=g.db.child('convo_user').child(user_uid).get().val()
+    db=get_db()
+    user_uid=current_app.user_uid
+    convos=db.child('convo_user').child(user_uid).get().val()
     data={}
     for convo in convos:
-        convo_info=g.db.child('convos').child(convo).get().val()
-        convo_info.update({'convo_uid': convo})
+        convo_info=db.child('convos').child(convo).get().val()
+        convo_info.update({'id': convo})
         data.update(convo_info)
     return jsonify(message=data), 200
 
 @app.route('/all_organizations', methods=['GET'])
 def all_orgs(other_user_uid):
-    data=g.db.child('orgs').get().val()
+    db=get_db()
+    data=db.child('orgs').get().val()
      
     return jsonify(message=data), 200
 
 
 @app.route('/organizations/<org_uid>', methods=['GET', 'POST'])
 def other_orgs(org_uid):
-    user_uid = g.user_uid
+    db=get_db()
+    user_uid = current_app.user_uid
     if request.method == 'POST':
         signup_cancel, org_uid = request.get_json() #...sign up vs cancel?
         try:    
             if signup_cancel==True:
-                g.db.child('org_user').child(user_uid).update({org_uid:True})
-                g.db.child('user_org').child(org_uid).update({user_uid:True})
+                db.child('org_user').child(user_uid).update({org_uid:True})
+                db.child('user_org').child(org_uid).update({user_uid:True})
             elif signup_cancel==False:
-                g.db.child('org_user').child(user_uid).update({org_uid: None})
-                g.db.child('user_org').child(org_uid).update({user_uid: None})
+                db.child('org_user').child(user_uid).update({org_uid: None})
+                db.child('user_org').child(org_uid).update({user_uid: None})
             return True, 200
         except:
             return False, 400
-    data=dict(g.db.child('orgs').child(org_uid).get().val())
+    data=dict(db.child('orgs').child(org_uid).get().val())
     #admin...? Need to edit database later
-    data.update({'org_uid':org_uid, 'admin':True})
-    org_users=g.db.child('user_org').child(org_uid).shallow().get().val()
+    data.update({'id':org_uid, 'admin':True})
+    org_users=db.child('user_org').child(org_uid).shallow().get().val()
     if str(user_uid) in org_users:
         data.update({'joined':True})
         
@@ -464,16 +474,17 @@ def other_orgs(org_uid):
 
 @app.route('/organizations', methods=['GET'])
 def organizations():
+    db=get_db()
     '''
     Inputs: user_uid
     Outputs: a list containing the info (in dicts) for all of a user's organizations
     '''
     org_info_list = [] #list of dictionaries containg info for each of a user's orgs
-    user_uid=g.user_uid
-    user_orgs = dict(g.db.child('org_user').child(user_uid).get().val())
+    user_uid=current_app.user_uid
+    user_orgs = dict(db.child('org_user').child(user_uid).get().val())
     for key in user_orgs:
         #where key is an org
-        org_info_list.append(dict(g.db.child('orgs').child(key).get().val()))
+        org_info_list.append(dict(db.child('orgs').child(key).get().val()))
         
     
     return jsonify(message=org_info_list), 200
@@ -481,7 +492,7 @@ def organizations():
 @app.route('/conversations/<convo_uid>', methods=['GET'])
 def other_convos(convo_uid):
     #...bc user can't change convos?
-    user_uid=g.user_uid
+    user_uid=current_app.user_uid
     other_convos_data = db_for_flask.db_other_convos(user_uid, convo_uid)
     return jsonify(message=other_convos_data), 200
 
