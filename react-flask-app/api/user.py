@@ -4,7 +4,6 @@ Created on Wed Mar 25 09:14:59 2020
 
 @author: Samantha
 """
-from db import get_db
 
 """
 User class will store and retrieve information from the SQL database. 
@@ -16,7 +15,7 @@ The name, email, and profile picture will all be retrieved from Google.
 #For Google authentication
 
 from flask_login import UserMixin
-
+from api.db import get_db
 
 class User(UserMixin):
     def __init__(self, id_, name, email, avatar):

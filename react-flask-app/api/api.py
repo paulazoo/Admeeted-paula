@@ -15,18 +15,13 @@ from flask_login import (
 from oauthlib.oauth2 import WebApplicationClient
 import requests
 
-print(os.getcwd())
-
 #firebase
 import pyrebase
 
-# # Internal imports
-# from db import init_db_command
-# from user import User
-# import db_for_flask
-from user import User
-import db_for_flask
-from db import init_db_command
+# Internal imports
+from api.db import init_db_command
+from api.user import User
+import api.db_for_flask
 
 '''
 Paula and Samantha combined version!
@@ -50,7 +45,8 @@ GOOGLE_DISCOVERY_URL = (
     "https://accounts.google.com/.well-known/openid-configuration"
 )
 
-
+import os 
+os.environ['AUTHLIB_INSECURE_TRANSPORT'] = '1'
 #%%
 app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY") or os.urandom(24)
