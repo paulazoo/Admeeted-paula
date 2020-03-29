@@ -302,17 +302,17 @@ def profile():
     user=db.child('users').child(user_uid).get().val()
 
     majors = db.child('major_user').child(user_uid).get().val()
+    majors_keys=[]
+    
     if majors:
-        majors = list(majors.keys())
-    else:
-        majors = []
+        majors_keys = list(majors.keys())
     
     data={'name':user['name'], 
      'displayName':user['displayName'],
      'state':user.get('state'),
      'country':user.get('country'),
      'avatar':user['avatar'],
-     'majors':majors
+     'majors':majors_keys
      }
     
     return jsonify(message=data), 200
@@ -343,8 +343,27 @@ def upcoming_events():
                 event_info=dict(event_info_ord)
                 event_info.update({'id':event})
                 data.append(event_info)
+                
+                
+                #show relevant convos under each upcoming event
+                event_convos=db.child('convo_event').child(event).get().val()
+                #show relevant convos under each upcoming event
+                user_convos=db.child('convo_user').child(user_uid).get().val()
+                #if convos have been created then show
+                convos_info={}
+                if event_convos and user_convos:
+                    event_user_convos=set(event_convos) & set(user_convos)
+                    #for each convo
+                    for convo in event_user_convos:
+                        convo_info=db.child("convos").child(convo).get().val()
+                        convo_info.update({'id':convo})
+                        convos_info.update({convo:convo_info})
+                        
+                data.append(convos_info)
+                
 
     return jsonify(message=data), 200
+
 
 @app.route('/upcoming-events/<org_uid>', methods=['GET'])
 def upcoming_events_org(org_uid):
@@ -365,8 +384,26 @@ def upcoming_events_org(org_uid):
                 event_info=dict(event_info_ord)
                 event_info.update({'id':event})
                 data.append(event_info)
+                
+                
+                #show relevant convos under each upcoming event
+                event_convos=db.child('convo_event').child(event).get().val()
+                #show relevant convos under each upcoming event
+                user_convos=db.child('convo_user').child(user_uid).get().val()
+                #if convos have been created then show
+                convos_info={}
+                if event_convos and user_convos:
+                    event_user_convos=set(event_convos) & set(user_convos)
+                    #for each convo
+                    for convo in event_user_convos:
+                        convo_info=db.child("convos").child(convo).get().val()
+                        convo_info.update({'id':convo})
+                        convos_info.update({convo:convo_info})
+                        
+                data.append(convos_info)
             
     return jsonify(message=data), 200
+
 
 @app.route('/avail-events', methods=['GET'])
 def avail_events():
