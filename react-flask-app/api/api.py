@@ -309,19 +309,13 @@ def profile():
      }
     
     return jsonify(message=data), 200
-  
-    
-@app.route('/profile/<other_user_uid>', methods=['GET'])
-def other_profile(other_user_uid):
-    db=get_db()
-    profile_data=db_for_flask.db_profile(other_user_uid)
-    
-    return jsonify(message=profile_data), 200
 
 @app.route('/majors', methods=['GET'])
 def majors():
     db=get_db()
     data=db.child('majors').get().val()
+    if not data:
+        data={}
      
     return jsonify(message=data), 200
 
@@ -331,16 +325,19 @@ def upcoming_events():
     db=get_db()
     user_uid=session.get('user_uid')
     events=db.child('event_user').child(user_uid).get().val()
-    data=[]
-    for event in events:
-        event_info_ord=db.child('events').child(event).get().val()
-        event_timeStart=datetime.strptime(event_info_ord['timeStart'], '%H:%M %d %B %Y')
-    
-        if event_timeStart<=datetime.now():
-            event_info=dict(event_info_ord)
-            event_info.update({'id':event})
-            data.append(event_info)
-     
+    if events:
+        data=[]
+        for event in events:
+            event_info_ord=db.child('events').child(event).get().val()
+            event_timeStart=datetime.strptime(event_info_ord['timeStart'], '%H:%M %d %B %Y')
+        
+            if event_timeStart<=datetime.now():
+                event_info=dict(event_info_ord)
+                event_info.update({'id':event})
+                data.append(event_info)
+    elif not events:
+        events=[]
+        
     return jsonify(message=data), 200
 
 @app.route('/upcoming-events/<org_uid>', methods=['GET'])
@@ -349,16 +346,19 @@ def upcoming_events_org(org_uid):
     user_uid = current_app.user_uid
     events_users=db.child('event_user').child(user_uid).get().val()
     events_orgs=db.child('event_org').child(org_uid).get().val()
-    events=set(events_users) & set(events_orgs)
-    data=[]
-    for event in events:
-        event_info_ord=db.child('events').child(event).get().val()
-        event_timeStart=datetime.strptime(event_info_ord['timeStart'], '%H:%M %d %B %Y')
-    
-        if event_timeStart<=datetime.now():
-            event_info=dict(event_info_ord)
-            event_info.update({'id':event})
-            data.append(event_info)   
+    if events_users and events_orgs:
+        events=set(events_users) & set(events_orgs)
+        data=[]
+        for event in events:
+            event_info_ord=db.child('events').child(event).get().val()
+            event_timeStart=datetime.strptime(event_info_ord['timeStart'], '%H:%M %d %B %Y')
+        
+            if event_timeStart<=datetime.now():
+                event_info=dict(event_info_ord)
+                event_info.update({'id':event})
+                data.append(event_info)   
+    elif not events_users or not events_orgs:
+        data=[]
             
     return jsonify(message=data), 200
 
@@ -367,21 +367,24 @@ def avail_events(org_uid):
     db=get_db()
     user_uid=session.get('user_uid')
     orgs=db.child('org_user').child(user_uid).get().val()
-    all_events={}
-    for org in orgs:
-        org_events=db.child('event_org').child(org).get().val()
-        all_events.update(dict(org_events))
-    events_users=db.child('event_user').child(user_uid).get().val()
-    events=set(all_events) - set(events_users)
-    data=[]
-    for event in events:
-        event_info_ord=db.child('events').child(event).get().val()
-        event_timeStart=datetime.strptime(event_info_ord['timeStart'], '%H:%M %d %B %Y')
-    
-        if event_timeStart<=datetime.now():
-            event_info=dict(event_info_ord)
-            event_info.update({'id':event})
-            data.append(event_info)
+    if orgs:
+        all_events={}
+        for org in orgs:
+            org_events=db.child('event_org').child(org).get().val()
+            all_events.update(dict(org_events))
+        events_users=db.child('event_user').child(user_uid).get().val()
+        events=set(all_events) - set(events_users)
+        data=[]
+        for event in events:
+            event_info_ord=db.child('events').child(event).get().val()
+            event_timeStart=datetime.strptime(event_info_ord['timeStart'], '%H:%M %d %B %Y')
+        
+            if event_timeStart<=datetime.now():
+                event_info=dict(event_info_ord)
+                event_info.update({'id':event})
+                data.append(event_info)
+    elif not orgs:
+        data=[]
             
     return jsonify(message=data), 200
 
@@ -391,16 +394,19 @@ def avail_events_org(org_uid):
     user_uid=session.get('user_uid')
     events_users=db.child('event_user').child(user_uid).get().val()
     events_orgs=db.child('event_org').child(org_uid).get().val()
-    events=set(events_orgs) - set(events_users)
-    data=[]
-    for event in events:
-        event_info_ord=db.child('events').child(event).get().val()
-        event_timeStart=datetime.strptime(event_info_ord['timeStart'], '%H:%M %d %B %Y')
-    
-        if event_timeStart<=datetime.now():
-            event_info=dict(event_info_ord)
-            event_info.update({'id':event})
-            data.append(event_info)
+    if events_users and events_orgs:
+        events=set(events_orgs) - set(events_users)
+        data=[]
+        for event in events:
+            event_info_ord=db.child('events').child(event).get().val()
+            event_timeStart=datetime.strptime(event_info_ord['timeStart'], '%H:%M %d %B %Y')
+        
+            if event_timeStart<=datetime.now():
+                event_info=dict(event_info_ord)
+                event_info.update({'id':event})
+                data.append(event_info)
+    elif not events_users or not events_orgs:
+        data = []
             
     return jsonify(message=data), 200
 
@@ -431,18 +437,22 @@ def convos():
     db=get_db()
     user_uid=session.get('user_uid')
     convos=db.child('convo_user').child(user_uid).get().val()
-    data={}
-    for convo in convos:
-        convo_info=db.child('convos').child(convo).get().val()
-        convo_info.update({'id': convo})
-        data.update(convo_info)
+    if convos:
+        data={}
+        for convo in convos:
+            convo_info=db.child('convos').child(convo).get().val()
+            convo_info.update({'id': convo})
+            data.update(convo_info)
+    elif not convos:
+        data={}
     return jsonify(message=data), 200
 
 @app.route('/all_organizations', methods=['GET'])
 def all_orgs(other_user_uid):
     db=get_db()
     data=db.child('orgs').get().val()
-     
+    if not data:
+        data = {}
     return jsonify(message=data), 200
 
 
@@ -463,12 +473,14 @@ def other_orgs(org_uid):
         except:
             return False, 400
     data=dict(db.child('orgs').child(org_uid).get().val())
-    #admin...? Need to edit database later
-    data.update({'id':org_uid, 'admin':True})
-    org_users=db.child('user_org').child(org_uid).shallow().get().val()
-    if str(user_uid) in org_users:
-        data.update({'joined':True})
-        
+    if data:
+        #admin...? Need to edit database later
+        data.update({'id':org_uid, 'admin':True})
+        org_users=db.child('user_org').child(org_uid).shallow().get().val()
+        if str(user_uid) in org_users:
+            data.update({'joined':True})
+    elif not data:
+        data = {}
     return jsonify(message=data), 200
 
 @app.route('/organizations', methods=['GET'])
@@ -481,10 +493,12 @@ def organizations():
     org_info_list = [] #list of dictionaries containg info for each of a user's orgs
     user_uid=session.get('user_uid')
     user_orgs = dict(db.child('org_user').child(user_uid).get().val())
-    for key in user_orgs:
-        #where key is an org
-        org_info_list.append(dict(db.child('orgs').child(key).get().val()))
-        
+    if user_orgs:
+        for key in user_orgs:
+            #where key is an org
+            org_info_list.append(dict(db.child('orgs').child(key).get().val()))
+    elif not user_orgs:
+        org_info_list=[]
     
     return jsonify(message=org_info_list), 200
 #%%
