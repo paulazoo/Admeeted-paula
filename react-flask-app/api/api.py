@@ -342,7 +342,6 @@ def upcoming_events():
             if event_timeStart>=datetime.now():
                 event_info=dict(event_info_ord)
                 event_info.update({'id':event})
-                data.append(event_info)
                 
                 
                 #show relevant convos under each upcoming event
@@ -355,11 +354,12 @@ def upcoming_events():
                     event_user_convos=set(event_convos) & set(user_convos)
                     #for each convo
                     for convo in event_user_convos:
-                        convo_info=db.child("convos").child(convo).get().val()
-                        convo_info.update({'id':convo})
+                        convo_info=dict(db.child("convos").child(convo).get().val())
                         convos_info.update({convo:convo_info})
                         
-                data.append(convos_info)
+                event_info.update({'convos':convos_info})
+                
+                data.append(event_info)
                 
 
     return jsonify(message=data), 200
@@ -383,7 +383,6 @@ def upcoming_events_org(org_uid):
             if event_timeStart>=datetime.now():
                 event_info=dict(event_info_ord)
                 event_info.update({'id':event})
-                data.append(event_info)
                 
                 
                 #show relevant convos under each upcoming event
@@ -396,11 +395,13 @@ def upcoming_events_org(org_uid):
                     event_user_convos=set(event_convos) & set(user_convos)
                     #for each convo
                     for convo in event_user_convos:
-                        convo_info=db.child("convos").child(convo).get().val()
-                        convo_info.update({'id':convo})
+                        convo_info=dict(db.child("convos").child(convo).get().val())
                         convos_info.update({convo:convo_info})
                         
-                data.append(convos_info)
+                event_info.update({'convos':convos_info})
+                
+                data.append(event_info)
+
             
     return jsonify(message=data), 200
 
