@@ -16,17 +16,13 @@ config = {
 
 firebase = pyrebase.initialize_app(config)
 db = firebase.database()
-    
-#%%
-org_users_ref=db.child("org_users").get()
-print(org_users_ref.val())
 
 #%%
 def get_emails(user_list):
-    email_list=[]
+    email_dict={}
     for user_uid in user_list:
-        email_list.append(db.child('users').child(user_uid).child('email').get().val())
-    return email_list
+        email_dict.update({user_uid:db.child('users').child(user_uid).child('email').get().val()})
+    return email_dict
 
 #%%
 def get_all_users():
@@ -95,9 +91,24 @@ def get_major_users(org_uid,event_uid):
 def get_event_info(event_uid):
     #event_uid='Harvard Admeeted 2024 3-30'
     event_info=db.child('events').child(event_uid).get().val()
-    displayName=event_info['displayName']
-    num_rounds=event_info['num_rounds']
-    desired_size=event_info['desired_size']
-    timeStart=event_info['timeStart']
-    org_uid=event_info['org']
-    return displayName, num_rounds, desired_size, timeStart, org_uid
+    return event_info
+
+#%%
+link='<link>'
+
+def post_convo(giant_dict, event_uid, event_info):
+    for convo in giant_dict:
+        #possibly change displayName
+        db.child('convos').child(convo).update({'displayName':convo, 
+                'event':event_uid,
+                'link':link,
+                'org':event_info['org'],
+                'timeStart':event_info['timeStart'],
+                'timeEnd':event_info['timeEnd'],
+                'members':dict.fromkeys(giant_dict[convo].keys(), True)
+                })
+            
+        db.child('convo_event').child(event_uid).update({convo:True})
+        for user_uid in giant_dict[convo].keys():
+            db.child('convo_user').child(user_uid).update({convo:True})   
+    return True
