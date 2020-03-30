@@ -297,17 +297,17 @@ def profile():
     user=db.child('users').child(user_uid).get().val()
 
     majors = db.child('major_user').child(user_uid).get().val()
+    majors_keys=[]
+    
     if majors:
-        majors = list(majors.keys())
-    else:
-        majors = []
+        majors_keys = list(majors.keys())
     
     data={'name':user['name'], 
      'displayName':user['displayName'],
      'state':user.get('state'),
      'country':user.get('country'),
      'avatar':user['avatar'],
-     'majors':majors
+     'majors':majors_keys
      }
     
     return jsonify(message=data), 200
@@ -343,6 +343,7 @@ def upcoming_events():
                 event_info.update({'convos': convos_data})
 
                 data.append(event_info)
+                
 
     return jsonify(message=data), 200
 
@@ -391,8 +392,10 @@ def upcoming_events_org(org_uid):
 
                 event_info.update({'convos': convos_data})
                 data.append(event_info)
+
             
     return jsonify(message=data), 200
+
 
 @app.route('/avail-events', methods=['GET'])
 def avail_events():

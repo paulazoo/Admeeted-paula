@@ -6,7 +6,6 @@ import selenium
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.keys import Keys
 from datetime import date
-import hangout_tools
 import time
 
 #%%
@@ -35,44 +34,47 @@ event_uid='Harvard Admeeted 2024 3-30'
 
 #%%
 import firebase_db
+#%%
 #get event variables
-displayName, num_rounds, desired_size, timeStart, org_uid=firebase_db.get_event_info(event_uid)
+event_info=firebase_db.get_event_info(event_uid)
 num_threads=int(input("num_threads? "))
 #%%
 #change depending on call type?
-all_users=firebase_db.get_org_users(org_uid, event_uid)
-all_emails=firebase_db.get_emails(all_users)
+all_users=firebase_db.get_org_users(event_info['org'], event_uid)
+
+#%%
+
+user_email_dict=firebase_db.get_emails(all_users)
 
 
 #%%
 #group manipulations
-import groups
+import groups_db
 #create groups using the createGroups function defined in groups.py file
 generated_groups = []
 
-for call_num in range(1, num_rounds + 1):
-    #for each call, ask what category for the call
-    #r for random
-    category = input("category for call "+str(call_num)+"? ")
+for call_num in range(1, event_info['num_rounds'] + 1):
+    generated_groups = generated_groups+groups_db.create_groups(list(user_email_dict.keys()), event_info['desired_size'], call_num)
 
-    #s for skip category combining
-    generated_groups = generated_groups+groups.create_groups(all_emails, desired_size, call_num)
-
-logging.warning(generated_groups)
-
-#%%
-#group name for hangout_tools
-#make generated_groups into a dict
 giant_dict = {}
 for i in range(len(generated_groups)):
-   group_name = "IGNORE TEST Call: %s %s %s PM EST Group number: %d"%(generated_groups[i][0], org_uid, timeStart, i)
-   giant_dict[group_name]=generated_groups[i]
+    group_name = "IGNORE TEST %s Call: %s PM EST Group number: %d"%(generated_groups[i][0], event_info['org'], i)
+    giant_dict[group_name]={user_uid:user_email_dict[user_uid] for user_uid in generated_groups[i][1:] }
+
+
+logging.warning(giant_dict)
 
 #%%
-import helpers
+#back to firebase
+firebase_db.post_convo(giant_dict, event_uid, event_info)
+
+big_dict={convo:list(giant_dict[convo].values()) for convo in giant_dict}
+
+#%%
+import helpers_db
 import threading
 
-batched_dicts = helpers.split_dict(giant_dict, num_threads)
+batched_dicts = helpers_db.split_dict(big_dict, num_threads)
 logging.warning("Batched dicts are:")
 logging.warning(batched_dicts)
 
@@ -81,7 +83,7 @@ thread_list=[]
 error_count = 0
 for batch in batched_dicts:
     try:
-        t = threading.Thread(target=helpers.go_thread, args=(batch, batched_dicts.index(batch),))
+        t = threading.Thread(target=helpers_db.go_thread, args=(batch, batched_dicts.index(batch),))
         #starting thread
         t.start()
         #add thread to thread list
