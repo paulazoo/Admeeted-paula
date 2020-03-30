@@ -12,11 +12,12 @@ import PanelList from "./PanelList";
 import Loading from "./Loading";
 import EventCardList from '../components/EventCardList';
 import FolderIcon from "@material-ui/icons/Folder";
-import {IconButton} from "@material-ui/core";
+import {Button, IconButton} from "@material-ui/core";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
 import {NavLink} from "react-router-dom";
+import ChatIcon from "@material-ui/icons/Chat";
 
 const styles = theme => ({
     root: {
@@ -27,7 +28,11 @@ const styles = theme => ({
     },
     availRoot: {
         height: '100%'
-    }
+    },
+    image: {
+        height: '100%',
+        width: 36
+    },
 });
 
 function Events({ data, currentlySending, modifyEvent, classes }) {
@@ -39,15 +44,31 @@ function Events({ data, currentlySending, modifyEvent, classes }) {
 
     const maxItems = 10;
 
-    function avatar(org_uid) {
-        return <IconButton
+    function avatar(uid, avatar) {
+        return <Button
             color="primary"
             edge="end"
             size="small"
             component={NavLink}
-            to={`/organization/${org_uid}`}
+            to={`/organization/${uid}`}
         >
-            <FolderIcon/>
+            <img
+                className={classes.image}
+                src={avatar}
+                alt='Organization'
+            />
+        </Button>
+    }
+
+    function chatButton(link) {
+        console.log(link);
+        return <IconButton
+            color="primary"
+            edge="end"
+            size="small"
+            href={link}
+        >
+            <ChatIcon/>
         </IconButton>
     }
 
@@ -95,6 +116,7 @@ function Events({ data, currentlySending, modifyEvent, classes }) {
                         maxItems={maxItems}
                         avatar={avatar}
                         iconButton={removeButton}
+                        chatButton={chatButton}
                         className={classes.upcomingRoot}
                     />
                     {/*<PanelLayout>*/}

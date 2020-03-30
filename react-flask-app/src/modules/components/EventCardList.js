@@ -17,6 +17,9 @@ import React from "react";
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
+    nested: {
+        paddingLeft: theme.spacing(4),
+      },
     content: {
         padding: 0
     },
@@ -29,7 +32,7 @@ const styles = theme => ({
     }
 });
 
-function EventCardList({ title, data, maxItems, avatar, iconButton, className, classes }) {
+function EventCardList({ title, data, maxItems, avatar, iconButton, chatButton, className, classes }) {
     function setItems(items) {
         if (items.length > maxItems) {
             return data.slice(0, maxItems)
@@ -50,12 +53,12 @@ function EventCardList({ title, data, maxItems, avatar, iconButton, className, c
           <CardContent className={classes.content}>
             <List>
               {points.map((point, i) => (
+                  <div>
                 <ListItem
-                  divider={i < points.length}
                   key={i}
                 >
                   <ListItemAvatar>
-                      {avatar(point.org)}
+                      {avatar(point.org, point.avatar)}
                     {/*<img*/}
                     {/*  alt="Conversation"*/}
                     {/*  className={classes.image}*/}
@@ -68,18 +71,35 @@ function EventCardList({ title, data, maxItems, avatar, iconButton, className, c
                   />
                     {iconButton(point.id)}
                 </ListItem>
+                  {point.hasOwnProperty('convos') ?
+                          <div>
+                              <Divider variant="inset"/>
+                              <List component="div" disablePadding>
+                                  {point.convos.map((convo, i) => (
+                                      <ListItem className={classes.nested} key={i}>
+                                        <ListItemText
+                                          primary={convo.displayName}
+                                          secondary={convo.timeStart}
+                                        />
+                                          {chatButton(convo.link)}
+                                      </ListItem>
+                                  ))}
+                              </List>
+                          </div> : null}
+                      <Divider/>
+                  </div>
               ))}
             </List>
           </CardContent>
-          <CardActions className={classes.actions}>
-            <Button
-              color="primary"
-              size="small"
-              variant="text"
-            >
-              View all <ArrowRightIcon />
-            </Button>
-          </CardActions>
+          {/*<CardActions className={classes.actions}>*/}
+          {/*  <Button*/}
+          {/*    color="primary"*/}
+          {/*    size="small"*/}
+          {/*    variant="text"*/}
+          {/*  >*/}
+          {/*    View all <ArrowRightIcon />*/}
+          {/*  </Button>*/}
+          {/*</CardActions>*/}
         </Card>
     )
 }

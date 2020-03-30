@@ -30,7 +30,7 @@ function OrgDashboard ({ org_uid, upcomingEvents, availEvents, conversations, mo
     const maxItems = 5;
 
     const upcomingText = 'Your upcoming events';
-    const convoText = 'Your conversations';
+    const convoText = 'Your past conversations';
     const availText = 'Your available events';
 
     function chatButton(link) {
@@ -91,6 +91,7 @@ function OrgDashboard ({ org_uid, upcomingEvents, availEvents, conversations, mo
                     data={upcomingEvents}
                     maxItems={maxItems}
                     iconButton={removeButton}
+                    chatButton={chatButton}
                     className={classes.upcomingRoot}
                 />
             </Grid>

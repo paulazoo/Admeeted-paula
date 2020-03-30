@@ -13,6 +13,9 @@ const styles = theme => ({
 });
 
 function Account({ profile, currentlySending, setProfile, classes }) {
+  const profileDetailsTitle = "Profile";
+  const profileDetailsSubtitle = "Edit and save your profile details.";
+
   return (
     <div>
       {!currentlySending ? <MainLayout>
@@ -36,7 +39,11 @@ function Account({ profile, currentlySending, setProfile, classes }) {
             xl={8}
             xs={12}
           >
-            <AccountDetails profile={profile} setProfile={setProfile}/>
+            <AccountDetails
+                title={profileDetailsTitle}
+                subtitle={profileDetailsSubtitle}
+                profile={profile}
+                setProfile={setProfile}/>
           </Grid>
        </Grid>
       </MainLayout> : <Loading/>}

@@ -1,6 +1,7 @@
 import {
     CHANGE_FORM,
     SET_AUTH,
+    SET_NEW_USER,
     SENDING_REQUEST,
     LOADING_AUTH,
     SET_ERROR_MESSAGE,
@@ -17,6 +18,7 @@ const initialState = {
   currentlySending: false,
   loadingAuth: false,
   loggedIn: false,
+  newUser: false,
   errorMessage: '',
   data: {
     profile: {
@@ -47,6 +49,8 @@ export const homeReducer = (state = initialState, action) => {
       return changeForm(state, action)
     case SET_AUTH:
       return setAuth(state, action)
+    case SET_NEW_USER:
+      return setNewUser(state, action)
     case SENDING_REQUEST:
       return sendingRequest(state, action)
     case LOADING_AUTH:
@@ -77,6 +81,13 @@ const setAuth = (state, action) => {
   return {
     ...state,
     loggedIn: action.newState
+  }
+}
+
+const setNewUser = (state, action) => {
+  return {
+    ...state,
+    newUser: action.newState
   }
 }
 
