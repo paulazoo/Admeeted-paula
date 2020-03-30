@@ -181,12 +181,6 @@ def login():
 
 
     #Login Callback:
-"""
-This login endpoint is the jumping point for all of Google’s work 
-authenticating the user and asking for consent. Once the user logs in with
-Google and agrees to share their email and basic profile information
-with this application, Google generates a unique code that it sends here.
-"""
 # #Define login callback endpoint and get Google's code
 # @app.route("/login/callback")
 # def callback():
@@ -266,6 +260,7 @@ with this application, Google generates a unique code that it sends here.
 #only logged in users can access this function (endpoint in this case).
 def logout():
     logout_user()
+    del session['user_uid']
     return jsonify(message=current_user.is_authenticated), 200
 
 
@@ -337,19 +332,46 @@ def upcoming_events():
     if events:
         for event in events:
             event_info_ord=db.child('events').child(event).get().val()
-            event_timeStart=datetime.strptime(event_info_ord['timeStart'], '%H:%M %d %B %Y')
+            event_timeEnd=datetime.strptime(event_info_ord['timeEnd'], '%H:%M %d %B %Y')
 
-            if event_timeStart>=datetime.now():
+            if event_timeEnd>=datetime.now():
                 event_info=dict(event_info_ord)
                 event_info.update({'id':event})
+
+                convos_data = get_convo_event(db, user_uid, event)
+
+                event_info.update({'convos': convos_data})
+
                 data.append(event_info)
 
     return jsonify(message=data), 200
 
+def get_convo_event(db, user_uid, event_uid):
+    '''
+    Helper method for upcoming_events() and upcoming_events_org()
+    '''
+    event_convos_ord = db.child('convo_event').child(event_uid).get().val()
+    user_convos_ord = db.child('convo_user').child(user_uid).get().val()
+
+    convos_data = []
+    if event_convos_ord and user_convos_ord:
+        convos = set(event_convos_ord) & set(user_convos_ord)
+
+        for convo in convos:
+            convo_info = db.child('convos').child(convo).get().val()
+
+            convos_data.append({
+                'displayName': convo_info['displayName'],
+                'timeStart': convo_info['timeStart'],
+                'link': convo_info['link']
+            })
+
+    return convos_data
+
 @app.route('/upcoming-events/<org_uid>', methods=['GET'])
 def upcoming_events_org(org_uid):
     db=get_db()
-    user_uid = current_app.user_uid
+    user_uid=session.get('user_uid')
     events_users=db.child('event_user').child(user_uid).get().val()
     events_orgs=db.child('event_org').child(org_uid).get().val()
 
@@ -359,11 +381,15 @@ def upcoming_events_org(org_uid):
 
         for event in events:
             event_info_ord=db.child('events').child(event).get().val()
-            event_timeStart=datetime.strptime(event_info_ord['timeStart'], '%H:%M %d %B %Y')
+            event_timeEnd=datetime.strptime(event_info_ord['timeEnd'], '%H:%M %d %B %Y')
         
-            if event_timeStart>=datetime.now():
+            if event_timeEnd>=datetime.now():
                 event_info=dict(event_info_ord)
                 event_info.update({'id':event})
+
+                convos_data = get_convo_event(db, user_uid, event)
+
+                event_info.update({'convos': convos_data})
                 data.append(event_info)
             
     return jsonify(message=data), 200
@@ -385,9 +411,9 @@ def avail_events():
 
         for event in events:
             event_info_ord=db.child('events').child(event).get().val()
-            event_timeStart=datetime.strptime(event_info_ord['timeStart'], '%H:%M %d %B %Y')
+            event_timeDeadline=datetime.strptime(event_info_ord['timeDeadline'], '%H:%M %d %B %Y')
         
-            if event_timeStart>=datetime.now():
+            if event_timeDeadline>=datetime.now():
                 event_info=dict(event_info_ord)
                 event_info.update({'id':event})
                 data.append(event_info)
@@ -407,9 +433,9 @@ def avail_events_org(org_uid):
 
         for event in events:
             event_info_ord=db.child('events').child(event).get().val()
-            event_timeStart=datetime.strptime(event_info_ord['timeStart'], '%H:%M %d %B %Y')
+            event_timeDeadline=datetime.strptime(event_info_ord['timeDeadline'], '%H:%M %d %B %Y')
         
-            if event_timeStart>=datetime.now():
+            if event_timeDeadline>=datetime.now():
                 event_info=dict(event_info_ord)
                 event_info.update({'id':event})
                 data.append(event_info)
@@ -425,13 +451,19 @@ def events(event_uid):
         signup_cancel = request.get_json(force=True)['new_data'] #...sign up vs cancel?
         print(f'Signup Cancel: {signup_cancel}')
         try:
-            if signup_cancel==True:
-                db.child('event_user').child(user_uid).update({event_uid:True})
-                db.child('user_event').child(event_uid).update({user_uid:True})
-            elif signup_cancel==False:
-                db.child('event_user').child(user_uid).update({event_uid: None})
-                db.child('user_event').child(event_uid).update({user_uid: None})
-            return jsonify(message=True), 200
+            event = db.child('events').child(event_uid).get().val()
+            event_timeDeadline = datetime.strptime(event['timeDeadline'], '%H:%M %d %B %Y')
+            if event_timeDeadline >= datetime.now(): # If deadline has not passed
+                if signup_cancel==True: # User wants to sign up
+                    db.child('event_user').child(user_uid).update({event_uid:True})
+                    db.child('user_event').child(event_uid).update({user_uid:True})
+                elif signup_cancel==False: # User wants to cancel
+                    db.child('event_user').child(user_uid).update({event_uid: None})
+                    db.child('user_event').child(event_uid).update({user_uid: None})
+                return jsonify(message=True), 200
+            else:
+                return jsonify(message=False), 400
+
         except Exception as e:
             print(e)
             return jsonify(message=False), 400
@@ -440,8 +472,8 @@ def events(event_uid):
     data.update({'event_uid':event_uid})
     return jsonify(message=data), 200
 
-@app.route('/conversations', methods=['GET'])
-def convos():
+@app.route('/past-conversations', methods=['GET'])
+def past_convos():
     db=get_db()
     user_uid=session.get('user_uid')
     convos=db.child('convo_user').child(user_uid).get().val()
@@ -450,10 +482,42 @@ def convos():
     if convos:
         for convo in convos:
             convo_info=db.child('convos').child(convo).get().val()
-            convo_info.update({'id': convo})
-            data.append(convo_info)
+            convo_timeEnd = datetime.strptime(convo_info['timeEnd'], '%H:%M %d %B %Y')
+            if convo_timeEnd <= datetime.now(): # Only conversations that have ended
+                convo_info.update({'id': convo})
+                data.append(convo_info)
 
     return jsonify(message=data), 200
+
+@app.route('/past-conversations/<org_uid>', methods=['GET'])
+def past_convos_org(org_uid):
+    db = get_db()
+    user_uid = session.get('user_uid')
+
+    convos = db.child('convo_user').child(user_uid).get().val()
+
+    data = []
+    if convos:
+        for convo in convos:
+            convo_info = db.child('convos').child(convo).get().val()
+            convo_timeEnd = datetime.strptime(convo_info['timeEnd'], '%H:%M %d %B %Y')
+            # Only conversations that have ended and are part of this organization
+            if convo_timeEnd <= datetime.now() and convo_info['org'] == org_uid:
+                convo_info.update({'id': convo})
+                data.append(convo_info)
+
+    return jsonify(message=data), 200
+#%%
+@app.route('/conversations/<convo_uid>', methods=['GET'])
+def other_convos(convo_uid):
+    #...bc user can't change convos?
+    user_uid=session.get('user_uid')
+    other_convos_data = db_for_flask.db_other_convos(user_uid, convo_uid)
+    print(other_convos_data)
+    return jsonify(message=other_convos_data), 200
+
+
+#%%
 
 @app.route('/all_organizations', methods=['GET'])
 def all_orgs():
@@ -470,13 +534,12 @@ def all_orgs():
 
     return jsonify(message=data), 200
 
-
 @app.route('/organizations/<org_uid>', methods=['GET', 'POST'])
 def other_orgs(org_uid):
     db=get_db()
     user_uid=session.get('user_uid')
     if request.method == 'POST':
-        signup_cancel, org_uid = request.get_json() #...sign up vs cancel?
+        signup_cancel = request.get_json(force=True)['new_data'] #...sign up vs cancel?
         try:    
             if signup_cancel==True:
                 db.child('org_user').child(user_uid).update({org_uid:True})
@@ -484,16 +547,17 @@ def other_orgs(org_uid):
             elif signup_cancel==False:
                 db.child('org_user').child(user_uid).update({org_uid: None})
                 db.child('user_org').child(org_uid).update({user_uid: None})
-            return True, 200
-        except:
-            return False, 400
+            return jsonify(message=True), 200
+        except Exception as e:
+            print(e)
+            return jsonify(message=False), 400
 
     data=dict(db.child('orgs').child(org_uid).get().val())
     if data:
         #admin...? Need to edit database later
         data.update({'id':org_uid, 'admin':False})
         org_users=db.child('user_org').child(org_uid).shallow().get().val()
-        if str(user_uid) in org_users:
+        if org_users and str(user_uid) in org_users:
             data.update({'joined':True})
     elif not data:
         data = {}
@@ -508,9 +572,9 @@ def organizations():
     db=get_db()
 
     user_uid=session.get('user_uid')
-    user_orgs = dict(db.child('org_user').child(user_uid).get().val())
+    user_orgs = db.child('org_user').child(user_uid).get().val()
 
-    org_info_list = []  # list of dictionaries containg info for each of a user's orgs
+    org_info_list = []  # list of dictionaries containing info for each of a user's orgs
     if user_orgs:
         for key in user_orgs:
             #where key is an org
@@ -522,17 +586,7 @@ def organizations():
     
     return jsonify(message=org_info_list), 200
 
-#%%
-@app.route('/conversations/<convo_uid>', methods=['GET'])
-def other_convos(convo_uid):
-    #...bc user can't change convos?
-    user_uid=session.get('user_uid')
-    other_convos_data = db_for_flask.db_other_convos(user_uid, convo_uid)
-    print(other_convos_data)
-    return jsonify(message=other_convos_data), 200
 
-
-#%%
 #To run your Flask application on your local computer to test the login flow
 if __name__ == "__main__":
     app.run(ssl_context="adhoc")
@@ -607,11 +661,11 @@ past_convos_old_data = {
 }
 
 @app.route('/past-convos/<int:org_uid>')
-def past_convos_org(org_uid):
+def past_convos_org_old(org_uid):
     return jsonify(message=past_convos_old_data[org_uid]), 200
 
 @app.route('/past-convos', methods=['GET'])
-def past_convos():
+def past_convos_old():
     return jsonify(message=
                    [
                        {

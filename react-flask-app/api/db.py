@@ -26,9 +26,7 @@ def get_db():
     return g.db
 
 def init_db():
-    print("init db called")
     if "db" not in g:
-        print("db not in g")
         project_id='admeeted-18732'
         config = {
            "apiKey": 'AIzaSyDyR1tbXRFE2fgENNTeepPyrCBExQ06rsk',
@@ -36,7 +34,8 @@ def init_db():
            "databaseURL": "https://"+project_id+".firebaseio.com",
            "projectId": project_id,
            "storageBucket": project_id+".appspot.com",
-           "serviceAccount": r"C:\Users\Samantha\Admeeted\Admeeted2.0\Admeeted\react-flask-app\api\admeeted-private-key.json", #Fill this in
+           # "serviceAccount": r"C:\Users\Samantha\Admeeted\Admeeted2.0\Admeeted\react-flask-app\api\admeeted-private-key.json", #Fill this in
+            "serviceAccount": r"C:\Users\billz\PycharmProjects\VirtualVisitas\Admeeted\react-flask-app\api\admeeted-private-key.json",
            "messagingSenderId": "667088492207"
         }   
 

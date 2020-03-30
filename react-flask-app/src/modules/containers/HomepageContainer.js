@@ -27,7 +27,7 @@ const mapDispatchToProps = dispatch => ({
         dispatch(loadData('/upcoming-events', 'upcomingEvents'));
     },
     loadPastConvos: () => {
-        dispatch(loadData('/conversations', 'conversations'));
+        dispatch(loadData('/past-conversations', 'conversations'));
     },
     loadOrganizations: () => {
         dispatch(loadData('/organizations', 'organizations'));

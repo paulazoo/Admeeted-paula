@@ -3,16 +3,17 @@ import Homepage from '../views/Homepage';
 import { loadData } from "../actions";
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import SearchBar from "../components/SearchBar";
+import SearchBarDialog from "../components/SearchBarDialog";
 
-function SearchBarContainer ({ all_organizations, currentlySending, loadOrganizations }) {
+function SearchBarDialogContainer ({ open, handleClose, all_organizations, currentlySending, loadOrganizations }) {
     useEffect(() => {
         loadOrganizations()
     },[])
 
     console.log(all_organizations)
+    console.log(open)
 
-    return <SearchBar all_organizations={all_organizations} currentlySending={currentlySending}/>
+    return <SearchBarDialog open={open} handleClose={handleClose} all_organizations={all_organizations} currentlySending={currentlySending}/>
 }
 
 const mapStateToProps = state => ({
@@ -26,4 +27,4 @@ const mapDispatchToProps = dispatch => ({
     }
 })
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SearchBarContainer))
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SearchBarDialogContainer))
