@@ -50,7 +50,7 @@ def main_convos(event_uid, convo_name_str, num_threads):
     
     #%%
     #user_email_dict=firebase_db.get_emails(all_users)
-    user_email_dict=firebase_db.get_emails([])
+    user_email_dict=firebase_db.get_emails(all_users)
     
     #%%
     #create groups using the createGroups function defined in groups.py file

@@ -47,6 +47,16 @@ def get_org_users(org_uid, event_uid):
     return org_users
 
 #%%
+def get_event_users(event_uid)
+    event_users = db.child("user_event").child(event_uid).shallow().get().val()
+    #print(org_users)
+    if event_users:
+        event_users=list(event_users)
+    elif not event_users:
+        event_users=[]
+    return event_users
+
+#%%
 def get_major_users(org_uid,event_uid):
     #org_uid = "Harvard"
     #event_uid='Harvard Admeeted 2024 3-30'
@@ -102,6 +112,12 @@ def post_convo(giant_dict, event_uid, event_info):
         #members
         members=dict.fromkeys(giant_dict[convo_uid].keys(), True)
         members.pop('displayName')
+        
+        
+        #calculate timeStart and timeEnd
+        
+        
+        
         
         #possibly change displayName
         db.child('convos').child(convo_uid).update({'displayName':convo_displayName, 
