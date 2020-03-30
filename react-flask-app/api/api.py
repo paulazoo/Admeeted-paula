@@ -303,7 +303,7 @@ def profile():
         majors_keys = list(majors.keys())
     
     data={'name':user['name'], 
-     'displayName':user['displayName'],
+     'displayName':user.get('displayName', user['name']),
      'state':user.get('state'),
      'country':user.get('country'),
      'avatar':user['avatar'],
@@ -409,14 +409,19 @@ def avail_events():
         all_events={}
         for org in orgs:
             org_events=db.child('event_org').child(org).get().val()
-            all_events.update(dict(org_events))
+            if org_events:
+                all_events.update(dict(org_events))
         events_users=db.child('event_user').child(user_uid).get().val()
+
+        if not events_users:
+            events_users = {}
+
         events=set(all_events) - set(events_users)
 
         for event in events:
             event_info_ord=db.child('events').child(event).get().val()
             event_timeDeadline=datetime.strptime(event_info_ord['timeDeadline'], '%H:%M %d %B %Y')
-        
+
             if event_timeDeadline>=datetime.now():
                 event_info=dict(event_info_ord)
                 event_info.update({'id':event})
@@ -436,7 +441,10 @@ def avail_events_org(org_uid):
     events_orgs=db.child('event_org').child(org_uid).get().val()
 
     data = []
-    if events_users and events_orgs:
+    if events_orgs:
+        if not events_users:
+            events_users = {}
+
         events=set(events_orgs) - set(events_users)
 
         for event in events:
@@ -519,10 +527,13 @@ def past_convos_org(org_uid):
 
 @app.route('/generate_convos/<event_uid>', methods=['POST'])
 def generate_convos(event_uid):
+    print("I HAVE ARRIVED")
     if request.method == 'POST':
         try:
-            gen_convo_inputs= request.get_json(force=True)['new_data']
-            main_convos(event_uid, gen_convo_inputs['convo_name'], gen_convo_inputs['threads'])
+            gen_convo_inputs= request.get_json(force=True)
+            print(f'Inputs: {gen_convo_inputs}')
+            num_threads = gen_convo_inputs.get('threads', 1)
+            main_convos(event_uid, gen_convo_inputs['convo_name'], num_threads)
             return jsonify(message=True), 200
         except Exception as e:
             print(e)
@@ -562,12 +573,15 @@ def other_orgs(org_uid):
     db=get_db()
     user_uid=session.get('user_uid')
     if request.method == 'POST':
-        signup_cancel = request.get_json(force=True)['new_data']#[0]
-        #input_code=request.get_json(force=True)['new_data'][1]
+        # code=str(db.child('orgs').child(org_uid).get().val())
+        signup_cancel = request.get_json(force=True)['new_data']
+        # signup_cancel = request.get_json(force=True)['new_data'][0]
+        # input_code=request.get_json(force=True)['new_data'][1]
         try:    
             if signup_cancel==True:
-                db.child('org_user').child(user_uid).update({org_uid:True})
-                db.child('user_org').child(org_uid).update({user_uid:True})
+                # if input_code==code:
+                    db.child('org_user').child(user_uid).update({org_uid:True})
+                    db.child('user_org').child(org_uid).update({user_uid:True})
             elif signup_cancel==False:
                 db.child('org_user').child(user_uid).update({org_uid: None})
                 db.child('user_org').child(org_uid).update({user_uid: None})

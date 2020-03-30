@@ -62,7 +62,7 @@ function SearchBarDialog ({ history, open, handleClose, all_organizations, curre
                     fullWidth
                     className={classes.root}
                 >
-                    <DialogTitle id="form-dialog-title">Search for an Organization</DialogTitle>
+                    <DialogTitle id="form-dialog-title">Select an Organization</DialogTitle>
                     <DialogContent>
                         <DialogContentText>
                             Filter results based on organization name.

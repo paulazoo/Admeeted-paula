@@ -15,6 +15,7 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 import ArrowRightIcon from "@material-ui/icons/ArrowRight";
 import React from "react";
 import { withStyles } from '@material-ui/core/styles';
+import moment from "moment";
 
 const styles = theme => ({
     nested: {
@@ -28,7 +29,7 @@ const styles = theme => ({
     }
 });
 
-function CardList({ title, data, maxItems, avatar, iconButton, chatButton, className, classes }) {
+function CardList({ title, subheader, data, maxItems, avatar, iconButton, chatButton, className, classes }) {
     function setItems(items) {
         if (items.length > maxItems) {
             return data.slice(0, maxItems)
@@ -45,6 +46,7 @@ function CardList({ title, data, maxItems, avatar, iconButton, chatButton, class
         <Card className={className}>
           <CardHeader
             subtitle={`${points.length} in total`}
+            subheader={subheader}
             title={title}
           />
           <Divider />
@@ -65,9 +67,9 @@ function CardList({ title, data, maxItems, avatar, iconButton, chatButton, class
                       </ListItemAvatar>
                       <ListItemText
                         primary={point.displayName}
-                        secondary={point.timeStart}
+                        secondary={`${moment(point.timeStart).format('LT')} - ${moment(point.timeEnd).format('h:mm A, MMMM Do YYYY')}`}
                       />
-                        {/*{point.hasOwnProperty('link') ? iconButton(point.link) : null}*/}
+                      {point.hasOwnProperty('link') ? iconButton(point.link) : null}
                     </ListItem>
                       {point.hasOwnProperty('convos') ?
                           <div>
@@ -77,7 +79,7 @@ function CardList({ title, data, maxItems, avatar, iconButton, chatButton, class
                                       <ListItem className={classes.nested} key={i}>
                                         <ListItemText
                                           primary={convo.displayName}
-                                          secondary={convo.timeStart}
+                                          secondary={`Start Time: ${moment(convo.timeStart).format('LT')}`}
                                         />
                                           {chatButton(convo.link)}
                                       </ListItem>

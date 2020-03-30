@@ -14,6 +14,7 @@ import OrganizationContainer from "../containers/OrganizationContainer";
 import StaticGoogleLogin from "../views/StaticGoogleLogin";
 import SearchBarContainer from "../containers/SearchBarContainer";
 import WelcomeContainer from "../containers/WelcomeContainer";
+import MasterContainer from "../containers/MasterContainer";
 import { connect } from 'react-redux';
 
 function Main ({ loggedIn }) {
@@ -41,6 +42,7 @@ function Main ({ loggedIn }) {
                     <Route exact path='/welcome' component={WelcomeContainer}/>
                     {/*<Route exact path='/organizations' component={SearchBarContainer}/>*/}
                     <Route exact path={`/organization/:org_uid`} component={OrganizationContainer}/>
+                    <Route exact path={'/master'} component={MasterContainer}/>
                 </Switch> : <Switch>
                     <Route path='/' component={ProductHero}/>
                 </Switch>

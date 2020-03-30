@@ -1,6 +1,6 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import {Grid, IconButton} from "@material-ui/core";
+import {Grid, IconButton, Button} from "@material-ui/core";
 import CardList from "./CardList";
 import OrgCardList from "./OrgCardList";
 import {NavLink} from "react-router-dom";
@@ -49,28 +49,28 @@ function OrgDashboard ({ org_uid, upcomingEvents, availEvents, conversations, mo
         function addEvent() {
             modifyEvent(event_uid, true, org_uid)
         }
-        return <IconButton
+        return <Button
             color="primary"
             edge="end"
             size="small"
             onClick={addEvent}
         >
-            <AddIcon/>
-        </IconButton>
+            Join Event
+        </Button>
     }
 
     function removeButton(event_uid) {
         function removeEvent() {
             modifyEvent(event_uid, false, org_uid)
         }
-        return <IconButton
+        return <Button
             color="primary"
             edge="end"
             size="small"
             onClick={removeEvent}
         >
-            <RemoveIcon />
-        </IconButton>
+            Remove Event
+        </Button>
     }
 
     return (

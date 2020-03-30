@@ -26,7 +26,11 @@ from api import firebase_db, helpers_db, groups_db
 #num_threads=3
     
 #%%
-def main_convos(event_uid, convo_name_str, num_threads):
+def main_convos(event_uid, convo_name_str, num_threads, category="random"):
+    #%%
+    #set up logger
+    #will not log unless basicConfig has been run outside of ipython console
+
     #who's logging
     current_user = os.getlogin()
     
@@ -46,11 +50,12 @@ def main_convos(event_uid, convo_name_str, num_threads):
     event_info=firebase_db.get_event_info(event_uid)
     
     #change depending on call type?
-    all_users=firebase_db.get_org_users(event_info['org'], event_uid)
+    all_users=firebase_db.get_event_users(event_uid)
     
     #%%
-    #user_email_dict=firebase_db.get_emails(all_users)
+
     user_email_dict=firebase_db.get_emails(all_users)
+    # user_email_dict=firebase_db.get_emails([])
     
     #%%
     #create groups using the createGroups function defined in groups.py file

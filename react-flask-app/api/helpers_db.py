@@ -58,7 +58,7 @@ def login(wait_time):
 #    return web
 
 #%%
-def create_hangout(web, group_name, wait_time):
+def create_hangout(web, convo_uid, group_name, wait_time):
 
         #write down the generatedGroups
     # with open("group_ppl.txt", "a") as file:
@@ -118,7 +118,7 @@ def create_hangout(web, group_name, wait_time):
         time.sleep(wait_time)
         link=web.driver.find_element_by_css_selector("input[class='LpmM1 iF0pUc']").get_attribute('value')
         #print('link: '+str(link))
-        post_convo_link(group_name, link)
+        post_convo_link(convo_uid, link)
         #click to exist specific hangout iframe
         web.driver.find_element_by_css_selector("button.gGnOIc.tV.qp.SD.p7oPo.JPiKic").click()    
         
@@ -141,13 +141,14 @@ def go_thread(given_groups, thread_num):
     time.sleep(wait_time)
     
     #start creating the hangout for each group in the generatedGroups for each designated call
-    for group_name in given_groups:
-        web = create_hangout(web, given_groups[group_name], wait_time)
-        #logging.warning(group_name)
+    for convo_uid in given_groups:
+        logging.warning("Now creating " + str(convo_uid))
+        web = create_hangout(web, convo_uid, given_groups[convo_uid], wait_time)
+
         #web, total_groups=create_hangout(web, subgroup, group_name, total_groups,wait_time)
         #move on to the next group
         #finished!
-        logging.warning(str(group_name) +" created!")
+        logging.warning(str(convo_uid) +" created!")
 
 #%%
 def split_list(seq, num): #input a list and the desired number of smaller lists. Returns a nested list with the smaller lists.

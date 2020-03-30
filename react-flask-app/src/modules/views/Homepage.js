@@ -31,7 +31,7 @@ import PanelList from "./PanelList";
 import Loading from "./Loading";
 import CardList from "../components/CardList";
 import {NavLink} from "react-router-dom";
-import OrgCardList from "../components/OrgCardList";
+import OrgsCardList from "../components/OrgsCardList";
 
 const styles = theme => ({
     grid: {
@@ -56,8 +56,11 @@ const styles = theme => ({
 
 function Homepage({ data, currentlySending, classes }) {
     const upcomingText = 'Your upcoming events';
+    const upcomingSubtext = 'For each event, you can join calls once the deadline to sign up passes.';
     const convoText = 'Your past conversations';
+    const convoSubtext = 'Revisit the calls you have participated in from past events.';
     const orgText = 'Your organizations';
+    const orgSubtext = 'You can see and join events only for organizations you have joined.';
 
     const viewAllConvos = ''; // What is this for?
 
@@ -122,6 +125,7 @@ function Homepage({ data, currentlySending, classes }) {
                     >
                         <CardList
                             title={upcomingText}
+                            subheader={upcomingSubtext}
                             data={upcomingEvents}
                             maxItems={maxItems}
                             avatar={avatar}
@@ -141,8 +145,9 @@ function Homepage({ data, currentlySending, classes }) {
                           xl={4}
                           xs={12}
                     >
-                        <OrgCardList
+                        <OrgsCardList
                             title={orgText}
+                            subheader={orgSubtext}
                             data={organizations}
                             maxItems={maxItems}
                             avatar={avatar}
@@ -166,6 +171,7 @@ function Homepage({ data, currentlySending, classes }) {
                     >
                         <CardList
                             title={convoText}
+                            subheader={convoSubtext}
                             data={conversations}
                             maxItems={maxItems}
                             avatar={avatar}

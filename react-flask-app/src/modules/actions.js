@@ -36,6 +36,23 @@ export const resetNewUser = (profile) => {
     }
 }
 
+export const genConvos = (event_uid, convo_name) => {
+    return dispatch => {
+        dispatch(sendingRequest(true))
+        dispatch(setErrorMessage(''))
+        fetch(`/generate_convos/${event_uid}`, {
+            method: 'POST',
+            body: JSON.stringify({ convo_name }),
+        }).then(res => {
+            console.log(res);
+            if (res.ok) return res.json();
+            else throw new Error(res.statusText);
+        }).then(
+            dispatch(sendingRequest(false))
+        )
+    }
+}
+
 // Trying to batch together dispatch actions without premature sendingRequest(false)
 export const new_loadData = (paths, names) => {
     return dispatch => {
