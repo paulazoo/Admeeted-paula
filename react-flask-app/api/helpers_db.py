@@ -87,12 +87,12 @@ def create_hangout(web, subgroup, group_name, wait_time):
         #switch to the correct iframe
         web.driver.switch_to.frame(iframe_correct)
         
-        #enter all the emails
-        for i in range(0, len(subgroup)-1):
-            #logging.warning(subgroup[i])
-            time.sleep(wait_time)
-            enter_email(web, subgroup[i], group_name, wait_time)
-            
+#        #enter all the emails
+#        for i in range(0, len(subgroup)-1):
+#            #logging.warning(subgroup[i])
+#            time.sleep(wait_time)
+#            enter_email(web, subgroup[i], group_name, wait_time)
+#            
         #name the group input box
         web.driver.find_element_by_css_selector("input.t0ZFWd.AKyIEc.ea-Ga-ea").send_keys(group_name)
         time.sleep(wait_time)
