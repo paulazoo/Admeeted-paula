@@ -33,7 +33,7 @@ const styles = theme => ({
     }
 });
 
-function OrgCardList({ title, data, maxItems, iconButton, className, classes }) {
+function OrgsCardList({ title, subheader, data, maxItems, iconButton, className, classes }) {
     function setItems(items) {
         if (items.length > maxItems) {
             return data.slice(0, maxItems)
@@ -48,11 +48,14 @@ function OrgCardList({ title, data, maxItems, iconButton, className, classes }) 
         <Card className={className}>
           <CardHeader
             subtitle={`${points.length} in total`}
+            subheader={subheader}
             title={title}
           />
           <Divider />
           <CardContent className={classes.content}>
-            <List className={classes.flex}>
+            <List
+                // className={classes.flex}
+            >
               {points.map((point, i) => (
                 <ListItem
                   divider={i < points.length}
@@ -60,24 +63,25 @@ function OrgCardList({ title, data, maxItems, iconButton, className, classes }) 
                 >
                   <ListItemText
                     primary={point.displayName}
-                    secondary={point.timeStart}
+                    secondary={"Click to see organization"}
                   />
                     {point.hasOwnProperty('link') ? iconButton(point.link) : iconButton(point.id)}
                 </ListItem>
               ))}
             </List>
           </CardContent>
-          <CardActions className={classes.actions}>
-            <Button
-              color="primary"
-              size="small"
-              variant="text"
-            >
-              View all <ArrowRightIcon />
-            </Button>
-          </CardActions>
+          {/*<CardActions className={classes.actions}>*/}
+          {/*  <Button*/}
+          {/*    color="primary"*/}
+          {/*    size="small"*/}
+          {/*    variant="text"*/}
+          {/*  >*/}
+          {/*    View all <ArrowRightIcon />*/}
+          {/*  </Button>*/}
+          {/*</CardActions>*/}
         </Card>
     )
 }
 
-export default withStyles(styles)(OrgCardList);
+// NOT BEING USED RIGHT NOW
+export default withStyles(styles)(OrgsCardList);

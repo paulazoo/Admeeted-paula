@@ -148,7 +148,7 @@ def login():
         id_=unique_id, name=users_name, email=users_email, avatar=picture
     )
 
-    new_user = True # Remember to change back!
+    new_user = False # Remember to change back!
 
     # Doesn't exist? Add it to the database.
     if not User.get(unique_id):
@@ -303,7 +303,7 @@ def profile():
         majors_keys = list(majors.keys())
     
     data={'name':user['name'], 
-     'displayName':user['displayName'],
+     'displayName':user.get('displayName', user['name']),
      'state':user.get('state'),
      'country':user.get('country'),
      'avatar':user['avatar'],
@@ -409,14 +409,19 @@ def avail_events():
         all_events={}
         for org in orgs:
             org_events=db.child('event_org').child(org).get().val()
-            all_events.update(dict(org_events))
+            if org_events:
+                all_events.update(dict(org_events))
         events_users=db.child('event_user').child(user_uid).get().val()
+
+        if not events_users:
+            events_users = {}
+
         events=set(all_events) - set(events_users)
 
         for event in events:
             event_info_ord=db.child('events').child(event).get().val()
             event_timeDeadline=datetime.strptime(event_info_ord['timeDeadline'], '%H:%M %d %B %Y')
-        
+
             if event_timeDeadline>=datetime.now():
                 event_info=dict(event_info_ord)
                 event_info.update({'id':event})
@@ -436,7 +441,10 @@ def avail_events_org(org_uid):
     events_orgs=db.child('event_org').child(org_uid).get().val()
 
     data = []
-    if events_users and events_orgs:
+    if events_orgs:
+        if not events_users:
+            events_users = {}
+
         events=set(events_orgs) - set(events_users)
 
         for event in events:

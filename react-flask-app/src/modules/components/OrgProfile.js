@@ -67,7 +67,7 @@ function OrgProfile ({ user, org_uid, modifyOrgMembership, className, ...rest })
               color="textSecondary"
               variant="body1"
             >
-              {user.dateFounded}
+              {`Founded: ${moment(user.dateFounded).format('MMMM Do YYYY')}`}
             </Typography>
           </div>
           <Avatar

@@ -57,6 +57,9 @@ function ProductHero({ loggedIn, googleLogin, classes }) {
                 <Typography color="inherit" align="center" variant="h2" marked="center">
                   Discover New Friends
                 </Typography>
+                 <Typography color="inherit" align="center" variant="h5" className={classes.h5}>
+                  They're waiting for you.
+                </Typography>
                 <Typography color="inherit" align="center" variant="h5" className={classes.h5}>
                   Meet your fellow Harvard admitted students - new connections, just one click away.
                 </Typography>

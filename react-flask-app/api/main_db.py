@@ -14,10 +14,10 @@ import threading
 
 
 #internal imports
-import api.firebase_db
-import api.helpers_db
+import api.firebase_db as firebase_db
+import api.helpers_db as helpers_db
 #group manipulations
-import api.groups_db
+import api.groups_db as groups_db
 
 #%%
 ##inputs

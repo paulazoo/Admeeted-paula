@@ -15,6 +15,7 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 import ArrowRightIcon from "@material-ui/icons/ArrowRight";
 import React from "react";
 import { withStyles } from '@material-ui/core/styles';
+import moment from 'moment';
 
 const styles = theme => ({
     nested: {
@@ -67,9 +68,9 @@ function EventCardList({ title, data, maxItems, avatar, iconButton, chatButton, 
                   </ListItemAvatar>
                   <ListItemText
                     primary={point.displayName}
-                    secondary={point.timeStart}
+                    secondary={`${moment(point.timeStart).format('LT')} - ${moment(point.timeEnd).format('h:mm A, MMMM Do YYYY')}`}
                   />
-                    {iconButton(point.id)}
+                  {moment().isBefore(moment(point.timeDeadline)) ? iconButton(point.id) : null}
                 </ListItem>
                   {point.hasOwnProperty('convos') ?
                           <div>
@@ -79,7 +80,7 @@ function EventCardList({ title, data, maxItems, avatar, iconButton, chatButton, 
                                       <ListItem className={classes.nested} key={i}>
                                         <ListItemText
                                           primary={convo.displayName}
-                                          secondary={convo.timeStart}
+                                          secondary={`Start Time: ${moment(convo.timeStart).format('LT')}`}
                                         />
                                           {chatButton(convo.link)}
                                       </ListItem>

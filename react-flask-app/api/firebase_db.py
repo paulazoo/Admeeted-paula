@@ -10,8 +10,9 @@ config = {
   "databaseURL": "https://"+project_id+".firebaseio.com",
   "projectId": project_id,
   "storageBucket": project_id+".appspot.com",
-  "serviceAccount": r"C:\Users\pkzr3\Admeeted\react-flask-app\api\admeeted-private-key.json",
-  "messagingSenderId": "667088492207"
+  # "serviceAccount": r"C:\Users\pkzr3\Admeeted\react-flask-app\api\admeeted-private-key.json",
+    "serviceAccount": r"C:\Users\billz\PycharmProjects\VirtualVisitas\Admeeted\react-flask-app\api\admeeted-private-key.json",
+    "messagingSenderId": "667088492207"
 }
 
 firebase = pyrebase.initialize_app(config)

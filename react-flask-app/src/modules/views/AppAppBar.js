@@ -7,7 +7,7 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  NavLink
+  NavLink, withRouter
 } from "react-router-dom";
 import AppBar from '../components/AppBar';
 import SignIn from './SignIn';
@@ -55,7 +55,7 @@ const styles = theme => ({
   },
 });
 
-function AppAppBar({ loggedIn, handleLogout, classes }) {
+function AppAppBar({ loggedIn, handleLogout, classes, history }) {
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -70,6 +70,7 @@ function AppAppBar({ loggedIn, handleLogout, classes }) {
   const logoutGoogle = () => {
     console.log('User log out');
     handleLogout();
+    history.push("/");
   };
 
   return (
@@ -159,7 +160,7 @@ const mapDispatchToProps = dispatch => ({
     handleLogout: () => dispatch(logout())
 })
 
-export default compose(
+export default withRouter(compose(
     withStyles(styles),
     connect(mapStateToProps, mapDispatchToProps)
-    )(AppAppBar);
+    )(AppAppBar));

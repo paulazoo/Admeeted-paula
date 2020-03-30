@@ -76,28 +76,28 @@ function Events({ data, currentlySending, modifyEvent, classes }) {
         function addEvent() {
             modifyEvent(event_uid, true)
         }
-        return <IconButton
+        return <Button
             color="primary"
             edge="end"
             size="small"
             onClick={addEvent}
         >
-            <AddIcon/>
-        </IconButton>
+            Join Event
+        </Button>
     }
 
     function removeButton(event_uid) {
         function removeEvent() {
             modifyEvent(event_uid, false)
         }
-        return <IconButton
+        return <Button
             color="primary"
             edge="end"
             size="small"
             onClick={removeEvent}
         >
-            <RemoveIcon />
-        </IconButton>
+            Remove Event
+        </Button>
     }
 
     return(
