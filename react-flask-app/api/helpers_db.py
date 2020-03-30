@@ -41,24 +41,24 @@ def login(wait_time):
     return web
 
 #%%
-def enter_email(web, email, group_name, wait_time):
-    #type the email string
-    web.type(email)
-    time.sleep(wait_time)
-    #cick the email to add
-    try:
-        #try to click any element that looks like it might be a clickable email
-        element=web.driver.find_element_by_css_selector("li[class*='eh XcEgrf fp pu hy']").click()
-    except NoSuchElementException:
-        #still doesn't work? just move on
-        logging.warning("skipping "+ str(email))
-        with open("dropped_ppl.txt", "w") as outfile:
-            #writes the call and groupNum, then the email that wasn't add to that hangout
-            outfile.write("\n" + group_name + " " + email)
-    return web
+#def enter_email(web, email, group_name, wait_time):
+#    #type the email string
+#    web.type(email)
+#    time.sleep(wait_time)
+#    #cick the email to add
+#    try:
+#        #try to click any element that looks like it might be a clickable email
+#        element=web.driver.find_element_by_css_selector("li[class*='eh XcEgrf fp pu hy']").click()
+#    except NoSuchElementException:
+#        #still doesn't work? just move on
+#        logging.warning("skipping "+ str(email))
+#        with open("dropped_ppl.txt", "w") as outfile:
+#            #writes the call and groupNum, then the email that wasn't add to that hangout
+#            outfile.write("\n" + group_name + " " + email)
+#    return web
 
 #%%
-def create_hangout(web, subgroup, group_name, wait_time):
+def create_hangout(web, group_name, wait_time):
 
         #write down the generatedGroups
     # with open("group_ppl.txt", "a") as file:
@@ -87,12 +87,12 @@ def create_hangout(web, subgroup, group_name, wait_time):
         #switch to the correct iframe
         web.driver.switch_to.frame(iframe_correct)
         
-        #enter all the emails
-        for i in range(0, len(subgroup)-1):
-            #logging.warning(subgroup[i])
-            time.sleep(wait_time)
-            enter_email(web, subgroup[i], group_name, wait_time)
-            
+#        #enter all the emails
+#        for i in range(0, len(subgroup)-1):
+#            #logging.warning(subgroup[i])
+#            time.sleep(wait_time)
+#            enter_email(web, subgroup[i], group_name, wait_time)
+#            
         #name the group input box
         web.driver.find_element_by_css_selector("input.t0ZFWd.AKyIEc.ea-Ga-ea").send_keys(group_name)
         time.sleep(wait_time)
@@ -100,11 +100,11 @@ def create_hangout(web, subgroup, group_name, wait_time):
         web.driver.find_element_by_css_selector("button.PD7XNe.yt1Zfc").click()
         #get out of iframe for making groups
         web.driver.switch_to.default_content()
-        time.sleep(wait_time)
+#        time.sleep(wait_time)
         #type and enter group introduction messages
-        web.type("Hello! Welcome to the group for " + str(group_name) + ". Please start the call at the designated start time. You can always return to this chat later if ya'll want to talk more :)")
-        time.sleep(wait_time)
-        web.press(web.Key.ENTER)
+#        web.type("Hello! Welcome to the group for " + str(group_name) + ". Please start the call at the designated start time. You can always return to this chat later if ya'll want to talk more :)")
+#        time.sleep(wait_time)
+#        web.press(web.Key.ENTER)
 
         #get into iframe
         time.sleep(wait_time)
@@ -117,7 +117,7 @@ def create_hangout(web, subgroup, group_name, wait_time):
         web.driver.find_elements_by_css_selector("button.wY.tR.bO4S5d.tJ.OzHnnb")[2].click()
         time.sleep(wait_time)
         link=web.driver.find_element_by_css_selector("input[class='LpmM1 iF0pUc']").get_attribute('value')
-        print('link: '+str(link))
+        #print('link: '+str(link))
         post_convo_link(group_name, link)
         #click to exist specific hangout iframe
         web.driver.find_element_by_css_selector("button.gGnOIc.tV.qp.SD.p7oPo.JPiKic").click()    
@@ -142,7 +142,7 @@ def go_thread(given_groups, thread_num):
     
     #start creating the hangout for each group in the generatedGroups for each designated call
     for group_name in given_groups:
-        web = create_hangout(web, given_groups[group_name], group_name, wait_time)
+        web = create_hangout(web, given_groups[group_name], wait_time)
         #logging.warning(group_name)
         #web, total_groups=create_hangout(web, subgroup, group_name, total_groups,wait_time)
         #move on to the next group

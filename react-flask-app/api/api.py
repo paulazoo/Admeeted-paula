@@ -570,11 +570,14 @@ def other_orgs(org_uid):
     db=get_db()
     user_uid=session.get('user_uid')
     if request.method == 'POST':
-        signup_cancel = request.get_json(force=True)['new_data'] #...sign up vs cancel?
+        code=str(db.child('orgs').child(org_uid).get().val())
+        signup_cancel = request.get_json(force=True)['new_data'][0]
+        input_code=request.get_json(force=True)['new_data'][1]
         try:    
             if signup_cancel==True:
-                db.child('org_user').child(user_uid).update({org_uid:True})
-                db.child('user_org').child(org_uid).update({user_uid:True})
+                if input_code==code:
+                    db.child('org_user').child(user_uid).update({org_uid:True})
+                    db.child('user_org').child(org_uid).update({user_uid:True})
             elif signup_cancel==False:
                 db.child('org_user').child(user_uid).update({org_uid: None})
                 db.child('user_org').child(org_uid).update({user_uid: None})
@@ -590,6 +593,7 @@ def other_orgs(org_uid):
         org_users=db.child('user_org').child(org_uid).shallow().get().val()
         if org_users and str(user_uid) in org_users:
             data.update({'joined':True})
+    
     elif not data:
         data = {}
     return jsonify(message=data), 200
