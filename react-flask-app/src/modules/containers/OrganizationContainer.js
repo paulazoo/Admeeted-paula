@@ -12,7 +12,8 @@ function OrganizationContainer ({
     loadOrgUpcomingEvents,
     loadOrgAvailEvents,
     loadOrgConversations,
-    modifyEvent
+    modifyEvent,
+    modifyOrgMembership
 }) {
     const org_uid = match.params.org_uid;
 
@@ -21,12 +22,18 @@ function OrganizationContainer ({
         loadOrgUpcomingEvents(org_uid);
         loadOrgAvailEvents(org_uid);
         loadOrgConversations(org_uid);
-    },[]);
+    },[org_uid]);
 
     console.log(org_data);
 
     return (
-        <Organization org_data={org_data} org_uid={org_uid} currentlySending={currentlySending} modifyEvent={modifyEvent}/>
+        <Organization
+            org_data={org_data}
+            org_uid={org_uid}
+            currentlySending={currentlySending}
+            modifyEvent={modifyEvent}
+            modifyOrgMembership={modifyOrgMembership}
+        />
     )
 }
 
@@ -46,15 +53,23 @@ const mapDispatchToProps = dispatch => ({
         dispatch(loadOrgData(`/avail-events/${org_uid}`, 'availEvents'))
     },
     loadOrgConversations: (org_uid) => {
-        dispatch(loadOrgData(`/conversations-NOT-READY/${org_uid}`, 'conversations'))
+        dispatch(loadOrgData(`/past-conversations/${org_uid}`, 'conversations'))
     },
     modifyEvent: (event_uid, signUp, org_uid) => {
         dispatch(changeOrgData(
             `/events/${event_uid}`,
             signUp,
             [`/upcoming-events/${org_uid}`, `/avail-events/${org_uid}`],
-            ['upcomingEvents', 'availEvents'])
-        );
+            ['upcomingEvents', 'availEvents']
+        ));
+    },
+    modifyOrgMembership: (signUp, org_uid) => {
+        dispatch(changeOrgData(
+            `/organizations/${org_uid}`,
+            signUp,
+            [`/organizations/${org_uid}`],
+            ['profile']
+        ));
     }
 })
 

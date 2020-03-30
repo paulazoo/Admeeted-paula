@@ -34,9 +34,12 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function OrgProfile ({ user, className, ...rest }) {
+function OrgProfile ({ user, org_uid, modifyOrgMembership, className, ...rest }) {
 
   const classes = useStyles();
+  function changeOrgMembership() {
+      modifyOrgMembership(!user.joined, org_uid)
+  }
 
   return (
     <Card
@@ -86,6 +89,7 @@ function OrgProfile ({ user, className, ...rest }) {
           className={classes.uploadButton}
           color="primary"
           variant="text"
+          onClick={changeOrgMembership}
         >
           {user.joined ? 'Leave organization' : 'Join organization'}
         </Button>

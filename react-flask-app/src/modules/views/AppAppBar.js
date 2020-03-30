@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { withStyles } from '@material-ui/core/styles';
@@ -20,9 +20,11 @@ import EventIcon from '@material-ui/icons/Event';
 import {IconButton} from "@material-ui/core";
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import SearchIcon from '@material-ui/icons/Search';
 import {GoogleLogout} from "react-google-login";
 import Button from "../components/Button";
 import {logout} from "../actions";
+import SearchBarDialogContainer from "../containers/SearchBarDialogContainer";
 
 const styles = theme => ({
   title: {
@@ -54,6 +56,17 @@ const styles = theme => ({
 });
 
 function AppAppBar({ loggedIn, handleLogout, classes }) {
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    console.log(open);
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   const logoutGoogle = () => {
     console.log('User log out');
     handleLogout();
@@ -76,6 +89,13 @@ function AppAppBar({ loggedIn, handleLogout, classes }) {
             </Link>
             <div className={classes.right}>
               {loggedIn ? <div>
+                <IconButton
+                  color="inherit"
+                  className={classes.rightLink}
+                  onClick={handleClickOpen}
+              >
+                <SearchIcon/>
+              </IconButton>
                     <IconButton
                   color="inherit"
                   className={classes.rightLink}
@@ -122,6 +142,7 @@ function AppAppBar({ loggedIn, handleLogout, classes }) {
           </Toolbar>
         </AppBar>
         <div className={classes.placeholder}/>
+        <SearchBarDialogContainer open={open} handleClose={handleClose}/>
       </div>
   );
 }

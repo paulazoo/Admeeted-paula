@@ -17,7 +17,7 @@ const styles = theme => ({
 
 });
 
-function Organization ({ org_data, org_uid, currentlySending, modifyEvent, classes }) {
+function Organization ({ org_data, org_uid, currentlySending, modifyEvent, modifyOrgMembership, classes }) {
     const profile = org_data.profile;
     const upcomingEvents = org_data.upcomingEvents;
     const availEvents = org_data.availEvents;
@@ -39,15 +39,15 @@ function Organization ({ org_data, org_uid, currentlySending, modifyEvent, class
                         xl={6}
                         xs={12}
                     >
-                        <OrgProfile user={profile} />
+                        <OrgProfile user={profile} org_uid={org_uid} modifyOrgMembership={modifyOrgMembership} />
                     </Grid>
                 </Grid>
-                <OrgDashboard
+                {profile.joined ? <OrgDashboard
                     availEvents={availEvents}
                     upcomingEvents={upcomingEvents}
                     conversations={conversations}
                     modifyEvent={modifyEvent}
-                    org_uid={org_uid}/>
+                    org_uid={org_uid}/> : null}
             </MainLayout> : <Loading/>}
         </div>
     )
