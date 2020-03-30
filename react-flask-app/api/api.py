@@ -22,6 +22,7 @@ import pyrebase
 # Internal imports
 from api.db import init_db_command, get_db
 from api.user import User
+from api.main_db import main_convos
 
 '''
 Paula and Samantha combined version!
@@ -515,6 +516,20 @@ def past_convos_org(org_uid):
                 data.append(convo_info)
 
     return jsonify(message=data), 200
+
+@app.route('/generate_convos/<event_uid>', methods=['POST'])
+def generate_convos(event_uid):
+    if request.method == 'POST':
+        try:
+            gen_convo_inputs= request.get_json(force=True)['new_data']
+            main_convos(event_uid, gen_convo_inputs['convo_name'], gen_convo_inputs['threads'])
+            return jsonify(message=True), 200
+        except Exception as e:
+            print(e)
+            return jsonify(message=False), 400
+
+
+
 #%%
 # @app.route('/conversations/<convo_uid>', methods=['GET'])
 # def other_convos(convo_uid):

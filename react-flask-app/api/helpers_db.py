@@ -86,7 +86,7 @@ def create_hangout(web, subgroup, group_name, wait_time):
         web.driver.switch_to.frame(iframe_correct)
         
         #enter all the emails
-        for i in range(0, len(subgroup)):
+        for i in range(0, len(subgroup)-1):
             #logging.warning(subgroup[i])
             time.sleep(wait_time)
             enter_email(web, subgroup[i], group_name, wait_time)
