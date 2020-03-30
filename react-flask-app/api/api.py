@@ -22,7 +22,6 @@ import pyrebase
 # Internal imports
 from api.db import init_db_command, get_db
 from api.user import User
-import api.db_for_flask as db_for_flask
 
 '''
 Paula and Samantha combined version!

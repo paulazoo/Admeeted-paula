@@ -8,11 +8,21 @@ from selenium.webdriver.common.keys import Keys
 from datetime import date
 import time
 
+import logging
+import os
+import threading
+
+
+#internal imports
+import firebase_db
+import helpers_db
+#group manipulations
+import groups_db
+
 #%%
 #set up logger
 #will not log unless basicConfig has been run outside of ipython console
-import logging
-import os
+
 
 #who's logging
 current_user = os.getlogin()
@@ -31,13 +41,13 @@ logging.warning('Log started with user: '+current_user)
 #%%
 #inputs
 event_uid='Harvard Admeeted 2024 3-30'
+convo_name_str='Virtual Visitas 2.0'
+num_threads=3
 
-#%%
-import firebase_db
 #%%
 #get event variables
 event_info=firebase_db.get_event_info(event_uid)
-num_threads=int(input("num_threads? "))
+
 #%%
 #change depending on call type?
 all_users=firebase_db.get_org_users(event_info['org'], event_uid)
@@ -46,10 +56,6 @@ all_users=firebase_db.get_org_users(event_info['org'], event_uid)
 
 user_email_dict=firebase_db.get_emails(all_users)
 
-
-#%%
-#group manipulations
-import groups_db
 #create groups using the createGroups function defined in groups.py file
 generated_groups = []
 
@@ -57,22 +63,23 @@ for call_num in range(1, event_info['num_rounds'] + 1):
     generated_groups = generated_groups+groups_db.create_groups(list(user_email_dict.keys()), event_info['desired_size'], call_num)
 
 giant_dict = {}
+convo_displayName={}
 for i in range(len(generated_groups)):
-    group_name = "IGNORE TEST %s Call: %s PM EST Group number: %d"%(generated_groups[i][0], event_info['org'], i)
-    giant_dict[group_name]={user_uid:user_email_dict[user_uid] for user_uid in generated_groups[i][1:] }
+    convo_uid = "%sCall%sGroup%d"%(event_uid, generated_groups[i][0], i)
+    displayName = "%s Call %s"%(convo_name_str, generated_groups[i][0])
+    giant_dict[displayName]={user_uid:user_email_dict[user_uid] for user_uid in generated_groups[i][1:] }
+    convo_displayName.update({displayName:convo_uid})
 
 
 logging.warning(giant_dict)
 
 #%%
 #back to firebase
-firebase_db.post_convo(giant_dict, event_uid, event_info)
+firebase_db.post_convo(giant_dict, convo_displayName, event_uid, event_info)
 
 big_dict={convo:list(giant_dict[convo].values()) for convo in giant_dict}
 
 #%%
-import helpers_db
-import threading
 
 batched_dicts = helpers_db.split_dict(big_dict, num_threads)
 logging.warning("Batched dicts are:")
