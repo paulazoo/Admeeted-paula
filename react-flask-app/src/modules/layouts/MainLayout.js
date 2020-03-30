@@ -29,7 +29,7 @@ function MainLayout(props) {
   const { children, classes } = props;
 
   return (
-    <section className={classes.root}>
+      <section className={classes.root}>
       <Container className={classes.container}>
         {children}
       </Container>

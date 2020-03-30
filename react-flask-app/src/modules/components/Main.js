@@ -13,6 +13,7 @@ import AccountContainer from "../containers/AccountContainer";
 import OrganizationContainer from "../containers/OrganizationContainer";
 import StaticGoogleLogin from "../views/StaticGoogleLogin";
 import SearchBarContainer from "../containers/SearchBarContainer";
+import WelcomeContainer from "../containers/WelcomeContainer";
 import { connect } from 'react-redux';
 
 function Main ({ loggedIn }) {
@@ -25,19 +26,20 @@ function Main ({ loggedIn }) {
             </Switch>
         )
     }
+
     return (
         <div>
             {
                 loggedIn ? <Switch>
-                    <Route exact path='/' component={ProductHero}/>
-                    <Route exact path='/home' component={HomepageContainer}/>
+                    <Route exact path='/' component={HomepageContainer}/>
                     {/*<Route exact path='/sign-up' component={SignUp}/>*/}
                     {/*<Route exact path='/sign-in' component={SignInContainer}/>*/}
                     {/*<Route exact path='/sign-in' component={StaticGoogleLogin}/>*/}
                     {/*<Route exact path='/sign-out' component={SignOutContainer}/>*/}
                     <Route exact path='/events' component={EventsContainer}/>
                     <Route exact path='/account' component={AccountContainer}/>
-                    <Route exact path='/organizations' component={SearchBarContainer}/>
+                    <Route exact path='/welcome' component={WelcomeContainer}/>
+                    {/*<Route exact path='/organizations' component={SearchBarContainer}/>*/}
                     <Route exact path={`/organization/:org_uid`} component={OrganizationContainer}/>
                 </Switch> : <Switch>
                     <Route path='/' component={ProductHero}/>

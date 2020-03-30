@@ -66,7 +66,12 @@ function getStyles(major, majors, theme) {
   }
 }
 
-function AccountDetails({ profile, setProfile, className, classes, ...rest }) {
+function AccountDetails({ title,
+                          subtitle,
+                          profile,
+                          setProfile,
+                          className,
+                          classes, ...rest }) {
   const theme = useTheme();
 
   const [values, setValues] = useState({
@@ -80,6 +85,7 @@ function AccountDetails({ profile, setProfile, className, classes, ...rest }) {
     setValues(profile)
   }, [profile]);
 
+  console.log(profile);
   console.log(values);
 
   const handleChange = event => {
@@ -124,8 +130,8 @@ function AccountDetails({ profile, setProfile, className, classes, ...rest }) {
         noValidate
       >
         <CardHeader
-          subheader="The information can be edited"
-          title="Profile"
+          subheader={subtitle}
+          title={title}
         />
         <Divider />
         <CardContent>
@@ -261,7 +267,11 @@ function AccountDetails({ profile, setProfile, className, classes, ...rest }) {
                 <InputLabel>Majors</InputLabel>
                 <Select
                     multiple
+<<<<<<< HEAD
                     name="majors"
+=======
+                    name='majors'
+>>>>>>> aa2ae06263641c1144986c911320333d1e169c52
                     value={values.majors}
                     onChange={handleChange}
                     input={<Input id='select-multiple-chip'/>}

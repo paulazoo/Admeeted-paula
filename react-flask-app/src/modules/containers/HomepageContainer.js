@@ -1,16 +1,21 @@
 import React, {useEffect} from 'react';
 import Homepage from '../views/Homepage';
-import { loadData } from "../actions";
+import {loadData, new_loadData, resetNewUser} from "../actions";
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import {Redirect, withRouter} from 'react-router-dom';
 
-function HomepageContainer ({ data, currentlySending, loadUpcomingConvos, loadPastConvos, loadOrganizations }) {
+function HomepageContainer ({ newUser, data, currentlySending, setUser, loadAllData, loadUpcomingConvos, loadPastConvos, loadOrganizations }) {
     useEffect(() => {
+        // loadAllData();
         loadUpcomingConvos();
         loadPastConvos();
         loadOrganizations();
     }, []);
     console.log(data);
+
+    if (newUser) {
+        return <Redirect to={'/welcome'}/>
+    }
 
     return (
         <Homepage data={data} currentlySending={currentlySending}/>
@@ -18,11 +23,16 @@ function HomepageContainer ({ data, currentlySending, loadUpcomingConvos, loadPa
 }
 
 const mapStateToProps = state => ({
+    newUser: state.newUser,
     data: state.data,
     currentlySending: state.currentlySending,
 })
 
 const mapDispatchToProps = dispatch => ({
+    loadAllData: () => {
+        dispatch(new_loadData(['/upcoming-events', '/past-conversations', '/organizations'],
+            ['upcomingEvents', 'conversations', 'organizations']))
+    },
     loadUpcomingConvos: () => {
         dispatch(loadData('/upcoming-events', 'upcomingEvents'));
     },

@@ -3,14 +3,20 @@ import {Button, Card, CardContent, CardHeader, Divider, List, Menu, ListItem, Me
 import Loading from "../views/Loading";
 import MainLayout from "../layouts/MainLayout";
 import {Autocomplete} from "@material-ui/lab";
-import {Redirect} from "react-router";
+import { withStyles } from '@material-ui/core/styles';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-function SearchBar ({ open, handleClose, all_organizations, currentlySending }) {
+const styles = theme => ({
+    root: {
+        padding: theme.spacing(4)
+    }
+})
+
+function SearchBarDialog ({ history, open, handleClose, all_organizations, currentlySending, classes }) {
     console.log(open);
 
     const [values, setValues] = useState({
@@ -22,10 +28,11 @@ function SearchBar ({ open, handleClose, all_organizations, currentlySending }) 
         const organizations = all_organizations.filter((e) => e.displayName === values.query);
         if (organizations.length > 0) {
             handleClose();
-            setValues({
-            ...values,
-            redirect: organizations[0].id
-        })
+            history.push(`/organization/${organizations[0].id}`)
+        //     setValues({
+        //     ...values,
+        //     redirect: organizations[0].id
+        // })
         }
     }
 
@@ -40,36 +47,47 @@ function SearchBar ({ open, handleClose, all_organizations, currentlySending }) 
     //     filterList(displayName)
     // }
 
-    if (values.redirect) {
-        return <Redirect to={`/organization/${values.redirect}`}/>
-    }
+    // if (values.redirect) {
+    //     handleClose();
+    //     return <Redirect to={`/organization/${values.redirect}`}/>
+    // }
 
     return (
         <div>
             {!currentlySending ?
-                <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-                <DialogTitle id="form-dialog-title">Search for an Organization</DialogTitle>
-                <DialogContentText>
-                    Filter results based on organization name.
-                  </DialogContentText>
-                    <Autocomplete
-                        variant="outlined"
-                        options={all_organizations}
-                        getOptionLabel={(option) => option.displayName}
-                        required
-                        renderInput={(params) => <TextField {...params} label="Search" variant="outlined"/>}
-                        onInputChange={handleChange}
-                    />
-                    <Button
+                <Dialog
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="form-dialog-title"
+                    fullWidth
+                    className={classes.root}
+                >
+                    <DialogTitle id="form-dialog-title">Search for an Organization</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText>
+                            Filter results based on organization name.
+                        </DialogContentText>
+                        <Autocomplete
+                            variant="outlined"
+                            options={all_organizations}
+                            getOptionLabel={(option) => option.displayName}
+                            required
+                            renderInput={(params) => <TextField {...params} label="Type organization name" variant="outlined"/>}
+                            onInputChange={handleChange}
+                        />
+                    </DialogContent>
+                    <DialogActions>
+                        <Button
                         color="primary"
                         variant="contained"
                         onClick={handleSubmit}
                     >
                         Go!
                     </Button>
-                    </Dialog>: <Loading/>}
+                    </DialogActions>
+                </Dialog>: <Loading/>}
         </div>
     )
 }
 
-export default SearchBar;
+export default withStyles(styles)(SearchBarDialog);

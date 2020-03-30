@@ -148,7 +148,7 @@ def login():
         id_=unique_id, name=users_name, email=users_email, avatar=picture
     )
 
-    new_user = False
+    new_user = True # Remember to change back!
 
     # Doesn't exist? Add it to the database.
     if not User.get(unique_id):
@@ -338,8 +338,10 @@ def upcoming_events():
                 event_info=dict(event_info_ord)
                 event_info.update({'id':event})
 
-                convos_data = get_convo_event(db, user_uid, event)
+                org_info = db.child('orgs').child(event_info['org']).get().val()
+                event_info.update({'avatar': org_info['avatar']})
 
+                convos_data = get_convo_event(db, user_uid, event)
                 event_info.update({'convos': convos_data})
 
                 data.append(event_info)
@@ -364,7 +366,7 @@ def get_convo_event(db, user_uid, event_uid):
             convos_data.append({
                 'displayName': convo_info['displayName'],
                 'timeStart': convo_info['timeStart'],
-                'link': convo_info['link']
+                'link': convo_info.get('link', '')
             })
 
     return convos_data
@@ -389,7 +391,6 @@ def upcoming_events_org(org_uid):
                 event_info.update({'id':event})
 
                 convos_data = get_convo_event(db, user_uid, event)
-
                 event_info.update({'convos': convos_data})
                 data.append(event_info)
 
@@ -419,6 +420,10 @@ def avail_events():
             if event_timeDeadline>=datetime.now():
                 event_info=dict(event_info_ord)
                 event_info.update({'id':event})
+
+                org_info = db.child('orgs').child(event_info['org']).get().val()
+                event_info.update({'avatar': org_info['avatar']})
+
                 data.append(event_info)
             
     return jsonify(message=data), 200
@@ -441,6 +446,7 @@ def avail_events_org(org_uid):
             if event_timeDeadline>=datetime.now():
                 event_info=dict(event_info_ord)
                 event_info.update({'id':event})
+
                 data.append(event_info)
             
     return jsonify(message=data), 200
@@ -525,13 +531,13 @@ def generate_convos(event_uid):
 
 
 #%%
-#@app.route('/conversations/<convo_uid>', methods=['GET'])
-#def other_convos(convo_uid):
-#    #...bc user can't change convos?
-#    user_uid=session.get('user_uid')
-#    other_convos_data = db_for_flask.db_other_convos(user_uid, convo_uid)
-#    print(other_convos_data)
-#    return jsonify(message=other_convos_data), 200
+# @app.route('/conversations/<convo_uid>', methods=['GET'])
+# def other_convos(convo_uid):
+#     #...bc user can't change convos?
+#     user_uid=session.get('user_uid')
+#     other_convos_data = db_for_flask.db_other_convos(user_uid, convo_uid)
+#     print(other_convos_data)
+#     return jsonify(message=other_convos_data), 200
 
 
 #%%

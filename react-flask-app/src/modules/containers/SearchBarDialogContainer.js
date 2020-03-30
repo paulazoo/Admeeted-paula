@@ -5,15 +5,20 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import SearchBarDialog from "../components/SearchBarDialog";
 
-function SearchBarDialogContainer ({ open, handleClose, all_organizations, currentlySending, loadOrganizations }) {
+function SearchBarDialogContainer ({ open, handleClose, all_organizations, currentlySending, loadOrganizations, history }) {
     useEffect(() => {
         loadOrganizations()
     },[])
 
-    console.log(all_organizations)
-    console.log(open)
+    console.log(history)
 
-    return <SearchBarDialog open={open} handleClose={handleClose} all_organizations={all_organizations} currentlySending={currentlySending}/>
+    return <SearchBarDialog
+        history={history}
+        open={open}
+        handleClose={handleClose}
+        all_organizations={all_organizations}
+        currentlySending={currentlySending}
+    />
 }
 
 const mapStateToProps = state => ({

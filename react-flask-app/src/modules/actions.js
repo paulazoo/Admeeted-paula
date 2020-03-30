@@ -1,5 +1,6 @@
 export const CHANGE_FORM = 'CHANGE_FORM';
 export const SET_AUTH = 'SET_AUTH';
+export const SET_NEW_USER = 'SET_NEW_USER';
 export const SENDING_REQUEST = 'SENDING_REQUEST';
 export const LOADING_AUTH = 'LOADING_AUTH';
 export const SET_ERROR_MESSAGE = 'SET_ERROR_MESSAGE';
@@ -21,10 +22,37 @@ export const login = (profile) => {
             console.log(data)
             dispatch(sendingRequest(false))
             dispatch(setAuthState(data.message))
+            dispatch(setNewUser(data.new_user))
         }).catch(error => {
             dispatch(sendingRequest(false))
             dispatch(setErrorMessage('Login failed'))
         });
+    }
+}
+
+export const resetNewUser = (profile) => {
+    return dispatch => {
+        dispatch(setNewUser(profile))
+    }
+}
+
+// Trying to batch together dispatch actions without premature sendingRequest(false)
+export const new_loadData = (paths, names) => {
+    return dispatch => {
+        dispatch(sendingRequest(true))
+        dispatch(setErrorMessage(''))
+        {paths.map(function(path, i) {
+            api(`${path}`)
+                .then(data => {
+                    console.log(names[i])
+                    console.log(data.message)
+                    dispatch(setData({[names[i]]: data.message}))
+                })
+                .catch(error => {
+                    dispatch(setErrorMessage('Error loading data'))
+                })
+        })}
+        dispatch(sendingRequest(false))
     }
 }
 
@@ -36,8 +64,9 @@ export const loadData = (path, name) => {
             .then(data => {
                 console.log(name)
                 console.log(data.message)
-                dispatch(sendingRequest(false))
+
                 dispatch(setData({[name]: data.message}))
+                dispatch(sendingRequest(false))
             })
             .catch(error => {
                 dispatch(sendingRequest(false))
@@ -58,13 +87,33 @@ export const changeData = (path, new_data, updatePaths, updateNames) => {
             else throw new Error(res.statusText)
         }).then(data => {
             dispatch(sendingRequest(false))
-            {updatePaths.map(function(e, i) {
-                dispatch(loadData(e, updateNames[i]))
+            {updatePaths.map(function(updatePath, i) {
+                dispatch(loadData(updatePath, updateNames[i]))
             })}
         }).catch(error => {
             dispatch(sendingRequest(false))
             dispatch(setErrorMessage('Change data failed'))
         });
+    }
+}
+
+// Trying to batch together dispatch actions without premature sendingRequest(false)
+export const new_loadOrgData = (paths, names) => {
+    return dispatch => {
+        dispatch(sendingRequest(true))
+        dispatch(setErrorMessage(''))
+        {paths.map(function(path, i) {
+            api(`${path}`)
+                .then(data => {
+                    console.log(names[i])
+                    console.log(data.message)
+                    dispatch(setOrgData({[names[i]]: data.message}))
+                })
+                .catch(error => {
+                    dispatch(setErrorMessage('Error loading data'))
+                })
+        })}
+        dispatch(sendingRequest(false))
     }
 }
 
@@ -147,6 +196,10 @@ export const changeForm = newState => {
 
 const setAuthState = newState => {
   return { type: SET_AUTH, newState }
+}
+
+const setNewUser = newState => {
+    return { type: SET_NEW_USER, newState }
 }
 
 const sendingRequest = sending => {

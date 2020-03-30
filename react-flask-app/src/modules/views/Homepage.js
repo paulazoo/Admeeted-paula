@@ -37,6 +37,7 @@ const styles = theme => ({
     grid: {
         flexGrow: 1,
         padding: theme.spacing(4),
+        height: '50%'
     },
     upcomingRoot: {
         height: '100%'
@@ -48,14 +49,14 @@ const styles = theme => ({
         height: '100%'
     },
     image: {
-        height: 36,
+        height: '100%',
         width: 36
-    }
+    },
 });
 
 function Homepage({ data, currentlySending, classes }) {
     const upcomingText = 'Your upcoming events';
-    const convoText = 'Your conversations';
+    const convoText = 'Your past conversations';
     const orgText = 'Your organizations';
 
     const viewAllConvos = ''; // What is this for?
@@ -68,7 +69,7 @@ function Homepage({ data, currentlySending, classes }) {
 
     const maxItems = 5;
 
-    function avatar(uid) {
+    function avatar(uid, avatar) {
         return <Button
             color="primary"
             edge="end"
@@ -78,8 +79,8 @@ function Homepage({ data, currentlySending, classes }) {
         >
             <img
                 className={classes.image}
-                src='/logo192.png'
-                alt='React'
+                src={avatar}
+                alt='Organization'
             />
         </Button>
     }
@@ -125,6 +126,7 @@ function Homepage({ data, currentlySending, classes }) {
                             maxItems={maxItems}
                             avatar={avatar}
                             iconButton={chatButton}
+                            chatButton={chatButton}
                             className={classes.upcomingRoot}
                         />
                         {/*<PanelLayout>*/}
