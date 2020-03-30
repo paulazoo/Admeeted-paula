@@ -100,11 +100,11 @@ def create_hangout(web, subgroup, group_name, wait_time):
         web.driver.find_element_by_css_selector("button.PD7XNe.yt1Zfc").click()
         #get out of iframe for making groups
         web.driver.switch_to.default_content()
-        time.sleep(wait_time)
+#        time.sleep(wait_time)
         #type and enter group introduction messages
-        web.type("Hello! Welcome to the group for " + str(group_name) + ". Please start the call at the designated start time. You can always return to this chat later if ya'll want to talk more :)")
-        time.sleep(wait_time)
-        web.press(web.Key.ENTER)
+#        web.type("Hello! Welcome to the group for " + str(group_name) + ". Please start the call at the designated start time. You can always return to this chat later if ya'll want to talk more :)")
+#        time.sleep(wait_time)
+#        web.press(web.Key.ENTER)
 
         #get into iframe
         time.sleep(wait_time)
@@ -117,7 +117,7 @@ def create_hangout(web, subgroup, group_name, wait_time):
         web.driver.find_elements_by_css_selector("button.wY.tR.bO4S5d.tJ.OzHnnb")[2].click()
         time.sleep(wait_time)
         link=web.driver.find_element_by_css_selector("input[class='LpmM1 iF0pUc']").get_attribute('value')
-        print('link: '+str(link))
+        #print('link: '+str(link))
         post_convo_link(group_name, link)
         #click to exist specific hangout iframe
         web.driver.find_element_by_css_selector("button.gGnOIc.tV.qp.SD.p7oPo.JPiKic").click()    
