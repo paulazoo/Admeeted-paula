@@ -41,24 +41,24 @@ def login(wait_time):
     return web
 
 #%%
-def enter_email(web, email, group_name, wait_time):
-    #type the email string
-    web.type(email)
-    time.sleep(wait_time)
-    #cick the email to add
-    try:
-        #try to click any element that looks like it might be a clickable email
-        element=web.driver.find_element_by_css_selector("li[class*='eh XcEgrf fp pu hy']").click()
-    except NoSuchElementException:
-        #still doesn't work? just move on
-        logging.warning("skipping "+ str(email))
-        with open("dropped_ppl.txt", "w") as outfile:
-            #writes the call and groupNum, then the email that wasn't add to that hangout
-            outfile.write("\n" + group_name + " " + email)
-    return web
+#def enter_email(web, email, group_name, wait_time):
+#    #type the email string
+#    web.type(email)
+#    time.sleep(wait_time)
+#    #cick the email to add
+#    try:
+#        #try to click any element that looks like it might be a clickable email
+#        element=web.driver.find_element_by_css_selector("li[class*='eh XcEgrf fp pu hy']").click()
+#    except NoSuchElementException:
+#        #still doesn't work? just move on
+#        logging.warning("skipping "+ str(email))
+#        with open("dropped_ppl.txt", "w") as outfile:
+#            #writes the call and groupNum, then the email that wasn't add to that hangout
+#            outfile.write("\n" + group_name + " " + email)
+#    return web
 
 #%%
-def create_hangout(web, subgroup, group_name, wait_time):
+def create_hangout(web, group_name, wait_time):
 
         #write down the generatedGroups
     # with open("group_ppl.txt", "a") as file:
@@ -142,7 +142,7 @@ def go_thread(given_groups, thread_num):
     
     #start creating the hangout for each group in the generatedGroups for each designated call
     for group_name in given_groups:
-        web = create_hangout(web, given_groups[group_name], group_name, wait_time)
+        web = create_hangout(web, given_groups[group_name], wait_time)
         #logging.warning(group_name)
         #web, total_groups=create_hangout(web, subgroup, group_name, total_groups,wait_time)
         #move on to the next group
