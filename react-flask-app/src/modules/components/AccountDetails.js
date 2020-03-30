@@ -57,10 +57,10 @@ const all_majors = [
 //   }
 // ];
 
-function getStyles(interest, interests, theme) {
+function getStyles(major, majors, theme) {
   return {
     fontWeight:
-      interests.indexOf(interest) === -1
+      majors.indexOf(major) === -1
         ? theme.typography.fontWeightRegular
           : theme.typography.fontWeightMedium
   }
@@ -261,7 +261,7 @@ function AccountDetails({ profile, setProfile, className, classes, ...rest }) {
                 <InputLabel>Majors</InputLabel>
                 <Select
                     multiple
-                    name='interests'
+                    name="majors"
                     value={values.majors}
                     onChange={handleChange}
                     input={<Input id='select-multiple-chip'/>}

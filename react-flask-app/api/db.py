@@ -35,8 +35,9 @@ def init_db():
            "projectId": project_id,
            "storageBucket": project_id+".appspot.com",
            # "serviceAccount": r"C:\Users\Samantha\Admeeted\Admeeted2.0\Admeeted\react-flask-app\api\admeeted-private-key.json", #Fill this in
-            "serviceAccount": r"C:\Users\billz\PycharmProjects\VirtualVisitas\Admeeted\react-flask-app\api\admeeted-private-key.json",
-           "messagingSenderId": "667088492207"
+#            "serviceAccount": r"C:\Users\billz\PycharmProjects\VirtualVisitas\Admeeted\react-flask-app\api\admeeted-private-key.json",
+            "serviceAccount": r"C:\Users\pkzr3\Admeeted\react-flask-app\api\admeeted-private-key.json",
+            "messagingSenderId": "667088492207"
         }   
 
         firebase = pyrebase.initialize_app(config)

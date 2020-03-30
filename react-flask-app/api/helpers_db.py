@@ -14,7 +14,9 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.keys import Keys
 from datetime import date
 import logging
-from firebase_db import post_convo_link
+
+#internal imports
+from api.firebase_db import post_convo_link
 #%%
 #starting browser and logging in to hangouts
 def login(wait_time):    

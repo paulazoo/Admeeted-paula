@@ -284,9 +284,9 @@ def profile():
             majors=pdata['majors']
             majors_dict=dict.fromkeys(majors, True)
             
-            db.child('major_user').child(user_uid).update(majors_dict)
+            db.child('major_user').child(user_uid).set(majors_dict)
             for major in majors:
-                db.child('user_major').child(major).update({user_uid: True})
+                db.child('user_major').child(major).set({user_uid: True})
 
             return jsonify(message=True), 200
         except Exception as e:
