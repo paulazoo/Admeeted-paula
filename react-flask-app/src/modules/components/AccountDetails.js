@@ -267,11 +267,7 @@ function AccountDetails({ title,
                 <InputLabel>Majors</InputLabel>
                 <Select
                     multiple
-<<<<<<< HEAD
                     name="majors"
-=======
-                    name='majors'
->>>>>>> aa2ae06263641c1144986c911320333d1e169c52
                     value={values.majors}
                     onChange={handleChange}
                     input={<Input id='select-multiple-chip'/>}
