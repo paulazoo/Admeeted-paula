@@ -26,7 +26,7 @@ import api.groups_db as groups_db
 #num_threads=3
     
 #%%
-def main_convos(event_uid, convo_name_str, num_threads):
+def main_convos(event_uid, convo_name_str, num_threads, category="random"):
     #%%
     #set up logger
     #will not log unless basicConfig has been run outside of ipython console

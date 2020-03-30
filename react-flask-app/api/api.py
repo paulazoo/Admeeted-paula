@@ -527,10 +527,13 @@ def past_convos_org(org_uid):
 
 @app.route('/generate_convos/<event_uid>', methods=['POST'])
 def generate_convos(event_uid):
+    print("I HAVE ARRIVED")
     if request.method == 'POST':
         try:
-            gen_convo_inputs= request.get_json(force=True)['new_data']
-            main_convos(event_uid, gen_convo_inputs['convo_name'], gen_convo_inputs['threads'])
+            gen_convo_inputs= request.get_json(force=True)
+            print(f'Inputs: {gen_convo_inputs}')
+            num_threads = gen_convo_inputs.get('threads', 1)
+            main_convos(event_uid, gen_convo_inputs['convo_name'], num_threads)
             return jsonify(message=True), 200
         except Exception as e:
             print(e)
@@ -571,11 +574,12 @@ def other_orgs(org_uid):
     user_uid=session.get('user_uid')
     if request.method == 'POST':
         code=str(db.child('orgs').child(org_uid).get().val())
-        signup_cancel = request.get_json(force=True)['new_data'][0]
-        input_code=request.get_json(force=True)['new_data'][1]
+        signup_cancel = request.get_json(force=True)['new_data']
+        # signup_cancel = request.get_json(force=True)['new_data'][0]
+        # input_code=request.get_json(force=True)['new_data'][1]
         try:    
             if signup_cancel==True:
-                if input_code==code:
+                # if input_code==code:
                     db.child('org_user').child(user_uid).update({org_uid:True})
                     db.child('user_org').child(org_uid).update({user_uid:True})
             elif signup_cancel==False:
