@@ -26,6 +26,15 @@ def get_emails(user_list):
     return email_dict
 
 #%%
+def get_event_users(event_uid):
+    event_users = db.child("user_event").child(event_uid).shallow().get().val()
+    #print(org_users)
+    if event_users:
+        event_users=list(event_users)
+    elif not event_users:
+        event_users=[]
+    return event_users
+#%%
 def get_all_users():
     #starting hey
     users = db.child("users").shallow().get().val()
@@ -37,7 +46,7 @@ def get_all_users():
     return users    
 
 #%%
-def get_org_users(org_uid, event_uid): 
+def get_org_users(org_uid):
     #starting hey
     org_users = db.child("user_org").child(org_uid).shallow().get().val()
     #print(org_users)

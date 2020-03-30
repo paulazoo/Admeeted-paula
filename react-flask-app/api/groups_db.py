@@ -10,7 +10,7 @@ def create_groups(all_emails, desired, call_num):
     np.random.shuffle(all_emails)
     #if the desired group size is more than the number of emails, just put everyone into one group
     if desired > all_emails.shape[0]:
-        created_groups = [np.insert(all_emails, 0, str(call_num)).tolist()]
+        created_groups = [np.insert(all_emails, 0, call_num).tolist()]
     else:
         #split evenly into all_emails/desired arrays and stack these arrays into a big 2d array
         split_groups = np.array_split(all_emails, np.floor(all_emails.shape[0] / desired))
@@ -21,6 +21,7 @@ def create_groups(all_emails, desired, call_num):
     
     #log that
     logging.warning(created_groups)
+    print(f'Created Groups: {created_groups}')
 
     return created_groups
 
