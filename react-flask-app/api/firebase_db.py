@@ -95,21 +95,26 @@ def get_event_info(event_uid):
 
 #%%
 
-def post_convo(giant_dict, convo_displayName, event_uid, event_info):
-    for displayName in giant_dict:
-        convo=convo_displayName[displayName]
+def post_convo(giant_dict, event_uid, event_info):
+    for convo_uid in giant_dict:
+        #convo_uid from the displayName and convo_uid dict
+        convo_displayName=giant_dict[convo_uid]['displayName']
+        #members
+        members=dict.fromkeys(giant_dict[convo_uid].keys(), True)
+        members.pop('displayName')
+        
         #possibly change displayName
-        db.child('convos').child(convo).update({'displayName':displayName, 
+        db.child('convos').child(convo_uid).update({'displayName':convo_displayName, 
                 'event':event_uid,
                 'org':event_info['org'],
                 'timeStart':event_info['timeStart'],
                 'timeEnd':event_info['timeEnd'],
-                'members':dict.fromkeys(giant_dict[displayName].keys(), True)
+                'members':members
                 })
             
-        db.child('convo_event').child(event_uid).update({convo:True})
-        for user_uid in giant_dict[displayName].keys():
-            db.child('convo_user').child(user_uid).update({convo:True})   
+        db.child('convo_event').child(event_uid).update({convo_uid:True})
+        for user_uid in members:
+            db.child('convo_user').child(user_uid).update({convo_uid:True})   
     return True
 
 #%%
