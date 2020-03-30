@@ -573,7 +573,7 @@ def other_orgs(org_uid):
     db=get_db()
     user_uid=session.get('user_uid')
     if request.method == 'POST':
-        code=str(db.child('orgs').child(org_uid).get().val())
+        # code=str(db.child('orgs').child(org_uid).get().val())
         signup_cancel = request.get_json(force=True)['new_data']
         # signup_cancel = request.get_json(force=True)['new_data'][0]
         # input_code=request.get_json(force=True)['new_data'][1]

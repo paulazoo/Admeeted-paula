@@ -30,8 +30,7 @@ def main_convos(event_uid, convo_name_str, num_threads, category="random"):
     #%%
     #set up logger
     #will not log unless basicConfig has been run outside of ipython console
-    
-    
+
     #who's logging
     current_user = os.getlogin()
     
@@ -54,7 +53,8 @@ def main_convos(event_uid, convo_name_str, num_threads, category="random"):
     all_users=firebase_db.get_org_users(event_info['org'], event_uid)
     
     #%%
-    user_email_dict=firebase_db.get_emails(all_users)
+    #user_email_dict=firebase_db.get_emails(all_users)
+    user_email_dict=firebase_db.get_emails([])
     
     #%%
     #create groups using the createGroups function defined in groups.py file
@@ -83,7 +83,7 @@ def main_convos(event_uid, convo_name_str, num_threads, category="random"):
     
     #%%
     #big dict with just the emails for threads
-    big_dict={convo_uid:list(giant_dict[convo_uid].values()) for convo_uid in giant_dict}
+    big_dict={convo_uid:giant_dict[convo_uid]['displayName'] for convo_uid in giant_dict}
     
     #%%
     

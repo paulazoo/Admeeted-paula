@@ -55,7 +55,7 @@ all_users=firebase_db.get_org_users(event_info['org'], event_uid)
 
 #%%
 #user_email_dict=firebase_db.get_emails(all_users)
-user_email_dict=firebase_db.get_emails([1,2,3,4,5,6,7,8,9,10,11,12])
+user_email_dict=firebase_db.get_emails([])
 
 #%%
 #create groups using the createGroups function defined in groups.py file
