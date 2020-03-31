@@ -25,6 +25,7 @@ import {GoogleLogout} from "react-google-login";
 import Button from "../components/Button";
 import {logout} from "../actions";
 import SearchBarDialogContainer from "../containers/SearchBarDialogContainer";
+import Tooltip from "@material-ui/core/Tooltip";
 
 const styles = theme => ({
   title: {
@@ -90,6 +91,7 @@ function AppAppBar({ loggedIn, handleLogout, classes, history }) {
             </Link>
             <div className={classes.right}>
               {loggedIn ? <div>
+                <Tooltip title="Search for Organization">
                 <IconButton
                   color="inherit"
                   className={classes.rightLink}
@@ -97,6 +99,8 @@ function AppAppBar({ loggedIn, handleLogout, classes, history }) {
               >
                 <SearchIcon/>
               </IconButton>
+                </Tooltip>
+                <Tooltip title="Events">
                     <IconButton
                   color="inherit"
                   className={classes.rightLink}
@@ -105,6 +109,8 @@ function AppAppBar({ loggedIn, handleLogout, classes, history }) {
               >
                 <EventIcon/>
               </IconButton>
+                </Tooltip>
+                <Tooltip title="Account">
                   <IconButton
                   color="inherit"
                   className={classes.rightLink}
@@ -113,6 +119,8 @@ function AppAppBar({ loggedIn, handleLogout, classes, history }) {
               >
                 <AccountCircleIcon/>
               </IconButton>
+                </Tooltip>
+                <Tooltip title="Sign Out">
                 <GoogleLogout
                   clientId="667088492207-2fch6bc6r8b40fm40hjv8mq0n6minrr2.apps.googleusercontent.com"
                   buttonText="Logout"
@@ -129,6 +137,7 @@ function AppAppBar({ loggedIn, handleLogout, classes, history }) {
                   onLogoutSuccess={logoutGoogle}
               >
               </GoogleLogout>
+                </Tooltip>
               </div> : null}
               {/*{!loggedIn ? <Link*/}
               {/*    variant="h6"*/}

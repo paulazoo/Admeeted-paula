@@ -19,7 +19,8 @@ const styles = theme => ({
 function SearchBarDialog ({ history, open, handleClose, all_organizations, currentlySending, classes }) {
     const [values, setValues] = useState({
         query: '',
-        redirect: false
+        redirect: false,
+        error: false
     });
 
     const handleSubmit = event => {
@@ -32,12 +33,19 @@ function SearchBarDialog ({ history, open, handleClose, all_organizations, curre
         //     redirect: organizations[0].id
         // })
         }
+        else {
+            setValues({
+                ...values,
+                error: true
+            })
+        }
     }
 
     const handleChange = (event, value) => {
         setValues({
             ...values,
-            query: value
+            query: value,
+            error: false
         })
     }
 
@@ -70,7 +78,12 @@ function SearchBarDialog ({ history, open, handleClose, all_organizations, curre
                             options={all_organizations}
                             getOptionLabel={(option) => option.displayName}
                             required
-                            renderInput={(params) => <TextField {...params} label="Type organization name" variant="outlined"/>}
+                            renderInput={(params) => <TextField
+                                {...params}
+                                label={values.error ? "Invalid organization name" : "Organization name"}
+                                variant="outlined"
+                                error={values.error}
+                            />}
                             onInputChange={handleChange}
                         />
                     </DialogContent>

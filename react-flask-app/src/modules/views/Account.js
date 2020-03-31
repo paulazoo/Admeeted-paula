@@ -12,7 +12,7 @@ const styles = theme => ({
   root: { },
 });
 
-function Account({ profile, currentlySending, setProfile, classes }) {
+function Account({ profile, allMajors, currentlySending, setProfile, classes }) {
   const profileDetailsTitle = "Profile";
   const profileDetailsSubtitle = "Edit and save your profile details.";
 
@@ -43,6 +43,7 @@ function Account({ profile, currentlySending, setProfile, classes }) {
                 title={profileDetailsTitle}
                 subtitle={profileDetailsSubtitle}
                 profile={profile}
+                allMajors={allMajors}
                 setProfile={setProfile}/>
           </Grid>
        </Grid>

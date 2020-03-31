@@ -5,27 +5,23 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import MainLayout from "../layouts/MainLayout";
+import Master from "../views/Master";
 
-function MasterContainer ({ events, loadUpcomingConvos, generateConvos }) {
+function MasterContainer ({ events, currentlySending, loadUpcomingConvos, generateConvos }) {
     useEffect(() => {
         loadUpcomingConvos();
     },[])
 
     console.log(events);
 
-    const convo_name = "Yale Sucks";
-
-    const handleSubmit = event => {
-        if (events.length > 0) {
-            generateConvos(events[0].id, convo_name);
-        }
-    };
-
-    return (<MainLayout><Button onClick={handleSubmit}>Click Me!</Button></MainLayout>)
+    return (
+        <Master events={events} currentlySending={currentlySending} generateConvos={generateConvos}/>
+    )
 }
 
 const mapStateToProps = state => ({
-    events: state.data.upcomingEvents
+    events: state.data.upcomingEvents,
+    currentlySending: state.currentlySending
 })
 
 const mapDispatchToProps = dispatch => ({
