@@ -10,10 +10,9 @@ const styles = theme => ({
     color: theme.palette.common.white,
     position: 'relative',
     display: 'flex',
-    backgroundColor: '#7fc7d9',
+    backgroundColor: theme.palette.secondary.light,
     [theme.breakpoints.up('sm')]: {
-      height: '100vh',
-      minHeight: 500
+      minHeight: '100vh'
     },
   },
   container: {

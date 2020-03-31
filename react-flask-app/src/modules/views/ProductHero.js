@@ -9,6 +9,9 @@ import {compose} from "redux";
 import {connect} from "react-redux";
 import {GoogleLogin} from "react-google-login";
 import {login} from "../actions";
+import ProductHowItWorks from "./ProductHowItWorks";
+import ProductCategories from "./ProductCategories";
+import ProductValues from "./ProductValues";
 
 const backgroundImage =
   'https://www.insidehighered.com/sites/default/server_files/media/image_4.png';
@@ -21,6 +24,7 @@ const styles = theme => ({
   },
   button: {
     minWidth: 200,
+    // marginTop: theme.spacing(8)
   },
   h5: {
     marginBottom: theme.spacing(4),
@@ -44,6 +48,29 @@ function ProductHero({ loggedIn, googleLogin, classes }) {
     console.log(response);
   }
 
+  const signInLabel = "Sign in with Google";
+
+  function googleButton (label, className) {
+    return <GoogleLogin
+                  clientId="667088492207-2fch6bc6r8b40fm40hjv8mq0n6minrr2.apps.googleusercontent.com"
+                  buttonText="Login"
+                  render={renderProps => (
+                      <Button
+                        color="secondary"
+                        variant="contained"
+                        size="large"
+                        className={className}
+                        onClick={renderProps.onClick}
+                        disabled={renderProps.disabled}
+                      >
+                        {label}
+                      </Button>
+                  )}
+                  onSuccess={successGoogle}
+                  onFailure={failureGoogle}
+                  cookiePolicy={'single_host_origin'}
+                />
+  }
 
   return (
       <div>
@@ -63,30 +90,14 @@ function ProductHero({ loggedIn, googleLogin, classes }) {
                 <Typography color="inherit" align="center" variant="h5" className={classes.h5}>
                   Meet your fellow Harvard admitted students - new connections, just one click away.
                 </Typography>
-                <GoogleLogin
-                  clientId="667088492207-2fch6bc6r8b40fm40hjv8mq0n6minrr2.apps.googleusercontent.com"
-                  buttonText="Login"
-                  render={renderProps => (
-                      <Button
-                        color="secondary"
-                        variant="contained"
-                        size="large"
-                        className={classes.button}
-                        onClick={renderProps.onClick}
-                        disabled={renderProps.disabled}
-                      >
-                        Sign In With Google
-                      </Button>
-                  )}
-                  onSuccess={successGoogle}
-                  onFailure={failureGoogle}
-                  cookiePolicy={'single_host_origin'}
-                />
-
+                {googleButton(signInLabel, classes.button)}
                 <Typography variant="body2" color="inherit" className={classes.more}>
                   Take a chance!
                 </Typography>
               </ProductHeroLayout>
+              <ProductValues/>
+              <ProductCategories/>
+              <ProductHowItWorks googleButton={googleButton}/>
             </div>
         )}
       </div>

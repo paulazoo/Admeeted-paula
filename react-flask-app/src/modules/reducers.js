@@ -33,7 +33,8 @@ const initialState = {
     conversations: [],
     availEvents: [],
     organizations: [],
-    allOrganizations: []
+    allOrganizations: [],
+    allMajors: []
   },
   orgData: {
     profile: {},

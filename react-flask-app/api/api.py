@@ -316,8 +316,10 @@ def profile():
 def majors():
     db=get_db()
     data=db.child('majors').get().val()
-    if not data:
-        data={}
+    if data:
+        data = list(data)
+    else:
+        data=[]
      
     return jsonify(message=data), 200
 

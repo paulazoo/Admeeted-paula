@@ -19,6 +19,8 @@ import Select from '@material-ui/core/Select';
 import FormTextField from "../form/FormTextField";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
+import {CountryRegionData, CountryDropdown, RegionDropdown} from "react-country-region-selector";
+import {Autocomplete} from "@material-ui/lab";
 
 const styles = theme => ({
   chips: {
@@ -30,17 +32,17 @@ const styles = theme => ({
   }
 });
 
-const all_interests = [
-    'cooking',
-    'coding',
-    'hiking'
-]
+// const all_interests = [
+//     'cooking',
+//     'coding',
+//     'hiking'
+// ]
 
-const all_majors = [
-    'Computer Science',
-    'Neuroscience',
-    'Psychology'
-]
+// const all_majors = [
+//     'Computer Science',
+//     'Neuroscience',
+//     'Psychology'
+// ]
 
 // const all_interests = [
 //   {
@@ -69,6 +71,7 @@ function getStyles(major, majors, theme) {
 function AccountDetails({ title,
                           subtitle,
                           profile,
+                          allMajors,
                           setProfile,
                           className,
                           classes, ...rest }) {
@@ -85,8 +88,8 @@ function AccountDetails({ title,
     setValues(profile)
   }, [profile]);
 
-  console.log(profile);
   console.log(values);
+  console.log(allMajors);
 
   const handleChange = event => {
     setValues({
@@ -95,29 +98,55 @@ function AccountDetails({ title,
     })
   }
 
+  const selectMajors = (event, value) => {
+      setValues({
+          ...values,
+          majors: value
+      })
+  }
+
+  const selectCountry = event => {
+    setValues({
+      ...values,
+      state: "",
+      country: event.target.value
+    })
+  }
+
+  const getRegions = country => {
+    if (!country) {
+      return [];
+    }
+    const country_data = CountryRegionData.filter(entry => entry[0] === country)[0];
+    return country_data[2].split("|").map(regionPair => {
+      let [regionName, regionShortCode = null] = regionPair.split("~");
+      return regionName;
+    });
+  };
+
   const handleSubmit = event => {
     event.preventDefault();
     setProfile(values);
   };
 
-  const states = [
-    {
-      value: 'Georgia',
-      label: 'Georgia'
-    },
-    {
-      value: 'Alabama',
-      label: 'Alabama'
-    },
-    {
-      value: 'New York',
-      label: 'New York'
-    },
-    {
-      value: 'San Francisco',
-      label: 'San Francisco'
-    }
-  ];
+  // const states = [
+  //   {
+  //     value: 'Georgia',
+  //     label: 'Georgia'
+  //   },
+  //   {
+  //     value: 'Alabama',
+  //     label: 'Alabama'
+  //   },
+  //   {
+  //     value: 'New York',
+  //     label: 'New York'
+  //   },
+  //   {
+  //     value: 'San Francisco',
+  //     label: 'San Francisco'
+  //   }
+  // ];
 
   return (
     <Card
@@ -156,98 +185,99 @@ function AccountDetails({ title,
                 onChange={handleChange}
               />
             </Grid>
-            {/*<Grid*/}
-            {/*  item*/}
-            {/*  md={6}*/}
-            {/*  xs={12}*/}
-            {/*>*/}
-            {/*  <TextField*/}
-            {/*    fullWidth*/}
-            {/*    label="Last name"*/}
-            {/*    margin="dense"*/}
-            {/*    name="lastName"*/}
-            {/*    onChange={handleChange}*/}
-            {/*    required*/}
-            {/*    value={values.lastName}*/}
-            {/*    variant="outlined"*/}
-            {/*  />*/}
-            {/*</Grid>*/}
-            {/*<Grid*/}
-            {/*  item*/}
-            {/*  md={6}*/}
-            {/*  xs={12}*/}
-            {/*>*/}
-            {/*  <TextField*/}
-            {/*    fullWidth*/}
-            {/*    label="Email Address"*/}
-            {/*    margin="dense"*/}
-            {/*    name="email"*/}
-            {/*    onChange={handleChange}*/}
-            {/*    required*/}
-            {/*    value={values.email}*/}
-            {/*    variant="outlined"*/}
-            {/*  />*/}
-            {/*</Grid>*/}
-            {/*<Grid*/}
-            {/*  item*/}
-            {/*  md={6}*/}
-            {/*  xs={12}*/}
-            {/*>*/}
-            {/*  <TextField*/}
-            {/*    fullWidth*/}
-            {/*    label="Phone Number"*/}
-            {/*    margin="dense"*/}
-            {/*    name="phone"*/}
-            {/*    onChange={handleChange}*/}
-            {/*    type="number"*/}
-            {/*    value={values.phone}*/}
-            {/*    variant="outlined"*/}
-            {/*  />*/}
-            {/*</Grid>*/}
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
+            <Grid item md={6} xs={12}>
               <TextField
-                fullWidth
-                label="Select State"
-                margin="dense"
-                name="state"
-                required
-                select
-                // eslint-disable-next-line react/jsx-sort-props
-                SelectProps={{ native: true }}
-                value={values.state}
-                variant="outlined"
-                onChange={handleChange}
+                  fullWidth
+                  value={values.country}
+                  name={"country"}
+                  label="Country"
+                  select
+                  variant="outlined"
+                  margin="dense"
+                  onChange={selectCountry}
               >
-                {states.map(option => (
-                  <option
-                    key={option.value}
-                    value={option.value}
-                  >
-                    {option.label}
-                  </option>
-                ))}
+                {CountryRegionData.map((option, index) => {
+                  return <MenuItem key={option[0]} value={option[0]}>{option[0]}</MenuItem>
+                })}
               </TextField>
             </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
+            <Grid item md={6} xs={12}>
               <TextField
-                fullWidth
-                label="Country"
-                margin="dense"
-                name="country"
-                required
-                value={values.country}
-                variant="outlined"
-                onChange={handleChange}
-              />
+                  fullWidth
+                  value={values.state}
+                  name={"state"}
+                  label="State/Region"
+                  select
+                  variant="outlined"
+                  margin="dense"
+                  onChange={handleChange}
+              >
+                {getRegions(values.country).map(
+                    (option, index) => {
+                      return <MenuItem key={option} value={option}>
+                        {option}
+                      </MenuItem>
+                    }
+                )}
+              </TextField>
             </Grid>
+            {/*<Grid item md={6} xs={12}>*/}
+            {/*  <CountryDropdown*/}
+            {/*      value={values.country}*/}
+            {/*      onChange={(val) => selectCountry(val)}*/}
+            {/*  />*/}
+            {/*</Grid>*/}
+            {/*<Grid item md={6} xs={12}>*/}
+            {/*  <RegionDropdown*/}
+            {/*      country={values.country}*/}
+            {/*      value={values.state}*/}
+            {/*      onChange={(val) => selectState(val)}*/}
+            {/*  />*/}
+            {/*</Grid>*/}
+            {/*<Grid*/}
+            {/*  item*/}
+            {/*  md={6}*/}
+            {/*  xs={12}*/}
+            {/*>*/}
+            {/*  <TextField*/}
+            {/*    fullWidth*/}
+            {/*    label="Select State"*/}
+            {/*    margin="dense"*/}
+            {/*    name="state"*/}
+            {/*    required*/}
+            {/*    select*/}
+            {/*    // eslint-disable-next-line react/jsx-sort-props*/}
+            {/*    SelectProps={{ native: true }}*/}
+            {/*    value={values.state}*/}
+            {/*    variant="outlined"*/}
+            {/*    onChange={handleChange}*/}
+            {/*  >*/}
+            {/*    {states.map(option => (*/}
+            {/*      <option*/}
+            {/*        key={option.value}*/}
+            {/*        value={option.value}*/}
+            {/*      >*/}
+            {/*        {option.label}*/}
+            {/*      </option>*/}
+            {/*    ))}*/}
+            {/*  </TextField>*/}
+            {/*</Grid>*/}
+            {/*<Grid*/}
+            {/*  item*/}
+            {/*  md={6}*/}
+            {/*  xs={12}*/}
+            {/*>*/}
+            {/*  <TextField*/}
+            {/*    fullWidth*/}
+            {/*    label="Country"*/}
+            {/*    margin="dense"*/}
+            {/*    name="country"*/}
+            {/*    required*/}
+            {/*    value={values.country}*/}
+            {/*    variant="outlined"*/}
+            {/*    onChange={handleChange}*/}
+            {/*  />*/}
+            {/*</Grid>*/}
           </Grid>
         </CardContent>
         <Divider />
@@ -256,37 +286,49 @@ function AccountDetails({ title,
             container
             spacing={3}
           >
-            <Grid
-                item
-                md={12}
-                xs={12}
-            >
-              <FormControl
-                  fullWidth
-              >
-                <InputLabel>Majors</InputLabel>
-                <Select
-                    multiple
-                    name="majors"
-                    value={values.majors}
-                    onChange={handleChange}
-                    input={<Input id='select-multiple-chip'/>}
-                    renderValue={selected => (
-                        <div className={classes.chips}>
-                          {selected.map(major => (
-                              <Chip key={major} label={major} className={classes.chip} />
-                          ))}
-                        </div>
-                    )}
-                >
-                  {all_majors.map(major => (
-                      <MenuItem key={major} value={major} style={getStyles(major, values.majors, theme)}>
-                        {major}
-                      </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
+            <Grid item md={12} xs={12}>
+              <Autocomplete
+                  multiple
+                  getOptionLabel={(option) => option}
+                  options={allMajors}
+                  value={values.majors}
+                  renderInput={(params)=> (
+                      <TextField {...params} variant={"outlined"} label={"(Intended) Majors"}/>
+                  )}
+                  onChange={selectMajors}
+              />
             </Grid>
+            {/*<Grid*/}
+            {/*    item*/}
+            {/*    md={12}*/}
+            {/*    xs={12}*/}
+            {/*>*/}
+            {/*  <FormControl*/}
+            {/*      fullWidth*/}
+            {/*  >*/}
+            {/*    <InputLabel>Majors</InputLabel>*/}
+            {/*    <Select*/}
+            {/*        multiple*/}
+            {/*        name="majors"*/}
+            {/*        value={values.majors}*/}
+            {/*        onChange={handleChange}*/}
+            {/*        input={<Input id='select-multiple-chip'/>}*/}
+            {/*        renderValue={selected => (*/}
+            {/*            <div className={classes.chips}>*/}
+            {/*              {selected.map(major => (*/}
+            {/*                  <Chip key={major} label={major} className={classes.chip} />*/}
+            {/*              ))}*/}
+            {/*            </div>*/}
+            {/*        )}*/}
+            {/*    >*/}
+            {/*      {all_majors.map(major => (*/}
+            {/*          <MenuItem key={major} value={major} style={getStyles(major, values.majors, theme)}>*/}
+            {/*            {major}*/}
+            {/*          </MenuItem>*/}
+            {/*      ))}*/}
+            {/*    </Select>*/}
+            {/*  </FormControl>*/}
+            {/*</Grid>*/}
           </Grid>
         </CardContent>
         <Divider />
@@ -296,7 +338,7 @@ function AccountDetails({ title,
             variant="contained"
             type="submit"
           >
-            Save details
+            Save
           </Button>
         </CardActions>
       </form>

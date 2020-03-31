@@ -4,21 +4,23 @@ import {loadData, changeData, resetNewUser} from "../actions";
 import { connect } from 'react-redux';
 import {Redirect, withRouter} from 'react-router-dom';
 
-function WelcomeContainer ({ profile, currentlySending, setUser, loadProfile, setProfile }) {
+function WelcomeContainer ({ profile, allMajors, currentlySending, setUser, loadProfile, loadMajors, setProfile }) {
     useEffect(() => {
         loadProfile();
+        loadMajors();
         setUser();
     },[]);
 
     return (
         <div>
-            <Welcome profile={profile} currentlySending={currentlySending} setProfile={setProfile}/>
+            <Welcome profile={profile} allMajors={allMajors} currentlySending={currentlySending} setProfile={setProfile}/>
         </div>
     )
 }
 
 const mapStateToProps = state => ({
     profile: state.data.profile,
+    allMajors: state.data.allMajors,
     currentlySending: state.currentlySending,
 })
 
@@ -28,6 +30,9 @@ const mapDispatchToProps = dispatch => ({
     },
     loadProfile: () => {
         dispatch(loadData('/profile', 'profile'))
+    },
+    loadMajors: () => {
+        dispatch(loadData('/majors', 'allMajors'))
     },
     setProfile: (new_data) => {
         dispatch(changeData('/profile', new_data, ['/profile'], ['profile']))

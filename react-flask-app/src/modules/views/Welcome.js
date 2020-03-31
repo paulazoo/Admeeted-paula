@@ -28,7 +28,7 @@ const styles = theme => ({
     }
 })
 
-function Welcome ({ profile, currentlySending, setProfile, classes }) {
+function Welcome ({ profile, allMajors, currentlySending, setProfile, classes }) {
     const stepOneTitle = "Step One: Complete Your Profile";
     const stepOneSubtitle = "Edit and save your profile details.";
     const stepTwoTitle = "Step Two: Join an Organization";
@@ -58,7 +58,7 @@ function Welcome ({ profile, currentlySending, setProfile, classes }) {
                     </Card>
                 </Grid>
                 <Grid item md={6}>
-                    <AccountDetails title={stepOneTitle} subtitle={stepOneSubtitle} profile={profile} setProfile={setProfile}/>
+                    <AccountDetails title={stepOneTitle} subtitle={stepOneSubtitle} allMajors={allMajors} profile={profile} setProfile={setProfile}/>
                 </Grid>
                 <Grid item md={6}>
                     <Card className={classes.card}>
