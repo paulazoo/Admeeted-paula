@@ -2,6 +2,7 @@
 import os
 import pyrebase
 import random
+from datetime import datetime
 #fb_conn=fb.FirebaseApplication('https://admeet2024.firebaseio.com/organizations/yx4uGm90iuD1BOOpNwEw', None)
 project_id='admeeted-18732'
 config = {
@@ -11,7 +12,8 @@ config = {
   "projectId": project_id,
   "storageBucket": project_id+".appspot.com",
   # "serviceAccount": r"C:\Users\pkzr3\Admeeted\react-flask-app\api\admeeted-private-key.json",
-    "serviceAccount": r"C:\Users\billz\PycharmProjects\VirtualVisitas\Admeeted\react-flask-app\api\admeeted-private-key.json",
+  #   "serviceAccount": r"C:\Users\billz\PycharmProjects\VirtualVisitas\Admeeted\react-flask-app\api\admeeted-private-key.json",
+    "serviceAccount": str(os.getcwd()) + r"/admeeted-private-key.json",
     "messagingSenderId": "667088492207"
 }
 
@@ -106,19 +108,27 @@ def get_event_info(event_uid):
 #%%
 
 def post_convo(giant_dict, event_uid, event_info):
-    for convo_uid in giant_dict:
+    time_start = datetime.strptime(event_info['timeStart'], '%H:%M %d %B %Y')
+    time_end = datetime.strptime(event_info['timeEnd'], '%H:%M %d %B %Y')
+    call_duration = (time_end - time_start) // event_info['num_rounds']
+    print(call_duration)
+    for i, convo_uid in enumerate(giant_dict):
+        print(i)
+        print(convo_uid)
         #convo_uid from the displayName and convo_uid dict
         convo_displayName=giant_dict[convo_uid]['displayName']
         #members
         members=dict.fromkeys(giant_dict[convo_uid].keys(), True)
         members.pop('displayName')
-        
+
+        call_start = (time_start + call_duration * i).strftime('%H:%M %d %B %Y')
+        call_end = (time_start + call_duration * (i + 1)).strftime('%H:%M %d %B %Y')
         #possibly change displayName
         db.child('convos').child(convo_uid).update({'displayName':convo_displayName, 
                 'event':event_uid,
                 'org':event_info['org'],
-                'timeStart':event_info['timeStart'],
-                'timeEnd':event_info['timeEnd'],
+                'timeStart':call_start,
+                'timeEnd':call_end,
                 'members':members
                 })
             

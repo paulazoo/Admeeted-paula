@@ -14,7 +14,9 @@ import threading
 
 
 #internal imports
-from api import firebase_db, helpers_db, groups_db
+import firebase_db
+import helpers_db
+import groups_db
 #import api.helpers_db
 ##group manipulations
 #import api.groups_db
@@ -71,8 +73,8 @@ def main_convos(event_uid, convo_name_str, num_threads, category="random"):
         displayName = "%s Call %s"%(convo_name_str, generated_groups[i][0])
         #giant_dict with displayNames and corresponding emails
         giant_dict[convo_uid]={user_uid:user_email_dict[user_uid] for user_uid in generated_groups[i][1:] }
-        #add displayName to each convo dict in giant_dict
-        giant_dict[convo_uid].update({'displayName':displayName})
+        #add displayName and category to each convo dict in giant_dict
+        giant_dict[convo_uid].update({'displayName':displayName, 'category':category})
     
     
     logging.warning(giant_dict)

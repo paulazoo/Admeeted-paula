@@ -20,9 +20,9 @@ import requests
 import pyrebase
 
 # Internal imports
-from api.db import init_db_command, get_db
-from api.user import User
-from api.main_db import main_convos
+from db import init_db_command, get_db
+from user import User
+from main_db import main_convos
 
 '''
 Paula and Samantha combined version!
@@ -502,6 +502,9 @@ def past_convos():
             convo_timeEnd = datetime.strptime(convo_info['timeEnd'], '%H:%M %d %B %Y')
             if convo_timeEnd <= datetime.now(): # Only conversations that have ended
                 convo_info.update({'id': convo})
+
+                org_info = db.child('orgs').child(convo_info['org']).get().val()
+                convo_info.update({'avatar': org_info['avatar']})
                 data.append(convo_info)
 
     return jsonify(message=data), 200
@@ -532,7 +535,7 @@ def generate_convos(event_uid):
         try:
             gen_convo_inputs= request.get_json(force=True)
             print(f'Inputs: {gen_convo_inputs}')
-            num_threads = gen_convo_inputs.get('threads', 1)
+            num_threads = gen_convo_inputs.get('threads', 4)
             main_convos(event_uid, gen_convo_inputs['convo_name'], num_threads)
             return jsonify(message=True), 200
         except Exception as e:

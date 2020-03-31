@@ -67,6 +67,7 @@ function Events({ data, currentlySending, modifyEvent, classes }) {
             edge="end"
             size="small"
             href={link}
+            target={"_blank"}
         >
             <ChatIcon/>
         </IconButton>

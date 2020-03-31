@@ -26,14 +26,14 @@ const styles = theme => ({
     },
     image: {
         height: '100%',
-        width: 36
+        width: 48
     },
     actions: {
         justifyContent: 'flex-end'
     }
 });
 
-function OrgsCardList({ title, subheader, data, maxItems, iconButton, className, classes }) {
+function OrgsCardList({ title, subheader, data, maxItems, avatar, iconButton, className, classes }) {
     function setItems(items) {
         if (items.length > maxItems) {
             return data.slice(0, maxItems)
@@ -61,11 +61,19 @@ function OrgsCardList({ title, subheader, data, maxItems, iconButton, className,
                   divider={i < points.length}
                   key={i}
                 >
+                    <ListItemAvatar>
+                          {avatar(point.id, point.avatar)}
+                        {/*<img*/}
+                        {/*  alt="Conversation"*/}
+                        {/*  className={classes.image}*/}
+                        {/*  src={product.imageUrl}*/}
+                        {/*/>*/}
+                    </ListItemAvatar>
                   <ListItemText
                     primary={point.displayName}
-                    secondary={"Click to see organization"}
+                    // secondary={"Click to see organization"}
                   />
-                    {point.hasOwnProperty('link') ? iconButton(point.link) : iconButton(point.id)}
+                    {iconButton(point.id)}
                 </ListItem>
               ))}
             </List>

@@ -4,6 +4,7 @@ import { loadData, genConvos } from "../actions";
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
+import MainLayout from "../layouts/MainLayout";
 
 function MasterContainer ({ events, loadUpcomingConvos, generateConvos }) {
     useEffect(() => {
@@ -20,7 +21,7 @@ function MasterContainer ({ events, loadUpcomingConvos, generateConvos }) {
         }
     };
 
-    return (<Button onClick={handleSubmit}>Click Me!</Button>)
+    return (<MainLayout><Button onClick={handleSubmit}>Click Me!</Button></MainLayout>)
 }
 
 const mapStateToProps = state => ({

@@ -49,8 +49,7 @@ const styles = theme => ({
         height: '100%'
     },
     image: {
-        height: '100%',
-        width: 36
+        height: 48
     },
 });
 
@@ -67,8 +66,6 @@ function Homepage({ data, currentlySending, classes }) {
     const upcomingEvents = data.upcomingEvents;
     const conversations = data.conversations;
     const organizations = data.organizations;
-
-    console.log(data);
 
     const maxItems = 5;
 
@@ -89,12 +86,12 @@ function Homepage({ data, currentlySending, classes }) {
     }
 
     function chatButton(link) {
-        console.log(link);
         return <IconButton
             color="primary"
             edge="end"
             size="small"
             href={link}
+            target={"_blank"}
         >
             <ChatIcon/>
         </IconButton>
