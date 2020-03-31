@@ -16,6 +16,7 @@ import ArrowRightIcon from "@material-ui/icons/ArrowRight";
 import React from "react";
 import { withStyles } from '@material-ui/core/styles';
 import moment from "moment";
+import Typography from "@material-ui/core/Typography";
 
 const styles = theme => ({
     nested: {
@@ -52,7 +53,8 @@ function CardList({ title, subheader, data, maxItems, avatar, iconButton, chatBu
           <Divider />
           <CardContent className={classes.content}>
             <List>
-              {points.map((point, i) => (
+                {/*{points.length === 0 ? <Typography variant={"h6"} align={"center"}>None yet</Typography> : null }*/}
+              {points.sort((a, b) => moment(a.timeStart) - moment(b.timeStart)).map((point, i) => (
                   <div>
                     <ListItem
                       key={i}
@@ -75,7 +77,9 @@ function CardList({ title, subheader, data, maxItems, avatar, iconButton, chatBu
                           <div>
                               <Divider variant="inset"/>
                               <List component="div" disablePadding>
-                                  {point.convos.map((convo, i) => (
+                                  {point.convos
+                                      .sort((a, b) => moment(a.timeStart) - moment(b.timeStart))
+                                      .map((convo, i) => (
                                       <ListItem className={classes.nested} key={i}>
                                         <ListItemText
                                           primary={convo.displayName}

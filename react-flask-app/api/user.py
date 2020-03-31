@@ -15,7 +15,7 @@ The name, email, and profile picture will all be retrieved from Google.
 #For Google authentication
 
 from flask_login import UserMixin
-from api.db import get_db
+from db import get_db
 
 class User(UserMixin):
     def __init__(self, id_, name, email, avatar):

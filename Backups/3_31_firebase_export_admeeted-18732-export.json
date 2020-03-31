@@ -1,0 +1,737 @@
+{
+  "convo_event" : {
+    "Harvard Admeeted 2024 3-31" : {
+      "Harvard Admeeted 2024 3-31Call1Group0" : true,
+      "Harvard Admeeted 2024 3-31Call2Group1" : true,
+      "Harvard Admeeted 2024 3-31Call3Group2" : true,
+      "Harvard Admeeted 2024 3-31Call4Group3" : true
+    }
+  },
+  "convo_user" : {
+    "103257380590723979410" : {
+      "Harvard Admeeted 2024 3-31Call1Group0" : true,
+      "Harvard Admeeted 2024 3-31Call2Group1" : true,
+      "Harvard Admeeted 2024 3-31Call3Group2" : true,
+      "Harvard Admeeted 2024 3-31Call4Group3" : true
+    },
+    "110753538828040619190" : {
+      "Harvard Admeeted 2024 3-31Call1Group0" : true,
+      "Harvard Admeeted 2024 3-31Call2Group1" : true,
+      "Harvard Admeeted 2024 3-31Call3Group2" : true,
+      "Harvard Admeeted 2024 3-31Call4Group3" : true
+    },
+    "113545690935311265871" : {
+      "Harvard Admeeted 2024 3-31Call1Group0" : true,
+      "Harvard Admeeted 2024 3-31Call2Group1" : true,
+      "Harvard Admeeted 2024 3-31Call3Group2" : true,
+      "Harvard Admeeted 2024 3-31Call4Group3" : true
+    },
+    "category" : {
+      "Harvard Admeeted 2024 3-31Call1Group0" : true,
+      "Harvard Admeeted 2024 3-31Call2Group1" : true,
+      "Harvard Admeeted 2024 3-31Call3Group2" : true,
+      "Harvard Admeeted 2024 3-31Call4Group3" : true
+    }
+  },
+  "convos" : {
+    "Harvard Admeeted 2024 3-31Call1Group0" : {
+      "displayName" : "Yale Sucks Call 1",
+      "event" : "Harvard Admeeted 2024 3-31",
+      "link" : "https://hangouts.google.com/group/pzPu983qFXZV7xJS6",
+      "members" : {
+        "103257380590723979410" : true,
+        "110753538828040619190" : true,
+        "113545690935311265871" : true,
+        "category" : true
+      },
+      "org" : "Harvard",
+      "timeEnd" : "16:30 31 March 2020",
+      "timeStart" : "16:00 31 March 2020"
+    },
+    "Harvard Admeeted 2024 3-31Call2Group1" : {
+      "displayName" : "Yale Sucks Call 2",
+      "event" : "Harvard Admeeted 2024 3-31",
+      "link" : "https://hangouts.google.com/group/Ygy4UXJvv3We3JdSA",
+      "members" : {
+        "103257380590723979410" : true,
+        "110753538828040619190" : true,
+        "113545690935311265871" : true,
+        "category" : true
+      },
+      "org" : "Harvard",
+      "timeEnd" : "17:00 31 March 2020",
+      "timeStart" : "16:30 31 March 2020"
+    },
+    "Harvard Admeeted 2024 3-31Call3Group2" : {
+      "displayName" : "Yale Sucks Call 3",
+      "event" : "Harvard Admeeted 2024 3-31",
+      "link" : "https://hangouts.google.com/group/fwoocT73uTR5DbaVA",
+      "members" : {
+        "103257380590723979410" : true,
+        "110753538828040619190" : true,
+        "113545690935311265871" : true,
+        "category" : true
+      },
+      "org" : "Harvard",
+      "timeEnd" : "17:30 31 March 2020",
+      "timeStart" : "17:00 31 March 2020"
+    },
+    "Harvard Admeeted 2024 3-31Call4Group3" : {
+      "displayName" : "Yale Sucks Call 4",
+      "event" : "Harvard Admeeted 2024 3-31",
+      "link" : "https://hangouts.google.com/group/wN7detmXdHxgFWZp7",
+      "members" : {
+        "103257380590723979410" : true,
+        "110753538828040619190" : true,
+        "113545690935311265871" : true,
+        "category" : true
+      },
+      "org" : "Harvard",
+      "timeEnd" : "18:00 31 March 2020",
+      "timeStart" : "17:30 31 March 2020"
+    }
+  },
+  "event_org" : {
+    "Harvard" : {
+      "Harvard Admeeted 2024 3-25" : true,
+      "Harvard Admeeted 2024 3-26" : true,
+      "Harvard Admeeted 2024 3-27" : true,
+      "Harvard Admeeted 2024 3-30" : true,
+      "Harvard Admeeted 2024 3-31" : true
+    }
+  },
+  "event_user" : {
+    "10" : {
+      "Harvard Admeeted 2024 3-25" : true,
+      "Harvard Admeeted 2024 3-26" : true,
+      "Harvard Admeeted 2024 3-30" : true
+    },
+    "103257380590723979410" : {
+      "Harvard Admeeted 2024 3-26" : true,
+      "Harvard Admeeted 2024 3-30" : true,
+      "Harvard Admeeted 2024 3-31" : true
+    },
+    "110753538828040619190" : {
+      "Harvard Admeeted 2024 3-31" : true
+    },
+    "113545690935311265871" : {
+      "Harvard Admeeted 2024 3-31" : true
+    }
+  },
+  "events" : {
+    "Harvard Admeeted 2024 3-25" : {
+      "creator" : 1,
+      "desired_size" : 3,
+      "displayName" : "Virtual Visitas 25",
+      "num_rounds" : 4,
+      "org" : "Harvard",
+      "timeCreated" : "11:00 23 March 2020",
+      "timeDeadline" : "23:59 26 March 2020",
+      "timeEnd" : "18:00 27 March 2020",
+      "timeStart" : "16:00 27 March 2020"
+    },
+    "Harvard Admeeted 2024 3-26" : {
+      "creator" : 1,
+      "desired_size" : 3,
+      "displayName" : "Virtual Visitas 26",
+      "num_rounds" : 4,
+      "org" : "Harvard",
+      "timeCreated" : "11:00 23 March 2020",
+      "timeDeadline" : "23:59 26 March 2020",
+      "timeEnd" : "18:00 27 March 2020",
+      "timeStart" : "16:00 27 March 2020"
+    },
+    "Harvard Admeeted 2024 3-27" : {
+      "creator" : 1,
+      "desired_size" : 3,
+      "displayName" : "Virtual Visitas 27",
+      "num_rounds" : 4,
+      "org" : "Harvard",
+      "timeCreated" : "11:00 23 March 2020",
+      "timeDeadline" : "23:59 26 March 2020",
+      "timeEnd" : "18:00 27 March 2020",
+      "timeStart" : "16:00 27 March 2020"
+    },
+    "Harvard Admeeted 2024 3-30" : {
+      "creator" : 1.0325738059072397E20,
+      "desired_size" : 3,
+      "displayName" : "Virtual Visitas 30",
+      "num_rounds" : 4,
+      "org" : "Harvard",
+      "timeCreated" : "9:00 29 March 2020",
+      "timeDeadline" : "23:59 29 March 2020",
+      "timeEnd" : "18:00 30 March 2020",
+      "timeStart" : "17:00 30 March 2020"
+    },
+    "Harvard Admeeted 2024 3-31" : {
+      "creator" : 1.0325738059072397E20,
+      "desired_size" : 3,
+      "displayName" : "Virtual Visitas 31",
+      "num_rounds" : 4,
+      "org" : "Harvard",
+      "timeCreated" : "11:00 30 March 2020",
+      "timeDeadline" : "15:00 31 March 2020",
+      "timeEnd" : "18:00 31 March 2020",
+      "timeStart" : "16:00 31 March 2020"
+    }
+  },
+  "major_org" : {
+    "Harvard" : {
+      "African and African American Studies" : true,
+      "Anthropology" : true,
+      "Applied Mathematics" : true,
+      "Art Film and Visual Studies" : true,
+      "Astrophysics" : true,
+      "Biomedical Engineering" : true,
+      "Chemical and Physical Biology" : true,
+      "Chemistry" : true,
+      "Chemistry and Physics" : true,
+      "Classics" : true,
+      "Comparative Literature" : true,
+      "Computer Science" : true,
+      "Earth and Planetary Sciences" : true,
+      "East Asian Studies" : true,
+      "Economics" : true,
+      "Electrical Engineering" : true,
+      "Engineering Sciences" : true,
+      "English" : true,
+      "Environmental Science and Engineering" : true,
+      "Environmental Science and Public Policy" : true,
+      "Folklore and Mythology" : true,
+      "Germanic Languages and Literatures" : true,
+      "Government" : true,
+      "History" : true,
+      "History and Literature" : true,
+      "History and Science" : true,
+      "History of Art and Architecture" : true,
+      "Human Developmental and Regenerative Biology" : true,
+      "Human Evolutionary Biology" : true,
+      "Integrative Biology" : true,
+      "Linguistics" : true,
+      "Mathematics" : true,
+      "Mechanical Engineering" : true,
+      "Molecular and Cellular Biology" : true,
+      "Music" : true,
+      "Near Eastern Languages and Civilizations" : true,
+      "Neuroscience" : true,
+      "Philosophy" : true,
+      "Physics" : true,
+      "Psychology" : true,
+      "Religion Comparative Study of" : true,
+      "Romance Languages and Literatures" : true,
+      "Slavic Languages and Literatures" : true,
+      "Social Studies" : true,
+      "Sociology" : true,
+      "South Asian Studies" : true,
+      "Special Concentrations" : true,
+      "Statistics" : true,
+      "Theater Dance & Media" : true,
+      "Women Gender and Sexuality Study of" : true
+    }
+  },
+  "major_user" : {
+    "1" : {
+      "Biology" : true,
+      "Biomedical Engineering" : true,
+      "Computer Science" : true,
+      "Economics" : true,
+      "Government" : true,
+      "History" : true
+    },
+    "2" : {
+      "History" : true
+    },
+    "3" : {
+      "Computer Science" : true
+    },
+    "4" : {
+      "Computer Science" : true
+    },
+    "5" : {
+      "Biology" : true,
+      "Biomedical Engineering" : true
+    },
+    "6" : {
+      "Computer Science" : true
+    },
+    "7" : {
+      "Neuroscience" : true
+    },
+    "8" : {
+      "Government" : true
+    },
+    "9" : {
+      "Computer Science" : true,
+      "Economics" : true
+    },
+    "10" : {
+      "Neuroscience" : true,
+      "Psychology" : true
+    },
+    "11" : {
+      "Neuroscience" : true,
+      "Psychology" : true
+    },
+    "12" : {
+      "Computer Science" : true
+    },
+    "102010603388161425304" : {
+      "Computer Science" : true
+    },
+    "103257380590723979410" : {
+      "Computer Science" : true,
+      "Neuroscience" : true,
+      "Psychology" : true
+    },
+    "108243314847325773476" : {
+      "Neuroscience" : true
+    },
+    "113545690935311265871" : {
+      "Computer Science" : true
+    },
+    "None" : {
+      "Computer Science" : true
+    }
+  },
+  "majors" : {
+    "African and African American Studies" : {
+      "description" : "explore the histories, societies, and cultures of African and African-descended people",
+      "displayName" : "African and African American Studies"
+    },
+    "Anthropology" : {
+      "description" : "the study of how human behavior has evolved as well as how language, culture, and society have shaped and continue to shape the human experience",
+      "displayName" : "Anthropology"
+    },
+    "Applied Mathematics" : {
+      "description" : "develop, implement, and study mathematical, statistical, and computational techniques broadly applicable in various fields",
+      "displayName" : "Applied Mathematics"
+    },
+    "Art Film and Visual Studies" : {
+      "description" : "components include photography, filmmaking, animation, video art, painting, drawing, printmaking and sculpture, as well as film and visual studies, critical theory, and the study of the built environment",
+      "displayName" : "Art, Film, and Visual Studies"
+    },
+    "Astrophysics" : {
+      "description" : "study of matter and radiation in the universe as understood through the laws of physics",
+      "displayName" : "Astrophysics"
+    },
+    "Biomedical Engineering" : {
+      "description" : "apply quantitative engineering analysis to understand the operation of living systems and design novel systems to satisfy unmet needs in medicine and industry",
+      "displayName" : "Biomedical Engineering"
+    },
+    "Chemical and Physical Biology" : {
+      "description" : "applying quantitative tools, physical concepts, and chemical principles to the study of biology",
+      "displayName" : "Chemical and Physical Biology"
+    },
+    "Chemistry" : {
+      "description" : "science of the structure, properties, and reactions of matter",
+      "displayName" : "Chemistry"
+    },
+    "Chemistry and Physics" : {
+      "description" : "The study of the boundary between physics and chemistry.",
+      "displayName" : "Chemistry and Physics"
+    },
+    "Classics" : {
+      "description" : "An intellectual discipline that embraces the study of ancient Greece and Rome, two civilizations whose legacy has played a major role in shaping our modern world.",
+      "displayName" : "Classics"
+    },
+    "Comparative Literature" : {
+      "description" : "Exploring literature and culture across languages and national borders",
+      "displayName" : "Comparative Literature"
+    },
+    "Computer Science" : {
+      "description" : "A dynamic, versatile field, full of open problems and opportunities for creative invention.",
+      "displayName" : "Computer Science"
+    },
+    "Earth and Planetary Sciences" : {
+      "description" : "Working to better understand the consequences of human activities for the Earth’s atmosphere, the oceans, the solid Earth, and the organisms that live on it.",
+      "displayName" : "Earth and Planetary Sciences"
+    },
+    "East Asian Studies" : {
+      "description" : "Developing a critical understanding of the human experience in East Asia.",
+      "displayName" : "East Asian Studies"
+    },
+    "Economics" : {
+      "description" : "Studying the behavior of social systems—such as markets, corporations, legislatures, and families—as the outcome of interactions through institutions between goal-directed individuals.",
+      "displayName" : "Economics"
+    },
+    "Electrical Engineering" : {
+      "description" : "A broadly diverse field that encompasses, for example, controls, communications, signal processing, circuit design, computer engineering, and electronic and photonic devices",
+      "displayName" : "Electrical Engineering"
+    },
+    "Engineering Sciences" : {
+      "description" : "Both diving deeply into specific engineering fields, but also to seeking out solutions to real-world problems by combining concepts from a broad range of scientific inquiries and innovations.",
+      "displayName" : "Engineering Sciences"
+    },
+    "English" : {
+      "description" : "Studying the full breadth of imaginative literature written in the English language from the eighth century to its more recent dispersal around the globe.",
+      "displayName" : "English"
+    },
+    "Environmental Science and Engineering" : {
+      "description" : "Understanding, predicting, and responding to natural and human-induced environmental change.",
+      "displayName" : "Environmental Science and Engineering"
+    },
+    "Environmental Science and Public Policy" : {
+      "description" : "An understanding of the underlying scientific and technical environmental issues and an appreciation for the relevant economic, political, legal, historical, and ethical dimensions.",
+      "displayName" : "Environmental Science and Public Policy"
+    },
+    "Folklore and Mythology" : {
+      "description" : "Studying how a specific given group or society defines itself through epics, music, folktales, legends, dramas, dance, rituals, “beliefs,” proverbs, customs, law codes, festival celebrations, “wisdom literature,” and many other forms of expressive culture.",
+      "displayName" : "Folklore and Mythology"
+    },
+    "Germanic Languages and Literatures" : {
+      "description" : "Studying Germanic languages, literatures, and cultures and the centrol role played by modern Germany in international politics and economics.",
+      "displayName" : "Germanic Languages and Literatures"
+    },
+    "Government" : {
+      "description" : "The study of power in all of its many forms and consequences.",
+      "displayName" : "Government"
+    },
+    "History" : {
+      "description" : "The study of individuals, groups, communities, and nations from every imaginable perspective—employing all the techniques of the humanities and social sciences to raise questions and probe for answers.",
+      "displayName" : "History"
+    },
+    "History and Literature" : {
+      "description" : "The oldest concentration at Harvard, studying the heart of History and Literature.",
+      "displayName" : "History and Literature"
+    },
+    "History and Science" : {
+      "description" : "A flourishing interdisciplinary field of study, at the heart of science and its impact on the world.",
+      "displayName" : "History and Science"
+    },
+    "History of Art and Architecture" : {
+      "description" : "Training in the historical interpretation and critical analysis of the visual arts and architecture.",
+      "displayName" : "History of Art and Architecture"
+    },
+    "Human Developmental and Regenerative Biology" : {
+      "description" : "Studying how human beings develop from a fertilized egg, are maintained and repaired throughout adulthood, and age till life’s end.",
+      "displayName" : "Human Developmental and Regenerative Biology"
+    },
+    "Human Evolutionary Biology" : {
+      "description" : "Answering questions about who we are, how we got here, and what makes us unique.",
+      "displayName" : "Human Evolutionary Biology"
+    },
+    "Integrative Biology" : {
+      "description" : "Asking questions about the function, evolution, and interaction of organisms, both now and in the past.",
+      "displayName" : "Integrative Biology"
+    },
+    "Linguistics" : {
+      "description" : "The scientific study of language.",
+      "displayName" : "Linguistics"
+    },
+    "Mathematics" : {
+      "description" : "The science of order, identifying instances of order and formulating and understanding concepts that enable us to perceive order in complicated situations.",
+      "displayName" : "Mathematics"
+    },
+    "Mechanical Engineering" : {
+      "description" : "Using the principles of physics and materials science for the analysis and design of mechanical and thermal systems.",
+      "displayName" : "Mechanical Engineering"
+    },
+    "Molecular and Cellular Biology" : {
+      "description" : "The study of molecular and cellular processes at the heart of both normal physiology and disease.",
+      "displayName" : "Molecular and Cellular Biology"
+    },
+    "Music" : {
+      "description" : "Study of a wide variety of musical styles, sounds, and musical traditions and critically understanding music in diverse cultural and historical contexts.",
+      "displayName" : "Music"
+    },
+    "Near Eastern Languages and Civilizations" : {
+      "description" : "The study of the Near and Middle East, an important area of academic inquiry on account of its political, economic and cultural significance on the international stage.",
+      "displayName" : "Near Eastern Languages and Civilizations"
+    },
+    "Neuroscience" : {
+      "description" : "The study of the nervous system, a field that investigates the biological mechanisms that underlie behavior and how brains process information.",
+      "displayName" : "Neuroscience"
+    },
+    "Philosophy" : {
+      "description" : "Studying many of humanity’s fundamental questions: how should we live, what kind of society should we strive towards, what are the limits of human knowledge? What is truth? Justice? Beauty?",
+      "displayName" : "Philosophy"
+    },
+    "Physics" : {
+      "description" : "Seeking an understanding of the subtle, profound, and fundamental laws—relativity, quantum mechanics, and the basic force laws—that govern the behavior of all matter.",
+      "displayName" : "Physics"
+    },
+    "Psychology" : {
+      "description" : "The scientific study of the mind, investigating the minds of humans and other species.",
+      "displayName" : "Psychology"
+    },
+    "Religion Comparative Study of" : {
+      "description" : "Exploring the most consequential and momentous questions relevant to the understanding of individual and communal human life.",
+      "displayName" : "Religion, Comparative Study of"
+    },
+    "Romance Languages and Literatures" : {
+      "description" : "Discovering the literatures, cultures, and critical approaches of societies worldwide where French, Italian, Portuguese, Spanish, and Catalan are spoken.",
+      "displayName" : "Romance Languages and Literatures"
+    },
+    "Slavic Languages and Literatures" : {
+      "description" : "Studying the great works and cultural traditions, past and present, of Russia and the other Slavic countries, especially Ukraine, Poland, and the Czech Republic.",
+      "displayName" : "Slavic Languages and Literatures"
+    },
+    "Social Studies" : {
+      "description" : "An integration of the disciplines of history, political science, economics, sociology, and anthropology, applying social science to contemporary social, economic, and political problems.",
+      "displayName" : "Social Studies"
+    },
+    "Sociology" : {
+      "description" : "The study of society, of the social frameworks within which we live our lives, from two-person relationships to the rise and fall of nations and civilizations.",
+      "displayName" : "Sociology"
+    },
+    "South Asian Studies" : {
+      "description" : "Developing a critical understanding of the diverse cultures, histories, languages and literatures of South Asia, which includes Bangladesh, India, Nepal, Pakistan, Sri Lanka, and Tibet.",
+      "displayName" : "South Asian Studies"
+    },
+    "Special Concentrations" : {
+      "description" : "Studying special things.",
+      "displayName" : "Special Concentrations"
+    },
+    "Statistics" : {
+      "description" : "Study of the collection, organization, analysis, interpretation and presentation of data",
+      "displayName" : "Statistics"
+    },
+    "Theater Dance & Media" : {
+      "description" : "Historical and theoretical study of live and digital arts with the practice of those arts.",
+      "displayName" : "Theater, Dance, & Media"
+    },
+    "Women Gender and Sexuality Study of" : {
+      "description" : "The study of gender and sexuality as fundamental categories of social organization and power.",
+      "displayName" : "Women, Gender, and Sexuality, Study of"
+    }
+  },
+  "org_user" : {
+    "10" : {
+      "Harvard" : true
+    },
+    "102010603388161425304" : {
+      "Harvard" : true
+    },
+    "103257380590723979410" : {
+      "Harvard" : true,
+      "UVA" : true
+    },
+    "108243314847325773476" : {
+      "UVA" : true
+    },
+    "110753538828040619190" : {
+      "Harvard" : true
+    },
+    "113545690935311265871" : {
+      "Harvard" : true
+    },
+    "114118789385241221553" : {
+      "Harvard" : true
+    }
+  },
+  "orgs" : {
+    "Harvard" : {
+      "avatar" : "https://www.harvard.edu/sites/default/files/user13/harvard_shield.png",
+      "dateFounded" : "24 March 2020",
+      "description" : "Group for connecting pre-first year students!",
+      "displayName" : "Harvard 2024",
+      "passcode" : "Harvard"
+    },
+    "UVA" : {
+      "avatar" : "https://cdn.freebiesupply.com/logos/large/2x/university-of-virginia-logo-png-transparent.png",
+      "dateFounded" : "28 March 2020",
+      "description" : "Group for connecting pre-first year students!",
+      "displayName" : "University of Virginia 2024",
+      "passcode" : "charlottesville"
+    }
+  },
+  "user_event" : {
+    "Harvard Admeeted 2024 3-25" : {
+      "10" : true
+    },
+    "Harvard Admeeted 2024 3-26" : {
+      "10" : true
+    },
+    "Harvard Admeeted 2024 3-30" : {
+      "10" : true,
+      "103257380590723979410" : true
+    },
+    "Harvard Admeeted 2024 3-31" : {
+      "103257380590723979410" : true,
+      "110753538828040619190" : true,
+      "113545690935311265871" : true
+    }
+  },
+  "user_major" : {
+    "Biomedical Engineering" : {
+      "5" : true
+    },
+    "Computer Science" : {
+      "103257380590723979410" : true
+    },
+    "Economics" : {
+      "9" : true
+    },
+    "Government" : {
+      "8" : true
+    },
+    "History" : {
+      "2" : true
+    },
+    "Neuroscience" : {
+      "103257380590723979410" : true
+    },
+    "Psychology" : {
+      "103257380590723979410" : true
+    }
+  },
+  "user_org" : {
+    "Harvard" : {
+      "10" : true,
+      "102010603388161425304" : true,
+      "103257380590723979410" : true,
+      "110753538828040619190" : true,
+      "113545690935311265871" : true,
+      "114118789385241221553" : true
+    },
+    "UVA" : {
+      "103257380590723979410" : true,
+      "108243314847325773476" : true
+    }
+  },
+  "users" : {
+    "1" : {
+      "country" : "USA",
+      "email" : "initforthenguyen@gmail.com",
+      "name" : "Ryan Doan Nguyen",
+      "participating" : true,
+      "state" : "Virginia"
+    },
+    "2" : {
+      "country" : "USA",
+      "email" : "tarunas220@gmail.com",
+      "name" : "Taruna Singh",
+      "participating" : true,
+      "state" : "Pennsylvania"
+    },
+    "3" : {
+      "country" : "USA",
+      "email" : "jgracebaldwin@gmail.com",
+      "name" : "Jackie Baldwin",
+      "participating" : true,
+      "state" : "Illinois"
+    },
+    "4" : {
+      "country" : "USA",
+      "email" : "noah2list@gmail.com",
+      "name" : "Noah List",
+      "participating" : true,
+      "state" : "Illinois"
+    },
+    "5" : {
+      "country" : "USA",
+      "email" : "mendez_james@hotmail.com",
+      "name" : "James Mendez",
+      "participating" : true,
+      "state" : "Texas"
+    },
+    "6" : {
+      "country" : "USA",
+      "email" : "apneal0725@gmail.com",
+      "name" : "Adam Neal",
+      "participating" : true,
+      "state" : "Massachusetts"
+    },
+    "7" : {
+      "country" : "USA",
+      "email" : "chloesharlinwilson@gmail.com",
+      "name" : "Chloe Wilson",
+      "participating" : true,
+      "state" : "Massachusetts"
+    },
+    "8" : {
+      "country" : "USA",
+      "email" : "allachelaeticia@gmail.com",
+      "name" : "Laeticia Allache",
+      "participating" : true,
+      "state" : "Virginia"
+    },
+    "9" : {
+      "country" : "USA",
+      "email" : "albertzhang9000@gmail.com",
+      "name" : "Albert Zhang",
+      "participating" : true,
+      "state" : "Georgia"
+    },
+    "10" : {
+      "avatar" : "<pic_link>",
+      "country" : "USA",
+      "displayName" : "Paula Zoo",
+      "email" : "paulakaitlynzoo@gmail.com",
+      "name" : "Paula Zhu",
+      "state" : "Virginia"
+    },
+    "11" : {
+      "country" : "USA",
+      "email" : "Mwen987@gmail.com",
+      "name" : "Melissa Meng",
+      "participating" : true,
+      "state" : "Virginia"
+    },
+    "12" : {
+      "country" : "USA",
+      "email" : "danielfein13@gmail.com",
+      "name" : "Daniel Fein",
+      "participating" : true,
+      "state" : "Florida"
+    },
+    "102010603388161425304" : {
+      "avatar" : "https://lh3.googleusercontent.com/a-/AOh14GhRCkXif3LJIISDrFlwfpieZ-eE52jfhMQT74DK=s96-c",
+      "country" : "USA",
+      "displayName" : "Bill Zhang",
+      "email" : "billzhang@college.harvard.edu",
+      "name" : "Bill Zhang",
+      "user_uid" : "102010603388161425304"
+    },
+    "102721409116886759462" : {
+      "avatar" : "https://lh3.googleusercontent.com/-3zQED1ipuYE/AAAAAAAAAAI/AAAAAAAAAAA/AKF05nCPlFW1-F9PuizsZnW-dyDTSmjaKw/photo.jpg",
+      "email" : "admeeted2.0@gmail.com",
+      "name" : "Albert",
+      "user_uid" : "102721409116886759462"
+    },
+    "103257380590723979410" : {
+      "avatar" : "https://lh3.googleusercontent.com/a-/AOh14Gh-iGMUyEzNdkNF3EmzmDks5d43gZO1vAUpSE7PfTs=s96-c",
+      "country" : "United States",
+      "displayName" : "Bill Zhang",
+      "email" : "billzhang1998@gmail.com",
+      "name" : "Bill Zhang",
+      "state" : "Georgia",
+      "user_uid" : "103257380590723979410"
+    },
+    "108243314847325773476" : {
+      "avatar" : "https://lh3.googleusercontent.com/-ARLiYa6FEHU/AAAAAAAAAAI/AAAAAAAAAAA/AKF05nBPLvZk1Rhvm8wUyshtXj2_Ngcoaw/photo.jpg",
+      "country" : "United States",
+      "displayName" : "Paula Zhu",
+      "email" : "paulakaitlynzoo@gmail.com",
+      "name" : "Paula",
+      "state" : "Alabama",
+      "user_uid" : "108243314847325773476"
+    },
+    "110753538828040619190" : {
+      "avatar" : "https://lh3.googleusercontent.com/a-/AOh14GhetT-jWYpAKkKMlNARAtH8xBaj1Qi5WzJmXxRj=s96-c",
+      "email" : "azhang9000@gmail.com",
+      "name" : "Albert Zhang",
+      "user_uid" : "110753538828040619190"
+    },
+    "113545690935311265871" : {
+      "avatar" : "https://lh6.googleusercontent.com/-BsewRr0Z0Ng/AAAAAAAAAAI/AAAAAAAAAAA/AKF05nCGtcjyDE52SSyPgBpiwxD5GS_cXQ/s96-c/photo.jpg",
+      "country" : "United States",
+      "displayName" : "David Zhang",
+      "email" : "qstd888@gmail.com",
+      "name" : "David Zhang",
+      "user_uid" : "113545690935311265871"
+    },
+    "114118789385241221553" : {
+      "avatar" : "https://lh6.googleusercontent.com/-rvh9EYEHlus/AAAAAAAAAAI/AAAAAAAAAAA/AKF05nCesfNBxPSA92R7591U9hnPJihxqA/s96-c/photo.jpg",
+      "email" : "alba900032@gmail.com",
+      "name" : "asdf dfgwsg",
+      "user_uid" : "114118789385241221553"
+    },
+    "115246946601535821469" : {
+      "avatar" : "https://lh6.googleusercontent.com/-X72SbjpOGpc/AAAAAAAAAAI/AAAAAAAAAAA/AKF05nCUcZ7geQlJNgVZK9JhcW-vYWYsIw/photo.jpg",
+      "email" : "virtualvisitas2.0@gmail.com",
+      "name" : "Albert",
+      "user_uid" : "115246946601535821469"
+    }
+  }
+}

@@ -13,6 +13,7 @@ import click
 from flask import current_app, g
 from flask.cli import with_appcontext
 import pyrebase
+import os
 
 #def close_db(e=None):
     #TODO need a close_db?
@@ -35,10 +36,12 @@ def init_db():
            "projectId": project_id,
            "storageBucket": project_id+".appspot.com",
            # "serviceAccount": r"C:\Users\Samantha\Admeeted\Admeeted2.0\Admeeted\react-flask-app\api\admeeted-private-key.json", #Fill this in
-           "serviceAccount": r"C:\Users\billz\PycharmProjects\VirtualVisitas\Admeeted\react-flask-app\api\admeeted-private-key.json",
+           # "serviceAccount": r"C:\Users\billz\PycharmProjects\VirtualVisitas\Admeeted\react-flask-app\api\admeeted-private-key.json",
+            "serviceAccount": str(os.getcwd()) + r"/admeeted-private-key.json",
 #             "serviceAccount": r"C:\Users\pkzr3\Admeeted\react-flask-app\api\admeeted-private-key.json",
             "messagingSenderId": "667088492207"
-        }   
+        }
+        print(config['serviceAccount'])
 
         firebase = pyrebase.initialize_app(config)
         g.db = firebase.database()

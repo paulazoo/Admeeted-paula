@@ -40,6 +40,7 @@ function OrgDashboard ({ org_uid, upcomingEvents, availEvents, conversations, mo
             edge="end"
             size="small"
             href={link}
+            target={"_blank"}
         >
             <ChatIcon/>
         </IconButton>

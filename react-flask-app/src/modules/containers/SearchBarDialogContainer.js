@@ -8,9 +8,7 @@ import SearchBarDialog from "../components/SearchBarDialog";
 function SearchBarDialogContainer ({ open, handleClose, all_organizations, currentlySending, loadOrganizations, history }) {
     useEffect(() => {
         loadOrganizations()
-    },[])
-
-    console.log(history)
+    },[]);
 
     return <SearchBarDialog
         history={history}

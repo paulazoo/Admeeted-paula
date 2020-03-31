@@ -53,7 +53,9 @@ function EventCardList({ title, data, maxItems, avatar, iconButton, chatButton, 
           <Divider />
           <CardContent className={classes.content}>
             <List>
-              {points.map((point, i) => (
+              {points
+                  .sort((a, b) => moment(a.timeStart) - moment(b.timeStart))
+                  .map((point, i) => (
                   <div>
                 <ListItem
                   key={i}
@@ -76,7 +78,9 @@ function EventCardList({ title, data, maxItems, avatar, iconButton, chatButton, 
                           <div>
                               <Divider variant="inset"/>
                               <List component="div" disablePadding>
-                                  {point.convos.map((convo, i) => (
+                                  {point.convos
+                                      .sort((a, b) => moment(a.timeStart) - moment(b.timeStart))
+                                      .map((convo, i) => (
                                       <ListItem className={classes.nested} key={i}>
                                         <ListItemText
                                           primary={convo.displayName}

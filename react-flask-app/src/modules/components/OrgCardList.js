@@ -53,7 +53,9 @@ function OrgCardList({ title, data, maxItems, iconButton, chatButton, className,
           <Divider />
           <CardContent className={classes.content}>
             <List>
-              {points.map((point, i) => (
+              {points
+                  .sort((a, b) => moment(a.timeStart) - moment(b.timeStart))
+                  .map((point, i) => (
                   <div>
                     <ListItem
                       key={i}
@@ -69,7 +71,9 @@ function OrgCardList({ title, data, maxItems, iconButton, chatButton, className,
                               <div>
                                   <Divider variant="inset"/>
                                   <List component="div" disablePadding>
-                                      {point.convos.map((convo, i) => (
+                                      {point.convos
+                                          .sort((a, b) => moment(a.timeStart) - moment(b.timeStart))
+                                          .map((convo, i) => (
                                           <ListItem className={classes.nested} key={i}>
                                             <ListItemText
                                               primary={convo.displayName}

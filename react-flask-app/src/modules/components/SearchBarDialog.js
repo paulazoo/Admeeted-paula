@@ -17,8 +17,6 @@ const styles = theme => ({
 })
 
 function SearchBarDialog ({ history, open, handleClose, all_organizations, currentlySending, classes }) {
-    console.log(open);
-
     const [values, setValues] = useState({
         query: '',
         redirect: false
