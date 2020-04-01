@@ -4,6 +4,7 @@ from datetime import datetime
 
 # Third-party libraries
 from flask import Flask, jsonify, render_template, request, g, current_app, redirect, url_for, session
+from flask_cors import CORS
 from werkzeug import exceptions as wex
 from flask.cli import with_appcontext
 from flask_login import (
@@ -50,6 +51,7 @@ import os
 os.environ['AUTHLIB_INSECURE_TRANSPORT'] = '1'
 #%%
 app = Flask(__name__)
+cors = CORS(app, resources={r"/*": {"origins": "https://www.admeeted.com"}})
 app.secret_key = os.environ.get("SECRET_KEY") or os.urandom(24)
 
 #%%
