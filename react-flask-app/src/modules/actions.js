@@ -11,7 +11,7 @@ export const login = (profile) => {
     return dispatch => {
         dispatch(sendingRequest(true));
         dispatch(setErrorMessage(''));
-        fetch('/login', {
+        fetch(`${process.env.REACT_APP_API_PROXY}/login`, {
             method: 'POST',
             body: JSON.stringify({ profile }),
         }).then(res => {
@@ -40,7 +40,7 @@ export const genConvos = (event_uid, convo_name) => {
     return dispatch => {
         dispatch(sendingRequest(true))
         dispatch(setErrorMessage(''))
-        fetch(`/generate-convos/${event_uid}`, {
+        fetch(`${process.env.REACT_APP_API_PROXY}/generate-convos/${event_uid}`, {
             method: 'POST',
             body: JSON.stringify({ convo_name }),
         }).then(res => {
@@ -57,7 +57,7 @@ export const genEmptyHangouts = (name, num_hangouts, num_threads) => {
     return dispatch => {
         dispatch(sendingRequest(true))
         dispatch(setErrorMessage(''))
-        fetch("/create-hangouts", {
+        fetch(`${process.env.REACT_APP_API_PROXY}/create-hangouts`, {
             method: 'POST',
             body: JSON.stringify({ name, num_hangouts, num_threads }),
         }).then(res => {
@@ -113,7 +113,7 @@ export const changeData = (path, new_data, updatePaths, updateNames) => {
     return dispatch => {
         dispatch(sendingRequest(true))
         dispatch(setErrorMessage(''))
-        fetch(`${path}`, {
+        fetch(`${process.env.REACT_APP_API_PROXY}${path}`, {
             method: 'POST',
             body: JSON.stringify({ new_data })
         }).then(res => {
@@ -171,7 +171,7 @@ export const changeOrgData = (path, new_data, updatePaths, updateNames) => {
     return dispatch => {
         dispatch(sendingRequest(true))
         dispatch(setErrorMessage(''))
-        fetch(`${path}`, {
+        fetch(`${process.env.REACT_APP_API_PROXY}${path}`, {
             method: 'POST',
             body: JSON.stringify({ new_data })
         }).then(res => {
@@ -208,7 +208,7 @@ export const logout = () => {
     return dispatch => {
         dispatch(sendingRequest(true))
         dispatch(setErrorMessage(''))
-        api('/logout')
+        api('/api/logout')
             .then(data => {
                 dispatch(sendingRequest(false))
                 dispatch(setAuthState(data.isLoggedIn))
@@ -253,7 +253,7 @@ const setOrgData = data => {
 }
 
 const api = path => {
-  return fetch(path, { credentials: 'same-origin' }).then(res => {
+  return fetch(`${process.env.REACT_APP_API_PROXY}${path}`, { credentials: 'same-origin' }).then(res => {
     if (res.ok) return res.json()
     else throw new Error(res.status)
   })

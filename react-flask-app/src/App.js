@@ -11,13 +11,13 @@ import StaticGoogleForm from './modules/views/StaticGoogleForm';
 import {loadMe} from "./modules/actions";
 
 function App({ loadingAuth, loadUser }) {
-  const [currTime, setCurrTime] = useState(0);
-
-  useEffect(() => {
-    fetch('/time').then(res => res.json()).then(data => {
-      setCurrTime(data.time);
-    });
-  }, []);
+  // const [currTime, setCurrTime] = useState(0);
+  //
+  // useEffect(() => {
+  //   fetch('/time').then(res => res.json()).then(data => {
+  //     setCurrTime(data.time);
+  //   });
+  // }, []);
 
   useEffect(() => {
       loadUser();
