@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
 import Homepage from '../views/Homepage';
-import { loadData, genConvos } from "../actions";
+import { loadData, genConvos, genEmptyHangouts } from "../actions";
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import MainLayout from "../layouts/MainLayout";
 import Master from "../views/Master";
 
-function MasterContainer ({ events, currentlySending, loadUpcomingConvos, generateConvos }) {
+function MasterContainer ({ events, currentlySending, loadUpcomingConvos, generateConvos, generateEmptyHangouts }) {
     useEffect(() => {
         loadUpcomingConvos();
     },[])
@@ -15,7 +15,12 @@ function MasterContainer ({ events, currentlySending, loadUpcomingConvos, genera
     console.log(events);
 
     return (
-        <Master events={events} currentlySending={currentlySending} generateConvos={generateConvos}/>
+        <Master
+            events={events}
+            currentlySending={currentlySending}
+            generateConvos={generateConvos}
+            generateEmptyHangouts={generateEmptyHangouts}
+        />
     )
 }
 
@@ -30,6 +35,9 @@ const mapDispatchToProps = dispatch => ({
     },
     generateConvos: (event_uid, convo_name) => {
         dispatch(genConvos(event_uid, convo_name))
+    },
+    generateEmptyHangouts: (num_hangouts, num_threads) => {
+        dispatch(genEmptyHangouts(num_hangouts, num_threads))
     }
 })
 

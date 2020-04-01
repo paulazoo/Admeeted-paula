@@ -16,7 +16,7 @@ from datetime import date
 import logging
 
 #internal imports
-from firebase_db import post_convo_link
+from firebase_db import post_convo_link, new_empty_hangout
 #%%
 #starting browser and logging in to hangouts
 def login(wait_time):    
@@ -58,7 +58,7 @@ def login(wait_time):
 #    return web
 
 #%%
-def create_hangout(web, convo_uid, group_name, wait_time):
+def create_hangout(web, wait_time, convo_uid, group_name, add_to_convo):
 
         #write down the generatedGroups
     # with open("group_ppl.txt", "a") as file:
@@ -118,7 +118,10 @@ def create_hangout(web, convo_uid, group_name, wait_time):
         time.sleep(wait_time)
         link=web.driver.find_element_by_css_selector("input[class='LpmM1 iF0pUc']").get_attribute('value')
         #print('link: '+str(link))
-        post_convo_link(convo_uid, link)
+        if add_to_convo:
+            post_convo_link(convo_uid, link)
+        else:
+            new_empty_hangout(link)
         #click to exist specific hangout iframe
         web.driver.find_element_by_css_selector("button.gGnOIc.tV.qp.SD.p7oPo.JPiKic").click()    
         
@@ -129,7 +132,7 @@ def create_hangout(web, convo_uid, group_name, wait_time):
         return web
     
 #%%
-def go_thread(given_groups, thread_num):
+def go_thread(given_groups, add_to_convo, thread_num):
     wait_time = 2
     
     #login using the login function in logging_in.py
@@ -139,11 +142,11 @@ def go_thread(given_groups, thread_num):
     #get out of iframe for making groups
     web.driver.switch_to.default_content()
     time.sleep(wait_time)
-    
+
     #start creating the hangout for each group in the generatedGroups for each designated call
     for convo_uid in given_groups:
         logging.warning("Now creating " + str(convo_uid))
-        web = create_hangout(web, convo_uid, given_groups[convo_uid], wait_time)
+        web = create_hangout(web, wait_time, convo_uid, given_groups[convo_uid], add_to_convo)
 
         #web, total_groups=create_hangout(web, subgroup, group_name, total_groups,wait_time)
         #move on to the next group

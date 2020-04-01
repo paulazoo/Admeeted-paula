@@ -117,7 +117,9 @@ def post_convo(giant_dict, event_uid, event_info):
     if not links:
         raise Exception('No available Google Hangouts links.')
 
-    links = list(links)
+    link_ids = list(links.keys())
+    links = list(links.values())
+
     if len(links) < len(giant_dict):
         raise Exception(f'Not enough available Google Hangouts links, need {len(giant_dict)} but only {len(links)} available.')
 
@@ -125,10 +127,15 @@ def post_convo(giant_dict, event_uid, event_info):
         print(i)
         print(convo_uid)
         #convo_uid from the displayName and convo_uid dict
-        convo_displayName=giant_dict[convo_uid]['displayName']
+        convo_displayName = giant_dict[convo_uid]['displayName']
+        convo_category = giant_dict[convo_uid]['category']
         #members
         members=dict.fromkeys(giant_dict[convo_uid].keys(), True)
+
+        # POP EVERYTHING THAT IS NOT MEMBERS OFF THE DICT
         members.pop('displayName')
+        members.pop('category')
+
         call_start = (time_start + call_duration * i).strftime('%H:%M %d %B %Y')
         call_end = (time_start + call_duration * (i + 1)).strftime('%H:%M %d %B %Y')
         #possibly change displayName
@@ -138,10 +145,11 @@ def post_convo(giant_dict, event_uid, event_info):
                 'timeStart':call_start,
                 'timeEnd':call_end,
                 'members':members,
-                'link': links[i]
+                'link': links[i],
+                'category': convo_category
         })
 
-        db.child('hangouts').child(links[i]).remove()
+        db.child('hangouts').child(link_ids[i]).remove()
         db.child('convo_event').child(event_uid).update({convo_uid:True})
         for user_uid in members:
             db.child('convo_user').child(user_uid).update({convo_uid:True})   
@@ -153,6 +161,8 @@ def post_convo_link(convo, link):
 
  #%%
 def new_empty_hangout(link):
-    db.child("hangouts").update({link:True})    
+    print(link)
+    hangout_id = link.split('/')[-1]
+    db.child("hangouts").update({hangout_id:link})
     
     

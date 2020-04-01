@@ -56,7 +56,7 @@ const mapDispatchToProps = dispatch => ({
         dispatch(changeData('/profile', new_data, ['/profile'], ['profile']))
     },
     loadOrganizations: () => {
-        dispatch(loadData('/all_organizations', 'allOrganizations'))
+        dispatch(loadData('/all-organizations', 'allOrganizations'))
     }
 })
 

@@ -86,20 +86,20 @@ def main_convos(event_uid, convo_name_str, num_threads, category="random"):
     
 #    #%%
 #    #big dict with just the emails for threads
-#    big_dict={convo_uid:giant_dict[convo_uid]['displayName'] for convo_uid in giant_dict}
-#    
-#    #%%
-#    
-#    batched_dicts = helpers_db.split_dict(big_dict, num_threads)
-#    logging.warning("Batched dicts are:")
-#    logging.warning(batched_dicts)
-#    
-#    #%%
-#    thread_list=[]
-#    error_count = 0
-#    for batch in batched_dicts:
+#     big_dict={convo_uid:giant_dict[convo_uid]['displayName'] for convo_uid in giant_dict}
+#
+#     #%%
+#
+#     batched_dicts = helpers_db.split_dict(big_dict, num_threads)
+#     logging.warning("Batched dicts are:")
+#     logging.warning(batched_dicts)
+#
+#     #%%
+#     thread_list=[]
+#     error_count = 0
+#     for batch in batched_dicts:
 #        try:
-#            t = threading.Thread(target=helpers_db.go_thread, args=(batch, batched_dicts.index(batch),))
+#            t = threading.Thread(target=helpers_db.go_thread, args=(batch, True, batched_dicts.index(batch),))
 #            #starting thread
 #            t.start()
 #            #add thread to thread list
@@ -107,12 +107,36 @@ def main_convos(event_uid, convo_name_str, num_threads, category="random"):
 #        except:
 #            logging.warning("There was an error.")
 #            error_count += 1
-#    
-#    for t in thread_list:
+#
+#     for t in thread_list:
 #        #join all the threads in thread_list
 #        t.join()
-#    # both threads completely executed 
-#    logging.warning("Done! There were " + str(error_count) + " errors.") 
+#     # both threads completely executed
+#     logging.warning("Done! There were " + str(error_count) + " errors.")
+#
+#     #%%
+#     return
 
-#%%
-    return
+def empty_hangouts(num_hangouts, num_threads):
+    thread_list = []
+    error_count = 0
+    empty_dict = {f'Convo {i}': "Hangout" for i in range(num_hangouts)}
+    batched_dicts = helpers_db.split_dict(empty_dict, num_threads)
+
+    for batch in batched_dicts:
+        print(f'Batch: {batch}')
+        try:
+            t = threading.Thread(target=helpers_db.go_thread, args=(batch, False, batched_dicts.index(batch),))
+            # starting thread
+            t.start()
+            # add thread to thread list
+            thread_list.append(t)
+        except:
+            logging.warning("There was an error.")
+            error_count += 1
+
+    for t in thread_list:
+        # join all the threads in thread_list
+        t.join()
+        # both threads completely executed
+    logging.warning("Done! There were " + str(error_count) + " errors.")

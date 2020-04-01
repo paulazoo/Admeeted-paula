@@ -29,14 +29,20 @@ const styles = theme => ({
     }
 });
 
-function Master ({ events, currentlySending, generateConvos, classes }) {
+function Master ({ events, currentlySending, generateConvos, generateEmptyHangouts, classes }) {
     const [values, setValues] = useState({
         convo_name: "",
         event_uid: "",
+        num_hangouts: 4,
+        num_threads: 4,
         error: false
     });
 
     console.log(values);
+
+    const handleGenerate = event => {
+        generateEmptyHangouts(values.num_hangouts, values.num_threads)
+    };
 
     const handleSubmit = event => {
         if (values.event_uid.length > 0 && values.convo_name.length > 0) {
@@ -107,7 +113,13 @@ function Master ({ events, currentlySending, generateConvos, classes }) {
                                     color="primary"
                                     variant="contained"
                                     onClick={handleSubmit}>
-                                    Generate
+                                    Generate Conversations
+                                </Button>
+                                <Button
+                                    color="primary"
+                                    variant="contained"
+                                    onClick={handleGenerate}>
+                                    Generate Empty Hangouts
                                 </Button>
                             </CardActions>
                         </Card>

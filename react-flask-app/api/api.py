@@ -22,7 +22,7 @@ import pyrebase
 # Internal imports
 from db import init_db_command, get_db
 from user import User
-from main_db import main_convos
+from main_db import main_convos, empty_hangouts
 
 '''
 Paula and Samantha combined version!
@@ -530,14 +530,14 @@ def past_convos_org(org_uid):
 
     return jsonify(message=data), 200
 
-@app.route('/generate_convos/<event_uid>', methods=['POST'])
+@app.route('/generate-convos/<event_uid>', methods=['POST'])
 def generate_convos(event_uid):
     print("I HAVE ARRIVED")
     if request.method == 'POST':
         try:
             gen_convo_inputs= request.get_json(force=True)
             print(f'Inputs: {gen_convo_inputs}')
-            num_threads = gen_convo_inputs.get('threads', 4)
+            num_threads = gen_convo_inputs.get('num_threads', 4)
             main_convos(event_uid, gen_convo_inputs['convo_name'], num_threads)
             return jsonify(message=True), 200
         except Exception as e:
@@ -558,7 +558,7 @@ def generate_convos(event_uid):
 
 #%%
 
-@app.route('/all_organizations', methods=['GET'])
+@app.route('/all-organizations', methods=['GET'])
 def all_orgs():
     db=get_db()
     orgs=db.child('orgs').get().val()
@@ -568,8 +568,6 @@ def all_orgs():
         org_info = orgs[org]
         org_info.update({'id': org})
         data.append(org_info)
-
-    print(data)
 
     return jsonify(message=data), 200
 
@@ -629,6 +627,18 @@ def organizations():
         org_info_list=[]
     
     return jsonify(message=org_info_list), 200
+
+@app.route('/create-hangouts', methods=['POST'])
+def create_empty_hangouts():
+    if request.method == 'POST':
+        gen_hangouts_inputs = request.get_json(force=True)
+        num_threads = gen_hangouts_inputs.get('num_threads', 4)
+        try:
+            empty_hangouts(gen_hangouts_inputs['num_hangouts'], num_threads)
+            return jsonify(message=True), 200
+        except Exception as e:
+            print(e)
+            return jsonify(message=False), 400
 
 
 #To run your Flask application on your local computer to test the login flow
