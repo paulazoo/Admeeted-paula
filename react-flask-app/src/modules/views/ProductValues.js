@@ -4,10 +4,10 @@ import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import Typography from '../components/Typography';
-import {ReactComponent as VideoCallSvg} from "../../static/video-call.svg";
-import {ReactComponent as DiscoverSvg} from "../../static/discover.svg";
-import {ReactComponent as TrustSvg} from "../../static/trust.svg";
-import {ReactComponent as CalendarSvg} from "../../static/calendar.svg";
+import {ReactComponent as VideoCallSvg} from "../../images/video-call.svg";
+import {ReactComponent as DiscoverSvg} from "../../images/discover.svg";
+import {ReactComponent as TrustSvg} from "../../images/trust.svg";
+import {ReactComponent as CalendarSvg} from "../../images/calendar.svg";
 
 const styles = theme => ({
   root: {
@@ -48,7 +48,7 @@ function ProductValues(props) {
     <section className={classes.root}>
       <Container className={classes.container}>
         {/*<img*/}
-        {/*  src="../../static/productCurvyLines.png"*/}
+        {/*  src="../../images/productCurvyLines.png"*/}
         {/*  className={classes.curvyLines}*/}
         {/*  alt="curvy lines"*/}
         {/*/>*/}
@@ -57,7 +57,7 @@ function ProductValues(props) {
             <div className={classes.item}>
               {/*<img*/}
               {/*  className={classes.image}*/}
-              {/*  src="/static/themes/onepirate/productValues1.svg"*/}
+              {/*  src="/images/themes/onepirate/productValues1.svg"*/}
               {/*  alt="suitcase"*/}
               {/*/>*/}
               <VideoCallSvg className={classes.image}/>
@@ -74,7 +74,7 @@ function ProductValues(props) {
             <div className={classes.item}>
               {/*<img*/}
               {/*  className={classes.image}*/}
-              {/*  src="/static/themes/onepirate/productValues2.svg"*/}
+              {/*  src="/images/themes/onepirate/productValues2.svg"*/}
               {/*  alt="graph"*/}
               {/*/>*/}
               <DiscoverSvg className={classes.image}/>
@@ -91,7 +91,7 @@ function ProductValues(props) {
             <div className={classes.item}>
               {/*<img*/}
               {/*  className={classes.image}*/}
-              {/*  src="/static/themes/onepirate/productValues3.svg"*/}
+              {/*  src="/images/themes/onepirate/productValues3.svg"*/}
               {/*  alt="clock"*/}
               {/*/>*/}
               <TrustSvg className={classes.image}/>
