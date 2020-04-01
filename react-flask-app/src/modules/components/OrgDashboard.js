@@ -27,7 +27,7 @@ const styles = theme => ({
 });
 
 function OrgDashboard ({ org_uid, upcomingEvents, availEvents, conversations, modifyEvent, classes }) {
-    const maxItems = 5;
+    const maxItems = 50;
 
     const upcomingText = 'Your upcoming events';
     const convoText = 'Your past conversations';

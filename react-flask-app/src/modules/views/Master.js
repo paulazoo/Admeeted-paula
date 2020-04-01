@@ -29,14 +29,21 @@ const styles = theme => ({
     }
 });
 
-function Master ({ events, currentlySending, generateConvos, classes }) {
+function Master ({ events, currentlySending, generateConvos, generateEmptyHangouts, classes }) {
     const [values, setValues] = useState({
         convo_name: "",
         event_uid: "",
+        num_hangouts: 4,
+        num_threads: 4,
+        hangout_name: "Hangout",
         error: false
     });
 
     console.log(values);
+
+    const handleGenerate = event => {
+        generateEmptyHangouts(values.hangout_name, values.num_hangouts, values.num_threads)
+    };
 
     const handleSubmit = event => {
         if (values.event_uid.length > 0 && values.convo_name.length > 0) {
@@ -56,6 +63,16 @@ function Master ({ events, currentlySending, generateConvos, classes }) {
             error: false
         })
     };
+
+    const handleNumChange = event => {
+        setValues({
+            ...values,
+            [event.target.name]: Number(event.target.value),
+            error: false
+        })
+    };
+
+    console.log(values);
 
     function showEventDetails() {
         const selectedEvent = events.filter((event) => event.id === values.event_uid)[0];
@@ -107,6 +124,62 @@ function Master ({ events, currentlySending, generateConvos, classes }) {
                                     color="primary"
                                     variant="contained"
                                     onClick={handleSubmit}>
+                                    Generate
+                                </Button>
+                            </CardActions>
+                        </Card>
+                    </Grid>
+                    <Grid item md={6} xs={12}>
+                        <Card className={classes.root}>
+                            <CardHeader title={"Generate Empty Hangouts"}/>
+                            <Divider/>
+                            <CardContent>
+                                <Grid container spacing={2}>
+                                    <Grid item xs={12} md={6}>
+                                        <TextField
+                                            fullWidth
+                                            type={"number"}
+                                            error={values.error}
+                                            value={values.num_hangouts}
+                                            name={"num_hangouts"}
+                                            label={"Number of Hangouts"}
+                                            variant="outlined"
+                                            margin="dense"
+                                            onChange={handleNumChange}
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12} md={6}>
+                                        <TextField
+                                            fullWidth
+                                            type={"number"}
+                                            error={values.error}
+                                            value={values.num_threads}
+                                            name={"num_threads"}
+                                            label={"Number of Threads"}
+                                            variant="outlined"
+                                            margin="dense"
+                                            onChange={handleNumChange}
+                                        />
+                                    </Grid>
+                                    <Grid item md={12}>
+                                        <TextField
+                                            fullWidth
+                                            error={values.error}
+                                            value={values.hangout_name}
+                                            name={"hangout_name"}
+                                            label={"Hangouts Name"}
+                                            variant="outlined"
+                                            margin="dense"
+                                            onChange={handleChange}
+                                        />
+                                    </Grid>
+                                </Grid>
+                            </CardContent>
+                            <CardActions>
+                                <Button
+                                    color="primary"
+                                    variant="contained"
+                                    onClick={handleGenerate}>
                                     Generate
                                 </Button>
                             </CardActions>

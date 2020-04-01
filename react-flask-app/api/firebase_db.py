@@ -11,9 +11,9 @@ config = {
   "databaseURL": "https://"+project_id+".firebaseio.com",
   "projectId": project_id,
   "storageBucket": project_id+".appspot.com",
-   "serviceAccount": r"C:\Users\pkzr3\Admeeted\react-flask-app\api\admeeted-private-key.json",
+   # "serviceAccount": r"C:\Users\pkzr3\Admeeted\react-flask-app\api\admeeted-private-key.json",
   #   "serviceAccount": r"C:\Users\billz\PycharmProjects\VirtualVisitas\Admeeted\react-flask-app\api\admeeted-private-key.json",
-#    "serviceAccount": str(os.getcwd()) + r"/admeeted-private-key.json",
+   "serviceAccount": str(os.getcwd()) + r"/admeeted-private-key.json",
     "messagingSenderId": "667088492207"
 }
 
@@ -112,11 +112,23 @@ def post_convo(giant_dict, event_uid, event_info):
     time_end = datetime.strptime(event_info['timeEnd'], '%H:%M %d %B %Y')
     call_duration = (time_end - time_start) // event_info['num_rounds']
     print(call_duration)
+
+    links = db.child('hangouts').get().val()
+    if not links:
+        raise Exception('No available Google Hangouts links.')
+
+    link_ids = list(links.keys())
+    links = list(links.values())
+
+    if len(links) < len(giant_dict):
+        raise Exception(f'Not enough available Google Hangouts links, need {len(giant_dict)} but only {len(links)} available.')
+
     for i, convo_uid in enumerate(giant_dict):
         print(i)
         print(convo_uid)
         #convo_uid from the displayName and convo_uid dict
-        convo_displayName=giant_dict[convo_uid]['displayName']
+        convo_displayName = giant_dict[convo_uid]['displayName']
+        convo_category = giant_dict[convo_uid]['category']
         #members
         members=giant_dict[convo_uid]
         members.pop('displayName')
@@ -129,15 +141,12 @@ def post_convo(giant_dict, event_uid, event_info):
                 'org':event_info['org'],
                 'timeStart':call_start,
                 'timeEnd':call_end,
-                'members':members
-                })
-    
-    
-        link_id = list(db.child('hangouts').get().val())[0]
-        link=db.child('hangouts').child(link_id).get().val()
-        db.child("convos").child(convo_uid).update({'link':link})
-        db.child('hangouts').child(link).remove()
-            
+                'members':members,
+                'link': links[i],
+                'category': convo_category
+        })
+
+        db.child('hangouts').child(link_ids[i]).remove()
         db.child('convo_event').child(event_uid).update({convo_uid:True})
         for user_uid in members:
             db.child('convo_user').child(user_uid).update({convo_uid:True})   
@@ -149,6 +158,8 @@ def post_convo_link(convo, link):
 
  #%%
 def new_empty_hangout(link):
-    db.child("hangouts").push(link)    
+    print(link)
+    hangout_id = link.split('/')[-1]
+    db.child("hangouts").update({hangout_id:link})
     
     

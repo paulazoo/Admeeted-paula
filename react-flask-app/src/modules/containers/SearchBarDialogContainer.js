@@ -26,7 +26,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     loadOrganizations: () => {
-        dispatch(loadData('/all_organizations', 'allOrganizations'))
+        dispatch(loadData('/all-organizations', 'allOrganizations'))
     }
 })
 

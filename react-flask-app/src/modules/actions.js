@@ -40,9 +40,26 @@ export const genConvos = (event_uid, convo_name) => {
     return dispatch => {
         dispatch(sendingRequest(true))
         dispatch(setErrorMessage(''))
-        fetch(`/generate_convos/${event_uid}`, {
+        fetch(`/generate-convos/${event_uid}`, {
             method: 'POST',
             body: JSON.stringify({ convo_name }),
+        }).then(res => {
+            console.log(res);
+            if (res.ok) return res.json();
+            else throw new Error(res.statusText);
+        }).then(
+            dispatch(sendingRequest(false))
+        )
+    }
+}
+
+export const genEmptyHangouts = (name, num_hangouts, num_threads) => {
+    return dispatch => {
+        dispatch(sendingRequest(true))
+        dispatch(setErrorMessage(''))
+        fetch("/create-hangouts", {
+            method: 'POST',
+            body: JSON.stringify({ name, num_hangouts, num_threads }),
         }).then(res => {
             console.log(res);
             if (res.ok) return res.json();

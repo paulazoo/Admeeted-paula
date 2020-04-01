@@ -27,13 +27,15 @@ const initialState = {
       state: '',
       country: '',
       avatar: '',
-      majors: []
+      majors: [],
+      interests: []
     },
     upcomingEvents: [],
     conversations: [],
     availEvents: [],
     organizations: [],
     allOrganizations: [],
+    allInterests: [],
     allMajors: []
   },
   orgData: {

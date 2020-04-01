@@ -67,7 +67,7 @@ function Homepage({ data, currentlySending, classes }) {
     const conversations = data.conversations;
     const organizations = data.organizations;
 
-    const maxItems = 5;
+    const maxItems = 50;
 
     function avatar(uid, avatar) {
         return <Button
