@@ -42,7 +42,7 @@ function Events({ data, currentlySending, modifyEvent, classes }) {
     const upcomingEvents = data.upcomingEvents;
     const availEvents = data.availEvents;
 
-    const maxItems = 10;
+    const maxItems = 50;
 
     function avatar(uid, avatar) {
         return <Button

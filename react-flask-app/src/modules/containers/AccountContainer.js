@@ -4,16 +4,18 @@ import { loadData, changeData } from "../actions";
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-function AccountContainer ({ profile, allMajors, currentlySending, loadProfile, loadMajors, setProfile }) {
+function AccountContainer ({ profile, allMajors, allInterests, currentlySending, loadProfile, loadMajors, loadInterests, setProfile }) {
     useEffect(() => {
         loadProfile();
         loadMajors();
+        loadInterests();
     },[]);
 
     return (
         <Account
             profile={profile}
             allMajors={allMajors}
+            allInterests={allInterests}
             currentlySending={currentlySending}
             setProfile={setProfile}
         />
@@ -23,6 +25,7 @@ function AccountContainer ({ profile, allMajors, currentlySending, loadProfile, 
 const mapStateToProps = state => ({
     profile: state.data.profile,
     allMajors: state.data.allMajors,
+    allInterests: state.data.allInterests,
     currentlySending: state.currentlySending,
 })
 
@@ -32,6 +35,9 @@ const mapDispatchToProps = dispatch => ({
     },
     loadMajors: () => {
         dispatch(loadData('/majors', 'allMajors'))
+    },
+    loadInterests: () => {
+        dispatch(loadData('/interests', 'allInterests'))
     },
     setProfile: (new_data) => {
         dispatch(changeData('/profile', new_data, ['/profile'], ['profile']))

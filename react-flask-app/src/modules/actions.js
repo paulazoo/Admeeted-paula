@@ -53,13 +53,13 @@ export const genConvos = (event_uid, convo_name) => {
     }
 }
 
-export const genEmptyHangouts = (num_hangouts, num_threads) => {
+export const genEmptyHangouts = (name, num_hangouts, num_threads) => {
     return dispatch => {
         dispatch(sendingRequest(true))
         dispatch(setErrorMessage(''))
         fetch("/create-hangouts", {
             method: 'POST',
-            body: JSON.stringify({ num_hangouts, num_threads }),
+            body: JSON.stringify({ name, num_hangouts, num_threads }),
         }).then(res => {
             console.log(res);
             if (res.ok) return res.json();

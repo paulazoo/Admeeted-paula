@@ -72,6 +72,7 @@ function AccountDetails({ title,
                           subtitle,
                           profile,
                           allMajors,
+                          allInterests,
                           setProfile,
                           className,
                           classes, ...rest }) {
@@ -81,14 +82,15 @@ function AccountDetails({ title,
     displayName: '',
     state: '',
     country: '',
-    majors: []
+    majors: [],
+    interests: []
   });
 
   useEffect(() => {
     setValues(profile)
   }, [profile]);
 
-  console.log(values);
+  console.log(allInterests);
   console.log(allMajors);
 
   const handleChange = event => {
@@ -102,6 +104,13 @@ function AccountDetails({ title,
       setValues({
           ...values,
           majors: value
+      })
+  }
+
+  const selectInterests = (event, value) => {
+      setValues({
+          ...values,
+          interests: value
       })
   }
 
@@ -296,6 +305,18 @@ function AccountDetails({ title,
                       <TextField {...params} variant={"outlined"} label={"(Intended) Majors"}/>
                   )}
                   onChange={selectMajors}
+              />
+            </Grid>
+            <Grid item md={12} xs={12}>
+              <Autocomplete
+                  multiple
+                  getOptionLabel={(option) => option}
+                  options={allInterests}
+                  value={values.interests}
+                  renderInput={(params)=> (
+                      <TextField {...params} variant={"outlined"} label={"Interests"}/>
+                  )}
+                  onChange={selectInterests}
               />
             </Grid>
             {/*<Grid*/}

@@ -282,11 +282,46 @@ def profile():
                     })
             
             majors=pdata['majors']
-            majors_dict=dict.fromkeys(majors, True)
-            
+            prev_majors = db.child('major_user').child(user_uid).get().val()
+
+            majors_dict = dict.fromkeys(majors, True)
             db.child('major_user').child(user_uid).set(majors_dict)
-            for major in majors:
+            if prev_majors:
+                prev_majors = list(prev_majors)
+            else:
+                prev_majors = []
+
+            new_majors = set(majors) - set(prev_majors)
+            old_majors = set(prev_majors) - set(majors)
+
+            for major in new_majors:
                 db.child('user_major').child(major).set({user_uid: True})
+            for major in old_majors:
+                db.child('user_major').child(major).set({user_uid: None})
+
+            interests=pdata['interests']
+            prev_interests = db.child('interest_user').child(user_uid).get().val()
+
+            interests_dict = dict.fromkeys(interests, True)
+            db.child('interest_user').child(user_uid).set(interests_dict)
+            if prev_interests:
+                prev_interests = list(prev_interests)
+            else:
+                prev_interests = []
+
+            print(f'Interests: {interests}')
+            print(f'Prev Interests: {prev_interests}')
+
+            new_interests = set(interests) - set(prev_interests)
+            old_interests = set(prev_interests) - set(interests)
+
+            print(f'New Interests: {new_interests}')
+            print(f'Old Interests: {old_interests}')
+
+            for interest in new_interests:
+                db.child('user_interest').child(interest).set({user_uid: True})
+            for interest in old_interests:
+                db.child('user_interest').child(interest).set({user_uid: None})
 
             return jsonify(message=True), 200
         except Exception as e:
@@ -301,28 +336,24 @@ def profile():
     
     if majors:
         majors_keys = list(majors.keys())
+
+    interests = db.child('interest_user').child(user_uid).get().val()
+    interests_keys = []
+
+    if interests:
+        interests_keys = list(interests.keys())
     
-    data={'name':user['name'], 
-     'displayName':user.get('displayName', user['name']),
-     'state':user.get('state'),
-     'country':user.get('country'),
-     'avatar':user['avatar'],
-     'majors':majors_keys
+    data={
+        'name':user['name'],
+        'displayName':user.get('displayName', user['name']),
+        'state':user.get('state'),
+        'country':user.get('country'),
+        'avatar':user['avatar'],
+        'majors':majors_keys,
+        'interests': interests_keys
      }
     
     return jsonify(message=data), 200
-
-@app.route('/majors', methods=['GET'])
-def majors():
-    db=get_db()
-    data=db.child('majors').get().val()
-    if data:
-        data = list(data)
-    else:
-        data=[]
-     
-    return jsonify(message=data), 200
-
 
 @app.route('/upcoming-events', methods=['GET'])
 def upcoming_events():
@@ -347,7 +378,6 @@ def upcoming_events():
                 event_info.update({'convos': convos_data})
 
                 data.append(event_info)
-                
 
     return jsonify(message=data), 200
 
@@ -625,21 +655,46 @@ def organizations():
             org_info_list.append(dictionary)
     elif not user_orgs:
         org_info_list=[]
-    
+
     return jsonify(message=org_info_list), 200
 
 @app.route('/create-hangouts', methods=['POST'])
 def create_empty_hangouts():
     if request.method == 'POST':
         gen_hangouts_inputs = request.get_json(force=True)
+        print(gen_hangouts_inputs)
         num_threads = gen_hangouts_inputs.get('num_threads', 4)
+        name = gen_hangouts_inputs.get('name', 'Hangout')
         try:
-            empty_hangouts(gen_hangouts_inputs['num_hangouts'], num_threads)
+            empty_hangouts(name, gen_hangouts_inputs['num_hangouts'], num_threads)
             return jsonify(message=True), 200
         except Exception as e:
             print(e)
             return jsonify(message=False), 400
 
+
+@app.route('/majors', methods=['GET'])
+def majors():
+    db = get_db()
+    data = db.child('majors').get().val()
+    if data:
+        data = list(data)
+    else:
+        data = []
+
+    return jsonify(message=data), 200
+
+
+@app.route('/interests', methods=['GET'])
+def interests():
+    db = get_db()
+    data = db.child('interests').get().val()
+    if data:
+        data = list(data)
+    else:
+        data = []
+
+    return jsonify(message=data), 200
 
 #To run your Flask application on your local computer to test the login flow
 if __name__ == "__main__":

@@ -23,7 +23,8 @@ import os
         #db.close()
 def get_db():
     if "db" not in g:
-        g.db=init_db()
+        print("AHHHHHHHHH")
+        init_db()
     return g.db
 
 def init_db():

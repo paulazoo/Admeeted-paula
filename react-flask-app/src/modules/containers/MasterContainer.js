@@ -36,8 +36,8 @@ const mapDispatchToProps = dispatch => ({
     generateConvos: (event_uid, convo_name) => {
         dispatch(genConvos(event_uid, convo_name))
     },
-    generateEmptyHangouts: (num_hangouts, num_threads) => {
-        dispatch(genEmptyHangouts(num_hangouts, num_threads))
+    generateEmptyHangouts: (name, num_hangouts, num_threads) => {
+        dispatch(genEmptyHangouts(name, num_hangouts, num_threads))
     }
 })
 

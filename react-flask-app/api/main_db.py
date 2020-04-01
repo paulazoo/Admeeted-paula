@@ -117,10 +117,10 @@ def main_convos(event_uid, convo_name_str, num_threads, category="random"):
 #     #%%
 #     return
 
-def empty_hangouts(num_hangouts, num_threads):
+def empty_hangouts(name, num_hangouts, num_threads):
     thread_list = []
     error_count = 0
-    empty_dict = {f'Convo {i}': "Hangout" for i in range(num_hangouts)}
+    empty_dict = {f'Convo {i}': name for i in range(num_hangouts)}
     batched_dicts = helpers_db.split_dict(empty_dict, num_threads)
 
     for batch in batched_dicts:
