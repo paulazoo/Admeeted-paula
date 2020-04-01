@@ -142,8 +142,9 @@ def post_convo(giant_dict, event_uid, event_info):
                 })
     
     
-        link = list(db.child('hangouts').get().val())[0]
-        db.child("convos").child(convo).update({'link':link})
+        link_id = list(db.child('hangouts').get().val())[0]
+        link=db.child('hangouts').child(link_id).get().val()
+        db.child("convos").child(convo_uid).update({'link':link})
         db.child('hangouts').child(link).remove()
             
         db.child('convo_event').child(event_uid).update({convo_uid:True})
@@ -157,6 +158,6 @@ def post_convo_link(convo, link):
 
  #%%
 def new_empty_hangout(link):
-    db.child("hangouts").update({link:True})    
+    db.child("hangouts").push(link)    
     
     
