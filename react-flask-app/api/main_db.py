@@ -28,7 +28,7 @@ import groups_db
 #num_threads=3
     
 #%%
-def main_convos(event_uid, convo_name_str, num_threads, category="random"):
+def main_convos(event_uid, convo_name_str, num_threads, category=["random"]):
     #%%
     #set up logger
     #will not log unless basicConfig has been run outside of ipython console
@@ -51,32 +51,37 @@ def main_convos(event_uid, convo_name_str, num_threads, category="random"):
     #get event variables
     event_info=firebase_db.get_event_info(event_uid)
     
-    #change depending on call type?
-    all_users=firebase_db.get_event_users(event_uid)
-    
     #%%
-
-    user_email_dict=firebase_db.get_emails(all_users)
-    # user_email_dict=firebase_db.get_emails([])
-    
+    '''
+    delete this later
+    '''
+    category=category*event_info['num_rounds']
     #%%
     #create groups using the createGroups function defined in groups.py file
     generated_groups = []
     
     for call_num in range(1, event_info['num_rounds'] + 1):
-        generated_groups = generated_groups+groups_db.create_groups(list(user_email_dict.keys()), event_info['desired_size'], call_num)
-    
+        call_category=category[call_num-1]
+        if call_category == 'major':
+            all_users_all=firebase_db.get_major_users(event_info['org'],event_uid)
+        elif call_category == 'random':
+            all_users_all={'random':firebase_db.get_event_users(event_uid)}
+        
+        for all_users in all_users_all:
+            #user_email_dict=firebase_db.get_emails(all_users)
+            generated_groups = generated_groups+groups_db.create_groups(list(all_users_all[all_users]), event_info['desired_size'], call_num)
+
+#%%    
     giant_dict = {}
     for i in range(len(generated_groups)):
         #unique convo_uid for firebase
         convo_uid = "%sCall%sGroup%d"%(event_uid, generated_groups[i][0], i)
         #actual displayName for google hangouts
         displayName = "%s Call %s"%(convo_name_str, generated_groups[i][0])
-        #giant_dict with displayNames and corresponding emails
-        giant_dict[convo_uid]={user_uid:user_email_dict[user_uid] for user_uid in generated_groups[i][1:] }
+        #giant_dict with displayNames
+        giant_dict[convo_uid]={user_uid:True for user_uid in generated_groups[i][1:] }
         #add displayName and category to each convo dict in giant_dict
-        giant_dict[convo_uid].update({'displayName':displayName, 'category':category})
-    
+        giant_dict[convo_uid].update({'displayName':displayName, 'category':category[generated_groups[i][0]-1]})
     
     logging.warning(giant_dict)
     
