@@ -5,9 +5,9 @@ import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import Button from '../components/Button';
 import Typography from '../components/Typography';
-import {ReactComponent as CalendarSvg} from "../../static/calendar.svg";
-import {ReactComponent as NetworkSvg} from "../../static/network.svg";
-import {ReactComponent as UserSvg} from "../../static/user.svg";
+import {ReactComponent as CalendarSvg} from "../../images/calendar.svg";
+import {ReactComponent as NetworkSvg} from "../../images/network.svg";
+import {ReactComponent as UserSvg} from "../../images/user.svg";
 
 const styles = theme => ({
   root: {
@@ -62,7 +62,7 @@ function ProductHowItWorks({ googleButton, classes }) {
     <section className={classes.root}>
       <Container className={classes.container}>
         {/*<img*/}
-        {/*  src="../../static/productCurvyLines.png"*/}
+        {/*  src="../../images/productCurvyLines.png"*/}
         {/*  className={classes.curvyLines}*/}
         {/*  alt="curvy lines"*/}
         {/*/>*/}
@@ -75,7 +75,7 @@ function ProductHowItWorks({ googleButton, classes }) {
               <div className={classes.item}>
                 <div className={classes.number}>1.</div>
                 {/*<img*/}
-                {/*  src="/static/themes/onepirate/productHowItWorks1.svg"*/}
+                {/*  src="/images/themes/onepirate/productHowItWorks1.svg"*/}
                 {/*  alt="suitcase"*/}
                 {/*  className={classes.image}*/}
                 {/*/>*/}
@@ -89,7 +89,7 @@ function ProductHowItWorks({ googleButton, classes }) {
               <div className={classes.item}>
                 <div className={classes.number}>2.</div>
                 {/*<img*/}
-                {/*  src="/static/themes/onepirate/productHowItWorks2.svg"*/}
+                {/*  src="/images/themes/onepirate/productHowItWorks2.svg"*/}
                 {/*  alt="graph"*/}
                 {/*  className={classes.image}*/}
                 {/*/>         */}
@@ -103,7 +103,7 @@ function ProductHowItWorks({ googleButton, classes }) {
               <div className={classes.item}>
                 <div className={classes.number}>3.</div>
                 {/*<img*/}
-                {/*  src="../../../public/static/video-call.svg"*/}
+                {/*  src="../../../public/images/video-call.svg"*/}
                 {/*  alt="clock"*/}
                 {/*  className={classes.image}*/}
                 {/*/>*/}
