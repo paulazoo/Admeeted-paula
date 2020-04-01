@@ -59,7 +59,7 @@ def get_org_users(org_uid):
     return org_users
 
 #%%
-def get_event_users(event_uid)
+def get_event_users(event_uid):
     event_users = db.child("user_event").child(event_uid).shallow().get().val()
     #print(org_users)
     if event_users:
