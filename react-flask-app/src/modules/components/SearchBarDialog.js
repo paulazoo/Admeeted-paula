@@ -88,7 +88,7 @@ function SearchBarDialog ({ history, open, handleClose, all_organizations, curre
                         />
                     </DialogContent>
                     <DialogActions>
-                        <Button
+                    <Button
                         color="primary"
                         variant="contained"
                         onClick={handleSubmit}

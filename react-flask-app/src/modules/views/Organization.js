@@ -14,7 +14,9 @@ import ArrowRightIcon from "@material-ui/icons/ArrowRight";
 import OrgDashboardContainer from "../containers/OrgDashboardContainer";
 
 const styles = theme => ({
-
+    root: {
+        width: '50vw'
+    }
 });
 
 function Organization ({ org_data, org_uid, currentlySending, modifyEvent, modifyOrgMembership, classes }) {
@@ -27,17 +29,13 @@ function Organization ({ org_data, org_uid, currentlySending, modifyEvent, modif
         <div>
             {!currentlySending ? <MainLayout>
                 <Grid
+                    className={classes.root}
                     container
                     spacing={4}
-                    alignItems="center"
-                    justify="center"
                 >
                     <Grid
                         item
-                        lg={6}
-                        md={8}
-                        xl={6}
-                        xs={12}
+                        md={12}
                     >
                         <OrgProfile user={profile} org_uid={org_uid} modifyOrgMembership={modifyOrgMembership} />
                     </Grid>
