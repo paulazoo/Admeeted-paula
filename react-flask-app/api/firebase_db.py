@@ -11,9 +11,9 @@ config = {
   "databaseURL": "https://"+project_id+".firebaseio.com",
   "projectId": project_id,
   "storageBucket": project_id+".appspot.com",
-  # "serviceAccount": r"C:\Users\pkzr3\Admeeted\react-flask-app\api\admeeted-private-key.json",
+   "serviceAccount": r"C:\Users\pkzr3\Admeeted\react-flask-app\api\admeeted-private-key.json",
   #   "serviceAccount": r"C:\Users\billz\PycharmProjects\VirtualVisitas\Admeeted\react-flask-app\api\admeeted-private-key.json",
-    "serviceAccount": str(os.getcwd()) + r"/admeeted-private-key.json",
+#    "serviceAccount": str(os.getcwd()) + r"/admeeted-private-key.json",
     "messagingSenderId": "667088492207"
 }
 
@@ -140,6 +140,11 @@ def post_convo(giant_dict, event_uid, event_info):
                 'timeEnd':call_end,
                 'members':members
                 })
+    
+    
+        link = list(db.child('hangouts').get().val())[0]
+        db.child("convos").child(convo).update({'link':link})
+        db.child('hangouts').child(link).remove()
             
         db.child('convo_event').child(event_uid).update({convo_uid:True})
         for user_uid in members:
@@ -149,3 +154,9 @@ def post_convo(giant_dict, event_uid, event_info):
 #%%
 def post_convo_link(convo, link):
     db.child("convos").child(convo).update({'link':link})
+
+ #%%
+def new_empty_hangout(link):
+    db.child("hangouts").update({link:True})    
+    
+    

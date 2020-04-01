@@ -84,35 +84,35 @@ def main_convos(event_uid, convo_name_str, num_threads, category="random"):
     #back to firebase
     firebase_db.post_convo(giant_dict, event_uid, event_info)
     
-    #%%
-    #big dict with just the emails for threads
-    big_dict={convo_uid:giant_dict[convo_uid]['displayName'] for convo_uid in giant_dict}
-    
-    #%%
-    
-    batched_dicts = helpers_db.split_dict(big_dict, num_threads)
-    logging.warning("Batched dicts are:")
-    logging.warning(batched_dicts)
-    
-    #%%
-    thread_list=[]
-    error_count = 0
-    for batch in batched_dicts:
-        try:
-            t = threading.Thread(target=helpers_db.go_thread, args=(batch, batched_dicts.index(batch),))
-            #starting thread
-            t.start()
-            #add thread to thread list
-            thread_list.append(t)
-        except:
-            logging.warning("There was an error.")
-            error_count += 1
-    
-    for t in thread_list:
-        #join all the threads in thread_list
-        t.join()
-    # both threads completely executed 
-    logging.warning("Done! There were " + str(error_count) + " errors.") 
+#    #%%
+#    #big dict with just the emails for threads
+#    big_dict={convo_uid:giant_dict[convo_uid]['displayName'] for convo_uid in giant_dict}
+#    
+#    #%%
+#    
+#    batched_dicts = helpers_db.split_dict(big_dict, num_threads)
+#    logging.warning("Batched dicts are:")
+#    logging.warning(batched_dicts)
+#    
+#    #%%
+#    thread_list=[]
+#    error_count = 0
+#    for batch in batched_dicts:
+#        try:
+#            t = threading.Thread(target=helpers_db.go_thread, args=(batch, batched_dicts.index(batch),))
+#            #starting thread
+#            t.start()
+#            #add thread to thread list
+#            thread_list.append(t)
+#        except:
+#            logging.warning("There was an error.")
+#            error_count += 1
+#    
+#    for t in thread_list:
+#        #join all the threads in thread_list
+#        t.join()
+#    # both threads completely executed 
+#    logging.warning("Done! There were " + str(error_count) + " errors.") 
 
 #%%
     return
