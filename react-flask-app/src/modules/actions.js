@@ -14,6 +14,7 @@ export const login = (profile) => {
         fetch(`${process.env.REACT_APP_API_PROXY}/login`, {
             method: 'POST',
             body: JSON.stringify({ profile }),
+            credentials: 'include'
         }).then(res => {
             console.log(res);
             if (res.ok) return res.json();
@@ -43,6 +44,7 @@ export const genConvos = (event_uid, convo_name) => {
         fetch(`${process.env.REACT_APP_API_PROXY}/generate-convos/${event_uid}`, {
             method: 'POST',
             body: JSON.stringify({ convo_name }),
+            credentials: 'include'
         }).then(res => {
             console.log(res);
             if (res.ok) return res.json();
@@ -60,6 +62,7 @@ export const genEmptyHangouts = (name, num_hangouts, num_threads) => {
         fetch(`${process.env.REACT_APP_API_PROXY}/create-hangouts`, {
             method: 'POST',
             body: JSON.stringify({ name, num_hangouts, num_threads }),
+            credentials: 'include'
         }).then(res => {
             console.log(res);
             if (res.ok) return res.json();
@@ -115,7 +118,8 @@ export const changeData = (path, new_data, updatePaths, updateNames) => {
         dispatch(setErrorMessage(''))
         fetch(`${process.env.REACT_APP_API_PROXY}${path}`, {
             method: 'POST',
-            body: JSON.stringify({ new_data })
+            body: JSON.stringify({ new_data }),
+            credentials: 'include'
         }).then(res => {
             if (res.ok) return res.json();
             else throw new Error(res.statusText)
@@ -173,7 +177,8 @@ export const changeOrgData = (path, new_data, updatePaths, updateNames) => {
         dispatch(setErrorMessage(''))
         fetch(`${process.env.REACT_APP_API_PROXY}${path}`, {
             method: 'POST',
-            body: JSON.stringify({ new_data })
+            body: JSON.stringify({ new_data }),
+            credentials: 'include'
         }).then(res => {
             if (res.ok) return res.json();
             else throw new Error(res.statusText)
@@ -253,7 +258,7 @@ const setOrgData = data => {
 }
 
 const api = path => {
-  return fetch(`${process.env.REACT_APP_API_PROXY}${path}`, { credentials: 'same-origin' }).then(res => {
+  return fetch(`${process.env.REACT_APP_API_PROXY}${path}`, { credentials: 'include' }).then(res => {
     if (res.ok) return res.json()
     else throw new Error(res.status)
   })
