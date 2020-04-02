@@ -333,6 +333,17 @@
       "timeEnd" : "17:00 1 April 2020",
       "timeStart" : "15:00 1 April 2020"
     },
+    "Boy_Scouts_4-3" : {
+      "creator" : 1,
+      "desired-size" : 8,
+      "displayName" : "International Virtual Jamboree 4-3",
+      "num_rounds" : 8,
+      "org" : "Boy_Scouts",
+      "timeCreated" : "23:00 31 March 2020",
+      "timeDeadline" : "14:50 3 April 2020",
+      "timeEnd" : "17:00 3 April 2020",
+      "timeStart" : "15:00 3 April 2020"
+    },
     "Boy_Scouts_4-2" : {
       "creator" : 1,
       "desired-size" : 8,
@@ -347,7 +358,7 @@
     "Coca_Cola_2024_4-1" : {
       "creator" : 1,
       "desired_size" : 8,
-      "displayName" : "Coca Cola Scholars 2024 Meet-up 4-1",
+      "displayName" : "Coca Cola Scholars 2020 Meet-up 4-1",
       "num_rounds" : 8,
       "org" : "2020_Coke_Scholars",
       "timeCreated" : "23:00 31 March 2020",
@@ -355,10 +366,21 @@
       "timeEnd" : "17:00 1 April 2020",
       "timeStart" : "15:00 1 April 2020"
     },
+    "Coca_Cola_2024_4-3" : {
+      "creator" : 1,
+      "desired_size" : 8,
+      "displayName" : "Coca Cola Scholars 2020 Meet-up 4-3",
+      "num_rounds" : 8,
+      "org" : "2020_Coke_Scholars",
+      "timeCreated" : "23:00 31 March 2020",
+      "timeDeadline" : "14:50 3 April 2020",
+      "timeEnd" : "17:00 3 April 2020",
+      "timeStart" : "15:00 3 April 2020"
+    },
     "Coca_Cola_2024_4-2" : {
       "creator" : 1,
       "desired_size" : 8,
-      "displayName" : "Coca Cola Scholars 2024 Meet-up 4-2",
+      "displayName" : "Coca Cola Scholars 2020 Meet-up 4-2",
       "num_rounds" : 8,
       "org" : "2020_Coke_Scholars",
       "timeCreated" : "23:00 31 March 2020",
@@ -432,6 +454,17 @@
       "timeEnd" : "10:00 1 April 2020",
       "timeStart" : "8:00 1 April 2020"
     },
+    "Harvard Admeeted 2024 4-3" : {
+      "creator" : 1,
+      "desired_size" : 8,
+      "displayName" : "Virtual Visitas 4-3",
+      "num_rounds" : 8,
+      "org" : "Harvard",
+      "timeCreated" : "18:00 31 March 2020",
+      "timeDeadline" : "7:00 3 April 2020",
+      "timeEnd" : "10:00 3 April 2020",
+      "timeStart" : "8:00 3 April 2020"
+    },
     "Harvard Admeeted 2024 4-2" : {
       "creator" : 1,
       "desired_size" : 8,
@@ -453,6 +486,17 @@
       "timeDeadline" : "14:50 1 April 2020",
       "timeEnd" : "17:00 1 April 2020",
       "timeStart" : "15:00 1 April 2020"
+    },
+    "Two_Sigma_4-3" : {
+      "creator" : 1,
+      "desired-size" : 8,
+      "displayName" : "Two Sigma Happy Hour 4-3",
+      "num_rounds" : 8,
+      "org" : "Two_Sigma",
+      "timeCreated" : "23:00 31 March 2020",
+      "timeDeadline" : "14:50 3 April 2020",
+      "timeEnd" : "17:00 3 April 2020",
+      "timeStart" : "15:00 3 April 2020"
     },
     "Two_Sigma_4-2" : {
       "creator" : 1,
@@ -513,49 +557,47 @@
       "displayName" : "Hiking"
     },
     "Music" : {
-      "description" : "Traveling through the great outdoors",
+      "description" : "Music is a hobby that converts to a passion and emerges as the melody of life itself.",
       "displayName" : "Music"
     }, 
     "Theater" : { 
-      "description" : "Traveling through the great outdoors",
+      "description" : "The activity or profession of acting in, producing, directing, or writing plays.",
       "displayName" : "Theater"
     }, 
     "Chess" : {
-      "description" : "Traveling through the great outdoors",
-      "displayName" : "Hiking"
+      "description" : "Chess is a two-player strategy board game played on a checkered board with 64 squares arranged in an 8×8 grid.",
+      "displayName" : "Chess"
     }, 
-    "Cooking or Baking" : {"description" : "Traveling through the great outdoors",
-      "displayName" : "Hiking"}, 
-    "Dance" : {"description" : "Traveling through the great outdoors",
-      "displayName" : "Hiking"}, 
-    "Art" : {"description" : "Traveling through the great outdoors",
-      "displayName" : "Hiking"},
-    "Coding" : {"description" : "Traveling through the great outdoors",
-      "displayName" : "Hiking"}, 
-    "Yoga" : {"description" : "Traveling through the great outdoors",
-      "displayName" : "Hiking"}, 
-    "Writing or Journalism" : {"description" : "Traveling through the great outdoors",
-      "displayName" : "Hiking"}, 
-    "Fishing" : {"description" : "Traveling through the great outdoors",
-      "displayName" : "Hiking"}, 
-    "Reading" : {"description" : "Traveling through the great outdoors",
-      "displayName" : "Hiking"}, 
-    "Shopping" : {"description" : "Traveling through the great outdoors",
-      "displayName" : "Hiking"}, 
-    "Research" : {"description" : "Traveling through the great outdoors",
-      "displayName" : "Hiking"}, 
-    "Debate" : {"description" : "Traveling through the great outdoors",
-      "displayName" : "Hiking"}, 
-    "Robotics" : {"description" : "Traveling through the great outdoors",
-      "displayName" : "Hiking"}, 
-    "Volunteering" : {"description" : "Traveling through the great outdoors",
-      "displayName" : "Hiking"}, 
-    "Gaming" : {"description" : "Traveling through the great outdoors",
-      "displayName" : "Hiking"}, 
-    "Martial Arts" : {"description" : "Traveling through the great outdoors",
-      "displayName" : "Hiking"}, 
-    "Other" : {"description" : "Traveling through the great outdoors",
-      "displayName" : "Hiking"}
+    "Dance" : {"description" : "Move rhythmically to music, typically following a set sequence of steps.",
+      "displayName" : "Dance"}, 
+    "Art" : {"description" : "The expression or application of human creative skill and imagination, typically in a visual form such as painting or sculpture, producing works to be appreciated primarily for their beauty or emotional power.",
+      "displayName" : "Art"},
+    "Coding" : {"description" : "Write code for a computer program.",
+      "displayName" : "Coding"}, 
+    "Yoga" : {"description" : "A spiritual and ascetic discipline, a part of which, including breath control, simple meditation, and the adoption of specific bodily postures, is widely practiced for health and relaxation.",
+      "displayName" : "Yoga"}, 
+    "Writing or Journalism" : {"description" : "The activity or profession of writing for newspapers, magazines, or news websites or preparing news to be broadcast.",
+      "displayName" : "Writing or Journalism"}, 
+    "Fishing" : {"description" : "The activity of catching fish, either for food or as a sport.",
+      "displayName" : "Fishing"}, 
+    "Reading" : {"description" : "The action or skill of reading written or printed matter silently or aloud.",
+      "displayName" : "Reading"}, 
+    "Shopping" : {"description" : "The action or activity of purchasing goods from stores.",
+      "displayName" : "Shopping"}, 
+    "Research" : {"description" : "The systematic investigation into and study of materials and sources in order to establish facts and reach new conclusions.",
+      "displayName" : "Research"}, 
+    "Debate" : {"description" : "A formal discussion on a particular topic in a public meeting or legislative assembly, in which opposing arguments are put forward.",
+      "displayName" : "Debate"}, 
+    "Robotics" : {"description" : "The branch of technology that deals with the design, construction, operation, and application of robots.",
+      "displayName" : "Robotics"}, 
+    "Volunteering" : {"description" : "An altruistic activity where an individual or group provides services for no financial or social gain.",
+      "displayName" : "Volunteering"}, 
+    "Gaming" : {"description" : "The action or practice of playing video games.",
+      "displayName" : "Gaming"}, 
+    "Martial Arts" : {"description" : "Various sports or skills that originated as forms of self-defense or attack, such as judo, karate, and kendo.",
+      "displayName" : "Martial Arts"}, 
+    "Other" : {"description" : "Something else.",
+      "displayName" : "Other"}
 
   },
   "major_org" : {
