@@ -1,0 +1,1194 @@
+{
+  "convo_event" : {
+    "Harvard Admeeted 2024 3-31" : {
+      "Harvard Admeeted 2024 3-31Call1Group0" : true,
+      "Harvard Admeeted 2024 3-31Call2Group1" : true,
+      "Harvard Admeeted 2024 3-31Call3Group2" : true,
+      "Harvard Admeeted 2024 3-31Call4Group3" : true
+    },
+    "Harvard Admeeted 2024 4-1" : {
+      "Harvard Admeeted 2024 4-1Call1Group0" : true,
+      "Harvard Admeeted 2024 4-1Call2Group1" : true,
+      "Harvard Admeeted 2024 4-1Call3Group2" : true,
+      "Harvard Admeeted 2024 4-1Call4Group3" : true,
+      "Harvard Admeeted 2024 4-1Call5Group4" : true,
+      "Harvard Admeeted 2024 4-1Call6Group5" : true,
+      "Harvard Admeeted 2024 4-1Call7Group6" : true,
+      "Harvard Admeeted 2024 4-1Call8Group7" : true
+    },
+    "Yale 2024 4-2" : {
+      "Yale 2024 4-2Call1Group0" : true,
+      "Yale 2024 4-2Call2Group1" : true,
+      "Yale 2024 4-2Call3Group2" : true,
+      "Yale 2024 4-2Call4Group3" : true
+    }
+  },
+  "convo_user" : {
+    "101869153325007302120" : {
+      "Harvard Admeeted 2024 4-1Call1Group0" : true,
+      "Harvard Admeeted 2024 4-1Call2Group1" : true,
+      "Harvard Admeeted 2024 4-1Call3Group2" : true,
+      "Harvard Admeeted 2024 4-1Call4Group3" : true,
+      "Harvard Admeeted 2024 4-1Call5Group4" : true,
+      "Harvard Admeeted 2024 4-1Call6Group5" : true,
+      "Harvard Admeeted 2024 4-1Call7Group6" : true,
+      "Harvard Admeeted 2024 4-1Call8Group7" : true
+    },
+    "103257380590723979410" : {
+      "Harvard Admeeted 2024 3-31Call1Group0" : true,
+      "Harvard Admeeted 2024 3-31Call2Group1" : true,
+      "Harvard Admeeted 2024 3-31Call3Group2" : true,
+      "Harvard Admeeted 2024 3-31Call4Group3" : true,
+      "Harvard Admeeted 2024 4-1Call1Group0" : true,
+      "Harvard Admeeted 2024 4-1Call2Group1" : true,
+      "Harvard Admeeted 2024 4-1Call3Group2" : true,
+      "Harvard Admeeted 2024 4-1Call4Group3" : true,
+      "Harvard Admeeted 2024 4-1Call5Group4" : true,
+      "Harvard Admeeted 2024 4-1Call6Group5" : true,
+      "Harvard Admeeted 2024 4-1Call7Group6" : true,
+      "Harvard Admeeted 2024 4-1Call8Group7" : true,
+      "Yale 2024 4-2Call1Group0" : true,
+      "Yale 2024 4-2Call2Group1" : true,
+      "Yale 2024 4-2Call3Group2" : true,
+      "Yale 2024 4-2Call4Group3" : true
+    },
+    "110753538828040619190" : {
+      "Harvard Admeeted 2024 3-31Call1Group0" : true,
+      "Harvard Admeeted 2024 3-31Call2Group1" : true,
+      "Harvard Admeeted 2024 3-31Call3Group2" : true,
+      "Harvard Admeeted 2024 3-31Call4Group3" : true
+    },
+    "113545690935311265871" : {
+      "Harvard Admeeted 2024 3-31Call1Group0" : true,
+      "Harvard Admeeted 2024 3-31Call2Group1" : true,
+      "Harvard Admeeted 2024 3-31Call3Group2" : true,
+      "Harvard Admeeted 2024 3-31Call4Group3" : true
+    }
+  },
+  "convos" : {
+    "Harvard Admeeted 2024 3-31Call1Group0" : {
+      "displayName" : "Yale Sucks Call 1",
+      "event" : "Harvard Admeeted 2024 3-31",
+      "link" : "https://hangouts.google.com/group/pzPu983qFXZV7xJS6",
+      "members" : {
+        "103257380590723979410" : true,
+        "110753538828040619190" : true,
+        "113545690935311265871" : true,
+        "category" : true
+      },
+      "org" : "Harvard",
+      "timeEnd" : "16:30 31 March 2020",
+      "timeStart" : "16:00 31 March 2020"
+    },
+    "Harvard Admeeted 2024 3-31Call2Group1" : {
+      "displayName" : "Yale Sucks Call 2",
+      "event" : "Harvard Admeeted 2024 3-31",
+      "link" : "https://hangouts.google.com/group/Ygy4UXJvv3We3JdSA",
+      "members" : {
+        "103257380590723979410" : true,
+        "110753538828040619190" : true,
+        "113545690935311265871" : true,
+        "category" : true
+      },
+      "org" : "Harvard",
+      "timeEnd" : "17:00 31 March 2020",
+      "timeStart" : "16:30 31 March 2020"
+    },
+    "Harvard Admeeted 2024 3-31Call3Group2" : {
+      "displayName" : "Yale Sucks Call 3",
+      "event" : "Harvard Admeeted 2024 3-31",
+      "link" : "https://hangouts.google.com/group/fwoocT73uTR5DbaVA",
+      "members" : {
+        "103257380590723979410" : true,
+        "110753538828040619190" : true,
+        "113545690935311265871" : true,
+        "category" : true
+      },
+      "org" : "Harvard",
+      "timeEnd" : "17:30 31 March 2020",
+      "timeStart" : "17:00 31 March 2020"
+    },
+    "Harvard Admeeted 2024 3-31Call4Group3" : {
+      "displayName" : "Yale Sucks Call 4",
+      "event" : "Harvard Admeeted 2024 3-31",
+      "link" : "https://hangouts.google.com/group/wN7detmXdHxgFWZp7",
+      "members" : {
+        "103257380590723979410" : true,
+        "110753538828040619190" : true,
+        "113545690935311265871" : true,
+        "category" : true
+      },
+      "org" : "Harvard",
+      "timeEnd" : "18:00 31 March 2020",
+      "timeStart" : "17:30 31 March 2020"
+    },
+    "Harvard Admeeted 2024 4-1Call1Group0" : {
+      "displayName" : "Albert and Bill Call 1",
+      "event" : "Harvard Admeeted 2024 4-1",
+      "link" : "https://hangouts.google.com/group/j7PyU7tRUXxYYuBPA",
+      "members" : {
+        "101869153325007302120" : true,
+        "103257380590723979410" : true,
+        "category" : true
+      },
+      "org" : "Harvard",
+      "timeEnd" : "08:15 01 April 2020",
+      "timeStart" : "08:00 01 April 2020"
+    },
+    "Harvard Admeeted 2024 4-1Call2Group1" : {
+      "displayName" : "Albert and Bill Call 2",
+      "event" : "Harvard Admeeted 2024 4-1",
+      "link" : "https://hangouts.google.com/group/LZUKyHLh5KdFhvyG7",
+      "members" : {
+        "101869153325007302120" : true,
+        "103257380590723979410" : true
+      },
+      "org" : "Harvard",
+      "timeEnd" : "08:30 01 April 2020",
+      "timeStart" : "08:15 01 April 2020"
+    },
+    "Harvard Admeeted 2024 4-1Call3Group2" : {
+      "displayName" : "Albert and Bill Call 3",
+      "event" : "Harvard Admeeted 2024 4-1",
+      "link" : "https://hangouts.google.com/group/bEt2a5dHit3apYHR9",
+      "members" : {
+        "101869153325007302120" : true,
+        "103257380590723979410" : true
+      },
+      "org" : "Harvard",
+      "timeEnd" : "08:45 01 April 2020",
+      "timeStart" : "08:30 01 April 2020"
+    },
+    "Harvard Admeeted 2024 4-1Call4Group3" : {
+      "displayName" : "Albert and Bill Call 4",
+      "event" : "Harvard Admeeted 2024 4-1",
+      "link" : "https://hangouts.google.com/group/DGeaaACrLT7KZuCo7",
+      "members" : {
+        "101869153325007302120" : true,
+        "103257380590723979410" : true
+      },
+      "org" : "Harvard",
+      "timeEnd" : "09:00 01 April 2020",
+      "timeStart" : "08:45 01 April 2020"
+    },
+    "Harvard Admeeted 2024 4-1Call5Group4" : {
+      "displayName" : "Albert and Bill Call 5",
+      "event" : "Harvard Admeeted 2024 4-1",
+      "link" : "https://hangouts.google.com/group/364SVGrJttZbkmyY8",
+      "members" : {
+        "101869153325007302120" : true,
+        "103257380590723979410" : true
+      },
+      "org" : "Harvard",
+      "timeEnd" : "09:15 01 April 2020",
+      "timeStart" : "09:00 01 April 2020"
+    },
+    "Harvard Admeeted 2024 4-1Call6Group5" : {
+      "displayName" : "Albert and Bill Call 6",
+      "event" : "Harvard Admeeted 2024 4-1",
+      "link" : "https://hangouts.google.com/group/nC8srs1joyyXugGe9",
+      "members" : {
+        "101869153325007302120" : true,
+        "103257380590723979410" : true
+      },
+      "org" : "Harvard",
+      "timeEnd" : "09:30 01 April 2020",
+      "timeStart" : "09:15 01 April 2020"
+    },
+    "Harvard Admeeted 2024 4-1Call7Group6" : {
+      "displayName" : "Albert and Bill Call 7",
+      "event" : "Harvard Admeeted 2024 4-1",
+      "link" : "https://hangouts.google.com/group/nC8srs1joyyXugGe9",
+      "members" : {
+        "101869153325007302120" : true,
+        "103257380590723979410" : true
+      },
+      "org" : "Harvard",
+      "timeEnd" : "09:45 01 April 2020",
+      "timeStart" : "09:30 01 April 2020"
+    },
+    "Harvard Admeeted 2024 4-1Call8Group7" : {
+      "displayName" : "Albert and Bill Call 8",
+      "event" : "Harvard Admeeted 2024 4-1",
+      "link" : "https://hangouts.google.com/group/nC8srs1joyyXugGe9",
+      "members" : {
+        "101869153325007302120" : true,
+        "103257380590723979410" : true
+      },
+      "org" : "Harvard",
+      "timeEnd" : "10:00 01 April 2020",
+      "timeStart" : "09:45 01 April 2020"
+    },
+    "Yale 2024 4-2Call1Group0" : {
+      "displayName" : "Bulldog Days Call 1",
+      "event" : "Yale 2024 4-2",
+      "link" : "https://hangouts.google.com/group/EqD71eDq2saF7viw8",
+      "members" : {
+        "103257380590723979410" : true
+      },
+      "org" : "Yale2024",
+      "timeEnd" : "12:30 02 April 2020",
+      "timeStart" : "12:00 02 April 2020"
+    },
+    "Yale 2024 4-2Call2Group1" : {
+      "displayName" : "Bulldog Days Call 2",
+      "event" : "Yale 2024 4-2",
+      "link" : "https://hangouts.google.com/group/MTH23SS7jPp6QWNq9",
+      "members" : {
+        "103257380590723979410" : true
+      },
+      "org" : "Yale2024",
+      "timeEnd" : "13:00 02 April 2020",
+      "timeStart" : "12:30 02 April 2020"
+    },
+    "Yale 2024 4-2Call3Group2" : {
+      "displayName" : "Bulldog Days Call 3",
+      "event" : "Yale 2024 4-2",
+      "link" : "https://hangouts.google.com/group/XKknEVWVxLik8Qno7",
+      "members" : {
+        "103257380590723979410" : true
+      },
+      "org" : "Yale2024",
+      "timeEnd" : "13:30 02 April 2020",
+      "timeStart" : "13:00 02 April 2020"
+    },
+    "Yale 2024 4-2Call4Group3" : {
+      "displayName" : "Bulldog Days Call 4",
+      "event" : "Yale 2024 4-2",
+      "link" : "https://hangouts.google.com/group/Xr97dkZEsvi5nirT8",
+      "members" : {
+        "103257380590723979410" : true
+      },
+      "org" : "Yale2024",
+      "timeEnd" : "14:00 02 April 2020",
+      "timeStart" : "13:30 02 April 2020"
+    }
+  },
+  "event_org" : {
+    "2020_Coke_Scholars" : {
+      "Coca_Cola_2024_4-1" : true,
+      "Coca_Cola_2024_4-2" : true
+    },
+    "Boy_Scouts" : {
+      "Boy_Scouts_4-1" : true,
+      "Boy_Scouts_4-2" : true
+    },
+    "Harvard" : {
+      "Harvard Admeeted 2024 3-25" : true,
+      "Harvard Admeeted 2024 3-26" : true,
+      "Harvard Admeeted 2024 3-27" : true,
+      "Harvard Admeeted 2024 3-30" : true,
+      "Harvard Admeeted 2024 3-31" : true,
+      "Harvard Admeeted 2024 4-1" : true,
+      "Harvard Admeeted 2024 4-2" : true
+    },
+    "Two_Sigma" : {
+      "Two_Sigma_4-1" : true,
+      "Two_Sigma_4-2" : true
+    },
+    "Yale2024" : {
+      "Yale 2024 4-2" : true
+    }
+  },
+  "event_user" : {
+    "10" : {
+      "Harvard Admeeted 2024 3-25" : true,
+      "Harvard Admeeted 2024 3-26" : true,
+      "Harvard Admeeted 2024 3-30" : true
+    },
+    "101869153325007302120" : {
+      "Harvard Admeeted 2024 4-1" : true
+    },
+    "103257380590723979410" : {
+      "Harvard Admeeted 2024 3-26" : true,
+      "Harvard Admeeted 2024 3-30" : true,
+      "Harvard Admeeted 2024 3-31" : true,
+      "Harvard Admeeted 2024 4-1" : true,
+      "Two_Sigma_4-2" : true,
+      "Yale 2024 4-2" : true
+    },
+    "108243314847325773476" : {
+      "Harvard Admeeted 2024 4-2" : true
+    },
+    "110753538828040619190" : {
+      "Harvard Admeeted 2024 3-31" : true
+    },
+    "113545690935311265871" : {
+      "Harvard Admeeted 2024 3-31" : true
+    },
+    "115958017814216547284" : {
+      "Harvard Admeeted 2024 4-2" : true,
+      "Two_Sigma_4-2" : true
+    }
+  },
+  "events" : {
+    "Boy_Scouts_4-1" : {
+      "creator" : 1,
+      "desired-size" : 8,
+      "displayName" : "International Virtual Jamboree 4-1",
+      "num_rounds" : 8,
+      "org" : "Boy_Scouts",
+      "timeCreated" : "23:00 31 March 2020",
+      "timeDeadline" : "14:50 1 April 2020",
+      "timeEnd" : "17:00 1 April 2020",
+      "timeStart" : "15:00 1 April 2020"
+    },
+    "Boy_Scouts_4-2" : {
+      "creator" : 1,
+      "desired-size" : 8,
+      "displayName" : "International Virtual Jamboree 4-2",
+      "num_rounds" : 8,
+      "org" : "Boy_Scouts",
+      "timeCreated" : "23:00 31 March 2020",
+      "timeDeadline" : "14:50 2 April 2020",
+      "timeEnd" : "17:00 2 April 2020",
+      "timeStart" : "15:00 2 April 2020"
+    },
+    "Coca_Cola_2024_4-1" : {
+      "creator" : 1,
+      "desired_size" : 8,
+      "displayName" : "Coca Cola Scholars 2024 Meet-up 4-1",
+      "num_rounds" : 8,
+      "org" : "2020_Coke_Scholars",
+      "timeCreated" : "23:00 31 March 2020",
+      "timeDeadline" : "14:50 1 April 2020",
+      "timeEnd" : "17:00 1 April 2020",
+      "timeStart" : "15:00 1 April 2020"
+    },
+    "Coca_Cola_2024_4-2" : {
+      "creator" : 1,
+      "desired_size" : 8,
+      "displayName" : "Coca Cola Scholars 2024 Meet-up 4-2",
+      "num_rounds" : 8,
+      "org" : "2020_Coke_Scholars",
+      "timeCreated" : "23:00 31 March 2020",
+      "timeDeadline" : "14:50 2 April 2020",
+      "timeEnd" : "17:00 2 April 2020",
+      "timeStart" : "15:00 2 April 2020"
+    },
+    "Harvard Admeeted 2024 3-25" : {
+      "creator" : 1,
+      "desired_size" : 3,
+      "displayName" : "Virtual Visitas 25",
+      "num_rounds" : 4,
+      "org" : "Harvard",
+      "timeCreated" : "11:00 23 March 2020",
+      "timeDeadline" : "23:59 26 March 2020",
+      "timeEnd" : "18:00 27 March 2020",
+      "timeStart" : "16:00 27 March 2020"
+    },
+    "Harvard Admeeted 2024 3-26" : {
+      "creator" : 1,
+      "desired_size" : 3,
+      "displayName" : "Virtual Visitas 26",
+      "num_rounds" : 4,
+      "org" : "Harvard",
+      "timeCreated" : "11:00 23 March 2020",
+      "timeDeadline" : "23:59 26 March 2020",
+      "timeEnd" : "18:00 27 March 2020",
+      "timeStart" : "16:00 27 March 2020"
+    },
+    "Harvard Admeeted 2024 3-27" : {
+      "creator" : 1,
+      "desired_size" : 3,
+      "displayName" : "Virtual Visitas 27",
+      "num_rounds" : 4,
+      "org" : "Harvard",
+      "timeCreated" : "11:00 23 March 2020",
+      "timeDeadline" : "23:59 26 March 2020",
+      "timeEnd" : "18:00 27 March 2020",
+      "timeStart" : "16:00 27 March 2020"
+    },
+    "Harvard Admeeted 2024 3-30" : {
+      "creator" : 1.0325738059072397E20,
+      "desired_size" : 3,
+      "displayName" : "Virtual Visitas 30",
+      "num_rounds" : 4,
+      "org" : "Harvard",
+      "timeCreated" : "9:00 29 March 2020",
+      "timeDeadline" : "23:59 29 March 2020",
+      "timeEnd" : "18:00 30 March 2020",
+      "timeStart" : "17:00 30 March 2020"
+    },
+    "Harvard Admeeted 2024 3-31" : {
+      "creator" : 1.0325738059072397E20,
+      "desired_size" : 3,
+      "displayName" : "Virtual Visitas 31",
+      "num_rounds" : 4,
+      "org" : "Harvard",
+      "timeCreated" : "11:00 30 March 2020",
+      "timeDeadline" : "15:00 31 March 2020",
+      "timeEnd" : "18:00 31 March 2020",
+      "timeStart" : "16:00 31 March 2020"
+    },
+    "Harvard Admeeted 2024 4-1" : {
+      "creator" : 1,
+      "desired_size" : 8,
+      "displayName" : "Virtual Visitas 4-1",
+      "num_rounds" : 8,
+      "org" : "Harvard",
+      "timeCreated" : "18:00 31 March 2020",
+      "timeDeadline" : "7:00 1 April 2020",
+      "timeEnd" : "10:00 1 April 2020",
+      "timeStart" : "8:00 1 April 2020"
+    },
+    "Harvard Admeeted 2024 4-2" : {
+      "creator" : 1,
+      "desired_size" : 8,
+      "displayName" : "Virtual Visitas 4-2",
+      "num_rounds" : 8,
+      "org" : "Harvard",
+      "timeCreated" : "23:00 31 March 2020",
+      "timeDeadline" : "14:50 2 April 2020",
+      "timeEnd" : "17:00 2 April 2020",
+      "timeStart" : "15:00 2 April 2020"
+    },
+    "Two_Sigma_4-1" : {
+      "creator" : 1,
+      "desired-size" : 8,
+      "displayName" : "Two Sigma Happy Hour 4-1",
+      "num_rounds" : 8,
+      "org" : "Two_Sigma",
+      "timeCreated" : "23:00 31 March 2020",
+      "timeDeadline" : "14:50 1 April 2020",
+      "timeEnd" : "17:00 1 April 2020",
+      "timeStart" : "15:00 1 April 2020"
+    },
+    "Two_Sigma_4-2" : {
+      "creator" : 1,
+      "desired-size" : 8,
+      "displayName" : "Two Sigma Happy Hour 4-2",
+      "num_rounds" : 8,
+      "org" : "Two_Sigma",
+      "timeCreated" : "23:00 31 March 2020",
+      "timeDeadline" : "14:50 2 April 2020",
+      "timeEnd" : "17:00 2 April 2020",
+      "timeStart" : "15:00 2 April 2020"
+    },
+    "Yale 2024 4-2" : {
+      "creator" : 1,
+      "desired_size" : 4,
+      "displayName" : "Yale Bulldog Days 2020",
+      "num_rounds" : 4,
+      "org" : "Yale2024",
+      "timeCreated" : "23:00 31 March 2020",
+      "timeDeadline" : "12:00 2 April 2020",
+      "timeEnd" : "14:00 2 April 2020",
+      "timeStart" : "12:00 2 April 2020"
+    }
+  },
+  "hangouts" : {
+    "1JC4SKzB4YToFnRM6" : "https://hangouts.google.com/group/1JC4SKzB4YToFnRM6",
+    "E2JjTSPbqtRuWywt8" : "https://hangouts.google.com/group/E2JjTSPbqtRuWywt8",
+    "Lj1ADzr1gNxHBkQM8" : "https://hangouts.google.com/group/Lj1ADzr1gNxHBkQM8",
+    "WmE4TveVnq7irwsa7" : "https://hangouts.google.com/group/WmE4TveVnq7irwsa7",
+    "Xs9kLuFPKdLQP8VNA" : "https://hangouts.google.com/group/Xs9kLuFPKdLQP8VNA",
+    "a1bSyZk2XC9WCGw49" : "https://hangouts.google.com/group/a1bSyZk2XC9WCGw49",
+    "f7GWPwoGVoPzUCwN7" : "https://hangouts.google.com/group/f7GWPwoGVoPzUCwN7",
+    "jwXCUUgboJPSGVLo7" : "https://hangouts.google.com/group/jwXCUUgboJPSGVLo7",
+    "mj8xE6t5mx4PQMMB8" : "https://hangouts.google.com/group/mj8xE6t5mx4PQMMB8",
+    "o1xRotpP7sXfrCAq7" : "https://hangouts.google.com/group/o1xRotpP7sXfrCAq7",
+    "qqMgg9RJUSLrfYAB8" : "https://hangouts.google.com/group/qqMgg9RJUSLrfYAB8",
+    "ty4XkimUMA8LmanF9" : "https://hangouts.google.com/group/ty4XkimUMA8LmanF9",
+    "uksq1s14BjcCu2ti9" : "https://hangouts.google.com/group/uksq1s14BjcCu2ti9",
+    "v4T2YwtrvRZKuo1g6" : "https://hangouts.google.com/group/v4T2YwtrvRZKuo1g6",
+    "y8Mpy3yUYq6b332U7" : "https://hangouts.google.com/group/y8Mpy3yUYq6b332U7"
+  },
+  "interest_user" : {
+    "103257380590723979410" : {
+      "Cooking" : true,
+      "Hiking" : true
+    },
+    "115958017814216547284" : {
+      "Hiking" : true
+    }
+  },
+  "interests" : {
+    "Cooking" : {
+      "description" : "The art of crafting delicious foods",
+      "displayName" : "Cooking"
+    },
+    "Hiking" : {
+      "description" : "Traveling through the great outdoors",
+      "displayName" : "Hiking"
+    }
+  },
+  "major_org" : {
+    "Harvard" : {
+      "African and African American Studies" : true,
+      "Anthropology" : true,
+      "Applied Mathematics" : true,
+      "Art Film and Visual Studies" : true,
+      "Astrophysics" : true,
+      "Biomedical Engineering" : true,
+      "Chemical and Physical Biology" : true,
+      "Chemistry" : true,
+      "Chemistry and Physics" : true,
+      "Classics" : true,
+      "Comparative Literature" : true,
+      "Computer Science" : true,
+      "Earth and Planetary Sciences" : true,
+      "East Asian Studies" : true,
+      "Economics" : true,
+      "Electrical Engineering" : true,
+      "Engineering Sciences" : true,
+      "English" : true,
+      "Environmental Science and Engineering" : true,
+      "Environmental Science and Public Policy" : true,
+      "Folklore and Mythology" : true,
+      "Germanic Languages and Literatures" : true,
+      "Government" : true,
+      "History" : true,
+      "History and Literature" : true,
+      "History and Science" : true,
+      "History of Art and Architecture" : true,
+      "Human Developmental and Regenerative Biology" : true,
+      "Human Evolutionary Biology" : true,
+      "Integrative Biology" : true,
+      "Linguistics" : true,
+      "Mathematics" : true,
+      "Mechanical Engineering" : true,
+      "Molecular and Cellular Biology" : true,
+      "Music" : true,
+      "Near Eastern Languages and Civilizations" : true,
+      "Neuroscience" : true,
+      "Philosophy" : true,
+      "Physics" : true,
+      "Psychology" : true,
+      "Religion Comparative Study of" : true,
+      "Romance Languages and Literatures" : true,
+      "Slavic Languages and Literatures" : true,
+      "Social Studies" : true,
+      "Sociology" : true,
+      "South Asian Studies" : true,
+      "Special Concentrations" : true,
+      "Statistics" : true,
+      "Theater Dance & Media" : true,
+      "Women Gender and Sexuality Study of" : true
+    }
+  },
+  "major_user" : {
+    "103257380590723979410" : {
+      "Applied Mathematics" : true,
+      "Computer Science" : true
+    },
+    "115958017814216547284" : {
+      "Computer Science" : true
+    }
+  },
+  "majors" : {
+    "African and African American Studies" : {
+      "description" : "explore the histories, societies, and cultures of African and African-descended people",
+      "displayName" : "African and African American Studies"
+    },
+    "Anthropology" : {
+      "description" : "the study of how human behavior has evolved as well as how language, culture, and society have shaped and continue to shape the human experience",
+      "displayName" : "Anthropology"
+    },
+    "Applied Mathematics" : {
+      "description" : "develop, implement, and study mathematical, statistical, and computational techniques broadly applicable in various fields",
+      "displayName" : "Applied Mathematics"
+    },
+    "Art Film and Visual Studies" : {
+      "description" : "components include photography, filmmaking, animation, video art, painting, drawing, printmaking and sculpture, as well as film and visual studies, critical theory, and the study of the built environment",
+      "displayName" : "Art, Film, and Visual Studies"
+    },
+    "Astrophysics" : {
+      "description" : "study of matter and radiation in the universe as understood through the laws of physics",
+      "displayName" : "Astrophysics"
+    },
+    "Biomedical Engineering" : {
+      "description" : "apply quantitative engineering analysis to understand the operation of living systems and design novel systems to satisfy unmet needs in medicine and industry",
+      "displayName" : "Biomedical Engineering"
+    },
+    "Chemical and Physical Biology" : {
+      "description" : "applying quantitative tools, physical concepts, and chemical principles to the study of biology",
+      "displayName" : "Chemical and Physical Biology"
+    },
+    "Chemistry" : {
+      "description" : "science of the structure, properties, and reactions of matter",
+      "displayName" : "Chemistry"
+    },
+    "Chemistry and Physics" : {
+      "description" : "The study of the boundary between physics and chemistry.",
+      "displayName" : "Chemistry and Physics"
+    },
+    "Classics" : {
+      "description" : "An intellectual discipline that embraces the study of ancient Greece and Rome, two civilizations whose legacy has played a major role in shaping our modern world.",
+      "displayName" : "Classics"
+    },
+    "Comparative Literature" : {
+      "description" : "Exploring literature and culture across languages and national borders",
+      "displayName" : "Comparative Literature"
+    },
+    "Computer Science" : {
+      "description" : "A dynamic, versatile field, full of open problems and opportunities for creative invention.",
+      "displayName" : "Computer Science"
+    },
+    "Earth and Planetary Sciences" : {
+      "description" : "Working to better understand the consequences of human activities for the Earth’s atmosphere, the oceans, the solid Earth, and the organisms that live on it.",
+      "displayName" : "Earth and Planetary Sciences"
+    },
+    "East Asian Studies" : {
+      "description" : "Developing a critical understanding of the human experience in East Asia.",
+      "displayName" : "East Asian Studies"
+    },
+    "Economics" : {
+      "description" : "Studying the behavior of social systems—such as markets, corporations, legislatures, and families—as the outcome of interactions through institutions between goal-directed individuals.",
+      "displayName" : "Economics"
+    },
+    "Electrical Engineering" : {
+      "description" : "A broadly diverse field that encompasses, for example, controls, communications, signal processing, circuit design, computer engineering, and electronic and photonic devices",
+      "displayName" : "Electrical Engineering"
+    },
+    "Engineering Sciences" : {
+      "description" : "Both diving deeply into specific engineering fields, but also to seeking out solutions to real-world problems by combining concepts from a broad range of scientific inquiries and innovations.",
+      "displayName" : "Engineering Sciences"
+    },
+    "English" : {
+      "description" : "Studying the full breadth of imaginative literature written in the English language from the eighth century to its more recent dispersal around the globe.",
+      "displayName" : "English"
+    },
+    "Environmental Science and Engineering" : {
+      "description" : "Understanding, predicting, and responding to natural and human-induced environmental change.",
+      "displayName" : "Environmental Science and Engineering"
+    },
+    "Environmental Science and Public Policy" : {
+      "description" : "An understanding of the underlying scientific and technical environmental issues and an appreciation for the relevant economic, political, legal, historical, and ethical dimensions.",
+      "displayName" : "Environmental Science and Public Policy"
+    },
+    "Folklore and Mythology" : {
+      "description" : "Studying how a specific given group or society defines itself through epics, music, folktales, legends, dramas, dance, rituals, “beliefs,” proverbs, customs, law codes, festival celebrations, “wisdom literature,” and many other forms of expressive culture.",
+      "displayName" : "Folklore and Mythology"
+    },
+    "Germanic Languages and Literatures" : {
+      "description" : "Studying Germanic languages, literatures, and cultures and the centrol role played by modern Germany in international politics and economics.",
+      "displayName" : "Germanic Languages and Literatures"
+    },
+    "Government" : {
+      "description" : "The study of power in all of its many forms and consequences.",
+      "displayName" : "Government"
+    },
+    "History" : {
+      "description" : "The study of individuals, groups, communities, and nations from every imaginable perspective—employing all the techniques of the humanities and social sciences to raise questions and probe for answers.",
+      "displayName" : "History"
+    },
+    "History and Literature" : {
+      "description" : "The oldest concentration at Harvard, studying the heart of History and Literature.",
+      "displayName" : "History and Literature"
+    },
+    "History and Science" : {
+      "description" : "A flourishing interdisciplinary field of study, at the heart of science and its impact on the world.",
+      "displayName" : "History and Science"
+    },
+    "History of Art and Architecture" : {
+      "description" : "Training in the historical interpretation and critical analysis of the visual arts and architecture.",
+      "displayName" : "History of Art and Architecture"
+    },
+    "Human Developmental and Regenerative Biology" : {
+      "description" : "Studying how human beings develop from a fertilized egg, are maintained and repaired throughout adulthood, and age till life’s end.",
+      "displayName" : "Human Developmental and Regenerative Biology"
+    },
+    "Human Evolutionary Biology" : {
+      "description" : "Answering questions about who we are, how we got here, and what makes us unique.",
+      "displayName" : "Human Evolutionary Biology"
+    },
+    "Integrative Biology" : {
+      "description" : "Asking questions about the function, evolution, and interaction of organisms, both now and in the past.",
+      "displayName" : "Integrative Biology"
+    },
+    "Linguistics" : {
+      "description" : "The scientific study of language.",
+      "displayName" : "Linguistics"
+    },
+    "Mathematics" : {
+      "description" : "The science of order, identifying instances of order and formulating and understanding concepts that enable us to perceive order in complicated situations.",
+      "displayName" : "Mathematics"
+    },
+    "Mechanical Engineering" : {
+      "description" : "Using the principles of physics and materials science for the analysis and design of mechanical and thermal systems.",
+      "displayName" : "Mechanical Engineering"
+    },
+    "Molecular and Cellular Biology" : {
+      "description" : "The study of molecular and cellular processes at the heart of both normal physiology and disease.",
+      "displayName" : "Molecular and Cellular Biology"
+    },
+    "Music" : {
+      "description" : "Study of a wide variety of musical styles, sounds, and musical traditions and critically understanding music in diverse cultural and historical contexts.",
+      "displayName" : "Music"
+    },
+    "Near Eastern Languages and Civilizations" : {
+      "description" : "The study of the Near and Middle East, an important area of academic inquiry on account of its political, economic and cultural significance on the international stage.",
+      "displayName" : "Near Eastern Languages and Civilizations"
+    },
+    "Neuroscience" : {
+      "description" : "The study of the nervous system, a field that investigates the biological mechanisms that underlie behavior and how brains process information.",
+      "displayName" : "Neuroscience"
+    },
+    "Philosophy" : {
+      "description" : "Studying many of humanity’s fundamental questions: how should we live, what kind of society should we strive towards, what are the limits of human knowledge? What is truth? Justice? Beauty?",
+      "displayName" : "Philosophy"
+    },
+    "Physics" : {
+      "description" : "Seeking an understanding of the subtle, profound, and fundamental laws—relativity, quantum mechanics, and the basic force laws—that govern the behavior of all matter.",
+      "displayName" : "Physics"
+    },
+    "Psychology" : {
+      "description" : "The scientific study of the mind, investigating the minds of humans and other species.",
+      "displayName" : "Psychology"
+    },
+    "Religion Comparative Study of" : {
+      "description" : "Exploring the most consequential and momentous questions relevant to the understanding of individual and communal human life.",
+      "displayName" : "Religion, Comparative Study of"
+    },
+    "Romance Languages and Literatures" : {
+      "description" : "Discovering the literatures, cultures, and critical approaches of societies worldwide where French, Italian, Portuguese, Spanish, and Catalan are spoken.",
+      "displayName" : "Romance Languages and Literatures"
+    },
+    "Slavic Languages and Literatures" : {
+      "description" : "Studying the great works and cultural traditions, past and present, of Russia and the other Slavic countries, especially Ukraine, Poland, and the Czech Republic.",
+      "displayName" : "Slavic Languages and Literatures"
+    },
+    "Social Studies" : {
+      "description" : "An integration of the disciplines of history, political science, economics, sociology, and anthropology, applying social science to contemporary social, economic, and political problems.",
+      "displayName" : "Social Studies"
+    },
+    "Sociology" : {
+      "description" : "The study of society, of the social frameworks within which we live our lives, from two-person relationships to the rise and fall of nations and civilizations.",
+      "displayName" : "Sociology"
+    },
+    "South Asian Studies" : {
+      "description" : "Developing a critical understanding of the diverse cultures, histories, languages and literatures of South Asia, which includes Bangladesh, India, Nepal, Pakistan, Sri Lanka, and Tibet.",
+      "displayName" : "South Asian Studies"
+    },
+    "Special Concentrations" : {
+      "description" : "Studying special things.",
+      "displayName" : "Special Concentrations"
+    },
+    "Statistics" : {
+      "description" : "Study of the collection, organization, analysis, interpretation and presentation of data",
+      "displayName" : "Statistics"
+    },
+    "Theater Dance & Media" : {
+      "description" : "Historical and theoretical study of live and digital arts with the practice of those arts.",
+      "displayName" : "Theater, Dance, & Media"
+    },
+    "Women Gender and Sexuality Study of" : {
+      "description" : "The study of gender and sexuality as fundamental categories of social organization and power.",
+      "displayName" : "Women, Gender, and Sexuality, Study of"
+    }
+  },
+  "org_user" : {
+    "10" : {
+      "Harvard" : true
+    },
+    "101869153325007302120" : {
+      "Harvard" : true,
+      "Harvard2024" : true
+    },
+    "102010603388161425304" : {
+      "Harvard" : true
+    },
+    "103257380590723979410" : {
+      "2020_Coke_Scholars" : true,
+      "Boy_Scouts" : true,
+      "Harvard" : true,
+      "Two_Sigma" : true,
+      "Yale2024" : true
+    },
+    "108243314847325773476" : {
+      "HYPSM2024" : true,
+      "Harvard" : true,
+      "Harvard2024" : true,
+      "UVA" : true
+    },
+    "110753538828040619190" : {
+      "Harvard" : true
+    },
+    "113545690935311265871" : {
+      "Harvard" : true
+    },
+    "114118789385241221553" : {
+      "Harvard" : true
+    },
+    "115958017814216547284" : {
+      "Harvard" : true,
+      "Two_Sigma" : true
+    }
+  },
+  "orgs" : {
+    "2020_Coke_Scholars" : {
+      "avatar" : "https://blog.collegevine.com/wp-content/uploads/2018/11/Coca-Cola-Scholars-Program_t580.jpg",
+      "dateFounded" : "24 March 2020",
+      "description" : "Group for connecting the 2020 Coke Scholars!",
+      "displayName" : "2020 Coca-Cola Scholars",
+      "passcode" : "2020_Coke_Scholars"
+    },
+    "Boy_Scouts" : {
+      "avatar" : "https://s.hdnux.com/photos/56/67/51/12286553/3/rawImage.jpg",
+      "dateFounded" : "24 March 2024",
+      "description" : "The Boy Scouts of America is the largest scouting organization and one of the largest youth organizations in the United States, with about 2.3 million youth participants and about one million adult volunteers.",
+      "displayName" : "Boy Scouts of America",
+      "passcode" : "Boy_Scouts"
+    },
+    "CokeScholars" : {
+      "avatar" : "https://lh3.googleusercontent.com/proxy/zNt9DJsBXV66ytSy1_Y0o2N86m_iqTSzXAr2Cn5ZEdEQTSnhyvVm6vDQttwSdUL6j89DaH_32L-SpvZOWQzEHFQ5zdfVbp6h9tP6gJlly1hmGRHrZvC_vNZ_3GL61lhmJlB4kTXe1BmAdT6FSXCFDmHD",
+      "dateFounded" : "24 March 2020",
+      "description" : "Coca-Cola Scholars are recognized for their capacity to lead and serve, as well as their commitment to making a significant impact on their schools and communities.",
+      "displayName" : "Coca-Cola Scholars",
+      "passcode" : "CokeScholars"
+    },
+    "HYPSM2024" : {
+      "avatar" : "https://lh3.googleusercontent.com/proxy/mCndG9heHxxbcSUZM-F4iLkGPy9QDMcISj-1ei_vvM2_fzOVrK3LgUH7DD68I_IRt8RFplKiH2g028YskENSdj1cEAnLBqBzOgzpCUzEk3SDIoj24RrtBa_IgXM18-4r1th14yggAIkn",
+      "dateFounded" : "24 March 2020",
+      "description" : "Group for connecting pre-first year Harvard, Yale, Princeton, Stanford, and MIT students!",
+      "displayName" : "HYPSM Class of 2024 (Harvard, Yale, Princeton, Stanford, MIT)",
+      "passcode" : "HYPSM2024"
+    },
+    "Harvard" : {
+      "avatar" : "https://www.harvard.edu/sites/default/files/user13/harvard_shield.png",
+      "dateFounded" : "24 March 2020",
+      "description" : "Harvard University is a private Ivy League research university in Cambridge, Massachusetts",
+      "displayName" : "Harvard University",
+      "passcode" : "Harvard"
+    },
+    "Harvard2024" : {
+      "avatar" : "https://pbs.twimg.com/media/ELoBXIDUEAAf1Ly?format=jpg&name=large",
+      "dateFounded" : "24 March 2020",
+      "description" : "Group for connecting pre-first year Harvard students!",
+      "displayName" : "Harvard Class of 2024",
+      "passcode" : "Harvard2024"
+    },
+    "Harvard_Financial_Analysts_Club" : {
+      "avatar" : "https://media-exp1.licdn.com/dms/image/C560BAQHGpqQrYDgxWA/company-logo_200_200/0?e=2159024400&v=beta&t=Heib3oTPSNXwM78cR70w4Q-X-vZdMLSRDMBAdHk8z3Q",
+      "dateFounded" : "24 March 2020",
+      "description" : "The Harvard Financial Analysts Club (HFAC) is dedicated to providing the Harvard student body with sound financial education programs and real-world investment experience. Through the HFAC comp, new members are given a ground up introduction to finance with a focus on internship/career preparation.",
+      "displayName" : "Harvard Financial Analysts Club (HFAC)",
+      "passcode" : "Harvard_Financial_Analysts_Club"
+    },
+    "MIT" : {
+      "avatar" : "https://lh3.googleusercontent.com/proxy/YBPnraryJWpSaxQo_NxdJDFc56q82CGCnm8zwieSTW2XsnnwwSCgBsS0LPx-elAz8dUxZHVv8pyll17w2buWVoznfW5NLswdhDqmf0gdoJDoxwVNK1B11Q",
+      "dateFounded" : "24 March 2020",
+      "description" : "Massachusetts Institute of Technology (MIT) is a private research university in Cambridge, Massachusetts. ",
+      "displayName" : "MIT (Massachusetts Institute of Technology)",
+      "passcode" : "MIT"
+    },
+    "MIT2024" : {
+      "avatar" : "https://alum.mit.edu/sites/default/files/styles/volunteer_view_teaser/public/images/529_550x550_Front_Color-NA_0.jpg?itok=lycZ46DH",
+      "dateFounded" : "24 March 2020",
+      "description" : "Group for connecting pre-first year MIT students!",
+      "displayName" : "MIT Class of 2024",
+      "passcode" : "MIT2024"
+    },
+    "NCR_Corporation" : {
+      "avatar" : "https://investor.ncr.com/sites/g/files/knoqqb32406/themes/site/nir_pid2809/dist/img/ncr_nav_logo180.png",
+      "dateFounded" : "24 March 2020",
+      "description" : "NCR Corporation, previously known as National Cash Register is an American software, managed and professional services, consulting and technology company that also makes self-service kiosks, point-of-sale terminals, automated teller machines, check processing systems, and barcode scanners.",
+      "displayName" : "NCR Corporation",
+      "passcorde" : "NCR_Corporation"
+    },
+    "Princeton" : {
+      "avatar" : "https://mpng.subpng.com/20190218/pjg/kisspng-princeton-university-logo-brand-font-clip-art-cdm-water-polo-alumni-collegiate-athletes-5c6b2bddbde050.0946356315505274537777.jpg",
+      "dateFounded" : "24 March 2020",
+      "description" : "Princeton University is a private Ivy League research university in Princeton, New Jersey.",
+      "displayName" : "Princeton University",
+      "passcode" : "Princeton"
+    },
+    "Princeton2024" : {
+      "avatar" : "https://www.princeton.edu/sites/default/files/styles/half_2x/public/images/2019/12/banner2024.jpg?itok=xWZajy5g",
+      "dateFounded" : "24 March 2020",
+      "description" : "Group for connecting pre-first year Princeton students!",
+      "displayName" : "Princeton Class of 2024",
+      "passcode" : "Princeton2024"
+    },
+    "Stanford" : {
+      "avatar" : "https://1000logos.net/wp-content/uploads/2018/02/Stanford-Logo.png",
+      "dateFounded" : "24 March 2020",
+      "description" : "Stanford University, officially Leland Stanford Junior University, is a private research university in Stanford, California.",
+      "displayName" : "Stanford",
+      "passcode" : "Stanford"
+    },
+    "Stanford2024" : {
+      "avatar" : "https://pbs.twimg.com/media/ELJUf5iX0AUdEsv.jpg",
+      "dateFounded" : "24 March 2020",
+      "description" : "Group for connecting pre-first year Stanford students!",
+      "displayName" : "Stanford Class of 2024",
+      "passcode" : "Stanford2024"
+    },
+    "Two_Sigma" : {
+      "avatar" : "https://www.twosigma.com/wp-content/uploads/two-sigma-logo.jpg",
+      "dateFounded" : "24 March 2020",
+      "description" : "Two Sigma Investments is a New York City-based hedge fund that uses a variety of technological methods, including artificial intelligence, machine learning, and distributed computing, for its trading strategies. ",
+      "displayName" : "Two Sigma",
+      "passcode" : "Two_Sigma"
+    },
+    "UVA" : {
+      "avatar" : "https://cdn.freebiesupply.com/logos/large/2x/university-of-virginia-logo-png-transparent.png",
+      "dateFounded" : "28 March 2020",
+      "description" : "Group for connecting pre-first year UVA students!",
+      "displayName" : "UVA (University of Virginia) Class of 2024",
+      "passcode" : "charlottesville"
+    },
+    "Yale" : {
+      "avatar" : "https://images-na.ssl-images-amazon.com/images/I/61RY-QtmmML._AC_SL1200_.jpg",
+      "dateFounded" : "24 March 2020",
+      "description" : "Yale University is a private Ivy League research university in New Haven, Connecticut.",
+      "displayName" : "Yale University",
+      "passcode" : "Yale"
+    },
+    "Yale2024" : {
+      "avatar" : "https://ih1.redbubble.net/image.1003028117.0641/stf,small,600x600-pad,750x1000,f8f8f8.u4.jpg",
+      "dateFounded" : "24 March 2020",
+      "description" : "Group for connecting pre-first year Yale students!",
+      "displayName" : "Yale Class of 2024",
+      "passcode" : "Yale2024"
+    }
+  },
+  "user_event" : {
+    "Harvard Admeeted 2024 3-25" : {
+      "10" : true
+    },
+    "Harvard Admeeted 2024 3-26" : {
+      "10" : true
+    },
+    "Harvard Admeeted 2024 3-30" : {
+      "10" : true,
+      "103257380590723979410" : true
+    },
+    "Harvard Admeeted 2024 3-31" : {
+      "103257380590723979410" : true,
+      "110753538828040619190" : true,
+      "113545690935311265871" : true
+    },
+    "Harvard Admeeted 2024 4-1" : {
+      "101869153325007302120" : true,
+      "103257380590723979410" : true
+    },
+    "Harvard Admeeted 2024 4-2" : {
+      "108243314847325773476" : true,
+      "115958017814216547284" : true
+    },
+    "Two_Sigma_4-2" : {
+      "103257380590723979410" : true,
+      "115958017814216547284" : true
+    },
+    "Yale 2024 4-2" : {
+      "103257380590723979410" : true
+    }
+  },
+  "user_interest" : {
+    "Cooking" : {
+      "103257380590723979410" : true
+    },
+    "Hiking" : {
+      "115958017814216547284" : true
+    }
+  },
+  "user_major" : {
+    "Applied Mathematics" : {
+      "103257380590723979410" : true
+    },
+    "Computer Science" : {
+      "115958017814216547284" : true
+    }
+  },
+  "user_org" : {
+    "2020_Coke_Scholars" : {
+      "103257380590723979410" : true
+    },
+    "Boy_Scouts" : {
+      "103257380590723979410" : true
+    },
+    "HYPSM2024" : {
+      "108243314847325773476" : true
+    },
+    "Harvard" : {
+      "10" : true,
+      "101869153325007302120" : true,
+      "102010603388161425304" : true,
+      "103257380590723979410" : true,
+      "108243314847325773476" : true,
+      "110753538828040619190" : true,
+      "113545690935311265871" : true,
+      "114118789385241221553" : true,
+      "115958017814216547284" : true
+    },
+    "Harvard2024" : {
+      "101869153325007302120" : true,
+      "108243314847325773476" : true
+    },
+    "Two_Sigma" : {
+      "103257380590723979410" : true,
+      "115958017814216547284" : true
+    },
+    "UVA" : {
+      "108243314847325773476" : true
+    },
+    "Yale2024" : {
+      "103257380590723979410" : true
+    }
+  },
+  "users" : {
+    "1" : {
+      "country" : "USA",
+      "email" : "initforthenguyen@gmail.com",
+      "name" : "Ryan Doan Nguyen",
+      "participating" : true,
+      "state" : "Virginia"
+    },
+    "2" : {
+      "country" : "USA",
+      "email" : "tarunas220@gmail.com",
+      "name" : "Taruna Singh",
+      "participating" : true,
+      "state" : "Pennsylvania"
+    },
+    "3" : {
+      "country" : "USA",
+      "email" : "jgracebaldwin@gmail.com",
+      "name" : "Jackie Baldwin",
+      "participating" : true,
+      "state" : "Illinois"
+    },
+    "4" : {
+      "country" : "USA",
+      "email" : "noah2list@gmail.com",
+      "name" : "Noah List",
+      "participating" : true,
+      "state" : "Illinois"
+    },
+    "5" : {
+      "country" : "USA",
+      "email" : "mendez_james@hotmail.com",
+      "name" : "James Mendez",
+      "participating" : true,
+      "state" : "Texas"
+    },
+    "6" : {
+      "country" : "USA",
+      "email" : "apneal0725@gmail.com",
+      "name" : "Adam Neal",
+      "participating" : true,
+      "state" : "Massachusetts"
+    },
+    "7" : {
+      "country" : "USA",
+      "email" : "chloesharlinwilson@gmail.com",
+      "name" : "Chloe Wilson",
+      "participating" : true,
+      "state" : "Massachusetts"
+    },
+    "8" : {
+      "country" : "USA",
+      "email" : "allachelaeticia@gmail.com",
+      "name" : "Laeticia Allache",
+      "participating" : true,
+      "state" : "Virginia"
+    },
+    "9" : {
+      "country" : "USA",
+      "email" : "albertzhang9000@gmail.com",
+      "name" : "Albert Zhang",
+      "participating" : true,
+      "state" : "Georgia"
+    },
+    "10" : {
+      "avatar" : "<pic_link>",
+      "country" : "USA",
+      "displayName" : "Paula Zoo",
+      "email" : "paulakaitlynzoo@gmail.com",
+      "name" : "Paula Zhu",
+      "state" : "Virginia"
+    },
+    "11" : {
+      "country" : "USA",
+      "email" : "Mwen987@gmail.com",
+      "name" : "Melissa Meng",
+      "participating" : true,
+      "state" : "Virginia"
+    },
+    "12" : {
+      "country" : "USA",
+      "email" : "danielfein13@gmail.com",
+      "name" : "Daniel Fein",
+      "participating" : true,
+      "state" : "Florida"
+    },
+    "101869153325007302120" : {
+      "avatar" : "https://lh5.googleusercontent.com/-JFHnW0U8Dhs/AAAAAAAAAAI/AAAAAAAAAAA/AAKWJJPYIg5dVSL3xwPUm-EpAvXnbyAEkQ/s96-c/photo.jpg",
+      "country" : "United States",
+      "displayName" : "Albert Zhang",
+      "email" : "albb900032@gmail.com",
+      "name" : "adf asdf",
+      "state" : "Georgia",
+      "user_uid" : "101869153325007302120"
+    },
+    "102010603388161425304" : {
+      "avatar" : "https://lh3.googleusercontent.com/a-/AOh14GhRCkXif3LJIISDrFlwfpieZ-eE52jfhMQT74DK=s96-c",
+      "country" : "USA",
+      "displayName" : "Bill Zhang",
+      "email" : "billzhang@college.harvard.edu",
+      "name" : "Bill Zhang",
+      "user_uid" : "102010603388161425304"
+    },
+    "102721409116886759462" : {
+      "avatar" : "https://lh3.googleusercontent.com/-3zQED1ipuYE/AAAAAAAAAAI/AAAAAAAAAAA/AKF05nCPlFW1-F9PuizsZnW-dyDTSmjaKw/photo.jpg",
+      "email" : "admeeted2.0@gmail.com",
+      "name" : "Albert",
+      "user_uid" : "102721409116886759462"
+    },
+    "103257380590723979410" : {
+      "avatar" : "https://lh3.googleusercontent.com/a-/AOh14Gh-iGMUyEzNdkNF3EmzmDks5d43gZO1vAUpSE7PfTs=s96-c",
+      "country" : "United States",
+      "displayName" : "Bill Zhang",
+      "email" : "billzhang1998@gmail.com",
+      "name" : "Bill Zhang",
+      "state" : "Georgia",
+      "user_uid" : "103257380590723979410"
+    },
+    "108243314847325773476" : {
+      "avatar" : "https://lh3.googleusercontent.com/-ARLiYa6FEHU/AAAAAAAAAAI/AAAAAAAAAAA/AKF05nBPLvZk1Rhvm8wUyshtXj2_Ngcoaw/photo.jpg",
+      "country" : "United States",
+      "displayName" : "Paula Zhu",
+      "email" : "paulakaitlynzoo@gmail.com",
+      "name" : "Paula",
+      "state" : "Alabama",
+      "user_uid" : "108243314847325773476"
+    },
+    "110753538828040619190" : {
+      "avatar" : "https://lh3.googleusercontent.com/a-/AOh14GhetT-jWYpAKkKMlNARAtH8xBaj1Qi5WzJmXxRj=s96-c",
+      "email" : "azhang9000@gmail.com",
+      "name" : "Albert Zhang",
+      "user_uid" : "110753538828040619190"
+    },
+    "113545690935311265871" : {
+      "avatar" : "https://lh6.googleusercontent.com/-BsewRr0Z0Ng/AAAAAAAAAAI/AAAAAAAAAAA/AKF05nCGtcjyDE52SSyPgBpiwxD5GS_cXQ/s96-c/photo.jpg",
+      "country" : "United States",
+      "displayName" : "David Zhang",
+      "email" : "qstd888@gmail.com",
+      "name" : "David Zhang",
+      "user_uid" : "113545690935311265871"
+    },
+    "114118789385241221553" : {
+      "avatar" : "https://lh6.googleusercontent.com/-rvh9EYEHlus/AAAAAAAAAAI/AAAAAAAAAAA/AKF05nCesfNBxPSA92R7591U9hnPJihxqA/s96-c/photo.jpg",
+      "email" : "alba900032@gmail.com",
+      "name" : "asdf dfgwsg",
+      "user_uid" : "114118789385241221553"
+    },
+    "115246946601535821469" : {
+      "avatar" : "https://lh6.googleusercontent.com/-X72SbjpOGpc/AAAAAAAAAAI/AAAAAAAAAAA/AKF05nCUcZ7geQlJNgVZK9JhcW-vYWYsIw/photo.jpg",
+      "email" : "virtualvisitas2.0@gmail.com",
+      "name" : "Albert",
+      "user_uid" : "115246946601535821469"
+    },
+    "115958017814216547284" : {
+      "avatar" : "https://lh3.googleusercontent.com/a-/AOh14Gj6WppIfnMBpd1Sq93NElBFiIm09VkjC6cwJro3pkQ=s96-c",
+      "country" : "United States",
+      "displayName" : "Albert Zhang",
+      "email" : "albertzhang9000@gmail.com",
+      "name" : "Albert Zhang",
+      "state" : "Georgia",
+      "user_uid" : "115958017814216547284"
+    }
+  }
+}
