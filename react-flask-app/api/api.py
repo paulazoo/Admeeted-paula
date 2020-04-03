@@ -1,4 +1,5 @@
 # Python standard libraries
+from concurrent.futures import ThreadPoolExecutor
 import time, json, os
 from datetime import datetime
 
@@ -434,17 +435,44 @@ def upcoming_events_org(org_uid):
 
 @app.route('/avail-events', methods=['GET'])
 def avail_events():
+    start = time.time()
     db=get_db()
     user_uid=session.get('user_uid')
     orgs=db.child('org_user').child(user_uid).get().val()
+    print(f"Get Orgs Time: {time.time() - start}")
+
+    def _grab_events(all_events, db, org):
+        start = time.time()
+        org_events = db.child('event_org').child(org).get().val()
+        if org_events:
+            all_events.update(dict(org_events))
+        print(f'Thread Event Time: {time.time() - start}')
+
+    def _grab_events_info(data, db, event):
+        start = time.time()
+        event_info_ord = db.child('events').child(event).get().val()
+        event_timeDeadline = datetime.strptime(event_info_ord['timeDeadline'], '%H:%M %d %B %Y')
+
+        if event_timeDeadline >= datetime.now():
+            event_info = dict(event_info_ord)
+            event_info.update({'id': event})
+
+            avatar = db.child('orgs').child(event_info['org']).child('avatar').get().val()
+            event_info.update({'avatar': avatar})
+
+            data.append(event_info)
+
+        print(f'Thread Info Time: {time.time() - start}')
 
     data = []
     if orgs:
         all_events={}
-        for org in orgs:
-            org_events=db.child('event_org').child(org).get().val()
-            if org_events:
-                all_events.update(dict(org_events))
+        with ThreadPoolExecutor() as executor:
+            for org in orgs:
+                executor.submit(_grab_events, all_events, db, org)
+
+        print(f"Get Events Time: {time.time() - start}")
+
         events_users=db.child('event_user').child(user_uid).get().val()
 
         if not events_users:
@@ -452,18 +480,11 @@ def avail_events():
 
         events=set(all_events) - set(events_users)
 
-        for event in events:
-            event_info_ord=db.child('events').child(event).get().val()
-            event_timeDeadline=datetime.strptime(event_info_ord['timeDeadline'], '%H:%M %d %B %Y')
+        with ThreadPoolExecutor() as executor:
+            for event in events:
+                executor.submit(_grab_events_info, data, db, event)
 
-            if event_timeDeadline>=datetime.now():
-                event_info=dict(event_info_ord)
-                event_info.update({'id':event})
-
-                org_info = db.child('orgs').child(event_info['org']).get().val()
-                event_info.update({'avatar': org_info['avatar']})
-
-                data.append(event_info)
+    print(f"Total Events Time: {time.time() - start}")
             
     return jsonify(message=data), 200
 
@@ -528,25 +549,28 @@ def past_convos():
     start = time.time()
     db=get_db()
     user_uid=session.get('user_uid')
-    print(f'Load User Time: {time.time() - start}')
     convos=db.child('convo_user').child(user_uid).get().val()
-    print(f'Load Convos Time: {time.time() - start}')
+
+    def _grab_convo(data, db, convo):
+        start = time.time()
+        convo_info = db.child('convos').child(convo).get().val()
+        convo_timeEnd = datetime.strptime(convo_info['timeEnd'], '%H:%M %d %B %Y')
+
+        if convo_timeEnd <= datetime.now():  # Only conversations that have ended
+            convo_info.update({'id': convo})
+
+            avatar = db.child('orgs').child(convo_info['org']).child('avatar').get().val()
+            convo_info.update({'avatar': avatar})
+            data.append(convo_info)
 
     data = []
     if convos:
-        for convo in convos:
-            convo_info=db.child('convos').child(convo).get().val()
-            convo_timeEnd = datetime.strptime(convo_info['timeEnd'], '%H:%M %d %B %Y')
-            print(f"Convo Info Time: {time.time() - start}")
-            if convo_timeEnd <= datetime.now(): # Only conversations that have ended
-                convo_info.update({'id': convo})
+        with ThreadPoolExecutor() as executor:
+            for convo in convos:
+                executor.submit(_grab_convo, data, db, convo)
 
-                org_info = db.child('orgs').child(convo_info['org']).get().val()
-                convo_info.update({'avatar': org_info['avatar']})
-                data.append(convo_info)
-            print(f'Filter Time: {time.time() - start}')
-    print(f'Past Convos Time: {time.time() - start}')
     return jsonify(message=data), 200
+
 
 @app.route('/past-conversations/<org_uid>', methods=['GET'])
 def past_convos_org(org_uid):
@@ -648,20 +672,26 @@ def organizations():
     Inputs: user_uid
     Outputs: a list containing the info (in dicts) for all of a user's organizations
     '''
+    start = time.time()
     db=get_db()
 
     user_uid=session.get('user_uid')
     user_orgs = db.child('org_user').child(user_uid).get().val()
 
-    org_info_list = []  # list of dictionaries containing info for each of a user's orgs
-    if user_orgs:
-        for key in user_orgs:
-            #where key is an org
-            dictionary = dict(get_db().child('orgs').child(key).get().val())
-            dictionary['id'] = key
-            org_info_list.append(dictionary)
+    def _grab_orgs(data, db, org):
+        start = time.time()
+        dictionary = dict(db.child('orgs').child(org).get().val())
+        dictionary['id'] = org
+        data.append(dictionary)
 
-    return jsonify(message=org_info_list), 200
+    data = []  # list of dictionaries containing info for each of a user's orgs
+    if user_orgs:
+        with ThreadPoolExecutor() as executor:
+            for org in user_orgs:
+                executor.submit(_grab_orgs, data, db, org)
+
+    return jsonify(message=data), 200
+
 
 @app.route('/create-hangouts', methods=['POST'])
 def create_empty_hangouts():
