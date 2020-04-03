@@ -71,7 +71,8 @@ def main_convos(event_uid, convo_name_str, num_threads, category=["random"]):
             #user_email_dict=firebase_db.get_emails(all_users)
             generated_groups = generated_groups+groups_db.create_groups(list(all_users_all[all_users]), event_info['desired_size'], call_num)
 
-#%%    
+    print(f'Generated Groups: {generated_groups}')
+#%%
     giant_dict = {}
     for i in range(len(generated_groups)):
         #unique convo_uid for firebase
@@ -81,7 +82,7 @@ def main_convos(event_uid, convo_name_str, num_threads, category=["random"]):
         #giant_dict with displayNames
         giant_dict[convo_uid]={user_uid:True for user_uid in generated_groups[i][1:] }
         #add displayName and category to each convo dict in giant_dict
-        giant_dict[convo_uid].update({'displayName':displayName, 'category':category[generated_groups[i][0]-1]})
+        giant_dict[convo_uid].update({'displayName':displayName, 'category':category[int(generated_groups[i][0])-1]})
     
     logging.warning(giant_dict)
     

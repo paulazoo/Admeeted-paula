@@ -7,11 +7,14 @@ export const SET_ERROR_MESSAGE = 'SET_ERROR_MESSAGE';
 export const SET_DATA = 'SET_DATA';
 export const SET_ORG_DATA = 'SET_ORG_DATA';
 
+// const REACT_APP_API_PROXY = 'https://admeeted.herokuapp.com';
+const REACT_APP_API_PROXY = '';
+
 export const login = (profile) => {
     return dispatch => {
         dispatch(sendingRequest(true));
         dispatch(setErrorMessage(''));
-        fetch(`${process.env.REACT_APP_API_PROXY}/login`, {
+        fetch(`${REACT_APP_API_PROXY}/login`, {
             method: 'POST',
             body: JSON.stringify({ profile }),
             credentials: 'include'
@@ -41,7 +44,7 @@ export const genConvos = (event_uid, convo_name) => {
     return dispatch => {
         dispatch(sendingRequest(true))
         dispatch(setErrorMessage(''))
-        fetch(`${process.env.REACT_APP_API_PROXY}/generate-convos/${event_uid}`, {
+        fetch(`${REACT_APP_API_PROXY}/generate-convos/${event_uid}`, {
             method: 'POST',
             body: JSON.stringify({ convo_name }),
             credentials: 'include'
@@ -59,7 +62,7 @@ export const genEmptyHangouts = (name, num_hangouts, num_threads) => {
     return dispatch => {
         dispatch(sendingRequest(true))
         dispatch(setErrorMessage(''))
-        fetch(`${process.env.REACT_APP_API_PROXY}/create-hangouts`, {
+        fetch(`${REACT_APP_API_PROXY}/create-hangouts`, {
             method: 'POST',
             body: JSON.stringify({ name, num_hangouts, num_threads }),
             credentials: 'include'
@@ -116,7 +119,7 @@ export const changeData = (path, new_data, updatePaths, updateNames) => {
     return dispatch => {
         dispatch(sendingRequest(true))
         dispatch(setErrorMessage(''))
-        fetch(`${process.env.REACT_APP_API_PROXY}${path}`, {
+        fetch(`${REACT_APP_API_PROXY}${path}`, {
             method: 'POST',
             body: JSON.stringify({ new_data }),
             credentials: 'include'
@@ -175,7 +178,7 @@ export const changeOrgData = (path, new_data, updatePaths, updateNames) => {
     return dispatch => {
         dispatch(sendingRequest(true))
         dispatch(setErrorMessage(''))
-        fetch(`${process.env.REACT_APP_API_PROXY}${path}`, {
+        fetch(`${REACT_APP_API_PROXY}${path}`, {
             method: 'POST',
             body: JSON.stringify({ new_data }),
             credentials: 'include'
@@ -213,7 +216,7 @@ export const logout = () => {
     return dispatch => {
         dispatch(sendingRequest(true))
         dispatch(setErrorMessage(''))
-        api('/api/logout')
+        api('/logout')
             .then(data => {
                 dispatch(sendingRequest(false))
                 dispatch(setAuthState(data.isLoggedIn))
@@ -258,7 +261,7 @@ const setOrgData = data => {
 }
 
 const api = path => {
-  return fetch(`${process.env.REACT_APP_API_PROXY}${path}`, { credentials: 'include' }).then(res => {
+  return fetch(`${REACT_APP_API_PROXY}${path}`, { credentials: 'include' }).then(res => {
     if (res.ok) return res.json()
     else throw new Error(res.status)
   })

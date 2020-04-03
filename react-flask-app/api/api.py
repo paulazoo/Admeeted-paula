@@ -51,7 +51,7 @@ import os
 os.environ['AUTHLIB_INSECURE_TRANSPORT'] = '1'
 #%%
 app = Flask(__name__)
-cors = CORS(app, resources={r"/*": {"origins": "https://www.admeeted.com"}})
+cors = CORS(app, supports_credentials=True, resources={r"/*": {"origins": "https://www.admeeted.com"}})
 app.secret_key = os.environ.get("SECRET_KEY") or os.urandom(24)
 
 #%%
@@ -525,22 +525,27 @@ def events(event_uid):
 
 @app.route('/past-conversations', methods=['GET'])
 def past_convos():
+    start = time.time()
     db=get_db()
     user_uid=session.get('user_uid')
+    print(f'Load User Time: {time.time() - start}')
     convos=db.child('convo_user').child(user_uid).get().val()
+    print(f'Load Convos Time: {time.time() - start}')
 
     data = []
     if convos:
         for convo in convos:
             convo_info=db.child('convos').child(convo).get().val()
             convo_timeEnd = datetime.strptime(convo_info['timeEnd'], '%H:%M %d %B %Y')
+            print(f"Convo Info Time: {time.time() - start}")
             if convo_timeEnd <= datetime.now(): # Only conversations that have ended
                 convo_info.update({'id': convo})
 
                 org_info = db.child('orgs').child(convo_info['org']).get().val()
                 convo_info.update({'avatar': org_info['avatar']})
                 data.append(convo_info)
-
+            print(f'Filter Time: {time.time() - start}')
+    print(f'Past Convos Time: {time.time() - start}')
     return jsonify(message=data), 200
 
 @app.route('/past-conversations/<org_uid>', methods=['GET'])
@@ -655,8 +660,6 @@ def organizations():
             dictionary = dict(get_db().child('orgs').child(key).get().val())
             dictionary['id'] = key
             org_info_list.append(dictionary)
-    elif not user_orgs:
-        org_info_list=[]
 
     return jsonify(message=org_info_list), 200
 

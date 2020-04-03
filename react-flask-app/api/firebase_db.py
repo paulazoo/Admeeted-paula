@@ -124,7 +124,6 @@ def post_convo(giant_dict, event_uid, event_info):
         raise Exception(f'Not enough available Google Hangouts links, need {len(giant_dict)} but only {len(links)} available.')
 
     for i, convo_uid in enumerate(giant_dict):
-        print(i)
         print(convo_uid)
         #convo_uid from the displayName and convo_uid dict
         convo_displayName = giant_dict[convo_uid]['displayName']

@@ -18,7 +18,7 @@ def create_groups(all_emails, desired, call_num):
         #first element of every group within subgroups is the call_num
         call_num_groups=[np.concatenate((np.array([call_num]), subgroup),axis=0) for subgroup in split_groups]
         created_groups=[l.tolist() for l in call_num_groups]
-    
+
     #log that
     logging.warning(created_groups)
     print(f'Created Groups: {created_groups}')

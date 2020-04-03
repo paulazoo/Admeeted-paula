@@ -8,7 +8,7 @@ Created on Wed Mar 25 09:06:49 2020
 # http://flask.pocoo.org/docs/1.0/tutorial/database/
 
 #import sqlite3
-
+import time
 import click
 from flask import current_app, g
 from flask.cli import with_appcontext
@@ -23,7 +23,6 @@ import os
         #db.close()
 def get_db():
     if "db" not in g:
-        print("AHHHHHHHHH")
         init_db()
     return g.db
 

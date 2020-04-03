@@ -7,17 +7,20 @@ import {Redirect, withRouter} from 'react-router-dom';
 function WelcomeContainer ({
     profile,
     allMajors,
+    allInterests,
     allOrganizations,
     currentlySending,
     setUser,
     loadProfile,
     loadMajors,
+    loadInterests,
     setProfile,
     history
 }) {
     useEffect(() => {
         loadProfile();
         loadMajors();
+        loadInterests();
         setUser();
     },[]);
 
@@ -27,6 +30,7 @@ function WelcomeContainer ({
                 profile={profile}
                 allMajors={allMajors}
                 allOrganizations={allOrganizations}
+                allInterests={allInterests}
                 currentlySending={currentlySending}
                 setProfile={setProfile}
                 history={history}
@@ -38,6 +42,7 @@ function WelcomeContainer ({
 const mapStateToProps = state => ({
     profile: state.data.profile,
     allMajors: state.data.allMajors,
+    allInterests: state.data.allInterests,
     allOrganizations: state.data.allOrganizations,
     currentlySending: state.currentlySending,
 })
@@ -51,6 +56,9 @@ const mapDispatchToProps = dispatch => ({
     },
     loadMajors: () => {
         dispatch(loadData('/majors', 'allMajors'))
+    },
+    loadInterests: () => {
+        dispatch(loadData('/interests', 'allInterests'))
     },
     setProfile: (new_data) => {
         dispatch(changeData('/profile', new_data, ['/profile'], ['profile']))

@@ -31,7 +31,7 @@ const styles = theme => ({
     }
 })
 
-function Welcome ({ profile, allMajors, allOrganizations, currentlySending, setProfile, classes, history }) {
+function Welcome ({ profile, allMajors, allOrganizations, allInterests, currentlySending, setProfile, classes, history }) {
     const [view, setView] = useState(false);
 
     const stepOneTitle = "Step One: Complete Your Profile";
@@ -94,7 +94,14 @@ function Welcome ({ profile, allMajors, allOrganizations, currentlySending, setP
                     </Card>
                 </Grid>
                 {!view ? <Grid item md={12}>
-                    <AccountDetails title={stepOneTitle} subtitle={stepOneSubtitle} allMajors={allMajors} profile={profile} setProfile={setViewAndProfile}/>
+                    <AccountDetails
+                        title={stepOneTitle}
+                        subtitle={stepOneSubtitle}
+                        allMajors={allMajors}
+                        allInterests={allInterests}
+                        profile={profile}
+                        setProfile={setViewAndProfile}
+                    />
                 </Grid> : <Grid item md={12}>
                     <Card className={classes.card}>
                         <CardHeader title={stepTwoTitle} subheader={stepTwoSubtitle}/>
