@@ -3,22 +3,18 @@ import os
 import pyrebase
 import random
 from datetime import datetime
-#fb_conn=fb.FirebaseApplication('https://admeet2024.firebaseio.com/organizations/yx4uGm90iuD1BOOpNwEw', None)
-project_id='admeeted-18732'
-config = {
-  "apiKey": 'AIzaSyDyR1tbXRFE2fgENNTeepPyrCBExQ06rsk',
-  "authDomain": project_id+".firebaseapp.com",
-  "databaseURL": "https://"+project_id+".firebaseio.com",
-  "projectId": project_id,
-  "storageBucket": project_id+".appspot.com",
-   # "serviceAccount": r"C:\Users\pkzr3\Admeeted\react-flask-app\api\admeeted-private-key.json",
-  #   "serviceAccount": r"C:\Users\billz\PycharmProjects\VirtualVisitas\Admeeted\react-flask-app\api\admeeted-private-key.json",
-   "serviceAccount": str(os.getcwd()) + r"/admeeted-private-key.json",
-    "messagingSenderId": "667088492207"
-}
 
-firebase = pyrebase.initialize_app(config)
-db = firebase.database()
+from db import init_db_command, get_db
+# Naive database setup
+try:
+    init_db_command()
+except: 
+    #og error: sqlite3.OperationalError:
+    #TODO safe to assume firebase created?
+    # Assume it's already been created
+    pass
+
+db=get_db()
 
 #%%
 def get_emails(user_list):

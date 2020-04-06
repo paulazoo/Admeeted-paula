@@ -36,9 +36,8 @@ class TestchatContainer extends Component {
     };
      
     setSocketListeners () {
-      socket.on('message', (data) => {
+      socket.on('recmsg', (data) => {
         console.log(data)
-        socket.emit("sendmsg")
       })
 
       socket.on('connect', (data) => {

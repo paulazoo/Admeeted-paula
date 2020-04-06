@@ -40,26 +40,25 @@ Paula and Samantha combined version!
 Storing the Google Client ID and Client Secret 
 (from https://console.developers.google.com/  Credentials for this project)
 App gets client credentials by reading environmental variables
-
-Windows users: set GOOGLE_CLIENT_ID=your_client_id in Command Prompt
 """
 # GOOGLE_CLIENT_ID = os.environ.get("GOOGLE_CLIENT_ID", None)
-GOOGLE_CLIENT_ID = "667088492207-2fch6bc6r8b40fm40hjv8mq0n6minrr2.apps.googleusercontent.com"
+GOOGLE_CLIENT_ID = "785353783740-5adk64k2huua2ftk2v2a9dp167qfk4iu.apps.googleusercontent.com"
 # GOOGLE_CLIENT_SECRET = os.environ.get("GOOGLE_CLIENT_SECRET", None)
-GOOGLE_CLIENT_SECRET = "CFG-c2H48GDs_xdxvDj4nFAb"
+GOOGLE_CLIENT_SECRET = "Bks4vh98L-zEty2c3jsLXhZn"
 GOOGLE_DISCOVERY_URL = (
     "https://accounts.google.com/.well-known/openid-configuration"
 )
 
 import os 
 os.environ['AUTHLIB_INSECURE_TRANSPORT'] = '1'
+
 #%%
 app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY") or os.urandom(24)
 #socketio server
 socket = SocketIO(app)
-cors = CORS(app, supports_credentials=True, resources={r"/*": {"origins": "https://www.admeeted.com"}})
-
+#cors = CORS(app, supports_credentials=True, resources={r"/*": {"origins": "https://www.admeeted.com"}})
+cors = CORS(app)
 
 #%%
 #socketio server stuff
@@ -72,6 +71,7 @@ def connect_message():
 def custom_ok_message(msg):
     print('sendmsg api got it!!!')
     print(msg)
+    emit("recmsg", msg)
 
 
 #%%
@@ -182,96 +182,6 @@ def login():
     login_user(user)
 
     return jsonify(message=current_user.is_authenticated, new_user=new_user), 200
-
-    # print("login")
-    # # Find out what URL to hit for Google login
-    # google_provider_cfg = get_google_provider_cfg()
-    # authorization_endpoint = google_provider_cfg["authorization_endpoint"]
-    #
-    # # Use library to construct the request for Google login and provide
-    # # scopes that let you retrieve user's profile from Google
-    # request_uri = client.prepare_request_uri(
-    #     authorization_endpoint,
-    #     redirect_uri=request.base_url + "/callback",
-    #     scope=["openid", "email", "profile"],
-    #     #Note: openid is a required scope to tell Google to initiate the
-    #     #OIDC flow, which will authenticate the user by having them log in.
-    # )
-    #
-    # return redirect(request_uri)
-
-
-
-    #Login Callback:
-# #Define login callback endpoint and get Google's code
-# @app.route("/login/callback")
-# def callback():
-#     # Get authorization code Google sent back to you
-#     code = request.args.get("code")
-#
-# # Find out what URL (Google's token endpoint) to hit to get tokens that allow
-# #you to ask for things on behalf of a user
-#     google_provider_cfg = get_google_provider_cfg()
-#     token_endpoint = google_provider_cfg["token_endpoint"]
-#
-# # Prepare a request to get tokens!
-#     token_url, headers, body = client.prepare_token_request(
-#         token_endpoint,
-#         authorization_response=request.url,
-#         redirect_url=request.base_url,
-#         code=code
-#         )
-# # Send a request to get tokens!
-#     token_response = requests.post(
-#         token_url,
-#         headers=headers,
-#         data=body,
-#         auth=(GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET),
-#         )
-#
-# # Parse the tokens!
-#     client.parse_request_body_response(json.dumps(token_response.json()))
-#
-# # Now that have tokens, find and hit the URL
-# # from Google that gives this app the user's profile information,
-# # including their Google profile image and email
-#     #checking the userinfo_endpoint field in the provider configuration document
-#     #for location of user info endpoint and its standardized URL
-#     userinfo_endpoint = google_provider_cfg["userinfo_endpoint"]
-#
-#     #use oauthlib to add the token to your request
-#     uri, headers, body = client.add_token(userinfo_endpoint)
-#     #use requests to send it out
-#     userinfo_response = requests.get(uri, headers=headers, data=body)
-#
-#
-# # You want to make sure their email is verified.
-# # The user authenticated with Google, authorized your
-# # app, and now you've verified their email through Google!
-#     if userinfo_response.json().get("email_verified"):
-#         unique_id = userinfo_response.json()["sub"]
-#         users_email = userinfo_response.json()["email"]
-#         picture = userinfo_response.json()["picture"]
-#         users_name = userinfo_response.json()["given_name"]
-#     else:
-#         return "User email not available or not verified by Google.", 400
-#
-# # Create a user in your db with the information provided
-# # by Google
-#     user = User(
-#         id_=unique_id, name=users_name, email=users_email, avatar=picture
-#         )
-#
-# # Doesn't exist? Add it to the database.
-#     if not User.get(unique_id):
-#         print("User doesn't exist, creating new User")
-#         User.create(unique_id, users_name, users_email, picture)
-#
-# # Begin user session by logging the user in (using Flask Log-in)
-#     login_user(user)
-#
-# # Send user back to homepage
-#     return redirect(url_for("index"))
 
 
     #Logout Endpoint (logout and redirect back to homepage)
