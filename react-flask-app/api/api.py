@@ -21,6 +21,9 @@ import requests
 #firebase
 import pyrebase
 
+#socketio
+from flask_socketio import SocketIO, emit, join_room
+
 # Internal imports
 from db import init_db_command, get_db
 from user import User
@@ -52,8 +55,24 @@ import os
 os.environ['AUTHLIB_INSECURE_TRANSPORT'] = '1'
 #%%
 app = Flask(__name__)
-cors = CORS(app, supports_credentials=True, resources={r"/*": {"origins": "https://www.admeeted.com"}})
 app.secret_key = os.environ.get("SECRET_KEY") or os.urandom(24)
+#socketio server
+socket = SocketIO(app)
+cors = CORS(app, supports_credentials=True, resources={r"/*": {"origins": "https://www.admeeted.com"}})
+
+
+#%%
+#socketio server stuff
+@socket.on('connect')
+def connect_message():
+    print("socket connect api!")
+    emit("message", "api data")
+
+@socket.on('sendmsg')
+def custom_ok_message(msg):
+    print('sendmsg api got it!!!')
+    print(msg)
+
 
 #%%
 # Bill's placeholder
@@ -733,8 +752,18 @@ def interests():
 
 #To run your Flask application on your local computer to test the login flow
 if __name__ == "__main__":
-    app.run(ssl_context="adhoc")
+    #app.run(ssl_context="adhoc")
     print("running")
+    socket.run(app, debug = True)
+
+
+
+
+
+
+
+
+
 
 
 #%%
