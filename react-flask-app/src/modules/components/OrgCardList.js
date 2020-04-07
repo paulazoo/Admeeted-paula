@@ -65,7 +65,7 @@ function OrgCardList({ title, data, maxItems, iconButton, chatButton, className,
                         secondary={`${moment(point.timeStart).format('LT')} - ${moment(point.timeEnd).format('h:mm A, MMMM Do YYYY')}`}
                       />
                       {point.hasOwnProperty('timeDeadline') && moment().isBefore(moment(point.timeDeadline)) ? iconButton(point.id) : null}
-                      {point.hasOwnProperty('link') ? iconButton(point.link) : null}
+                      {point.hasOwnProperty('id') ? iconButton(point.id) : null}
                     </ListItem>
                       {point.hasOwnProperty('convos') ?
                               <div>
@@ -79,7 +79,7 @@ function OrgCardList({ title, data, maxItems, iconButton, chatButton, className,
                                               primary={convo.displayName}
                                               secondary={`Start Time: ${moment(convo.timeStart).format('LT')}`}
                                             />
-                                              {chatButton(convo.link)}
+                                              {chatButton(convo.id)}
                                           </ListItem>
                                       ))}
                                   </List>

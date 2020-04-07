@@ -115,6 +115,24 @@ export const loadData = (path, name) => {
     }
 }
 
+export const loadConvochatData = (path, userInConvo, convoDisplayName, videolink) => {
+    return dispatch => {
+        dispatch(sendingRequest(true))
+        dispatch(setErrorMessage(''))
+        api(`${path}`)
+            .then(data => {
+                dispatch(setData({[convoDisplayName]: data.convoDisplayName}))
+                dispatch(setData({[userInConvo]: data.userInConvo}))
+                dispatch(setData({[videolink]: data.videolink}))
+                dispatch(sendingRequest(false))
+            })
+            .catch(error => {
+                dispatch(sendingRequest(false))
+                dispatch(setErrorMessage('Error loading data'))
+            })
+    }
+}
+
 export const changeData = (path, new_data, updatePaths, updateNames) => {
     return dispatch => {
         dispatch(sendingRequest(true))

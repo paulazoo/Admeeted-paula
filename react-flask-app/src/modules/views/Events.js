@@ -60,14 +60,13 @@ function Events({ data, currentlySending, modifyEvent, classes }) {
         </Button>
     }
 
-    function chatButton(link) {
-        console.log(link);
+    function chatButton(convo_id) {
         return <IconButton
             color="primary"
             edge="end"
             size="small"
-            href={link}
-            target={"_blank"}
+            component={NavLink}
+            to={`/convochat/${convo_id}`}
         >
             <ChatIcon/>
         </IconButton>

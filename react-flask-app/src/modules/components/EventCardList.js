@@ -86,7 +86,7 @@ function EventCardList({ title, data, maxItems, avatar, iconButton, chatButton, 
                                           primary={convo.displayName}
                                           secondary={`Start Time: ${moment(convo.timeStart).format('LT')}`}
                                         />
-                                          {chatButton(convo.link)}
+                                          {chatButton(convo.id)}
                                       </ListItem>
                                   ))}
                               </List>

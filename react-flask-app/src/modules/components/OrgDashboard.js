@@ -33,14 +33,13 @@ function OrgDashboard ({ org_uid, upcomingEvents, availEvents, conversations, mo
     const convoText = 'Your past conversations';
     const availText = 'Your available events';
 
-    function chatButton(link) {
-        console.log(link);
+    function chatButton(convo_id) {
         return <IconButton
             color="primary"
             edge="end"
             size="small"
-            href={link}
-            target={"_blank"}
+            component={NavLink}
+            to={`/convochat/${convo_id}`}
         >
             <ChatIcon/>
         </IconButton>

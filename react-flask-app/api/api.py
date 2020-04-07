@@ -22,12 +22,13 @@ import requests
 import pyrebase
 
 #socketio
-from flask_socketio import SocketIO, emit, join_room
+from flask_socketio import SocketIO, emit, join_room, leave_room
 
 # Internal imports
 from db import init_db_command, get_db
 from user import User
 from main_db import main_convos, empty_hangouts
+from chat_db import new_msg_db, get_msgs_db
 
 '''
 Paula and Samantha combined version!
@@ -59,20 +60,6 @@ app.secret_key = os.environ.get("SECRET_KEY") or os.urandom(24)
 socket = SocketIO(app)
 #cors = CORS(app, supports_credentials=True, resources={r"/*": {"origins": "https://www.admeeted.com"}})
 cors = CORS(app)
-
-#%%
-#socketio server stuff
-@socket.on('connect')
-def connect_message():
-    print("socket connect api!")
-    emit("message", "api data")
-
-@socket.on('sendmsg')
-def custom_ok_message(msg):
-    print('sendmsg api got it!!!')
-    print(msg)
-    emit("recmsg", msg)
-
 
 #%%
 # Bill's placeholder
@@ -534,20 +521,6 @@ def generate_convos(event_uid):
             print(e)
             return jsonify(message=False), 400
 
-
-
-#%%
-# @app.route('/conversations/<convo_uid>', methods=['GET'])
-# def other_convos(convo_uid):
-#     #...bc user can't change convos?
-#     user_uid=session.get('user_uid')
-#     other_convos_data = db_for_flask.db_other_convos(user_uid, convo_uid)
-#     print(other_convos_data)
-#     return jsonify(message=other_convos_data), 200
-
-
-#%%
-
 @app.route('/all-organizations', methods=['GET'])
 def all_orgs():
     db=get_db()
@@ -660,6 +633,60 @@ def interests():
 
     return jsonify(message=data), 200
 
+
+#%%
+#socketio server stuff
+@socket.on('connect')
+def connect_message():
+    print("socket connect api!")
+
+@socket.on('join')
+def on_join(convo_uid):
+    join_room(convo_uid)
+    user_uid=session.get("user_uid")
+    db=get_db()
+    db.child("convo_actuser").child(convo_uid).update({user_uid:True})
+    actusers=db.child("convo_actuser").child(convo_uid).get().val()
+    displayNames=[]
+    for user in actusers:
+        displayNames.append({db.child("users").child(user).child("displayName").get().val()})
+    emit("userjoined", displayNames, room=convo_uid, broadcast=True, namespace="/")
+    print(actusers, displayNames)
+
+@socket.on('leave')
+def on_leave(convo_uid):
+    leave_room(convo_uid)
+
+@socket.on('sendmsg')
+def custom_ok_message(msg, convo_uid):
+    user_uid=session.get('user_uid')
+    print(" sent msg to api!")
+    #print('sendmsg api got it!!!'+str(msg))
+    if msg:
+        new_msg_db(user_uid, msg, convo_uid)
+    msgs_data=get_msgs_db(convo_uid)
+    emit("recmsg", msgs_data, room=convo_uid, broadcast=True, namespace="/")
+
+@app.route('/convochat/<convo_uid>', methods=['GET'])
+def convochat_init(convo_uid):
+    #...bc user can't change convos?
+    db=get_db()
+    user_uid=session.get('user_uid')
+    convoDisplayName=db.child("convos").child(convo_uid).child("displayName").get().val()
+    
+    convo_user = db.child("convo_user").child(user_uid).child(convo_uid).get().val()
+
+    #print(convo_user)
+    if convo_user:
+        userInConvo=True
+        videolink=db.child("convos").child(convo_uid).child("link").get().val()
+    else:
+        userInConvo=False
+        videolink=""
+
+    return jsonify(userInConvo=userInConvo, convoDisplayName=convoDisplayName, videolink=videolink), 200
+
+#%%
 #To run your Flask application on your local computer to test the login flow
 if __name__ == "__main__":
     #app.run(ssl_context="adhoc")

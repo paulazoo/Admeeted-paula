@@ -71,7 +71,7 @@ function CardList({ title, subheader, data, maxItems, avatar, iconButton, chatBu
                         primary={point.displayName}
                         secondary={`${moment(point.timeStart).format('LT')} - ${moment(point.timeEnd).format('h:mm A, MMMM Do YYYY')}`}
                       />
-                      {point.hasOwnProperty('link') ? iconButton(point.link) : null}
+                      {point.hasOwnProperty('id') ? iconButton(point.id) : null}
                     </ListItem>
                       {point.hasOwnProperty('convos') ?
                           <div>
@@ -85,7 +85,7 @@ function CardList({ title, subheader, data, maxItems, avatar, iconButton, chatBu
                                           primary={convo.displayName}
                                           secondary={`Start Time: ${moment(convo.timeStart).format('LT')}`}
                                         />
-                                          {chatButton(convo.link)}
+                                          {chatButton(convo.id)}
                                       </ListItem>
                                   ))}
                               </List>

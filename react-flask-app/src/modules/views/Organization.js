@@ -25,6 +25,8 @@ function Organization ({ org_data, org_uid, currentlySending, modifyEvent, modif
     const availEvents = org_data.availEvents;
     const conversations = org_data.conversations;
 
+    console.log(profile.joined)
+
     return (
         <div>
             {!currentlySending ? <MainLayout>
